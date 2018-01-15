@@ -6,4 +6,4 @@ Folders:
 - slides: I'll put the slides here
 - data: Put the UndSoc data there (do not change anything, the next subfolder in data should be UKDA-6614-tab). Do not track this folder; it must be stored locally
 
-As the course prograsses I'll update this repo with new scripts
+As the course progresses I'll update this repo with new scripts
