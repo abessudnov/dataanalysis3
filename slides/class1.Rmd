@@ -1,0 +1,128 @@
+---
+title: 'Data Analysis 3: Introduction'
+author: "Alexey Bessudnov"
+date: "15 January 2018"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+  beamer_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## What is this module about?
+
+- Doing practical data analysis that always means quite a lot of data management
+- Introducing some new techniques and software
+- Some basic programming in R
+- Nothing new statistically
+- Prereqs: SOC1004/POL1008, SOC/POL1041, and SOC/POL2077
+
+## What you (are supposed to) know already
+
+- SOC1004/POL1008: basic descriptive statistics, visualizations and R
+- SOC/POL1041: statistical inference and hypothesis testing
+- SOC/POL2077: linear (regression) model
+
+## Contents of this module
+
+- Data structures and types in R
+- Manipulating data: the *dplyr* package
+- Longitudinal data and reshaping: the *tidyr* package
+- Visualising data with the *ggplot2* package
+- Creating interactive documents and reports with R Markdown
+- (Maybe): Creating interactive data applications with *Shiny*
+- Basic R programming: Control structures and loops in R
+- Writing functions in R
+
+## Why should you learn this?
+
+- In most work places (except the academia) you actually won't have to do complex statistical analysis, and they would hire maths graduates to do complex modelling 
+- Often what you would have to do is a relatively technically simple analysis with 'dirty' data. And it this stage it wouldn't be simple any longer
+- Another skill that you'll need to learn is how to effectively present your analysis to people without a statistical background
+
+## Practical arrangements
+
+- Monday, 11.30am - 1.30pm, WSL 3220
+- No class in week 2 (22 January); it has been rescheduled to Friday 2 February, 10.30am - 12.30pm
+- Office hours (Amory A341): Monday, 2-3pm; Friday, 12-1pm
+- Attendance: mandatory. Do not take this module if you cannot attend the classes
+
+## Assessment
+
+- 100%: final statistical report (3,500 words + figures and tables)
+- Submission deadline on 29 March at 2pm
+- Questions for the reports will be given to you separately (within a couple of weeks)
+- Marks and feedback will be released on 4 May
+
+##  Readings
+
+- Main text: G.Grolemund & H.Wickham. (2016). R for Data Science. Available online
+at http://r4ds.had.co.nz/.
+- Generally, doing data analysis as much as you can is more important than reading about it
+- There are some more readings in the module outline
+
+##  "Flipped classroom"
+
+- "Flipped classroom" is a pedagogical technique
+- I can't teach you data analysis; you can only learn it yourself. All I can do is to provide some guidance
+- First you read new material and do exercises at home before the class
+- At the classes we discuss the results together, I answer questions, and provide my solutions
+- The idea is that I do not do lectures and do not introduce new things in class
+
+##  Github
+
+- Git is a version control software
+- Guthub is a website where computer programmers collaborate and share their code
+- After classes I will be downloading the correct code and solutions on Github
+- One of your tasks for the next class will be to install Git and register on Github
+- Git: https://git-scm.com/
+- Github: https://github.com/
+- The repo for the module: https://github.com/abessudnov/dataanalysis3
+
+## Data
+
+- In this course we will use the Understanding Society data
+- The Understanding Society is a large UK household panel study
+- It is a longitudinal data set that has a complex structure. This is why we will use it
+- Students who have taken the Immigration module are familiar with the data, but we only used the cross-sectional data there
+- Substantive focus: in this module we will study how people's political preferences change over time
+- In the assignments you will use the same data set, but will have different questions 
+
+## Getting the data
+
+- You will need to download the data for the next class
+- The data can be downloaded from the UK Data Service website (SN6614)
+- https://discover.ukdataservice.ac.uk/catalogue/?sn=6614
+- You can either create a new usage for yourself
+- Or you can join the existing usage that I've created already (I'll need to add you first)
+- Please register now: https://www.ukdataservice.ac.uk/get-data/how-to-access/registration/uk-he-fe-users
+- If you need to enter your email address please use the University of Exeter email address in the format *ab789@exeter.ac.uk*
+
+## Things to do for the next class (29 Jan): 1
+
+1. Read about the Understanding Society project (read the user guide 2017 in the Documentation section)
+2. Download the Understanding Society data to a folder in your computer. You need tab delimited files (tab format, not SPSS or SAS versions). Do not change or modify this folder.
+3. The UndSoc data come as multiple data tables for each wave. We will need the individual level data files that have the variables for political participation and behaviour, together with the socio-demographic variables (gender, education, etc.). Figure out which data tables you need for this
+
+## Things to do for the next class (29 Jan): 2
+
+4. Next you need to read the data into R. Read ch. 11 (Data import) from R for Data Science: http://r4ds.had.co.nz/data-import.html
+5. Read into R the data set we need for wave 1. Make sure the data have been read correctly. Quickly explore the data set from wave 1: find the variables for political behaviour and attitudes as well as sex and education, tabulate them. Look at the data dictionary for this file.
+6. We won't use the BHPS data and for now we ignore waves 2 to 7 data
+
+## Things to do for the next class (29 Jan): 3
+
+7. Install Git and register on Github
+8. Learn how Git/Github work. Take this short free course: https://www.datacamp.com/courses/introduction-to-git-for-data-science/
+9. (Optional). You can interact with Github from R Studio. Learn about how to do this here: https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-2 (under Version control)
+10. Create a project in R Studio for our course. I recommend forking the existing course repo on Github (https://github.com/abessudnov/dataanalysis3) and then creating it as a project in R Studio. You can learn more about this here: https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1 (Projects), but you can also figure it out yourself (it's really simple). Alternatively, just create a project locally.
+
+
+
+
+
+
+
