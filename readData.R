@@ -67,6 +67,13 @@ UndSoc1 <- read_tsv("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab")
 #         http://r4ds.had.co.nz/iteration.html
 
 
+# Preparing and saving a short abstract from the data.
+
+W1 <- UndSoc1 %>%
+  select(pidp, a_sex, a_dvage, a_ukborn, a_racel, a_hlht:a_hlwtk, a_vote1:a_vote6)
+
+write_csv(W1, "exData/W1.csv")
+
 
 
 
