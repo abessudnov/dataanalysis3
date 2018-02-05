@@ -31,6 +31,17 @@ for (i in c("red", "blue", "yellow")) {
 
 nchar(c("red", "blue", "yellow"))
 
+a <- 1:3
+b <- 4:6
+a
+b
+a + b
+
+for (i in 1:3) {
+  print(a[i] + b[i])
+}
+
+
 # 2. while loops
 
 i = 1
@@ -65,7 +76,6 @@ repeat {
 
 # rarely used
 
-
 # Exercises:
 
 # 1. From here - http://www-math.bgsu.edu/~zirbel/programming/index.html
@@ -74,16 +84,86 @@ repeat {
 # Set it to zero, then use a for loop that will run through the numbers 1, 2, 3, ... 
 # and add each of these to the current sum.  After the for loop, output the value of the sum. 
 
+x <- 0
+for (y in 1:300) {
+  x = x + y
+}
+print(x)
+
+sum(1:300)
+
+
 # 2. Write some lines of code to calculate the sum 1·2+2·3+3·4+ ... + 249·250.
 
-# 3. Write a program to calculate 10! ("10 factorial"), which is defined to be 10*9*8*7*6*5*4*3*2*1.
+# Incorrect:
+# x <- 0
+# for (y in 1*2:249*250){
+#   x = x + y
+# }
+# print(x)
+
+x <- 0
+for (i in 1:249) {
+  x <- x + i*(i+1)
+}
+print(x)
+
+# 3. Write a program to calculate 10! ("10 factorial"), 
+# which is defined to be 10*9*8*7*6*5*4*3*2*1.
+
+x<-10
+for(i in 9:1){
+  x<-i*x
+}
+print(x)
+
+factorial(10)
+
+ourResult <- 1
+x <- 10
+while (x > 0) {
+  ourResult <- ourResult * x
+  x <- x - 1
+}
+print(ourResult)
+factorial(10)  
 
 # 4. From here: http://maths-people.anu.edu.au/~johnm/courses/r/exercises/pdf/r-exercises.pdf
-# (a) Create a for loop that, given a numeric vector, prints out one number per line,
+# (a) Create a for loop that, given a numeric vector,
+# prints out one number per line,
 # with its square and cube alongside.
-# (b) Look up help(while). Show how to use a while loop to achieve the same result.
-# (c) Show how to achieve the same result without the use of an explicit loop.
 
+n <- 5:15
+for(i in 1:length(n)){
+  print(c(n[i], n[i]^2, n[i]^3))
+}
+
+# (b) Look up help(while). Show how to use a while loop to achieve the same result.
+n <- 3:1
+
+i <- 1
+while(i <= length(n)){
+  # print(c(n[i], n[i]^2, n[i]^3))
+  cat(n[i], n[i]^2, n[i]^3, "\n")
+  i = i + 1
+}
+
+# (c) Show how to achieve the same result without the use 
+# of an explicit loop.
+i<-3:99
+b<-i^2
+c<-i^3
+cbind(i, b, c)
+
+n <- 3:7
+n <- data.frame(n)
+n$n2 <- n[,1] ^ 2
+n$n3 <- n[,2] ^ 3
+n
+
+
+
+# *****************
 # The apply family of functions
 
 # Many iterations in R can be done without explicit use of loops.
@@ -127,6 +207,7 @@ for (i in c("heightcm", "weightkg", "bmi")) {
 
 colnames(W1mod)
 apply(W1mod[, 20:22], 2, mean, na.rm = TRUE)
+
 # 
 # Another example: calculate the sum of all variables by row
 # (doesn't make any sense here, but we're interested in technical implementation)
@@ -174,6 +255,13 @@ for (i in 1:3) {
   for (j in 3:1) {
     cat(i, j, "\n")
   }  
+}
+
+for (i in 1:2) {
+  for (j in 1:3) {
+    print(mean(W1mod2$bmiover30[W1mod2$a_sex == i & W1mod2$agegr == j],
+               na.rm = TRUE))
+  }
 }
 
 
