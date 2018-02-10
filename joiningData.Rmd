@@ -1,0 +1,237 @@
+---
+title: "Joining data from the Understanding Society"
+author: "Alexey Bessudnov"
+date: "10 February 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(error = FALSE)
+knitr::opts_chunk$set(cache = TRUE)
+library(tidyverse)
+library(data.table)
+```
+
+At home you read ch.13 on Relational Data from R for Data Science -- http://r4ds.had.co.nz/relational-data.html. Let us see how we can apply this to the Understanding Society data.
+
+# Joining waves 1 and 2
+
+I will start with joining data from waves 1 and 2 and then expand the algorithm to all the seven waves. First we need to read the data into R.
+
+I am using the fundtion **read_tsv()** from the **readr** package here since the data are tab separated.
+
+```{r}
+UndSoc1 <- read_tsv("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab")
+UndSoc2 <- read_tsv("data/UKDA-6614-tab/tab/us_w2/b_indresp.tab")
+
+```
+
+These are very large files that take a lot of space in the memory.
+
+```{r}
+format(object.size(UndSoc1), units = "auto")
+format(object.size(UndSoc2), units = "auto")
+
+```
+
+Before joining these two data frames I may want to select only the variables I need. These are:
+
+* **pidp**: this is the unique cross-wave individual number (in both waves),
+
+* **a_sex**: sex from wave 1,
+
+* **a_dvage**: age from wave 1,
+
+* **a_vote6**: level of interest in politics from wave 1,
+
+* **b_sex**: sex from wave 2,
+
+* **b_dvage**: age from wave 2,
+
+* **b_vote6**: level of interest in politics from wave 2.
+
+Note that for now I keep it intentionally simple.
+
+First I will edit both data sets to keep only the variables I need.
+
+```{r}
+UndSoc1ed <- UndSoc1 %>%
+        select(pidp, a_sex, a_dvage, a_vote6)
+UndSoc2ed <- UndSoc2 %>%
+        select(pidp, b_sex, b_dvage, b_vote6)
+
+```
+
+Note that these are much smaller objects.
+
+```{r}
+format(object.size(UndSoc1ed), units = "auto")
+format(object.size(UndSoc2ed), units = "auto")
+
+```
+
+I will remove the larger data sets from the memory to free it up.
+
+```{r}
+rm(UndSoc1, UndSoc2)
+```
+
+Let us explore the data.
+
+```{r}
+head(UndSoc1ed)
+head(UndSoc2ed)
+
+```
+
+Now we can join the data sets. As you know already, there can be several types of joins. Inner join will keep the observations that match in both data frames.
+
+```{r}
+inner <- UndSoc1ed %>%
+        inner_join(UndSoc2ed, by = "pidp")
+```
+
+Note that I se the variable **pidp** as the key for joining.
+
+The same result can be achieved with the function **merge** from base R.
+
+```{r}
+inner2 <- UndSoc1ed %>%
+        merge(UndSoc2ed, by = "pidp")
+identical(as.data.frame(inner), inner2)
+```
+
+These two data frames are identical. Note the use of **as.data.frame()**. **inner** is a tibble and unless converted into a simple data frame it is not identical to **inner2** because of the differences in object type.
+
+Inner join will only retain individuals that are present in both waves. This is why we only have `r nrow(inner)` observations in the joined data compared to `r nrow(UndSoc1ed)` in wave 1. But do we want this? Imagine that the person is present in wave 1, does not participate in wave 2, but then re-appears in wave 3. We probably want to include such individuals as well.
+
+Left join will keep all individuals in wave 1 and only those in wave 2 that can be matched to them.
+
+```{r}
+left <- UndSoc1ed %>%
+        left_join(UndSoc2ed, by = "pidp")
+# or, identically,
+# left <- UndSoc1ed %>%
+#         merge(UndSoc2ed, by = "pidp", all.x = TRUE)
+```
+
+You can check that the number of individuals in wave 1 and the joined data frame is the same.
+
+Right join will keep all individuals from wave 2 and only those from wave 1 that can be matched to them.
+
+```{r}
+right <- UndSoc1ed %>%
+        right_join(UndSoc2ed, by = "pidp")
+# or, identically,
+# right <- UndSoc1ed %>%
+#         merge(UndSoc2ed, by = "pidp", all.y = TRUE)
+```
+
+Usually I would want all the individuals from both waves to remain in the data set, no matter if they can be matched to other waves. If I need to exclude them from the analysis I prefer to do this manually. This can be achieved with full join.
+
+```{r}
+full <- UndSoc1ed %>%
+        full_join(UndSoc2ed, by = "pidp")
+# or, identically,
+# full <- UndSoc1ed %>%
+#          merge(UndSoc2ed, by = "pidp", all = TRUE)
+```
+
+Note that **full** has `r nrow(full)` observations compared to  `r nrow(UndSoc1ed)` in wave 1 and `r nrow(UndSoc2ed)` in wave 2. This is because it includes a) all individuals that took part in both waves 1 and 2, b) those who took part in wave 1, but not in wave 2, c) those who missed wave 1 but joined the study in wave 2.
+
+Let us explore the joined data set.
+
+```{r}
+head(full)
+```
+
+We have missing values for wave 1 variable for those people who joined in wave 2.
+
+# Joining waves 1 to 7
+
+Now let us join data from all seven waves. The challenge here is that we do not want to do every operation seven times so we may want to use some iterative tools that we learned last week.
+
+Note that the variables across the waves are named consistently, and the difference between the variables from different waves is the prefix that changes from "a" in wave 1 to "g" in wave 7.
+
+We may want to write a loop that reads a file for a particular wave into R, selects only the variables we need, joins the data, removes the original file from the memory and proceeds to the next wave.
+
+First let us clean the space and remove all the existing objects from the memory.
+
+```{r}
+rm(list = ls())
+```
+
+Now we will create a character vector with the full paths to the individual indresp files from all the waves.
+
+```{r}
+files <- dir("data/UKDA-6614-tab/tab",
+             pattern="indresp", recursive = TRUE, full.names=TRUE)
+files
+```
+
+This includes files from the BHPS that we don't need so let us drop them. We can use the function **str_detect()** (part of the stringr package) to identify files from the Understanding Society only and then keep only their names in the vector **files**.
+
+```{r}
+str_detect(files, "us")
+files <- files[str_detect(files, "us")]
+files
+```
+
+Now let us write the loop.
+
+```{r}
+# These are the variables we want to select from each wave without prefixes
+# (exclusing pidp).
+vars <- c("sex", "dvage", "vote6")
+
+# We will loop over numbers from 1 to 7
+for (i in 1:7) {
+        # Create a vector of the variables to select. I need to add the prefix.
+        # Note the use of the function letters()
+        varsToSelect <- paste(letters[i], vars, sep = "_")
+        # Add pidp (no prefix for pidp)
+        varsToSelect <- c("pidp", varsToSelect)
+        
+        # Now read the data. I only need to read the select variables.
+        # I will use the fread() function from the data.table package
+        # (it's faster and it's easier to select only some variables)
+        data <- fread(files[i], select = varsToSelect)
+        
+        # Now, if this is the first iteration of the loop we simply want to initialise
+        # the data frame with these data.
+        # If this is not the first iteration of the loop
+        # we need to use full_join.
+        # To achieve this result we will use the conditional operator if... else
+        if (i == 1) {
+                all7 <- data  
+        }
+        else {
+                all7 <- full_join(all7, data, by = "pidp")
+        }
+        # Now we can remove the full data frame
+        rm(data)
+}
+
+# Check the result
+colnames(all7)
+head(all7)
+```
+
+Now I will save this joined data frame for the future use. I will write it into the myData folder. Make sure that this folder is NOT tracked on Github as a) the data file is too large for tracking, b) we cannot put data in public access.
+
+To keep the folder untracked, just add the following line to your .gitignore file:
+
+myData/
+
+```{r}
+# You need to create the myData folder first
+
+write_tsv(all7, "myData/all7.tab")
+```
+
+
+
+
