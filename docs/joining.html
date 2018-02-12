@@ -5,32 +5,34 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <meta name="description" content="">
+  <title>Data Analysis in Social Science 3</title>
+  <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
   <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
-  <meta property="og:title" content="" />
+  <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
   
   
-  
-  
+  <meta property="og:description" content="A website for the Data Analysis in Social Science 3 module." />
+  <meta name="github-repo" content="abessudnov/dataanalysis3" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="" />
+  <meta name="twitter:title" content="Data Analysis in Social Science 3" />
   
-  
+  <meta name="twitter:description" content="A website for the Data Analysis in Social Science 3 module." />
   
 
+<meta name="author" content="Alexey Bessudnov">
 
 
+<meta name="date" content="2018-02-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
+<link rel="prev" href="index.html">
 <link rel="next" href="tidy-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -97,14 +99,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="joining.html"><a href="joining.html"><i class="fa fa-check"></i><b>1</b> Joining data from the Understanding Society</a><ul>
-<li class="chapter" data-level="1.1" data-path="joining.html"><a href="joining.html#joining-waves-1-and-2"><i class="fa fa-check"></i><b>1.1</b> Joining waves 1 and 2</a></li>
-<li class="chapter" data-level="1.2" data-path="joining.html"><a href="joining.html#joining-waves-1-to-7"><i class="fa fa-check"></i><b>1.2</b> Joining waves 1 to 7</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index file</a></li>
+<li class="chapter" data-level="2" data-path="joining.html"><a href="joining.html"><i class="fa fa-check"></i><b>2</b> Joining data from the Understanding Society</a><ul>
+<li class="chapter" data-level="2.1" data-path="joining.html"><a href="joining.html#joining-waves-1-and-2"><i class="fa fa-check"></i><b>2.1</b> Joining waves 1 and 2</a></li>
+<li class="chapter" data-level="2.2" data-path="joining.html"><a href="joining.html#joining-waves-1-to-7"><i class="fa fa-check"></i><b>2.2</b> Joining waves 1 to 7</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>2</b> Tidy data</a><ul>
-<li class="chapter" data-level="2.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>2.1</b> Long and wide formats</a></li>
-<li class="chapter" data-level="2.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>2.2</b> Cleaning the data</a></li>
-<li class="chapter" data-level="2.3" data-path="tidy-data.html"><a href="tidy-data.html#homework"><i class="fa fa-check"></i><b>2.3</b> Homework</a></li>
+<li class="chapter" data-level="3" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>3</b> Tidy data</a><ul>
+<li class="chapter" data-level="3.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>3.1</b> Long and wide formats</a></li>
+<li class="chapter" data-level="3.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>3.2</b> Cleaning the data</a></li>
+<li class="chapter" data-level="3.3" data-path="tidy-data.html"><a href="tidy-data.html#homework"><i class="fa fa-check"></i><b>3.3</b> Homework</a></li>
 </ul></li>
 </ul>
 
@@ -115,7 +118,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Analysis in Social Science 3</a>
           </h1>
         </div>
 
@@ -123,40 +126,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<!--bookdown:title:end-->
-<!--bookdown:title:start-->
 <div id="joining" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Joining data from the Understanding Society</h1>
+<h1><span class="header-section-number">Chapter 2</span> Joining data from the Understanding Society</h1>
 <p>At home you read ch.13 on Relational Data from R for Data Science – <a href="http://r4ds.had.co.nz/relational-data.html" class="uri">http://r4ds.had.co.nz/relational-data.html</a>. Let us see how we can apply this to the Understanding Society data.</p>
 <div id="joining-waves-1-and-2" class="section level2">
-<h2><span class="header-section-number">1.1</span> Joining waves 1 and 2</h2>
+<h2><span class="header-section-number">2.1</span> Joining waves 1 and 2</h2>
 <p>I will start with joining data from waves 1 and 2 and then expand the algorithm to all the seven waves. First we need to read the data into R.</p>
 <p>I am using the fundtion <strong>read_tsv()</strong> from the <strong>readr</strong> package here since the data are tab separated.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First I attach the packages I will use later. You need to install these packages first.</span>
 <span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(data.table)</code></pre></div>
-<pre><code>## data.table 1.10.4.3</code></pre>
-<pre><code>##   The fastest way to learn (by data.table authors): https://www.datacamp.com/courses/data-analysis-the-data-table-way</code></pre>
-<pre><code>##   Documentation: ?data.table, example(data.table) and browseVignettes(&quot;data.table&quot;)</code></pre>
-<pre><code>##   Release notes, videos and slides: http://r-datatable.com</code></pre>
-<pre><code>## 
-## Attaching package: &#39;data.table&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
-## 
-##     between, first, last</code></pre>
-<pre><code>## The following object is masked from &#39;package:purrr&#39;:
-## 
-##     transpose</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape2)</code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;reshape2&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:data.table&#39;:
-## 
-##     dcast, melt</code></pre>
-<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
-## 
-##     smiths</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSoc1 &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
+<span class="kw">library</span>(data.table)
+<span class="kw">library</span>(reshape2)
+
+UndSoc1 &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   .default = col_integer(),
@@ -316,7 +298,7 @@ UndSoc2ed &lt;-<span class="st"> </span>UndSoc2 <span class="op">%&gt;%</span>
 <p>We have missing values for wave 1 variable for those people who joined in wave 2.</p>
 </div>
 <div id="joining-waves-1-to-7" class="section level2">
-<h2><span class="header-section-number">1.2</span> Joining waves 1 to 7</h2>
+<h2><span class="header-section-number">2.2</span> Joining waves 1 to 7</h2>
 <p>Now let us join data from all seven waves. The challenge here is that we do not want to do every operation seven times so we may want to use some iterative tools that we learned last week.</p>
 <p>Note that the variables across the waves are named consistently, and the difference between the variables from different waves is the prefix that changes from “a” in wave 1 to “g” in wave 7.</p>
 <p>We may want to write a loop that reads a file for a particular wave into R, selects only the variables we need, joins the data, removes the original file from the memory and proceeds to the next wave.</p>
@@ -398,7 +380,7 @@ vars &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&q
         <span class="kw">rm</span>(data)
 }</code></pre></div>
 <pre><code>## 
-Read 40.2% of 49739 rows
+Read 60.3% of 49739 rows
 Read 49739 rows and 4 (of 3024) columns from 0.402 GB file in 00:00:04
 ## 
 Read 84.8% of 47157 rows
@@ -410,7 +392,7 @@ Read 44903 rows and 4 (of 2583) columns from 0.310 GB file in 00:00:03
 Read 88.3% of 45290 rows
 Read 45290 rows and 4 (of 2060) columns from 0.263 GB file in 00:00:03
 ## 
-Read 47.4% of 42217 rows
+Read 71.1% of 42217 rows
 Read 42217 rows and 4 (of 2799) columns from 0.321 GB file in 00:00:03</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Check the result</span>
 <span class="kw">colnames</span>(all7)</code></pre></div>
@@ -454,8 +436,8 @@ Read 42217 rows and 4 (of 2799) columns from 0.321 GB file in 00:00:03</code></p
           </div>
         </div>
       </div>
-
-<a href="tidy-data.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tidy-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
