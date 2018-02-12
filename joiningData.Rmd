@@ -1,7 +1,7 @@
 ---
 title: "Joining data from the Understanding Society"
 author: "Alexey Bessudnov"
-date: "10 February 2018"
+date: "12 February 2018"
 output: html_document
 ---
 
