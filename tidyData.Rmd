@@ -119,7 +119,13 @@ UndSocExampleLong %>%
 **Exercise**. Reshape the full **UndSoc** data frame from wide to long format. Call the object where you will
 store the result **UndSocLong**.
 
-*Insert code here.*
+```{r}
+UndSocLong <- UndSoc %>%
+  gather(a_sex:g_vote6, key = "variable", value = "value") %>%
+  separate(variable, into = c("wave", "variable"), sep = "_") %>%
+  spread(key = variable, value = value)
+UndSocLong
+```
 
 # Cleaning the data
 
@@ -156,9 +162,10 @@ UndSocLongClean <- UndSocLong %>%
   mutate(sex = factor(sex)) %>%
   mutate(vote6 = factor(vote6))
 UndSocLongClean
-  
-```
 
+write_tsv(UndSocLongClean, "myData/all7clean.tab")
+
+```
 
 # Homework
 

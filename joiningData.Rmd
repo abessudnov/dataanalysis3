@@ -94,7 +94,7 @@ inner <- UndSoc1ed %>%
         inner_join(UndSoc2ed, by = "pidp")
 ```
 
-Note that I se the variable **pidp** as the key for joining.
+Note that I use the variable **pidp** as the key for joining.
 
 The same result can be achieved with the function **merge** from base R.
 
