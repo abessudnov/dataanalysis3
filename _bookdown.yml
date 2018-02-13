@@ -1,7 +1,8 @@
 book_filename: "datan3"
 language:
   ui:
-    chapter_name: "Chapter "
+    chapter_name: ""
 delete_merged_file: true
 output_dir: "docs"
+before_chapter_script: ["removeObjects.R"]
 rmd_files: ["index.Rmd", "moduleOutline.Rmd", "joiningData.Rmd", "tidyData.Rmd"]
