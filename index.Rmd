@@ -25,6 +25,7 @@ documentclass: book
 link-citations: yes
 github-repo: abessudnov/dataanalysis3
 description: "A website for the Data Analysis in Social Science 3 module."
+url: 'http\://abessudnov.net/dataanalysis3/'
 ---
 
 # Index
