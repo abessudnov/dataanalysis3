@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="module-outline.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="joining.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -134,23 +134,83 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data Analysis in Social Science 3</h1>
-<h4 class="author"><em>Alexey Bessudnov</em></h4>
-<h4 class="date"><em>2018-02-13</em></h4>
+<div id="module-outline" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Module outline</h1>
+<div id="practical-arrangements" class="section level3">
+<h3><span class="header-section-number">2.0.1</span> Practical arrangements</h3>
+<p><strong>Classes:</strong></p>
+<ul>
+<li>Monday, 11.30am - 1.30pm, WSL 220</li>
+</ul>
+<p>Classes begin on 15 January and end on 26 March. The class on 22 January (week 2) has been cancelled and moved to Friday 2 February, 10.30 - 12.30, WSL 220.</p>
+<p><strong>Office hours (Amory A341)</strong></p>
+<ul>
+<li>Monday, 2-3pm</li>
+<li>Friday, 12-1pm</li>
+</ul>
+<p><strong>Email:</strong></p>
+<ul>
+<li>A.Bessudnov [at] exeter.ac.uk</li>
+</ul>
 </div>
-<div id="index-file" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Index file</h1>
-<p>Some text here.</p>
+<div id="aims-of-the-module" class="section level3">
+<h3><span class="header-section-number">2.0.2</span> Aims of the module</h3>
+<p>This is a fourth module in the data analysis in the social sciences series. In the Introduction to Social Data you learned the basics of descriptive statistics and R. Data Analysis 1 introduced you to statistical inference. Data Analysis 2 covered linear regression analysis. In Data Analysis 3 we are not going to learn new statistical techniques, but will focus on how to apply the techniques you already know to the analysis of real-life data sets and how to produce statistical reports.</p>
+<p>This is a skill that you may need in a variety of jobs where data analytic expertise is required, such as marketing analysis, policy analysis in various fields, web analytics, data journalism, academic research, etc.</p>
+<p>You already know how to use R to describe data and run simple statistical models. However, real-life data rarely come in the form of a perfectly formatted csv file ready for the analysis. The real life data sets often need to be reshaped, merged, recoded, aggregated and modified in various ways before you can even start your analysis. Unless you know how to do this you will not be able to produce good statistical reports.</p>
+<p>This year in this module we will use data from the Understanding Society, a large household panel study conducted in the UK. In the Immigration module we already used the cross-sectional Understanding Society data. In this module we will work with the longitudinal data, which introduces a number of technical challenges.</p>
+<p>Throughout the module we will use R for statistical analysis. You are expected to know the basics of data analysis in R.</p>
+<p>The only way to learn data analysis is to do data analysis. I will not be able to teach you this, but I can guide your independent learning. This year we will try the “flipped classroom” model of teaching. This means that you will be expected to read and master the required material BEFORE the class and we will use the time in class to answer additional questions and check your solutions rather than introduce new material.</p>
+<p>The pre-requisites for this module are POL/SOC1041 and POL/SOC2077.</p>
+</div>
+<div id="attendance" class="section level3">
+<h3><span class="header-section-number">2.0.3</span> Attendance</h3>
+<p>This module is quite technical. As with other technical skills, missing some initial bits means that you may not be able to catch up. Attendance in this module is crucial. If you do not attend you will not be able to do well in this module. Even skipping a couple of classes will have negative consequences for your understanding of the material. Another negative consequence will be that you will slow the rest of the class down as I will have to explain the same things several times. If you plan not to attend classes please do not take this optional module.</p>
+</div>
+<div id="assessment" class="section level3">
+<h3><span class="header-section-number">2.0.4</span> Assessment</h3>
+<p>The assessment for this module is a report of 3,500 words (in addition to figures and tables) with the results of statistical analysis you will undertake. This will be 100% of your final mark for this module. You will be given questions for the reports later in the module. In your analysis you will use the Understanding Society data.</p>
+<p>The deadline for submitting your reports through eBart is 29 March at 2pm. You will receive your marks and feedback by 5 May.</p>
+<p>Late submissions up to two weeks after the deadline will be capped at 40%. Submissions that are late for more than two weeks will not be accepted.</p>
+</div>
+<div id="syllabus-plan" class="section level3">
+<h3><span class="header-section-number">2.0.5</span> Syllabus plan</h3>
+<p>I may change some topics as we proceed.</p>
+<ul>
+<li>Data structures in R</li>
+<li>Manipulating data with dplyr</li>
+<li>Longitudinal data in R. Wide and long formats. Reshaping</li>
+<li>Data visualisation with ggplot2</li>
+<li>Producing statistical reports with R Markdown</li>
+<li>Interactive applications with Shiny</li>
+<li>Loops and other control structures. The apply family of functions</li>
+<li>Writing functions in R</li>
+</ul>
+</div>
+<div id="reading-list" class="section level3">
+<h3><span class="header-section-number">2.0.6</span> Reading list</h3>
+<p>The main text for this module:</p>
+<ul>
+<li>G.Grolemund &amp; H.Wickham. (2016). R for Data Science. Freely available at <a href="http://r4ds.had.co.nz/" class="uri">http://r4ds.had.co.nz/</a></li>
+</ul>
+<p>In addition to this you can the following sources (among many others books on R).</p>
+<ul>
+<li>H.Wickham. (2015). ggplot2. Elegant Graphics for Data Analysis. 2nd ed. Springer.</li>
+<li>W.Chang. (2013). R Graphics Cookbook. O’Reilly.</li>
+<li>P.Spector. (2008). Data Manipulation with R. Springer.</li>
+<li>N.Matloff. (2011). The Art of R Programming. No Starch Press.</li>
+<li>H.Wickham. (2014). Advanced R. Chapman &amp; Hall.</li>
+</ul>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="module-outline.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="joining.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
