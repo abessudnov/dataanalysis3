@@ -1,13 +1,4 @@
 book_filename: "datan3"
-title: "Data Analysis in Social Science 3"
-author: "Alexey Bessudnov"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-output: bookdown::gitbook
-documentclass: book
-link-citations: yes
-github-repo: abessudnov/dataanalysis3
-description: "A website for the Data Analysis in Social Science 3 module."
 delete_merged_file: true
 output_dir: "docs"
 before_chapter_script: ["removeObjects.R"]
