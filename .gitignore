@@ -5,5 +5,4 @@
 
 data/
 myData/
-joiningData_cache/
-tidyData_cache/
+_bookdown_files
