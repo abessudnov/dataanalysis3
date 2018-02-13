@@ -1,15 +1,3 @@
---- 
-title: "Data Analysis in Social Science 3"
-author: "Alexey Bessudnov"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-output: bookdown::gitbook
-documentclass: book
-link-citations: yes
-github-repo: abessudnov/dataanalysis3
-description: "A website for the Data Analysis in Social Science 3 module."
----
-
 # Index file
 
 Some text here.
