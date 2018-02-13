@@ -8,7 +8,7 @@ I will start with joining data from waves 1 and 2 and then expand the algorithm 
 
 I am using the fundtion **read_tsv()** from the **readr** package here since the data are tab separated.
 
-```{r}
+```{r cache = TRUE}
 # First I attach the packages I will use later. You need to install these packages first.
 library(tidyverse)
 library(data.table)
@@ -21,7 +21,7 @@ UndSoc2 <- read_tsv("data/UKDA-6614-tab/tab/us_w2/b_indresp.tab")
 
 These are very large files that take a lot of space in the memory.
 
-```{r}
+```{r cache = TRUE}
 format(object.size(UndSoc1), units = "auto")
 format(object.size(UndSoc2), units = "auto")
 
@@ -47,7 +47,7 @@ Note that for now I keep it intentionally simple.
 
 First I will edit both data sets to keep only the variables I need.
 
-```{r}
+```{r cache = TRUE}
 UndSoc1ed <- UndSoc1 %>%
         select(pidp, a_sex, a_dvage, a_vote6)
 UndSoc2ed <- UndSoc2 %>%
@@ -57,7 +57,7 @@ UndSoc2ed <- UndSoc2 %>%
 
 Note that these are much smaller objects.
 
-```{r}
+```{r cache = TRUE}
 format(object.size(UndSoc1ed), units = "auto")
 format(object.size(UndSoc2ed), units = "auto")
 
@@ -65,13 +65,13 @@ format(object.size(UndSoc2ed), units = "auto")
 
 I will remove the larger data sets from the memory to free it up.
 
-```{r}
+```{r cache = TRUE}
 rm(UndSoc1, UndSoc2)
 ```
 
 Let us explore the data.
 
-```{r}
+```{r cache = TRUE}
 head(UndSoc1ed)
 head(UndSoc2ed)
 
@@ -79,7 +79,7 @@ head(UndSoc2ed)
 
 Now we can join the data sets. As you know already, there can be several types of joins. Inner join will keep the observations that match in both data frames.
 
-```{r}
+```{r cache = TRUE}
 inner <- UndSoc1ed %>%
         inner_join(UndSoc2ed, by = "pidp")
 ```
@@ -88,7 +88,7 @@ Note that I use the variable **pidp** as the key for joining.
 
 The same result can be achieved with the function **merge** from base R.
 
-```{r}
+```{r cache = TRUE}
 inner2 <- UndSoc1ed %>%
         merge(UndSoc2ed, by = "pidp")
 identical(as.data.frame(inner), inner2)
@@ -100,7 +100,7 @@ Inner join will only retain individuals that are present in both waves. This is 
 
 Left join will keep all individuals in wave 1 and only those in wave 2 that can be matched to them.
 
-```{r}
+```{r cache = TRUE}
 left <- UndSoc1ed %>%
         left_join(UndSoc2ed, by = "pidp")
 # or, identically,
@@ -112,7 +112,7 @@ You can check that the number of individuals in wave 1 and the joined data frame
 
 Right join will keep all individuals from wave 2 and only those from wave 1 that can be matched to them.
 
-```{r}
+```{r cache = TRUE}
 right <- UndSoc1ed %>%
         right_join(UndSoc2ed, by = "pidp")
 # or, identically,
@@ -122,7 +122,7 @@ right <- UndSoc1ed %>%
 
 Usually I would want all the individuals from both waves to remain in the data set, no matter if they can be matched to other waves. If I need to exclude them from the analysis I prefer to do this manually. This can be achieved with full join.
 
-```{r}
+```{r cache = TRUE}
 full <- UndSoc1ed %>%
         full_join(UndSoc2ed, by = "pidp")
 # or, identically,
@@ -134,7 +134,7 @@ Note that **full** has `r nrow(full)` observations compared to  `r nrow(UndSoc1e
 
 Let us explore the joined data set.
 
-```{r}
+```{r cache = TRUE}
 head(full)
 ```
 
@@ -150,13 +150,13 @@ We may want to write a loop that reads a file for a particular wave into R, sele
 
 First let us clean the space and remove all the existing objects from the memory.
 
-```{r}
+```{r cache = TRUE}
 rm(list = ls())
 ```
 
 Now we will create a character vector with the full paths to the individual indresp files from all the waves.
 
-```{r}
+```{r cache = TRUE}
 files <- dir("data/UKDA-6614-tab/tab",
              pattern="indresp", recursive = TRUE, full.names=TRUE)
 files
@@ -164,7 +164,7 @@ files
 
 This includes files from the BHPS that we don't need so let us drop them. We can use the function **str_detect()** (part of the stringr package) to identify files from the Understanding Society only and then keep only their names in the vector **files**.
 
-```{r}
+```{r cache = TRUE}
 str_detect(files, "us")
 files <- files[str_detect(files, "us")]
 files
@@ -172,7 +172,7 @@ files
 
 Now let us write the loop.
 
-```{r}
+```{r cache = TRUE}
 # These are the variables we want to select from each wave without prefixes
 # (exclusing pidp).
 vars <- c("sex", "dvage", "vote6")
@@ -216,7 +216,7 @@ To keep the folder untracked, just add the following line to your .gitignore fil
 
 myData/
 
-```{r}
+```{r cache = TRUE}
 # You need to create the myData folder first
 
 write_tsv(all7, "myData/all7.tab")

@@ -2,7 +2,7 @@
 
 In the previous part of the course (joiningData.Rmd) we learned how to join together data from seven waves of the Understanding Society. Let us open this data set.
 
-```{r}
+```{r cache = TRUE}
 UndSoc <- read_tsv("myData/all7.tab")
 head(UndSoc)
 ```
@@ -13,7 +13,7 @@ Now we will work on how these data can be represented and prepared for the analy
 
 Let us keep only a few observations and columns in the data and more closely look at its structure.
 
-```{r}
+```{r cache = TRUE}
 UndSocExample <- UndSoc %>%
   filter(pidp == 68001367 | pidp == 68004087) %>%
   select(pidp, a_sex: b_vote6)
@@ -26,7 +26,7 @@ You will find this representation of the data common in longitudinal data sets. 
 
 To move from the wide to the long format we can use the function **melt** and **cast** functions from the **reshape2** package.
 
-```{r}
+```{r cache = TRUE}
 require(reshape2)
 
 # First we "melt" the data frame.
@@ -52,7 +52,7 @@ Now the data are in the "long format". This means that we have as many rows for 
 
 What if we want to convert the data back to the wide format?
 
-```{r}
+```{r cache = TRUE}
 # First melt
 UndSocExampleMolten2 <- UndSocExampleLong %>%
   melt(id = c("pidp", "wave"))
@@ -73,7 +73,7 @@ We can also restructure the data using the **gather** and **spread** functions f
 
 Moving from wide to long:
 
-```{r}
+```{r cache = TRUE}
 UndSocExample
 
 # This "melts" the data frame. 
@@ -90,7 +90,7 @@ UndSocExample %>%
 
 If we want to move from long to wide:
 
-```{r}
+```{r cache = TRUE}
 UndSocExampleLong
 
 UndSocExampleLong %>%
@@ -103,7 +103,9 @@ UndSocExampleLong %>%
 **Exercise**. Reshape the full **UndSoc** data frame from wide to long format. Call the object where you will
 store the result **UndSocLong**.
 
-```{r}
+**Solution:**
+
+```{r cache = TRUE}
 UndSocLong <- UndSoc %>%
   gather(a_sex:g_vote6, key = "variable", value = "value") %>%
   separate(variable, into = c("wave", "variable"), sep = "_") %>%
@@ -117,7 +119,7 @@ Before we begin the analysis we want to make sure that the data have been cleane
 
 Let us explore the data set we have. Note that if we had not converted the data into the long format we would have to tabulate and clean each variable seven times.
 
-```{r}
+```{r cache = TRUE}
 summary(UndSocLong)
 table(UndSocLong$wave)
 table(UndSocLong$dvage)
@@ -127,7 +129,7 @@ table(UndSocLong$vote6)
 
 Note the negative values for dvage, sex and vote6. These are missing values that need to be coded as missing.
 
-```{r}
+```{r cache = TRUE}
 UndSocLong  <- UndSocLong %>%
   mutate(dvage = ifelse(dvage > 0, dvage, NA)) %>%
   mutate(sex = ifelse(sex > 0, sex, NA)) %>%
@@ -139,7 +141,7 @@ table(UndSocLong$vote6)
 
 We may also want to code **sex** as "male" and "female" and assign meaningful labels to **vote6** converting these variables into factors.
 
-```{r}
+```{r cache = TRUE}
 UndSocLongClean <- UndSocLong %>%
   mutate(sex = recode(sex, "1" = "male", "2" = "female")) %>%
   mutate(vote6 = recode(vote6, "1" = "very", "2" = "fairly", "3" = "not very", "4" = "not al all")) %>%
