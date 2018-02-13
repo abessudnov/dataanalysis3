@@ -28,9 +28,7 @@ description: "A website for the Data Analysis in Social Science 3 module."
 url: 'http\://abessudnov.net/dataanalysis3/'
 ---
 
-# Data Analysis in Social Science 3
-
-## Introduction
+# Introduction
 
 This is a website for the Data Analysis in Social Science 3 module at the University of Exeter (SOC2094/3094 POL2094/3094) as offered in Term 2 in 2018.
 
@@ -59,6 +57,7 @@ To learn how Git and Github work take this free online course: https://www.datac
 You do not want to track these two folders on Github. To avoid this, include the following two lines in your .gitignore file:
 
 data/
+
 myData/
 
 4. Read ch.11 (Data Import) from R for Data Science and do the exercises - http://r4ds.had.co.nz/data-import.html 
