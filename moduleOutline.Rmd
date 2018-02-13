@@ -1,6 +1,6 @@
 # Module outline
 
-### Practical arrangements
+## Practical arrangements
 
 **Classes:**
 
@@ -19,7 +19,7 @@ Classes begin on 15 January and end on 26 March. The class on 22 January (week 2
 * A.Bessudnov [at] exeter.ac.uk
 
 
-### Aims of the module
+## Aims of the module
 
 This is a fourth module in the data analysis in the social sciences series. In the Introduction to Social Data you learned the basics of descriptive statistics and R. Data Analysis 1 introduced you to statistical inference. Data Analysis 2 covered linear regression analysis. In Data Analysis 3 we are not going to learn new statistical techniques, but will focus on how to apply the techniques you already know to the analysis of real-life data sets and how to produce statistical reports.
 
@@ -35,11 +35,11 @@ The only way to learn data analysis is to do data analysis. I will not be able t
 
 The pre-requisites for this module are POL/SOC1041 and POL/SOC2077.
 
-### Attendance
+## Attendance
 
 This module is quite technical. As with other technical skills, missing some initial bits means that you may not be able to catch up. Attendance in this module is crucial. If you do not attend you will not be able to do well in this module. Even skipping a couple of classes will have negative consequences for your understanding of the material. Another negative consequence will be that you will slow the rest of the class down as I will have to explain the same things several times. If you plan not to attend classes please do not take this optional module.
 
-### Assessment
+## Assessment
 
 The assessment for this module is a report of 3,500 words (in addition to figures and tables) with the results of statistical analysis you will undertake. This will be 100\% of your final mark for this module. You will be given questions for the reports later in the module. In your analysis you will use the Understanding Society data.
 
@@ -48,7 +48,7 @@ The deadline for submitting your reports through eBart is 29 March at 2pm. You w
 Late submissions up to two weeks after the deadline will be capped at 40\%. Submissions that are late for more than two weeks will not be accepted.
 
 
-### Syllabus plan
+## Syllabus plan
 
 I may change some topics as we proceed.
 
@@ -62,7 +62,7 @@ I may change some topics as we proceed.
 * Loops and other control structures. The apply family of functions
 * Writing functions in R
 
-### Reading list
+## Reading list
 
 The main text for this module:
 
