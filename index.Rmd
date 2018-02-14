@@ -6,7 +6,7 @@ site: bookdown::bookdown_site
 output:
     bookdown::gitbook:
         includes:
-          in_header: [google_analytics.html]
+          in_header: [docs/google_analytics.html]
         config:
             toc:
                 collapse: section
