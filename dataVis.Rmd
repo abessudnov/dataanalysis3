@@ -1,0 +1,70 @@
+# Data visualisation {#datavis}
+
+**Pre-requisite for this class: ch.3 ("Data visualisation") from R for Data Science - http://r4ds.had.co.nz/data-visualisation.html**
+
+At home you learned about the basic principles of data visualisation in R with the **ggplot2** package. Let us see how we can apply this to the Understanding Society data set.
+
+Personally I can never remember all the details of the ggplot2 syntax. I often use the ready-made "recipes" from the R Graphics Cookbook by W.Chang -- https://www.amazon.co.uk/R-Graphics-Cookbook-Winston-Chang/dp/1449316956/. The 2nd edition is coming out later this year -- https://www.amazon.co.uk/Graphics-Cookbook-2e-Winston-Chang/dp/1491978600 .
+
+You may also find Winston Chang's website useful (and not only for graphics) - http://www.cookbook-r.com .
+
+## Reading in the data
+
+First let us read in the data we used in week 2 when we learned about **dplyr** (a short version of the wave 1 data) and recreate the measures for weight, height and BMI.
+
+```{r cache = TRUE}
+W1 <- read_csv("exData/W1.csv")
+W1 <- W1 %>%
+  mutate(heightcm = ifelse(a_hlht == 1 & a_hlhtf > 0, 
+                           a_hlhtf*30.48 + a_hlhti*2.54,
+                           ifelse(a_hlht == 2 & a_hlhtc > 0, 
+                                  a_hlhtc, NA))) %>%
+  mutate(weightkg = ifelse(a_hlwt == 1 & a_hlwts > 0, 
+                           a_hlwts*6.35 + a_hlwtp*0.45,
+                           ifelse(a_hlwt == 2 & a_hlwtk > 0, 
+                                  a_hlwtk, NA))) %>%
+  mutate(bmi = weightkg / (heightcm / 100)^2)
+
+```
+
+## Visualising one quantitative variable
+
+**Exercise**. Visualise the distribution of the BMI with **ggplot2**. Which statistical graphs would be appropriate for this?
+
+## Visualising one categorical variable
+
+**Exercise**. Visualise the distribution of *a_ukborn* with **ggplot2**. Which statistical graphs would be appropriate for this?
+
+## Visualising two quantitative variables
+
+**Exercise**. Visualise the joint distribution of weight (in kg) and height (in cm). In your chart show the regression line and the nonparametric smoothing line.
+
+## Visualising one categorical and one quantitative variable
+
+**Exercise**. Visualise the distribution of BMI for a) men and women, b) different age groups.
+
+## Visualising two categorical variables
+
+**Exercise**. Use facets to visualise the distribution of *a_ukborn* by age group.
+
+## Showing the relationships by group
+
+**Exercise**. Use facets to visualise the association between age and BMI by ethnic group.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
