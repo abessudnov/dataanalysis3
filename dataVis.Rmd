@@ -13,6 +13,8 @@ You may also find Winston Chang's website useful (and not only for graphics) - h
 First let us read in the data we used in week 2 when we learned about **dplyr** (a short version of the wave 1 data) and recreate the measures for weight, height and BMI.
 
 ```{r cache = TRUE}
+library(tidyverse)
+library(data.table)
 W1 <- fread("exData/W1.csv")
 W1 <- W1 %>%
   mutate(heightcm = ifelse(a_hlht == 1 & a_hlhtf > 0, 
@@ -31,13 +33,60 @@ head(W1, 3)
 
 **Exercise**. Visualise the distribution of the BMI with **ggplot2**. Which statistical graphs would be appropriate for this?
 
+
+### Histogram.
+
+```{r}
+ggplot(W1, aes(x=bmi)) +
+  geom_histogram(bins = 100) +
+  xlab("Body mass index")
+```
+
+### Density chart.
+
+```{r}
+ggplot(W1, aes(x=bmi)) +
+  geom_density() +
+  xlab("Body mass index")
+```
+
+
 ## Visualising one categorical variable
 
 **Exercise**. Visualise the distribution of *a_ukborn* with **ggplot2**. Which statistical graphs would be appropriate for this?
 
+### Bar plot.
+
+```{r}
+table(W1$a_ukborn)
+W1 <- W1 %>%
+  mutate(a_ukborn = ifelse(a_ukborn > 0, a_ukborn, NA)) %>%
+  mutate(cbirth = recode(a_ukborn, "1" = "England", 
+                         "2" = "Scotland",
+                         "3" = "Wales",
+                         "4" = "Northern Ireland",
+                         "5" = "Not UK")) 
+  
+table(W1$cbirth)
+W1 %>% 
+  filter(!is.na(cbirth)) %>%
+  ggplot(aes(x=cbirth)) +
+  geom_bar() +
+  xlab("Country of birth")
+
+table(W1$cbirth, useNA = "always")
+```
+
 ## Visualising two quantitative variables
 
 **Exercise**. Visualise the joint distribution of weight (in kg) and height (in cm). In your chart show the regression line and the nonparametric smoothing line.
+
+```{r}
+ggplot(W1, aes(x = weightkg, y= heightcm)) +
+  geom_point() +
+  geom_smooth() +
+  stat_smooth(method=lm)
+```
 
 ## Visualising one categorical and one quantitative variable
 
