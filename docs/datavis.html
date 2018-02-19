@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="tidy-data.html">
 
-<link rel="next" href="module-outline.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -154,36 +154,72 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data Analysis in Social Science 3</h1>
-<h4 class="author"><em>Alexey Bessudnov</em></h4>
-<h4 class="date"><em>2018-02-19</em></h4>
+<div id="datavis" class="section level1">
+<h1><span class="header-section-number">5</span> Data visualisation</h1>
+<p>**Pre-requisite for this class: ch.3 (“Data visualisation”) from R for Data Science - <a href="http://r4ds.had.co.nz/data-visualisation.html**" class="uri">http://r4ds.had.co.nz/data-visualisation.html**</a></p>
+<p>At home you learned about the basic principles of data visualisation in R with the <strong>ggplot2</strong> package. Let us see how we can apply this to the Understanding Society data set.</p>
+<p>Personally I can never remember all the details of the ggplot2 syntax. I often use the ready-made “recipes” from the R Graphics Cookbook by W.Chang – <a href="https://www.amazon.co.uk/R-Graphics-Cookbook-Winston-Chang/dp/1449316956/" class="uri">https://www.amazon.co.uk/R-Graphics-Cookbook-Winston-Chang/dp/1449316956/</a>. The 2nd edition is coming out later this year – <a href="https://www.amazon.co.uk/Graphics-Cookbook-2e-Winston-Chang/dp/1491978600" class="uri">https://www.amazon.co.uk/Graphics-Cookbook-2e-Winston-Chang/dp/1491978600</a> .</p>
+<p>You may also find Winston Chang’s website useful (and not only for graphics) - <a href="http://www.cookbook-r.com" class="uri">http://www.cookbook-r.com</a> .</p>
+<div id="reading-in-the-data" class="section level2">
+<h2><span class="header-section-number">5.1</span> Reading in the data</h2>
+<p>First let us read in the data we used in week 2 when we learned about <strong>dplyr</strong> (a short version of the wave 1 data) and recreate the measures for weight, height and BMI.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;exData/W1.csv&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   pidp = col_integer(),
+##   a_sex = col_integer(),
+##   a_dvage = col_integer(),
+##   a_ukborn = col_integer(),
+##   a_racel = col_integer(),
+##   a_hlht = col_integer(),
+##   a_hlhtf = col_integer(),
+##   a_hlhti = col_integer(),
+##   a_hlhtc = col_integer(),
+##   a_hlwt = col_integer(),
+##   a_hlwts = col_integer(),
+##   a_hlwtp = col_integer(),
+##   a_hlwtk = col_integer(),
+##   a_vote1 = col_integer(),
+##   a_vote2 = col_integer(),
+##   a_vote3 = col_integer(),
+##   a_vote4 = col_integer(),
+##   a_vote5 = col_integer(),
+##   a_vote6 = col_integer()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">heightcm =</span> <span class="kw">ifelse</span>(a_hlht <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>a_hlhtf <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
+                           a_hlhtf<span class="op">*</span><span class="fl">30.48</span> <span class="op">+</span><span class="st"> </span>a_hlhti<span class="op">*</span><span class="fl">2.54</span>,
+                           <span class="kw">ifelse</span>(a_hlht <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>a_hlhtc <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
+                                  a_hlhtc, <span class="ot">NA</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weightkg =</span> <span class="kw">ifelse</span>(a_hlwt <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>a_hlwts <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
+                           a_hlwts<span class="op">*</span><span class="fl">6.35</span> <span class="op">+</span><span class="st"> </span>a_hlwtp<span class="op">*</span><span class="fl">0.45</span>,
+                           <span class="kw">ifelse</span>(a_hlwt <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>a_hlwtk <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
+                                  a_hlwtk, <span class="ot">NA</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bmi =</span> weightkg <span class="op">/</span><span class="st"> </span>(heightcm <span class="op">/</span><span class="st"> </span><span class="dv">100</span>)<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
 </div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>This is a website for the Data Analysis in Social Science 3 module at the University of Exeter (SOC2094/3094 POL2094/3094) as offered in Term 2 in 2018.</p>
-<p>The website will be updated with new R Markdown scripts as the course progresses. All the scripts are provided on the ‘as is’ basis.</p>
-<p>The idea for this module is to teach you how to work with complex longitudinal data sets using data from the <a href="https://www.understandingsociety.ac.uk/">Understanding Society</a>, a longitudinal household survey conducted in the UK. You will learn how to read complex data into R, manipulate and summarise data using dplyr, merge and restructure data frames, visualise data using ggplot2, create statistical reports with R Markdown and (possibly) interactive applications with Shiny. For more details see the <a href="http://abessudnov.net/dataanalysis3/module-outline.html">module outline</a>.</p>
-<p>The module is organised according to the “flipped classroom” pedagogy. This means that you read new material and do exercises <strong>before</strong> the class, and in class we work together on the exercises and discuss how what you learned at home can be applied to the Understanding Society data. The readings and exercises mostly come from the <a href="http://r4ds.had.co.nz/">R for Data Science</a> book by G.Grolemund and H.Wickham.</p>
-<p>The pre-requisites for this module are SOC/POL1041 and SOC/POL2077.</p>
-<p>All the scripts and other materials are available in the Github repository for the module: <a href="https://github.com/abessudnov/dataanalysis3" class="uri">https://github.com/abessudnov/dataanalysis3</a></p>
-<div id="things-to-do-before-the-next-class" class="section level2">
-<h2><span class="header-section-number">1.1</span> Things to do before the next class</h2>
-<p>Before coming to class 2 please do the following:</p>
-<ol style="list-style-type: decimal">
-<li><p>Register an account with the <a href="https://www.ukdataservice.ac.uk/">UK Data Service</a>, create a data usage (or join the existing data usage that I have created) and download the Understanding Society data in the tab delimited format (<a href="https://discover.ukdataservice.ac.uk/catalogue/?sn=6614">SN6614</a>). Read the User Manual and familiarise yourself with the structure of the data.</p></li>
-<li><p>Install <a href="https://git-scm.com/">Git</a> and register an account on <a href="https://github.com/">Github</a> (if you do not have it already). Then you can either create a new repository for this module or fork my repository (see the link above). Create a project in R Studio for this repository.</p></li>
-</ol>
-<p>To learn how Git and Github work take this free online course: <a href="https://www.datacamp.com/courses/introduction-to-git-for-data-science/" class="uri">https://www.datacamp.com/courses/introduction-to-git-for-data-science/</a></p>
-<ol start="3" style="list-style-type: decimal">
-<li>In the root folder for your project create a folder “data” and put there the Understanding Society data as you downloaded them. The next subfolder must be “UKDA-6614-tab”. Never change anything in this folder. Also create an empty “myData” folder in the root folder.</li>
-</ol>
-<p>You do not want to track these two folders on Github. To avoid this, include the following two lines in your .gitignore file:</p>
-<p>data/</p>
-<p>myData/</p>
-<ol start="4" style="list-style-type: decimal">
-<li>Read ch.11 (Data Import) from R for Data Science and do the exercises - <a href="http://r4ds.had.co.nz/data-import.html" class="uri">http://r4ds.had.co.nz/data-import.html</a></li>
-</ol>
+<div id="visualising-one-quantitative-variable" class="section level2">
+<h2><span class="header-section-number">5.2</span> Visualising one quantitative variable</h2>
+<p><strong>Exercise</strong>. Visualise the distribution of the BMI with <strong>ggplot2</strong>. Which statistical graphs would be appropriate for this?</p>
+</div>
+<div id="visualising-one-categorical-variable" class="section level2">
+<h2><span class="header-section-number">5.3</span> Visualising one categorical variable</h2>
+<p><strong>Exercise</strong>. Visualise the distribution of <em>a_ukborn</em> with <strong>ggplot2</strong>. Which statistical graphs would be appropriate for this?</p>
+</div>
+<div id="visualising-two-quantitative-variables" class="section level2">
+<h2><span class="header-section-number">5.4</span> Visualising two quantitative variables</h2>
+<p><strong>Exercise</strong>. Visualise the joint distribution of weight (in kg) and height (in cm). In your chart show the regression line and the nonparametric smoothing line.</p>
+</div>
+<div id="visualising-one-categorical-and-one-quantitative-variable" class="section level2">
+<h2><span class="header-section-number">5.5</span> Visualising one categorical and one quantitative variable</h2>
+<p><strong>Exercise</strong>. Visualise the distribution of BMI for a) men and women, b) different age groups.</p>
+</div>
+<div id="visualising-two-categorical-variables" class="section level2">
+<h2><span class="header-section-number">5.6</span> Visualising two categorical variables</h2>
+<p><strong>Exercise</strong>. Use facets to visualise the distribution of <em>a_ukborn</em> by age group.</p>
+</div>
+<div id="showing-the-relationships-by-group" class="section level2">
+<h2><span class="header-section-number">5.7</span> Showing the relationships by group</h2>
+<p><strong>Exercise</strong>. Use facets to visualise the association between age and BMI by ethnic group.</p>
 
 </div>
 </div>
@@ -192,8 +228,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
+<a href="tidy-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="module-outline.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
