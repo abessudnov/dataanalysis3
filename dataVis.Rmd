@@ -1,6 +1,6 @@
 # Data visualisation {#datavis}
 
-**Pre-requisite for this class: ch.3 ("Data visualisation") from R for Data Science - http://r4ds.had.co.nz/data-visualisation.html**
+> Pre-requisite for this class: ch.3 ("Data visualisation") from R for Data Science - http://r4ds.had.co.nz/data-visualisation.html
 
 At home you learned about the basic principles of data visualisation in R with the **ggplot2** package. Let us see how we can apply this to the Understanding Society data set.
 
@@ -13,7 +13,7 @@ You may also find Winston Chang's website useful (and not only for graphics) - h
 First let us read in the data we used in week 2 when we learned about **dplyr** (a short version of the wave 1 data) and recreate the measures for weight, height and BMI.
 
 ```{r cache = TRUE}
-W1 <- read_csv("exData/W1.csv")
+W1 <- fread("exData/W1.csv")
 W1 <- W1 %>%
   mutate(heightcm = ifelse(a_hlht == 1 & a_hlhtf > 0, 
                            a_hlhtf*30.48 + a_hlhti*2.54,
@@ -24,7 +24,7 @@ W1 <- W1 %>%
                            ifelse(a_hlwt == 2 & a_hlwtk > 0, 
                                   a_hlwtk, NA))) %>%
   mutate(bmi = weightkg / (heightcm / 100)^2)
-
+head(W1, 3)
 ```
 
 ## Visualising one quantitative variable
