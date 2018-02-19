@@ -1,0 +1,46 @@
+# Assignment
+
+Your assignment for this module is to choose a topic, conduct an independent statistical analysis with the Understanding Society data and write up your results in a report that is about 3,500 words long.
+
+I wanted to give you as much flexibility as possible in preparing the report. I will not provide a detailed guidance on what you should analyse and how you should this. As this is an advanced module I expect you to be able to formulate a research question, identify the data you need and conduct the analysis independently. In other words, the idea is to throw you into the sea of data and find out if you can come up with a nice statistical report that answers a well defined question.
+
+However, there are a few rules.
+
+1. You must use the Understanding Society data and I suggest you use data from the *indresp* files (these are individual adult questionnaires).
+
+2. You must use longitudinal data, i.e. data from more than one wave and preferrably all seven waves of the Understanding Society. This will depend on your question though. If you only have data at two time points available and produce good analysis this is totally fine. But if you have data in all seven waves and only use two this is not fine.
+
+3. Generally you would select one time-varying variable and explore changes over time, in the whole sample and different population subgroups. For example, you may explore how people's incomes changed from 2008 to 2016. You may want to conduct your analysis by gender, age group, location, etc. Other possible variables:
+    + Health
+    + Employment and job mobility
+    + State benefits
+    + Any other topic that you find interesting and that has longitudinal data available in the Understanding Society.
+ 
+4. You cannot use data on political interest and political preferences as we will explore these data in class.
+
+5. You must prepare your report in R Markdown. Submit the pdf file (with all the R syntax visible) through eBart. You should also commit your Rmd file to the course's Github repo to the **studentWork** folder. This is not compulsory, but I will mark you down if you do not do this. The Rmd file should have the same name as your student number (for example, "6666666666.Rmd"). Note that I should be able to execute this file so all the file paths must be correct and your syntax must only refer to the data that I have in the **data** folder. For example, the path to the wave 1 data in your file will be "../data/UKDA-6614-tab/tab/us_w1/a_indresp.tab". If your Rmd file does not compile I will not have time to fix it and will have to ignore it. I will explain this further in class.
+
+5. Please keep your R syntax clear and provide commentary explaining to me what you do.
+
+6. The deadline for your reports is 29 March at 2pm.
+
+I suggest the following steps for your reports.
+
+1. First you need to find a topic that interests you and that has longitudinal data available. Check the User Manual, the questionnaires and data dictionaries for individual waves. Note that the Understanding Society has some modules that are present in each wave and some rotating modules that are only present in one or several waves. Once you have found a variable that interests you make sure that it is present in the data at least at two or more time points.
+
+2. Next you need to read the data into R. Start simple and only read in the data for your outcome variable and maybe sex and age. You will be able to add more variables later as long as you keep your syntax. Clean the data and look at the distributions.
+
+3. Think about the best way to describe and visualise your data. Do you see any interesting patterns and trends? At this stage you should start thinking about the story you want to tell us with your analysis.
+
+4. I do not expect you to do anything fancy statistically. Just providing descriptive statistics and visualisations is fine, as long as I can see that you have thought carefully about which statistics and graphs are best to answer your questions. Every table and chart you have in your report must contribute something to your story. That said, if you want to use some statistical modelling in your report (for example, linear regression) and you do this correctly this will be appreciated and I will give you extra marks for doing this.
+
+5. Once you have a feeling about the general direction of your analysis start adding the details. Maybe you want to explore some more variables; then you need to add them to the data set. For example, for the analysis of political interest I would start with looking at descriptive statistics for political interest for each wave and establish if it was stable or increased/decreased. Then I would think about how I can visualise the results. Then I may start adding details. Was the trend the same for men and women? Different age groups? Different parts of the country? Then if I want to do something fancy I would remember that in 2010 the UK had a general election. Can we get the date of the interview from the data and explore how political interest changed monthly in 2010? And then if I really want to do something very fancy I would read about applyng models with fixed effects to longitudinal data, talk to Alexey in his office hours and explore if change in people's income over time is associated with the change in political interest. (The latter part is optional.)
+
+6. Write up the results.
+    + Start with a brief introduction. For political interest that would be approximately the following: Why are we interested in political interest? What happened in British politics between 2008 and 2016 that could affect the level of political interest? Maybe you can find and cite two or three papers that have already explored this topic.
+    + Then present your research questions. What are you aiming to achieve with your report? What questions will you answer?
+    + Briefly describe the data (variables you are going to use, what waves they are coming from, etc.).
+    + Present your statistical results. The structure of this part will depend on your results. This should not be just a collection of tables and graphs. Explain what you see in all those tables and graphs and why you have included them.
+    + Discussion. This is a very important part. You need to discuss here how the statistical results you have got contribute to our understanding of your topic (for example, political interest in Britain). Explain in substantive terms your results and discuss them. Why has political interest increased (or decresed, or ramained stable)? What factors contributed to this?
+    
+7. The length of the report is 3,500 words, but I am not going to count your words and writing slightly more or slightly less is fine. Do not submit 100 pages. In the same way, if your report is obviously too short this is going to affect your mark.

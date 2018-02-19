@@ -25,17 +25,15 @@
 <meta name="author" content="Alexey Bessudnov">
 
 
-
-<meta name="date" content="2018-02-19">
-
+<meta name="date" content="2018-02-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="assignment.html">
+<link rel="prev" href="module-outline.html">
+<link rel="next" href="joining.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -131,15 +129,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>5.2</b> Cleaning the data</a></li>
 <li class="chapter" data-level="5.3" data-path="tidy-data.html"><a href="tidy-data.html#homework"><i class="fa fa-check"></i><b>5.3</b> Homework</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="datavis.html"><a href="datavis.html"><i class="fa fa-check"></i><b>5</b> Data visualisation</a><ul>
-<li class="chapter" data-level="5.1" data-path="datavis.html"><a href="datavis.html#reading-in-the-data"><i class="fa fa-check"></i><b>5.1</b> Reading in the data</a></li>
-<li class="chapter" data-level="5.2" data-path="datavis.html"><a href="datavis.html#visualising-one-quantitative-variable"><i class="fa fa-check"></i><b>5.2</b> Visualising one quantitative variable</a></li>
-<li class="chapter" data-level="5.3" data-path="datavis.html"><a href="datavis.html#visualising-one-categorical-variable"><i class="fa fa-check"></i><b>5.3</b> Visualising one categorical variable</a></li>
-<li class="chapter" data-level="5.4" data-path="datavis.html"><a href="datavis.html#visualising-two-quantitative-variables"><i class="fa fa-check"></i><b>5.4</b> Visualising two quantitative variables</a></li>
-<li class="chapter" data-level="5.5" data-path="datavis.html"><a href="datavis.html#visualising-one-categorical-and-one-quantitative-variable"><i class="fa fa-check"></i><b>5.5</b> Visualising one categorical and one quantitative variable</a></li>
-<li class="chapter" data-level="5.6" data-path="datavis.html"><a href="datavis.html#visualising-two-categorical-variables"><i class="fa fa-check"></i><b>5.6</b> Visualising two categorical variables</a></li>
-<li class="chapter" data-level="5.7" data-path="datavis.html"><a href="datavis.html#showing-the-relationships-by-group"><i class="fa fa-check"></i><b>5.7</b> Showing the relationships by group</a></li>
-</ul></li>
 </ul>
 
       </nav>
@@ -157,83 +146,52 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="module-outline" class="section level1">
-<h1><span class="header-section-number">2</span> Module outline</h1>
-<div id="practical-arrangements" class="section level2">
-<h2><span class="header-section-number">2.1</span> Practical arrangements</h2>
-<p><strong>Classes:</strong></p>
+<div id="assignment" class="section level1">
+<h1><span class="header-section-number">3</span> Assignment</h1>
+<p>Your assignment for this module is to choose a topic, conduct an independent statistical analysis with the Understanding Society data and write up your results in a report that is about 3,500 words long.</p>
+<p>I wanted to give you as much flexibility as possible in preparing the report. I will not provide a detailed guidance on what you should analyse and how you should this. As this is an advanced module I expect you to be able to formulate a research question, identify the data you need and conduct the analysis independently. In other words, the idea is to throw you into the sea of data and find out if you can come up with a nice statistical report that answers a well defined question.</p>
+<p>However, there are a few rules.</p>
+<ol style="list-style-type: decimal">
+<li><p>You must use the Understanding Society data and I suggest you use data from the <em>indresp</em> files (these are individual adult questionnaires).</p></li>
+<li><p>You must use longitudinal data, i.e. data from more than one wave and preferrably all seven waves of the Understanding Society. This will depend on your question though. If you only have data at two time points available and produce good analysis this is totally fine. But if you have data in all seven waves and only use two this is not fine.</p></li>
+<li>Generally you would select one time-varying variable and explore changes over time, in the whole sample and different population subgroups. For example, you may explore how people’s incomes changed from 2008 to 2016. You may want to conduct your analysis by gender, age group, location, etc. Other possible variables:
 <ul>
-<li>Monday, 11.30am - 1.30pm, WSL 220</li>
-</ul>
-<p>Classes begin on 15 January and end on 26 March. The class on 22 January (week 2) has been cancelled and moved to Friday 2 February, 10.30 - 12.30, WSL 220.</p>
-<p><strong>Office hours (Amory A341)</strong></p>
+<li>Health</li>
+<li>Employment and job mobility</li>
+<li>State benefits</li>
+<li>Any other topic that you find interesting and that has longitudinal data available in the Understanding Society.</li>
+</ul></li>
+<li><p>You cannot use data on political interest and political preferences as we will explore these data in class.</p></li>
+<li><p>You must prepare your report in R Markdown. Submit the pdf file (with all the R syntax visible) through eBart. You should also commit your Rmd file to the course’s Github repo to the <strong>studentWork</strong> folder. This is not compulsory, but I will mark you down if you do not do this. The Rmd file should have the same name as your student number (for example, “6666666666.Rmd”). Note that I should be able to execute this file so all the file paths must be correct and your syntax must only refer to the data that I have in the <strong>data</strong> folder. For example, the path to the wave 1 data in your file will be “../data/UKDA-6614-tab/tab/us_w1/a_indresp.tab”. If your Rmd file does not compile I will not have time to fix it and will have to ignore it. I will explain this further in class.</p></li>
+<li><p>Please keep your R syntax clear and provide commentary explaining to me what you do.</p></li>
+<li><p>The deadline for your reports is 29 March at 2pm.</p></li>
+</ol>
+<p>I suggest the following steps for your reports.</p>
+<ol style="list-style-type: decimal">
+<li><p>First you need to find a topic that interests you and that has longitudinal data available. Check the User Manual, the questionnaires and data dictionaries for individual waves. Note that the Understanding Society has some modules that are present in each wave and some rotating modules that are only present in one or several waves. Once you have found a variable that interests you make sure that it is present in the data at least at two or more time points.</p></li>
+<li><p>Next you need to read the data into R. Start simple and only read in the data for your outcome variable and maybe sex and age. You will be able to add more variables later as long as you keep your syntax. Clean the data and look at the distributions.</p></li>
+<li><p>Think about the best way to describe and visualise your data. Do you see any interesting patterns and trends? At this stage you should start thinking about the story you want to tell us with your analysis.</p></li>
+<li><p>I do not expect you to do anything fancy statistically. Just providing descriptive statistics and visualisations is fine, as long as I can see that you have thought carefully about which statistics and graphs are best to answer your questions. Every table and chart you have in your report must contribute something to your story. That said, if you want to use some statistical modelling in your report (for example, linear regression) and you do this correctly this will be appreciated and I will give you extra marks for doing this.</p></li>
+<li><p>Once you have a feeling about the general direction of your analysis start adding the details. Maybe you want to explore some more variables; then you need to add them to the data set. For example, for the analysis of political interest I would start with looking at descriptive statistics for political interest for each wave and establish if it was stable or increased/decreased. Then I would think about how I can visualise the results. Then I may start adding details. Was the trend the same for men and women? Different age groups? Different parts of the country? Then if I want to do something fancy I would remember that in 2010 the UK had a general election. Can we get the date of the interview from the data and explore how political interest changed monthly in 2010? And then if I really want to do something very fancy I would read about applyng models with fixed effects to longitudinal data, talk to Alexey in his office hours and explore if change in people’s income over time is associated with the change in political interest. (The latter part is optional.)</p></li>
+<li>Write up the results.
 <ul>
-<li>Monday, 2-3pm</li>
-<li>Friday, 12-1pm</li>
-</ul>
-<p><strong>Email:</strong></p>
-<ul>
-<li>A.Bessudnov [at] exeter.ac.uk</li>
-</ul>
-</div>
-<div id="aims-of-the-module" class="section level2">
-<h2><span class="header-section-number">2.2</span> Aims of the module</h2>
-<p>This is a fourth module in the data analysis in the social sciences series. In the Introduction to Social Data you learned the basics of descriptive statistics and R. Data Analysis 1 introduced you to statistical inference. Data Analysis 2 covered linear regression analysis. In Data Analysis 3 we are not going to learn new statistical techniques, but will focus on how to apply the techniques you already know to the analysis of real-life data sets and how to produce statistical reports.</p>
-<p>This is a skill that you may need in a variety of jobs where data analytic expertise is required, such as marketing analysis, policy analysis in various fields, web analytics, data journalism, academic research, etc.</p>
-<p>You already know how to use R to describe data and run simple statistical models. However, real-life data rarely come in the form of a perfectly formatted csv file ready for the analysis. The real life data sets often need to be reshaped, merged, recoded, aggregated and modified in various ways before you can even start your analysis. Unless you know how to do this you will not be able to produce good statistical reports.</p>
-<p>This year in this module we will use data from the Understanding Society, a large household panel study conducted in the UK. In the Immigration module we already used the cross-sectional Understanding Society data. In this module we will work with the longitudinal data, which introduces a number of technical challenges.</p>
-<p>Throughout the module we will use R for statistical analysis. You are expected to know the basics of data analysis in R.</p>
-<p>The only way to learn data analysis is to do data analysis. I will not be able to teach you this, but I can guide your independent learning. This year we will try the “flipped classroom” model of teaching. This means that you will be expected to read and master the required material BEFORE the class and we will use the time in class to answer additional questions and check your solutions rather than introduce new material.</p>
-<p>The pre-requisites for this module are POL/SOC1041 and POL/SOC2077.</p>
-</div>
-<div id="attendance" class="section level2">
-<h2><span class="header-section-number">2.3</span> Attendance</h2>
-<p>This module is quite technical. As with other technical skills, missing some initial bits means that you may not be able to catch up. Attendance in this module is crucial. If you do not attend you will not be able to do well in this module. Even skipping a couple of classes will have negative consequences for your understanding of the material. Another negative consequence will be that you will slow the rest of the class down as I will have to explain the same things several times. If you plan not to attend classes please do not take this optional module.</p>
-</div>
-<div id="assessment" class="section level2">
-<h2><span class="header-section-number">2.4</span> Assessment</h2>
-<p>The assessment for this module is a report of 3,500 words (in addition to figures and tables) with the results of statistical analysis you will undertake. This will be 100% of your final mark for this module. You will be given questions for the reports later in the module. In your analysis you will use the Understanding Society data.</p>
-<p>The deadline for submitting your reports through eBart is 29 March at 2pm. You will receive your marks and feedback by 5 May.</p>
-<p>Late submissions up to two weeks after the deadline will be capped at 40%. Submissions that are late for more than two weeks will not be accepted.</p>
-</div>
-<div id="syllabus-plan" class="section level2">
-<h2><span class="header-section-number">2.5</span> Syllabus plan</h2>
-<p>I may change some topics as we proceed.</p>
-<ul>
-<li>Data structures in R</li>
-<li>Manipulating data with dplyr</li>
-<li>Longitudinal data in R. Wide and long formats. Reshaping</li>
-<li>Data visualisation with ggplot2</li>
-<li>Producing statistical reports with R Markdown</li>
-<li>Interactive applications with Shiny</li>
-<li>Loops and other control structures. The apply family of functions</li>
-<li>Writing functions in R</li>
-</ul>
-</div>
-<div id="reading-list" class="section level2">
-<h2><span class="header-section-number">2.6</span> Reading list</h2>
-<p>The main text for this module:</p>
-<ul>
-<li>G.Grolemund &amp; H.Wickham. (2016). R for Data Science. Freely available at <a href="http://r4ds.had.co.nz/" class="uri">http://r4ds.had.co.nz/</a></li>
-</ul>
-<p>In addition to this you can the following sources (among many others books on R).</p>
-<ul>
-<li>H.Wickham. (2015). ggplot2. Elegant Graphics for Data Analysis. 2nd ed. Springer.</li>
-<li>W.Chang. (2013). R Graphics Cookbook. O’Reilly.</li>
-<li>P.Spector. (2008). Data Manipulation with R. Springer.</li>
-<li>N.Matloff. (2011). The Art of R Programming. No Starch Press.</li>
-<li>H.Wickham. (2014). Advanced R. Chapman &amp; Hall.</li>
-</ul>
+<li>Start with a brief introduction. For political interest that would be approximately the following: Why are we interested in political interest? What happened in British politics between 2008 and 2016 that could affect the level of political interest? Maybe you can find and cite two or three papers that have already explored this topic.</li>
+<li>Then present your research questions. What are you aiming to achieve with your report? What questions will you answer?</li>
+<li>Briefly describe the data (variables you are going to use, what waves they are coming from, etc.).</li>
+<li>Present your statistical results. The structure of this part will depend on your results. This should not be just a collection of tables and graphs. Explain what you see in all those tables and graphs and why you have included them.</li>
+<li>Discussion. This is a very important part. You need to discuss here how the statistical results you have got contribute to our understanding of your topic (for example, political interest in Britain). Explain in substantive terms your results and discuss them. Why has political interest increased (or decresed, or ramained stable)? What factors contributed to this?</li>
+</ul></li>
+<li><p>The length of the report is 3,500 words, but I am not going to count your words and writing slightly more or slightly less is fine. Do not submit 100 pages. In the same way, if your report is obviously too short this is going to affect your mark.</p></li>
+</ol>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="assignment.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="module-outline.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="joining.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
