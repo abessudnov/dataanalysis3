@@ -131,8 +131,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="6" data-path="datavis.html"><a href="datavis.html"><i class="fa fa-check"></i><b>6</b> Data visualisation</a><ul>
 <li class="chapter" data-level="6.1" data-path="datavis.html"><a href="datavis.html#reading-in-the-data"><i class="fa fa-check"></i><b>6.1</b> Reading in the data</a></li>
-<li class="chapter" data-level="6.2" data-path="datavis.html"><a href="datavis.html#visualising-one-quantitative-variable"><i class="fa fa-check"></i><b>6.2</b> Visualising one quantitative variable</a></li>
-<li class="chapter" data-level="6.3" data-path="datavis.html"><a href="datavis.html#visualising-one-categorical-variable"><i class="fa fa-check"></i><b>6.3</b> Visualising one categorical variable</a></li>
+<li class="chapter" data-level="6.2" data-path="datavis.html"><a href="datavis.html#visualising-one-quantitative-variable"><i class="fa fa-check"></i><b>6.2</b> Visualising one quantitative variable</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="datavis.html"><a href="datavis.html#histogram."><i class="fa fa-check"></i><b>6.2.1</b> Histogram.</a></li>
+<li class="chapter" data-level="6.2.2" data-path="datavis.html"><a href="datavis.html#density-chart."><i class="fa fa-check"></i><b>6.2.2</b> Density chart.</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="datavis.html"><a href="datavis.html#visualising-one-categorical-variable"><i class="fa fa-check"></i><b>6.3</b> Visualising one categorical variable</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="datavis.html"><a href="datavis.html#bar-plot."><i class="fa fa-check"></i><b>6.3.1</b> Bar plot.</a></li>
+</ul></li>
 <li class="chapter" data-level="6.4" data-path="datavis.html"><a href="datavis.html#visualising-two-quantitative-variables"><i class="fa fa-check"></i><b>6.4</b> Visualising two quantitative variables</a></li>
 <li class="chapter" data-level="6.5" data-path="datavis.html"><a href="datavis.html#visualising-one-categorical-and-one-quantitative-variable"><i class="fa fa-check"></i><b>6.5</b> Visualising one categorical and one quantitative variable</a></li>
 <li class="chapter" data-level="6.6" data-path="datavis.html"><a href="datavis.html#visualising-two-categorical-variables"><i class="fa fa-check"></i><b>6.6</b> Visualising two categorical variables</a></li>
@@ -166,7 +171,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="reading-in-the-data" class="section level2">
 <h2><span class="header-section-number">6.1</span> Reading in the data</h2>
 <p>First let us read in the data we used in week 2 when we learned about <strong>dplyr</strong> (a short version of the wave 1 data) and recreate the measures for weight, height and BMI.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1 &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;exData/W1.csv&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(data.table)
+W1 &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;exData/W1.csv&quot;</span>)
 W1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">heightcm =</span> <span class="kw">ifelse</span>(a_hlht <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>a_hlhtf <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
                            a_hlhtf<span class="op">*</span><span class="fl">30.48</span> <span class="op">+</span><span class="st"> </span>a_hlhti<span class="op">*</span><span class="fl">2.54</span>,
@@ -194,14 +201,73 @@ W1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
 <div id="visualising-one-quantitative-variable" class="section level2">
 <h2><span class="header-section-number">6.2</span> Visualising one quantitative variable</h2>
 <p><strong>Exercise</strong>. Visualise the distribution of the BMI with <strong>ggplot2</strong>. Which statistical graphs would be appropriate for this?</p>
+<div id="histogram." class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Histogram.</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(W1, <span class="kw">aes</span>(<span class="dt">x=</span>bmi)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
+<pre><code>## Warning: Removed 6426 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="datan3_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+</div>
+<div id="density-chart." class="section level3">
+<h3><span class="header-section-number">6.2.2</span> Density chart.</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(W1, <span class="kw">aes</span>(<span class="dt">x=</span>bmi)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
+<pre><code>## Warning: Removed 6426 rows containing non-finite values (stat_density).</code></pre>
+<p><img src="datan3_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+</div>
 </div>
 <div id="visualising-one-categorical-variable" class="section level2">
 <h2><span class="header-section-number">6.3</span> Visualising one categorical variable</h2>
 <p><strong>Exercise</strong>. Visualise the distribution of <em>a_ukborn</em> with <strong>ggplot2</strong>. Which statistical graphs would be appropriate for this?</p>
+<div id="bar-plot." class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Bar plot.</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(W1<span class="op">$</span>a_ukborn)</code></pre></div>
+<pre><code>## 
+##    -9    -2    -1     1     2     3     4     5 
+##     6     2     8 33480  3567  2154  2033  9744</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">a_ukborn =</span> <span class="kw">ifelse</span>(a_ukborn <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, a_ukborn, <span class="ot">NA</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cbirth =</span> <span class="kw">recode</span>(a_ukborn, <span class="st">&quot;1&quot;</span> =<span class="st"> &quot;England&quot;</span>, 
+                         <span class="st">&quot;2&quot;</span> =<span class="st"> &quot;Scotland&quot;</span>,
+                         <span class="st">&quot;3&quot;</span> =<span class="st"> &quot;Wales&quot;</span>,
+                         <span class="st">&quot;4&quot;</span> =<span class="st"> &quot;Northern Ireland&quot;</span>,
+                         <span class="st">&quot;5&quot;</span> =<span class="st"> &quot;Not UK&quot;</span>)) 
+  
+<span class="kw">table</span>(W1<span class="op">$</span>cbirth)</code></pre></div>
+<pre><code>## 
+##          England Northern Ireland           Not UK         Scotland 
+##            33480             2033             9744             3567 
+##            Wales 
+##             2154</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(cbirth)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>cbirth)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Country of birth&quot;</span>)</code></pre></div>
+<p><img src="datan3_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(W1<span class="op">$</span>cbirth, <span class="dt">useNA =</span> <span class="st">&quot;always&quot;</span>)</code></pre></div>
+<pre><code>## 
+##          England Northern Ireland           Not UK         Scotland 
+##            33480             2033             9744             3567 
+##            Wales             &lt;NA&gt; 
+##             2154               16</code></pre>
+</div>
 </div>
 <div id="visualising-two-quantitative-variables" class="section level2">
 <h2><span class="header-section-number">6.4</span> Visualising two quantitative variables</h2>
 <p><strong>Exercise</strong>. Visualise the joint distribution of weight (in kg) and height (in cm). In your chart show the regression line and the nonparametric smoothing line.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(W1, <span class="kw">aes</span>(<span class="dt">x =</span> weightkg, <span class="dt">y=</span> heightcm)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span>lm)</code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;gam&#39;</code></pre>
+<pre><code>## Warning: Removed 6426 rows containing non-finite values (stat_smooth).
+
+## Warning: Removed 6426 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 6426 rows containing missing values (geom_point).</code></pre>
+<p><img src="datan3_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 </div>
 <div id="visualising-one-categorical-and-one-quantitative-variable" class="section level2">
 <h2><span class="header-section-number">6.5</span> Visualising one categorical and one quantitative variable</h2>
