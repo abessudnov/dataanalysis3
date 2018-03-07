@@ -123,6 +123,17 @@ W1 %>%
   facet_wrap(~ agegr)
 ```
 
+Alternatively you can do a jitter plot, but in our case it wouldn't look nice. 
+
+```{r}
+W1 %>% 
+  filter(!is.na(cbirth)) %>%
+  ggplot(aes(x=cbirth, y = agegr)) +
+  geom_jitter() +
+  xlab("Country of birth") +
+  ylab("Age group")
+```
+
 ## Showing the relationships by group
 
 **Exercise**. Use facets to visualise the association between age and BMI by country of birth.
