@@ -1,4 +1,4 @@
-# Data visualisation2 {#datavis2}
+# Data visualisation 2 {#datavis2}
 
 > Pre-requisite for this class: ch.3 ("Data visualisation") from R for Data Science - http://r4ds.had.co.nz/data-visualisation.html
 
@@ -220,13 +220,6 @@ UndSocLong %>%
                 ylab("Net monthly income") + 
                 xlab("Year")
 
-# Then visualize.
-# We need to add group = 1 because wave is not numeric
-ggplot(medians, aes(x = wave, y = medianIncome, group = 1)) +
-        geom_point() + 
-        geom_line() + 
-        ylab("Median net monthly income") + 
-        xlab("Wave")
 ```
 
 A more economical way to write the code is the following. This time I will also select only people with positive net incomes.

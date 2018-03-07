@@ -143,7 +143,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.6" data-path="datavis.html"><a href="datavis.html#visualising-two-categorical-variables"><i class="fa fa-check"></i><b>6.6</b> Visualising two categorical variables</a></li>
 <li class="chapter" data-level="6.7" data-path="datavis.html"><a href="datavis.html#showing-the-relationships-by-group"><i class="fa fa-check"></i><b>6.7</b> Showing the relationships by group</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="datavis2.html"><a href="datavis2.html"><i class="fa fa-check"></i><b>7</b> Data visualisation2</a><ul>
+<li class="chapter" data-level="7" data-path="datavis2.html"><a href="datavis2.html"><i class="fa fa-check"></i><b>7</b> Data visualisation 2</a><ul>
 <li class="chapter" data-level="7.1" data-path="datavis2.html"><a href="datavis2.html#prepare-the-data"><i class="fa fa-check"></i><b>7.1</b> Prepare the data</a></li>
 <li class="chapter" data-level="7.2" data-path="datavis2.html"><a href="datavis2.html#visualising-income"><i class="fa fa-check"></i><b>7.2</b> Visualising income</a></li>
 </ul></li>
@@ -165,7 +165,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="datavis2" class="section level1">
-<h1><span class="header-section-number">7</span> Data visualisation2</h1>
+<h1><span class="header-section-number">7</span> Data visualisation 2</h1>
 <blockquote>
 <p>Pre-requisite for this class: ch.3 (“Data visualisation”) from R for Data Science - <a href="http://r4ds.had.co.nz/data-visualisation.html" class="uri">http://r4ds.had.co.nz/data-visualisation.html</a></p>
 </blockquote>
@@ -568,14 +568,6 @@ medians &lt;-<span class="st"> </span>UndSocLong <span class="op">%&gt;%</span>
 <span class="st">                </span><span class="kw">ylab</span>(<span class="st">&quot;Net monthly income&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">                </span><span class="kw">xlab</span>(<span class="st">&quot;Year&quot;</span>)</code></pre></div>
 <p><img src="datan3_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Then visualize.</span>
-<span class="co"># We need to add group = 1 because wave is not numeric</span>
-<span class="kw">ggplot</span>(medians, <span class="kw">aes</span>(<span class="dt">x =</span> wave, <span class="dt">y =</span> medianIncome, <span class="dt">group =</span> <span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">        </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">ylab</span>(<span class="st">&quot;Median net monthly income&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">xlab</span>(<span class="st">&quot;Wave&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-54-2.png" width="672" /></p>
 <p>A more economical way to write the code is the following. This time I will also select only people with positive net incomes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
 UndSocLong <span class="op">%&gt;%</span>

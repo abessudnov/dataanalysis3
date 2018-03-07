@@ -36,7 +36,7 @@ head(W1, 3)
 
 ### Histogram.
 
-```{r}
+```{r cache = TRUE}
 ggplot(W1, aes(x=bmi)) +
   geom_histogram(bins = 100) +
   xlab("Body mass index")
@@ -44,7 +44,7 @@ ggplot(W1, aes(x=bmi)) +
 
 ### Density chart.
 
-```{r}
+```{r cache = TRUE}
 ggplot(W1, aes(x=bmi)) +
   geom_density() +
   xlab("Body mass index")
@@ -57,7 +57,7 @@ ggplot(W1, aes(x=bmi)) +
 
 ### Bar plot.
 
-```{r}
+```{r cache = TRUE}
 table(W1$a_ukborn)
 W1 <- W1 %>%
   mutate(a_ukborn = ifelse(a_ukborn > 0, a_ukborn, NA)) %>%
@@ -81,7 +81,7 @@ table(W1$cbirth, useNA = "always")
 
 **Exercise**. Visualise the joint distribution of weight (in kg) and height (in cm). In your chart show the regression line and the nonparametric smoothing line.
 
-```{r}
+```{r cache = TRUE}
 ggplot(W1, aes(x = weightkg, y= heightcm)) +
   geom_point() +
   geom_smooth() +
@@ -92,7 +92,7 @@ ggplot(W1, aes(x = weightkg, y= heightcm)) +
 
 **Exercise**. Visualise the distribution of BMI for a) men and women, b) different age groups.
 
-```{r}
+```{r cache = TRUE}
 # Coding a categorical variable for age groups
 
 table(W1$a_dvage, useNA = "always")
@@ -114,7 +114,7 @@ ggplot(W1, aes(x = agegr, y= bmi)) +
 
 **Exercise**. Use facets to visualise the distribution of *a_ukborn* by age group.
 
-```{r}
+```{r cache = TRUE}
 W1 %>% 
   filter(!is.na(cbirth)) %>%
   ggplot(aes(x=cbirth)) +
@@ -125,7 +125,7 @@ W1 %>%
 
 Alternatively you can do a jitter plot, but in our case it wouldn't look nice. 
 
-```{r}
+```{r cache = TRUE}
 W1 %>% 
   filter(!is.na(cbirth)) %>%
   ggplot(aes(x=cbirth, y = agegr)) +
@@ -138,7 +138,7 @@ W1 %>%
 
 **Exercise**. Use facets to visualise the association between age and BMI by country of birth.
 
-```{r}
+```{r cache = TRUE}
 W1 %>%
         filter(!is.na(cbirth)) %>%
         ggplot(aes(x = a_dvage, y= bmi)) +
