@@ -92,14 +92,49 @@ ggplot(W1, aes(x = weightkg, y= heightcm)) +
 
 **Exercise**. Visualise the distribution of BMI for a) men and women, b) different age groups.
 
+```{r}
+# Coding a categorical variable for age groups
+
+table(W1$a_dvage, useNA = "always")
+
+W1 <- W1 %>%
+        mutate(agegr = ifelse(a_dvage < 31, "16-30",
+                              ifelse(a_dvage > 30 & a_dvage < 46, "31-45",
+                                ifelse(a_dvage > 45 & a_dvage < 61, "46-60",
+                                       ">60")))) %>%
+        mutate(agegr = factor(agegr, c("16-30", "31-45", "46-60", ">60")))
+
+ggplot(W1, aes(x = agegr, y= bmi)) +
+  geom_boxplot() +
+  xlab("Age group") +
+  ylab("Body mass index")
+```
+
 ## Visualising two categorical variables
 
 **Exercise**. Use facets to visualise the distribution of *a_ukborn* by age group.
 
+```{r}
+W1 %>% 
+  filter(!is.na(cbirth)) %>%
+  ggplot(aes(x=cbirth)) +
+  geom_bar() +
+  xlab("Country of birth") +
+  facet_wrap(~ agegr)
+```
+
 ## Showing the relationships by group
 
-**Exercise**. Use facets to visualise the association between age and BMI by ethnic group.
+**Exercise**. Use facets to visualise the association between age and BMI by country of birth.
 
+```{r}
+W1 %>%
+        filter(!is.na(cbirth)) %>%
+        ggplot(aes(x = a_dvage, y= bmi)) +
+                geom_point() +
+                geom_smooth() +
+                facet_wrap(~ cbirth)
+```
 
 
 
