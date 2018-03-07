@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov">
 
 
-<meta name="date" content="2018-02-19">
+<meta name="date" content="2018-03-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -143,6 +143,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.6" data-path="datavis.html"><a href="datavis.html#visualising-two-categorical-variables"><i class="fa fa-check"></i><b>6.6</b> Visualising two categorical variables</a></li>
 <li class="chapter" data-level="6.7" data-path="datavis.html"><a href="datavis.html#showing-the-relationships-by-group"><i class="fa fa-check"></i><b>6.7</b> Showing the relationships by group</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="datavis2.html"><a href="datavis2.html"><i class="fa fa-check"></i><b>7</b> Data visualisation2</a><ul>
+<li class="chapter" data-level="7.1" data-path="datavis2.html"><a href="datavis2.html#prepare-the-data"><i class="fa fa-check"></i><b>7.1</b> Prepare the data</a></li>
+<li class="chapter" data-level="7.2" data-path="datavis2.html"><a href="datavis2.html#visualising-income"><i class="fa fa-check"></i><b>7.2</b> Visualising income</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -168,11 +172,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>I will start with joining data from waves 1 and 2 and then expand the algorithm to all the seven waves. First we need to read the data into R.</p>
 <p>I am using the fundtion <strong>read_tsv()</strong> from the <strong>readr</strong> package here since the data are tab separated.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First I attach the packages I will use later. You need to install these packages first.</span>
-<span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(data.table)
-<span class="kw">library</span>(reshape2)
-
-UndSoc1 &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
+<span class="kw">library</span>(tidyverse)</code></pre></div>
+<pre><code>## -- Attaching packages ------ tidyverse 1.2.0 --</code></pre>
+<pre><code>## v ggplot2 2.2.1     v purrr   0.2.4
+## v tibble  1.3.4     v dplyr   0.7.4
+## v tidyr   0.7.2     v stringr 1.2.0
+## v readr   1.1.1     v forcats 0.2.0</code></pre>
+<pre><code>## -- Conflicts --------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)</code></pre></div>
+<pre><code>## Warning: package &#39;data.table&#39; was built under R version 3.4.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;data.table&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     between, first, last</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     transpose</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape2)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:data.table&#39;:
+## 
+##     dcast, melt</code></pre>
+<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
+## 
+##     smiths</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSoc1 &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   .default = col_integer(),
@@ -414,20 +442,20 @@ vars &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&q
         <span class="kw">rm</span>(data)
 }</code></pre></div>
 <pre><code>## 
-Read 60.3% of 49739 rows
-Read 49739 rows and 4 (of 3024) columns from 0.402 GB file in 00:00:04
+Read 0.0% of 49739 rows
+Read 49739 rows and 4 (of 3024) columns from 0.402 GB file in 00:00:06
 ## 
-Read 84.8% of 47157 rows
-Read 47157 rows and 4 (of 2086) columns from 0.262 GB file in 00:00:03
+Read 0.0% of 47157 rows
+Read 47157 rows and 4 (of 2086) columns from 0.262 GB file in 00:00:04
 ## 
-Read 66.8% of 44903 rows
-Read 44903 rows and 4 (of 2583) columns from 0.310 GB file in 00:00:03
+Read 0.0% of 44903 rows
+Read 44903 rows and 4 (of 2583) columns from 0.310 GB file in 00:00:05
 ## 
-Read 88.3% of 45290 rows
-Read 45290 rows and 4 (of 2060) columns from 0.263 GB file in 00:00:03
+Read 0.0% of 45290 rows
+Read 45290 rows and 4 (of 2060) columns from 0.263 GB file in 00:00:05
 ## 
-Read 71.1% of 42217 rows
-Read 42217 rows and 4 (of 2799) columns from 0.321 GB file in 00:00:03</code></pre>
+Read 0.0% of 42217 rows
+Read 42217 rows and 4 (of 2799) columns from 0.321 GB file in 00:00:06</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Check the result</span>
 <span class="kw">colnames</span>(all7)</code></pre></div>
 <pre><code>##  [1] &quot;pidp&quot;    &quot;a_sex&quot;   &quot;a_dvage&quot; &quot;a_vote6&quot; &quot;b_sex&quot;   &quot;b_dvage&quot; &quot;b_vote6&quot;

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov">
 
 
-<meta name="date" content="2018-02-19">
+<meta name="date" content="2018-03-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="tidy-data.html">
-
+<link rel="next" href="datavis2.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -142,6 +142,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.5" data-path="datavis.html"><a href="datavis.html#visualising-one-categorical-and-one-quantitative-variable"><i class="fa fa-check"></i><b>6.5</b> Visualising one categorical and one quantitative variable</a></li>
 <li class="chapter" data-level="6.6" data-path="datavis.html"><a href="datavis.html#visualising-two-categorical-variables"><i class="fa fa-check"></i><b>6.6</b> Visualising two categorical variables</a></li>
 <li class="chapter" data-level="6.7" data-path="datavis.html"><a href="datavis.html#showing-the-relationships-by-group"><i class="fa fa-check"></i><b>6.7</b> Showing the relationships by group</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="datavis2.html"><a href="datavis2.html"><i class="fa fa-check"></i><b>7</b> Data visualisation2</a><ul>
+<li class="chapter" data-level="7.1" data-path="datavis2.html"><a href="datavis2.html#prepare-the-data"><i class="fa fa-check"></i><b>7.1</b> Prepare the data</a></li>
+<li class="chapter" data-level="7.2" data-path="datavis2.html"><a href="datavis2.html#visualising-income"><i class="fa fa-check"></i><b>7.2</b> Visualising income</a></li>
 </ul></li>
 </ul>
 
@@ -272,14 +276,68 @@ W1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
 <div id="visualising-one-categorical-and-one-quantitative-variable" class="section level2">
 <h2><span class="header-section-number">6.5</span> Visualising one categorical and one quantitative variable</h2>
 <p><strong>Exercise</strong>. Visualise the distribution of BMI for a) men and women, b) different age groups.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Coding a categorical variable for age groups</span>
+
+<span class="kw">table</span>(W1<span class="op">$</span>a_dvage, <span class="dt">useNA =</span> <span class="st">&quot;always&quot;</span>)</code></pre></div>
+<pre><code>## 
+##   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30 
+##  937  864  787  798  786  738  756  786  806  791  827  849  878  936  914 
+##   31   32   33   34   35   36   37   38   39   40   41   42   43   44   45 
+##  884  879  917  864  928  983  923  976 1051 1054 1032 1043  935  968  987 
+##   46   47   48   49   50   51   52   53   54   55   56   57   58   59   60 
+##  940  941  917  889  873  824  817  765  803  722  761  703  756  666  662 
+##   61   62   63   64   65   66   67   68   69   70   71   72   73   74   75 
+##  820  806  775  685  621  646  591  521  563  571  500  498  443  411  380 
+##   76   77   78   79   80   81   82   83   84   85   86   87   88   89   90 
+##  368  356  338  294  287  267  225  207  166  147  132  108   80   73   54 
+##   91   92   93   94   95   96   97   98   99  100  101 &lt;NA&gt; 
+##   38   27   20   21   14   14    4    3    2    1    1    0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">agegr =</span> <span class="kw">ifelse</span>(a_dvage <span class="op">&lt;</span><span class="st"> </span><span class="dv">31</span>, <span class="st">&quot;16-30&quot;</span>,
+                              <span class="kw">ifelse</span>(a_dvage <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">&amp;</span><span class="st"> </span>a_dvage <span class="op">&lt;</span><span class="st"> </span><span class="dv">46</span>, <span class="st">&quot;31-45&quot;</span>,
+                                <span class="kw">ifelse</span>(a_dvage <span class="op">&gt;</span><span class="st"> </span><span class="dv">45</span> <span class="op">&amp;</span><span class="st"> </span>a_dvage <span class="op">&lt;</span><span class="st"> </span><span class="dv">61</span>, <span class="st">&quot;46-60&quot;</span>,
+                                       <span class="st">&quot;&gt;60&quot;</span>)))) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">agegr =</span> <span class="kw">factor</span>(agegr, <span class="kw">c</span>(<span class="st">&quot;16-30&quot;</span>, <span class="st">&quot;31-45&quot;</span>, <span class="st">&quot;46-60&quot;</span>, <span class="st">&quot;&gt;60&quot;</span>)))
+
+<span class="kw">ggplot</span>(W1, <span class="kw">aes</span>(<span class="dt">x =</span> agegr, <span class="dt">y=</span> bmi)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Age group&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
+<pre><code>## Warning: Removed 6426 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="datan3_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
 <div id="visualising-two-categorical-variables" class="section level2">
 <h2><span class="header-section-number">6.6</span> Visualising two categorical variables</h2>
 <p><strong>Exercise</strong>. Use facets to visualise the distribution of <em>a_ukborn</em> by age group.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(cbirth)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>cbirth)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Country of birth&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>agegr)</code></pre></div>
+<p><img src="datan3_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p>Alternatively you can do a jitter plot, but in our case it wouldn’t look nice.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(cbirth)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>cbirth, <span class="dt">y =</span> agegr)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Country of birth&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Age group&quot;</span>)</code></pre></div>
+<p><img src="datan3_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 </div>
 <div id="showing-the-relationships-by-group" class="section level2">
 <h2><span class="header-section-number">6.7</span> Showing the relationships by group</h2>
-<p><strong>Exercise</strong>. Use facets to visualise the association between age and BMI by ethnic group.</p>
+<p><strong>Exercise</strong>. Use facets to visualise the association between age and BMI by country of birth.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1 <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(cbirth)) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> a_dvage, <span class="dt">y=</span> bmi)) <span class="op">+</span>
+<span class="st">                </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">                </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
+<span class="st">                </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>cbirth)</code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;gam&#39;</code></pre>
+<pre><code>## Warning: Removed 6416 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 6416 rows containing missing values (geom_point).</code></pre>
+<p><img src="datan3_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 
 </div>
 </div>
@@ -288,8 +346,8 @@ W1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
           </div>
         </div>
       </div>
-<a href="tidy-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="tidy-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="datavis2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
