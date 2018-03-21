@@ -1,0 +1,7 @@
+R Markdown exercise for today (21 March)
+
+1. Create a simple R Markdown document.
+2. Add three sections: 1) to read in the data from US wave 1, 2) to produce a table summarising your outcome a variable, 3) to produce a graph showing the distribution of your outcome variable.
+3. Produce the document in three different formats: pdf, word, and html.
+4. Produce the document with and without the R code.
+5. Add bibliography (one reference is enough), using Zotero and BibTex.
