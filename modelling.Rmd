@@ -1,0 +1,214 @@
+# Modelling {#modelling}
+
+> Pre-requisite for this class: ch.22-24 ("Model") from R for Data Science - http://r4ds.had.co.nz/model-intro.html
+
+Let us explore how we can apply linear models with the Understanding Society data for your reports.
+
+First we need to read in the data. This is the same data frame that I used for Data visualisation 2. I saved it then so now I can simply open the file.
+
+```{r cache = TRUE}
+library(tidyverse)
+UndSoc <- read_tsv("myData/all7new.tab") 
+```
+
+We have a variable for interest in politics (**vote6**) and we will take it as the outcome variable we want to study. It is a discrete variable measured on a four-point scale (from "not at all interested" to "very interested"). It is an ordinal rather than continuous variable so strictly speaking it is not statisticaly appropriate to calculate the mean of this variable and to use simple linear regression. You will see though that we can still do this and learn something interesting from this exercise.
+
+First let us look at the distribution of the variable.
+
+```{r}
+table(UndSoc$vote6)
+```
+
+To do the modelling we want to recode it to numeric. I will do this in such a way that larger values indicate stronger interest in politics.
+
+```{r}
+UndSoc <- UndSoc %>%
+  mutate(polinterest = recode(vote6, 
+                              "very" = "4", "fairly" = "3",
+                              "not very" = "2", "not al all" = "1")) %>%
+  mutate(polinterest = as.numeric(polinterest))
+
+table(UndSoc$polinterest)
+```
+
+## Cross-sectional analysis
+
+Let us start from cross-sectional analysis, i.e. the analysis of the data at one point in time. You can choose any wave to do this; I will go with wave 1.
+
+First I create a separate data frame for wave 1 only.
+
+```{r cache = TRUE}
+wave1 <- UndSoc %>%
+  filter(wave == "a") %>%
+  filter(!is.na(dvage))
+```
+
+### Age and political interest
+
+We will start with the association between age and political interest. It is always a good idea to start with visualisations.
+
+```{r}
+wave1 %>%
+  ggplot(aes(x = dvage, y = polinterest)) +
+  geom_smooth()
+```
+
+I fit a non-parametric smooth here with **geom_smooth**, and the association between age and political interest seems to be non-linear. 
+
+We can also fit a regression line and see how well it describes the data.
+
+```{r}
+
+wave1 %>%
+  ggplot(aes(x = dvage, y = polinterest)) +
+  geom_smooth() +
+  geom_smooth(method = "lm", colour = "red")
+```
+
+Up to the age of about 70 years two lines are pretty close and I'd say that the linear function adequately describes the data. However, for people older than 75 the linear assocition is inadequate and provides a really poor fit.
+
+### Sex and political interest
+
+Let us look at a bar chart showing the association between sex and political interest.
+
+```{r}
+wave1 %>%
+  ggplot(aes(x = sex, y = polinterest)) +
+  geom_bar(stat = "summary", fun.y = "mean")
+```
+
+We see that mean political interest is somewhat higher for men compared to women.
+
+### Linear model
+
+Now we can fit a simple linear regression model with two predictors: age and sex.
+
+```{r}
+m1 <- lm(polinterest ~ sex + dvage, wave1)
+summary(m1)
+```
+
+Both age and sex are highly statistically significant predictors of political interest. Men on average are 0.3 points higher on the political interest scale. For age, a one-year difference is associated with about 0.01 change in political interest (older people are more interested). For two people with the age difference of about 30 years this corresponds to the difference in political interest of about 0.3. 
+
+We have seen that the association between age and political interest is non-linear. To model this, we may want to include the quadratic term for age.
+
+```{r}
+m2 <- lm(polinterest ~ sex + dvage + I(dvage^2), wave1)
+summary(m2)
+```
+
+The quadratic term is statistically significanty indicating a non-linear fit. Note, however, that the coefficients now are more difficult to interpret. Essentially, you need to visualise the association between age and political interest to make sense of the effect size.
+
+```{r}
+wave1 %>%
+  ggplot(aes(x = dvage, y = polinterest, colour = sex)) +
+  geom_smooth(method = "lm", formula = y ~ x + I(x^2))
+```
+
+Note that this 
+
+
+
+
+# But is this really necessary?
+# 
+# Checking the assumptions?
+# Is R-squared important>?
+#   
+
+# Can we fit an interaction effect and check if the association is different for men and women?
+
+
+wave1 %>%
+  ggplot(aes(x = dvage, y = polinterest, colour = sex)) +
+  geom_smooth()
+
+# It doesn't look like interaction is important, but we can check this formally
+
+m3 <- lm(polinterest ~ sex * dvage, wave1)
+summary(m3)
+
+wave1 %>%
+  ggplot(aes(x = dvage, y = polinterest, colour = sex)) +
+  geom_smooth(method = "lm")
+
+# Producing the regression tables with multiple models.
+
+# If you knit in pdf or html you can use stargazer. stargazer will not work with Word.
+
+library(stargazer)
+stargazer(m1, m2, m3)
+
+stargazer(m1, m2, m3, type = "text")
+
+# If you use stargazer with pdf make sure that your R chunk where you do this has an option
+# results = 'asis'.
+# 
+# ```{r results = 'asis'}
+# stargazer()
+# ```
+
+
+# library(memisc)
+# regtable <- mtable("model 1" = m1, "model 2" = m2, "model 3" = m3,
+#                    summary.stats = c('R-squared', 'N'))
+# regtable
+
+
+# Longitudinal modelling
+
+# What if we want to know how political interest changes with age?
+
+# We can use fixed-effects models
+
+UndSoc10000 <- UndSoc[1:10000,]
+
+m4 <- lm(polinterest ~ dvage + as.factor(pidp), data = UndSoc10000)
+summary(m4)
+
+# same as
+
+library(plm)
+
+m5 <- plm(polinterest ~ dvage, data = UndSoc10000, model = "within", index = c("pidp", "wave"))
+summary(m5)
+
+# For time-constant variables you can check if the trends are similar over time by group
+
+UndSoc %>%
+  filter(!is.na(sex)) %>%
+  group_by(sex, wave) %>%
+  summarise(
+    meanPI = mean(polinterest, na.rm = TRUE)
+  ) %>%
+  ggplot(aes(x = wave, y = meanPI, group = sex)) +
+  geom_point() + 
+  geom_line()
+
+# We can test this formally
+
+m6 <- lm(polinterest ~ sex + wave, UndSoc)
+summary(m6)
+
+# Fitting a linear trend
+# Let's convert wave to year
+
+UndSoc <- UndSoc %>%
+  mutate(year = dplyr::recode(wave, "a" = "2009",
+                       "b" = "2010",
+                       "c" = "2011",
+                       "d" = "2012",
+                       "e" = "2013",
+                       "f" = "2014",
+                       "g" = "2015")) %>%
+  mutate(year = as.numeric(year))
+
+m7 <- lm(polinterest ~ sex + year, UndSoc)
+summary(m7)
+
+m8 <- lm(polinterest ~ sex * as.factor(year), UndSoc)
+summary(m8)
+
+
+
+
