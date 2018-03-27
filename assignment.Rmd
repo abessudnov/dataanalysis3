@@ -18,7 +18,7 @@ However, there are a few rules.
  
 4. You cannot use data on political interest and political preferences as we will explore these data in class.
 
-5. You must prepare your report in R Markdown. Submit the pdf file (with all the R syntax visible) through eBart. You should also commit your Rmd file to the course's Github repo to the **studentWork** folder. This is not compulsory, but I will mark you down if you do not do this. The Rmd file should have the same name as your student number (for example, "6666666666.Rmd"). Note that I should be able to execute this file so all the file paths must be correct and your syntax must only refer to the data that I have in the **data** folder. For example, the path to the wave 1 data in your file will be "../data/UKDA-6614-tab/tab/us_w1/a_indresp.tab". If your Rmd file does not compile I will not have time to fix it and will have to ignore it. I will explain this further in class.
+5. You must prepare your report in R Markdown. Submit the pdf file (with all the R syntax visible) through eBart. You do no need to submit your work on Github.
 
 5. Please keep your R syntax clear and provide commentary explaining to me what you do.
 
