@@ -5,7 +5,6 @@
 # Let's open the data first.
 
 library(tidyverse)
-library(data.table)
 
 UndSoc <- read_tsv("myData/all7new.tab") 
 
@@ -23,6 +22,8 @@ UndSoc <- UndSoc %>%
   mutate(polinterest = as.numeric(polinterest))
 
 table(UndSoc$polinterest)
+summary(UndSoc$polinterest)
+hist(UndSoc$polinterest)
 
 # How can we model the association between sex, age and political interest?
 
@@ -100,6 +101,10 @@ stargazer(m1, m2, m3, type = "text")
 
 # If you use stargazer with pdf make sure that your R chunk where you do this has an option
 # results = 'asis'.
+# 
+# ```{r results = 'asis'}
+# stargazer()
+# ```
 
 
 # library(memisc)
