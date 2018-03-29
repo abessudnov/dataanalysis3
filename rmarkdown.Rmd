@@ -1,0 +1,20 @@
+# R Markdown {#rmarkdown}
+
+> For this class read ch.27 ("R Markdown") from R for Data Science - http://r4ds.had.co.nz/r-markdown.html
+
+The traditional approach for statistical data analysis is to analyse the data and write up the results separatey. For example, you may conduct your analysis in R and then copy the output to Word and write up your results there. This is an error prone approach. The code and the results are not synchronisd so that if you change your code the results will not change automatically. You can also make mistake when copying the results.
+
+R Markdown was designed to combine statistical analysis and communication into a single framework. The code and the results are combined in a single document, and you can also add text, external tables and images if you want. You can use R Markdown to produce documents in different formats (html, Word, pdf, presentation slides).
+
+This website has been produced using R Markdown.
+
+There are many places on the web where you can learn the basics of R Markdown and there is no point for me to repeat them here. Please see ch.27 from R for Data Science (http://r4ds.had.co.nz/r-markdown.html) and the official R Markdown website (https://rmarkdown.rstudio.com) and follow the links. You can also check this webpage: https://stat545.com/block007_first-use-rmarkdown.html (this is part of a course at the University of British Columbia that is similar to our module, but somewhat more advanced).
+
+Here I will focus on the things that are specifically relevant for your reports.
+
+
+
+
+
+
+
