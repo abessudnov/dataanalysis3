@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov">
 
 
-<meta name="date" content="2018-03-07">
+<meta name="date" content="2018-03-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,6 +147,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.1" data-path="datavis2.html"><a href="datavis2.html#prepare-the-data"><i class="fa fa-check"></i><b>7.1</b> Prepare the data</a></li>
 <li class="chapter" data-level="7.2" data-path="datavis2.html"><a href="datavis2.html#visualising-income"><i class="fa fa-check"></i><b>7.2</b> Visualising income</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="modelling.html"><a href="modelling.html"><i class="fa fa-check"></i><b>8</b> Modelling</a><ul>
+<li class="chapter" data-level="8.1" data-path="modelling.html"><a href="modelling.html#cross-sectional-analysis"><i class="fa fa-check"></i><b>8.1</b> Cross-sectional analysis</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="modelling.html"><a href="modelling.html#age-and-political-interest"><i class="fa fa-check"></i><b>8.1.1</b> Age and political interest</a></li>
+<li class="chapter" data-level="8.1.2" data-path="modelling.html"><a href="modelling.html#sex-and-political-interest"><i class="fa fa-check"></i><b>8.1.2</b> Sex and political interest</a></li>
+<li class="chapter" data-level="8.1.3" data-path="modelling.html"><a href="modelling.html#linear-model"><i class="fa fa-check"></i><b>8.1.3</b> Linear model</a></li>
+<li class="chapter" data-level="8.1.4" data-path="modelling.html"><a href="modelling.html#interaction-effect-between-sex-and-age"><i class="fa fa-check"></i><b>8.1.4</b> Interaction effect between sex and age</a></li>
+<li class="chapter" data-level="8.1.5" data-path="modelling.html"><a href="modelling.html#checking-the-assumptions"><i class="fa fa-check"></i><b>8.1.5</b> Checking the assumptions</a></li>
+<li class="chapter" data-level="8.1.6" data-path="modelling.html"><a href="modelling.html#presenting-the-output-for-multiple-regression-models"><i class="fa fa-check"></i><b>8.1.6</b> Presenting the output for multiple regression models</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="modelling.html"><a href="modelling.html#longitudinal-analysis"><i class="fa fa-check"></i><b>8.2</b> Longitudinal analysis</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="modelling.html"><a href="modelling.html#simple-model"><i class="fa fa-check"></i><b>8.2.1</b> Simple model</a></li>
+<li class="chapter" data-level="8.2.2" data-path="modelling.html"><a href="modelling.html#adding-a-time-constant-variable"><i class="fa fa-check"></i><b>8.2.2</b> Adding a time-constant variable</a></li>
+<li class="chapter" data-level="8.2.3" data-path="modelling.html"><a href="modelling.html#adding-a-time-varying-variable"><i class="fa fa-check"></i><b>8.2.3</b> Adding a time-varying variable</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="modelling.html"><a href="modelling.html#further-reading"><i class="fa fa-check"></i><b>8.3</b> Further reading</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -210,7 +226,6 @@ W1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(W1, <span class="kw">aes</span>(<span class="dt">x=</span>bmi)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
-<pre><code>## Warning: Removed 6426 rows containing non-finite values (stat_bin).</code></pre>
 <p><img src="datan3_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 </div>
 <div id="density-chart." class="section level3">
@@ -218,7 +233,6 @@ W1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(W1, <span class="kw">aes</span>(<span class="dt">x=</span>bmi)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
-<pre><code>## Warning: Removed 6426 rows containing non-finite values (stat_density).</code></pre>
 <p><img src="datan3_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 </div>
 </div>
@@ -266,11 +280,6 @@ W1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span>lm)</code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;gam&#39;</code></pre>
-<pre><code>## Warning: Removed 6426 rows containing non-finite values (stat_smooth).
-
-## Warning: Removed 6426 rows containing non-finite values (stat_smooth).</code></pre>
-<pre><code>## Warning: Removed 6426 rows containing missing values (geom_point).</code></pre>
 <p><img src="datan3_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 </div>
 <div id="visualising-one-categorical-and-one-quantitative-variable" class="section level2">
@@ -303,7 +312,6 @@ W1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Age group&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
-<pre><code>## Warning: Removed 6426 rows containing non-finite values (stat_boxplot).</code></pre>
 <p><img src="datan3_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
 <div id="visualising-two-categorical-variables" class="section level2">
@@ -334,9 +342,6 @@ W1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
 <span class="st">                </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">                </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
 <span class="st">                </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>cbirth)</code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;gam&#39;</code></pre>
-<pre><code>## Warning: Removed 6416 rows containing non-finite values (stat_smooth).</code></pre>
-<pre><code>## Warning: Removed 6416 rows containing missing values (geom_point).</code></pre>
 <p><img src="datan3_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 
 </div>
