@@ -30,6 +30,12 @@ description: "A website for the Data Analysis in Social Science 3 module."
 url: 'http\://abessudnov.net/dataanalysis3/'
 ---
 
+```{r global_options, include=FALSE}
+rm(list=ls()) ### To clear namespace
+library(knitr)
+opts_chunk$set(echo=TRUE, warning=FALSE, message=FALSE)
+```
+
 # Introduction
 
 This is a website for the Data Analysis in Social Science 3 module at the University of Exeter (SOC2094/3094 POL2094/3094) as offered in Term 2 in 2018.

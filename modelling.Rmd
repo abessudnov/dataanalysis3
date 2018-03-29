@@ -6,7 +6,7 @@ Let us explore how we can apply linear models with the Understanding Society dat
 
 First we need to read in the data. This is the same data frame that I used for Data visualisation 2. I saved it then so now I can simply open the file.
 
-```{r cache = TRUE}
+```{r message = FALSE}
 library(tidyverse)
 UndSoc <- read_tsv("myData/all7new.tab") 
 ```
@@ -37,7 +37,7 @@ Let us start from cross-sectional analysis, i.e. the analysis of the data at one
 
 First I create a separate data frame for wave 1 only.
 
-```{r cache = TRUE}
+```{r}
 wave1 <- UndSoc %>%
   filter(wave == "a") %>%
   filter(!is.na(dvage))
@@ -58,7 +58,6 @@ I fit a non-parametric smooth here with **geom_smooth**, and the association bet
 We can also fit a regression line and see how well it describes the data.
 
 ```{r}
-
 wave1 %>%
   ggplot(aes(x = dvage, y = polinterest)) +
   geom_smooth() +
@@ -81,6 +80,10 @@ We see that mean political interest is somewhat higher for men compared to women
 
 ### Linear model
 
+As I said above, the outcome variable is ordinal so fitting a linear model will have some limitations. For our purposes this is fine though.
+
+For your reports you should fit a linear model for ordered and binary outcomes. The linear model for binary outcomes is called the linear probability model. Please do not estimate logit or probit models for the purpose of this assignment. Of course, you cannot fit a linear model for nominal outcomes. If you outcome is nominal (this is unlikely), you should either stay with descriptive statistics and graphs or use a multinomial logit model. You should only do this if you are confident that you know what you are doing. 
+
 Now we can fit a simple linear regression model with two predictors: age and sex.
 
 ```{r}
@@ -97,7 +100,35 @@ m2 <- lm(polinterest ~ sex + dvage + I(dvage^2), wave1)
 summary(m2)
 ```
 
-The quadratic term is statistically significanty indicating a non-linear fit. Note, however, that the coefficients now are more difficult to interpret. Essentially, you need to visualise the association between age and political interest to make sense of the effect size.
+The quadratic term is statistically significanty indicating a non-linear fit. Note, however, that the coefficients are now more difficult to interpret. We can visualise the association between age and political interest to get some idea of the effect size.
+
+```{r}
+wave1 %>%
+  ggplot(aes(x = dvage, y = polinterest)) +
+  geom_smooth(method = "lm", formula = y ~ x + I(x^2))
+```
+
+Note that this visualisation does not control for sex.
+
+### Interaction effect between sex and age
+
+Another question we can ask is whether the association between age and political interest is the same or different for men and women. Note that in the previous model we control for sex, and the coefficient for age represents an averaged association between age and political interest for men and women. It is possible to have a situation where the association is very different for two sexes (for example, for men political interest increases with age and for women it decreases). To check this formally, we can fit a model with an interaction effect. 
+
+```{r}
+m3 <- lm(polinterest ~ sex * dvage, wave1)
+summary(m3)
+```
+
+We see that the interaction effect is indeed statistically significant and negative suggesting that for men the association between age and political interest is weaker.
+
+We can also fit a quadratic model.
+
+```{r}
+m4 <- lm(polinterest ~ sex * dvage + sex * I(dvage^2), wave1)
+summary(m4)
+```
+
+The interaction effect is highly statistically significant. To make sense of the association between age and political interest for men and women it is best to visualise this model.
 
 ```{r}
 wave1 %>%
@@ -105,94 +136,45 @@ wave1 %>%
   geom_smooth(method = "lm", formula = y ~ x + I(x^2))
 ```
 
-Note that this 
+We can see that the lines for men and women are indeed different, although the non-linear pattern of the association is similar for both sexes.
 
+### Checking the assumptions
 
+In Data Analysis 2 your task was to check the assumptions underlying linear regression models. This is an important step, but it is less relevant for our work in this module. Many of these assumptions are about the distribution of residuals and affect standard errors of regression coefficients. This is very important for small samples, but less important for large samples like the one we have in the Understanding Society where standard errors are usually small compared to regression coefficients and moderate violation of the regression assumpions (such as not normal distribution of the residuals and heteroskedasticity) will not affect the results much. You do not have to show how you have checked the assumptions in your reports (although if you want to do it for yourself this would not hurt).
 
+Another common question is the interpretation of the R-squared coefficient. In Model 4 the R-squared coefficients was about 0.05 suggesting that age and sex can jointly account for about 5% of the variance of political interest. Is this an indication that the model is really poor? Yes, if your task is to build a model that predicts political interest well. This shows that just knowning a person's age and sex you can only make a wild guess about their level of political interest (this isn't really surprising).
 
-# But is this really necessary?
-# 
-# Checking the assumptions?
-# Is R-squared important>?
-#   
+However, if our task is simply to explore the association between age, sex and political interest rather than to build a model that predicts political interest well, then we should not pay too much attention to R-squared.
 
-# Can we fit an interaction effect and check if the association is different for men and women?
+### Presenting the output for multiple regression models
 
+How to present the regression output in your reports? You can of course simply fo **summary(m1)** as we did above, but this does not look really nice. Another way is to use the package **stargazer**. Note that **stargazer** will only work if you knit your reports as pdf rather than Word. To knit as pdf you  will need to install LaTeX on your computers (see https://www.latex-project.org). This is how the table produced by **stargazer** will look like.
 
-wave1 %>%
-  ggplot(aes(x = dvage, y = polinterest, colour = sex)) +
-  geom_smooth()
-
-# It doesn't look like interaction is important, but we can check this formally
-
-m3 <- lm(polinterest ~ sex * dvage, wave1)
-summary(m3)
-
-wave1 %>%
-  ggplot(aes(x = dvage, y = polinterest, colour = sex)) +
-  geom_smooth(method = "lm")
-
-# Producing the regression tables with multiple models.
-
-# If you knit in pdf or html you can use stargazer. stargazer will not work with Word.
-
+```{r results = "asis"}
 library(stargazer)
-stargazer(m1, m2, m3)
+stargazer(m1, m2, m3, m4, type = "html")
+```
 
-stargazer(m1, m2, m3, type = "text")
+In your reports you will knit as LaTeX rather than html so you should do something like:
 
-# If you use stargazer with pdf make sure that your R chunk where you do this has an option
-# results = 'asis'.
-# 
-# ```{r results = 'asis'}
-# stargazer()
-# ```
+<pre><code>```{r results = 'asis'}
+stargazer(m1, m2, m3, m4, type = "latex")
+```</pre></code>
 
+The *results* argument shoud be set to *asis* so that the results are displayed correctly. Note that *type* is *latex*.
 
-# library(memisc)
-# regtable <- mtable("model 1" = m1, "model 2" = m2, "model 3" = m3,
-#                    summary.stats = c('R-squared', 'N'))
-# regtable
+**stargazer** has many options to customise the tables. Please do experiment with them.
 
+## Longitudinal analysis
 
-# Longitudinal modelling
+Now we may want to model how things change over time (i.e. do longitudinal modelling). 
 
-# What if we want to know how political interest changes with age?
+### Simple model
 
-# We can use fixed-effects models
+We will start from simply plotting mean political interest over time.
 
-UndSoc10000 <- UndSoc[1:10000,]
-
-m4 <- lm(polinterest ~ dvage + as.factor(pidp), data = UndSoc10000)
-summary(m4)
-
-# same as
-
-library(plm)
-
-m5 <- plm(polinterest ~ dvage, data = UndSoc10000, model = "within", index = c("pidp", "wave"))
-summary(m5)
-
-# For time-constant variables you can check if the trends are similar over time by group
-
-UndSoc %>%
-  filter(!is.na(sex)) %>%
-  group_by(sex, wave) %>%
-  summarise(
-    meanPI = mean(polinterest, na.rm = TRUE)
-  ) %>%
-  ggplot(aes(x = wave, y = meanPI, group = sex)) +
-  geom_point() + 
-  geom_line()
-
-# We can test this formally
-
-m6 <- lm(polinterest ~ sex + wave, UndSoc)
-summary(m6)
-
-# Fitting a linear trend
-# Let's convert wave to year
-
+```{r}
+# First let us code the variable for year.
 UndSoc <- UndSoc %>%
   mutate(year = dplyr::recode(wave, "a" = "2009",
                        "b" = "2010",
@@ -203,12 +185,106 @@ UndSoc <- UndSoc %>%
                        "g" = "2015")) %>%
   mutate(year = as.numeric(year))
 
-m7 <- lm(polinterest ~ sex + year, UndSoc)
-summary(m7)
+UndSoc %>%
+    group_by(year) %>%
+    summarise(
+      meanPI = mean(polinterest, na.rm = TRUE)
+    ) %>%
+    ggplot(aes(x = year, y = meanPI)) +
+    geom_point() +
+    geom_line()
 
-m8 <- lm(polinterest ~ sex * as.factor(year), UndSoc)
+```
+
+The model that describes this chart will be the following.
+
+```{r}
+m5 <- lm(polinterest ~ as.factor(year), UndSoc)
+summary(m5)
+```
+
+We can see from this model that in 2011 to 2013 political interest was statistically significantly lower than in 2009, and in 2015 it was statistically significantly higher.
+
+### Adding a time-constant variable
+
+We may want to check if the change in political interest depends on a time-constant variable such as sex. Was the change in mean political interest similar for men and women?
+
+```{r}
+UndSoc %>%
+    filter(!is.na(sex)) %>%
+    group_by(year, sex) %>%
+    summarise(
+      meanPI = mean(polinterest, na.rm = TRUE)
+    ) %>%
+    ggplot(aes(x = year, y = meanPI, colour = sex)) +
+    geom_point() +
+    geom_line()
+```
+
+It does not look like there was an interaction between sex and year, but we can check it formally.
+
+```{r}
+m6 <- lm(polinterest ~ as.factor(year)*sex, UndSoc)
+summary(m6)
+```
+
+This suggest that the gap in political interest between men and women was slighty hgher in 2013, but the effect size is really small.
+
+### Adding a time-varying variable
+
+Things get more tricky (and more interesting) if we want to add a time-varying variable such as age to the analysis. We have already modelled the association between age and political interest cross-sectionally. This answers the question of whether there is any difference in political interest between people of different age.
+
+Another question that we may want to ask is whether political interest changes when people get older. Note that this is a different question, and answering it requires the use of longitudinal data.
+
+To answer this question we need to apply regression models with fixed effects. You have not covered these models in Data Analysis 2. The main idea is to look at the changes for the same individuals. We want to see if for each person in the data getting older is associated with the changes in political interest, and then we can average the effects across different people. In other words, instead of fitting the model that compares *between* individuals we want to compare *within* individuals.
+
+Technically, we can achieve this by simply controlling for individual id.
+
+With the data of our size the model will be very difficult to estimate, so for the demonstration purposes I will select 500 random individuals from the data and run the model for them.
+
+```{r}
+# creating a data frame with data for 500 random people
+set.seed(1)
+random500 <- sample(unique(UndSoc$pidp), 500)
+UndSoc500 <- UndSoc %>%
+  filter(pidp %in% random500)
+
+m7 <- lm(polinterest ~ as.factor(year) + as.factor(pidp) + dvage, UndSoc500)
+```
+
+If we run **summary(m7)** now we will get a really long output with 499 coefficients for **pidp**. I will use **stargazer** to present the results and will omit these coefficients (called individual fixed effects) and the coefficients for year.
+
+```{r results = 'asis'}
+stargazer(m7, omit = c("pidp", "year"), type = "html")
+```
+
+Note that the coefficient for age is not statisticaly significant. This indicates that as people get older their interest in politics does not change much, at least in our sub-sample of 500 people.
+
+A more efficient way to estimate fixed effects model is to use the package **plm**.
+
+```{r}
+library(plm)
+m8 <- plm(polinterest ~ dvage, data = UndSoc500, model = "within", index = c("pidp", "year"),
+          effect = "twoways")
 summary(m8)
+```
 
+Asking for the **twoways** effect means that we fit the model with individual and year fixed effects.
 
+Note that the effect size is exactly the same in models 7 and 8 (becuase this is essentially the same model), but **plm** will work faster. With **plm** you may be able to estimate the fixed effects model with the full data for your reports, although the estimation will take you some time. I will not do this here.
 
+## Further reading
 
+If you want to use linear models in your assignment I strongly recommend you consult the following book (available as an e-book in the library):
+
+1. J.Fox, S.Weisberg. (2011). An R Companion to Applied Regression. 2nd ed. Sage.
+
+The chapter on factors and interactions will be particularly useful.
+
+If you want to know more about fixed effects models see
+
+2. P.D.Allison. (2008). Fixed Effect Regression Models. Sage.
+
+To learn how to use the package **plm** read
+
+3. Y.Croissant, G.Millo. Panel Data Econometrics in R: The plm Package. https://cran.r-project.org/web/packages/plm/vignettes/plm.pdf 
