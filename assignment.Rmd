@@ -22,7 +22,7 @@ However, there are a few rules.
 
 5. Please keep your R syntax clear and provide commentary explaining to me what you do.
 
-6. The deadline for your reports is 29 March at 2pm.
+6. The deadline for your reports is 3 May at 2pm.
 
 I suggest the following steps for your reports.
 
