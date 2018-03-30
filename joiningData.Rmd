@@ -1,4 +1,4 @@
-# Joining data {#joining}
+# Join data {#joining}
 
 > For this class please read ch.13 on Relational Data from R for Data Science -- http://r4ds.had.co.nz/relational-data.html.
 
