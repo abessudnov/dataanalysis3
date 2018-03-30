@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="assignment.html">
+<link rel="prev" href="assignment.html">
+<link rel="next" href="joining.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -188,73 +188,65 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="module-outline" class="section level1">
-<h1><span class="header-section-number">2</span> Module outline</h1>
-<div id="practical-arrangements" class="section level2">
-<h2><span class="header-section-number">2.1</span> Practical arrangements</h2>
-<p><strong>Classes:</strong></p>
-<ul>
-<li>Monday, 11.30am - 1.30pm, WSL 220</li>
-</ul>
-<p>Classes begin on 15 January and end on 26 March. The class on 22 January (week 2) has been cancelled and moved to Friday 2 February, 10.30 - 12.30, WSL 220.</p>
-<p><strong>Office hours (Amory A341)</strong></p>
-<ul>
-<li>Monday, 2-3pm</li>
-<li>Friday, 12-1pm</li>
-</ul>
-<p><strong>Email:</strong></p>
-<ul>
-<li>A.Bessudnov [at] exeter.ac.uk</li>
-</ul>
+<div id="readdata" class="section level1">
+<h1><span class="header-section-number">4</span> Read data</h1>
+<blockquote>
+<p>Please read ch.11 (Data import) from R for Data Science - <a href="http://r4ds.had.co.nz/data-import.html" class="uri">http://r4ds.had.co.nz/data-import.html</a></p>
+</blockquote>
+<p>For this module we will use data from the Understanding Society survey (<a href="https://discover.ukdataservice.ac.uk/catalogue/?sn=6614" class="uri">https://discover.ukdataservice.ac.uk/catalogue/?sn=6614</a>). I assume that you have famliarised yourself with the data set, registered an account with the UK Data Service website and downloaded the data in the tab format.</p>
+<p>The first thing we need to do is to read the data in R. There are multiple ways of doing this.</p>
+<p>For all the examples I will use the individual adult data from wave 1 (<em>a_indresp.tab</em>).</p>
+<div id="base-r" class="section level2">
+<h2><span class="header-section-number">4.1</span> Base R</h2>
+<p>In base R we have the <strong>read.table</strong> function. I will wrap it into the <strong>system.time</strong> function to measure how long the execution will take.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(UndSoc1 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>,
+                      <span class="dt">header =</span> <span class="ot">TRUE</span>,
+                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>))</code></pre></div>
+<pre><code>##    user  system elapsed 
+##  39.299   1.192  40.596</code></pre>
+<p>I set <em>header = TRUE</em> to make sure that the first row in the data is interpreted as variable names. <em>stringsAsFacrors = FALSE</em> means that the text variables will be read in as character vectors rather than factors. We can convert them into factors when necessary.</p>
 </div>
-<div id="aims-of-the-module" class="section level2">
-<h2><span class="header-section-number">2.2</span> Aims of the module</h2>
-<p>This is a fourth module in the data analysis in the social sciences series. In the Introduction to Social Data you learned the basics of descriptive statistics and R. Data Analysis 1 introduced you to statistical inference. Data Analysis 2 covered linear regression analysis. In Data Analysis 3 we are not going to learn new statistical techniques, but will focus on how to apply the techniques you already know to the analysis of real-life data sets and how to produce statistical reports.</p>
-<p>This is a skill that you may need in a variety of jobs where data analytic expertise is required, such as marketing analysis, policy analysis in various fields, web analytics, data journalism, academic research, etc.</p>
-<p>You already know how to use R to describe data and run simple statistical models. However, real-life data rarely come in the form of a perfectly formatted csv file ready for the analysis. The real life data sets often need to be reshaped, merged, recoded, aggregated and modified in various ways before you can even start your analysis. Unless you know how to do this you will not be able to produce good statistical reports.</p>
-<p>This year in this module we will use data from the Understanding Society, a large household panel study conducted in the UK. In the Immigration module we already used the cross-sectional Understanding Society data. In this module we will work with the longitudinal data, which introduces a number of technical challenges.</p>
-<p>Throughout the module we will use R for statistical analysis. You are expected to know the basics of data analysis in R.</p>
-<p>The only way to learn data analysis is to do data analysis. I will not be able to teach you this, but I can guide your independent learning. This year we will try the “flipped classroom” model of teaching. This means that you will be expected to read and master the required material BEFORE the class and we will use the time in class to answer additional questions and check your solutions rather than introduce new material.</p>
-<p>The pre-requisites for this module are POL/SOC1041 and POL/SOC2077.</p>
+<div id="package-readr" class="section level2">
+<h2><span class="header-section-number">4.2</span> Package readr</h2>
+<p>We can also read in these data with the package <strong>readr</strong> (part of <strong>tidyverse</strong>). The main advantage is that it works faster.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+<span class="kw">system.time</span>(UndSoc2 &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>))</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   9.811   0.498  10.323</code></pre>
+<p><strong>readr</strong> was able to read the data set much faster than base R.</p>
 </div>
-<div id="attendance" class="section level2">
-<h2><span class="header-section-number">2.3</span> Attendance</h2>
-<p>This module is quite technical. As with other technical skills, missing some initial bits means that you may not be able to catch up. Attendance in this module is crucial. If you do not attend you will not be able to do well in this module. Even skipping a couple of classes will have negative consequences for your understanding of the material. Another negative consequence will be that you will slow the rest of the class down as I will have to explain the same things several times. If you plan not to attend classes please do not take this optional module.</p>
+<div id="package-data.table" class="section level2">
+<h2><span class="header-section-number">4.3</span> Package data.table</h2>
+<p>The <strong>fread</strong> function from the <strong>data.table</strong> package is probably the fastest way to read in the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
+<span class="kw">system.time</span>(UndSoc3 &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>))</code></pre></div>
+<pre><code>## 
+Read 78.4% of 50994 rows
+Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code></pre>
+<pre><code>##    user  system elapsed 
+##   2.430   0.215   2.649</code></pre>
+<p>It took less than 3 seconds!</p>
+<p>With small data sets the choice between these three methods is not very important, but with larger data the gain in efficiency that <strong>readr</strong> and <strong>data.table</strong> provide can be quite substantial.</p>
 </div>
-<div id="assessment" class="section level2">
-<h2><span class="header-section-number">2.4</span> Assessment</h2>
-<p>The assessment for this module is a report of 3,500 words (in addition to figures and tables) with the results of statistical analysis you will undertake. This will be 100% of your final mark for this module. You will be given questions for the reports later in the module. In your analysis you will use the Understanding Society data.</p>
-<p>The deadline for submitting your reports through eBart is 29 March at 2pm. You will receive your marks and feedback by 5 May.</p>
-<p>Late submissions up to two weeks after the deadline will be capped at 40%. Submissions that are late for more than two weeks will not be accepted.</p>
+<div id="other-data-formats" class="section level2">
+<h2><span class="header-section-number">4.4</span> Other data formats</h2>
+<p>In R you can easily read in data in other formats, such as csv files, Stata, SPSS, SAS, Excel and others. There are many tutorials on how to do this on the web. See, for example, <a href="https://www.datacamp.com/courses/importing-data-in-r-part-1/" class="uri">https://www.datacamp.com/courses/importing-data-in-r-part-1/</a> and <a href="https://www.datacamp.com/courses/importing-data-in-r-part-2" class="uri">https://www.datacamp.com/courses/importing-data-in-r-part-2</a> .</p>
 </div>
-<div id="syllabus-plan" class="section level2">
-<h2><span class="header-section-number">2.5</span> Syllabus plan</h2>
-<p>I may change some topics as we proceed.</p>
-<ul>
-<li>Data structures in R</li>
-<li>Manipulating data with dplyr</li>
-<li>Longitudinal data in R. Wide and long formats. Reshaping</li>
-<li>Data visualisation with ggplot2</li>
-<li>Producing statistical reports with R Markdown</li>
-<li>Interactive applications with Shiny</li>
-<li>Loops and other control structures. The apply family of functions</li>
-<li>Writing functions in R</li>
-</ul>
-</div>
-<div id="reading-list" class="section level2">
-<h2><span class="header-section-number">2.6</span> Reading list</h2>
-<p>The main text for this module:</p>
-<ul>
-<li>G.Grolemund &amp; H.Wickham. (2016). R for Data Science. Freely available at <a href="http://r4ds.had.co.nz/" class="uri">http://r4ds.had.co.nz/</a></li>
-</ul>
-<p>In addition to this you can the following sources (among many others books on R).</p>
-<ul>
-<li>H.Wickham. (2015). ggplot2. Elegant Graphics for Data Analysis. 2nd ed. Springer.</li>
-<li>W.Chang. (2013). R Graphics Cookbook. O’Reilly.</li>
-<li>P.Spector. (2008). Data Manipulation with R. Springer.</li>
-<li>N.Matloff. (2011). The Art of R Programming. No Starch Press.</li>
-<li>H.Wickham. (2014). Advanced R. Chapman &amp; Hall.</li>
-</ul>
+<div id="saving-the-r-workspace" class="section level2">
+<h2><span class="header-section-number">4.5</span> Saving the R workspace</h2>
+<p>Once you have read your data into R you can save it as R workspace.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># I will remove some objects from memory to speed things up</span>
+<span class="kw">rm</span>(UndSoc2, UndSoc3)
+<span class="co"># saving R workspavce now in myData (you need to create myData first)</span>
+<span class="kw">save.image</span>(<span class="st">&quot;myData/readTest.RData&quot;</span>)</code></pre></div>
+<p>Next time I need this file I can simply load the workspace.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first let&#39;s remove everything from the workspace</span>
+<span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())
+<span class="co"># load the workspace</span>
+<span class="kw">system.time</span>(<span class="kw">load</span>(<span class="st">&quot;myData/readTest.RData&quot;</span>))</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   1.440   0.114   1.557</code></pre>
+<p>Of course, in R workspace you can save not only data frames but any objects: models, plots, functions, etc.</p>
 
 </div>
 </div>
@@ -263,8 +255,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="assignment.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="assignment.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="joining.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
