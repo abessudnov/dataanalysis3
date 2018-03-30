@@ -186,24 +186,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <blockquote>
 <p>For this class read ch.27 (“R Markdown”) from R for Data Science - <a href="http://r4ds.had.co.nz/r-markdown.html" class="uri">http://r4ds.had.co.nz/r-markdown.html</a></p>
 </blockquote>
-<p>The traditional approach for statistical data analysis is to analyse the data and write up the results separatey. For example, you may conduct your analysis in R and then copy the output to Word and write up your results there. This is an error prone approach. The code and the results are not synchronisd so that if you change your code the results will not change automatically. You can also make mistake when copying the results.</p>
+<p>The traditional approach for statistical data analysis is to analyse the data and write up the results separately. For example, you may conduct your analysis in R and then copy the output to Word and write up your results there. This is an error prone approach. The code and the results are not synchronised so that if you change your code the results will not change automatically. You can also make mistakes when copying the results.</p>
 <p>R Markdown was designed to combine statistical analysis and communication into a single framework. The code and the results are combined in a single document, and you can also add text, external tables and images if you want. You can use R Markdown to produce documents in different formats (html, Word, pdf, presentation slides).</p>
 <p>This website has been produced using R Markdown.</p>
-<p>There are many places on the web where you can learn the basics of R Markdown and there is no point for me to repeat them here. Please see ch.27 from R for Data Science (<a href="http://r4ds.had.co.nz/r-markdown.html" class="uri">http://r4ds.had.co.nz/r-markdown.html</a>) and the official R Markdown website (<a href="https://rmarkdown.rstudio.com" class="uri">https://rmarkdown.rstudio.com</a>) and follow the links. You can also check this webpage: <a href="https://stat545.com/block007_first-use-rmarkdown.html" class="uri">https://stat545.com/block007_first-use-rmarkdown.html</a> (this is part of a course at the University of British Columbia that is similar to our module, but somewhat more advanced).</p>
+<p>There are many places on the web where you can learn the basics of R Markdown and there is no point for me to repeat this here. Please see ch.27 from R for Data Science (<a href="http://r4ds.had.co.nz/r-markdown.html" class="uri">http://r4ds.had.co.nz/r-markdown.html</a>) and the official R Markdown website (<a href="https://rmarkdown.rstudio.com" class="uri">https://rmarkdown.rstudio.com</a>) and follow the links. You can also check this webpage: <a href="https://stat545.com/block007_first-use-rmarkdown.html" class="uri">https://stat545.com/block007_first-use-rmarkdown.html</a> (this is part of a course at the University of British Columbia that is similar to our module, but somewhat more advanced).</p>
 <p>Here I will focus on a few things that are specifically relevant for your reports.</p>
 <ol style="list-style-type: decimal">
-<li>You can knit your reports in either pdf or Word formats. If you are going to use Word you will noy be able to use the <strong>stargazer</strong> package for regression output. You may try to use a combination of the packages <strong>memisc</strong> and <strong>pander</strong> to achieve the same result (see <a href="https://stackoverflow.com/questions/24342162/regression-tables-in-markdown-format-for-flexible-use-in-r-markdown-v2" class="uri">https://stackoverflow.com/questions/24342162/regression-tables-in-markdown-format-for-flexible-use-in-r-markdown-v2</a>), but I haven’t tried this and I cannot guarantee that it will work. Also see <a href="https://rmarkdown.rstudio.com/articles_docx.html" class="uri">https://rmarkdown.rstudio.com/articles_docx.html</a></li>
+<li>You can knit your reports in either pdf or Word formats. If you are going to use Word you will not be able to use the <strong>stargazer</strong> package for regression output. You may try to use a combination of the packages <strong>memisc</strong> and <strong>pander</strong> to achieve the same result (see <a href="https://stackoverflow.com/questions/24342162/regression-tables-in-markdown-format-for-flexible-use-in-r-markdown-v2" class="uri">https://stackoverflow.com/questions/24342162/regression-tables-in-markdown-format-for-flexible-use-in-r-markdown-v2</a>), but I haven’t tried this and I cannot guarantee that it will work. Also see <a href="https://rmarkdown.rstudio.com/articles_docx.html" class="uri">https://rmarkdown.rstudio.com/articles_docx.html</a></li>
 </ol>
 <p>If you want to knit as pdf you will need to install LaTeX first (<a href="https://www.latex-project.org" class="uri">https://www.latex-project.org</a>). Install LaTeX (complete version), restart your computer, restart R Studio and it should all work automatically.</p>
 <ol start="2" style="list-style-type: decimal">
-<li>If you knit as pdf with LaTeX <strong>stargazer</strong> will work just fine, but you need to set the <em>results</em> argument to ‘asis’ and run the stargazer in a separate R chunk. The code will look something like</li>
+<li>If you knit as pdf with LaTeX <strong>stargazer</strong> will work just fine, but you need to set the <em>results</em> argument to ‘asis’ and run <strong>stargazer</strong> in a separate R chunk. The code will look something like</li>
 </ol>
 <pre><code>```{r results = 'asis'}
 stargazer(m1, m2, m3, m4, type = "latex")
 ```</pre>
 <p></code></p>
 <ol start="3" style="list-style-type: decimal">
-<li>You need to include all your code in your report. You do not need to include messages and warnings. You may also want to use cache to speed up the rendering of your document. To achieve this result include in the beginning of your R Mardown file an R chunk setting the following global options.</li>
+<li>You need to include all your code in your report. You do not need to include messages and warnings. You may also want to use cache to speed up rendering of your document. To achieve this result include in the beginning of your R Mardown file an R chunk setting the following global options.</li>
 </ol>
 <pre><code>```{r setup}
 knitr::opts_chunk$set(echo = TRUE)
@@ -219,7 +219,21 @@ knitr::opts_chunk$set(cache = TRUE)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rmarkdown<span class="op">::</span><span class="kw">render</span>(<span class="st">&quot;your_file.Rmd&quot;</span>, <span class="st">&quot;rmarkdown::word_document&quot;</span>)
 rmarkdown<span class="op">::</span><span class="kw">render</span>(<span class="st">&quot;your_file.Rmd&quot;</span>, <span class="st">&quot;rmarkdown::pdf_document&quot;</span>)</code></pre></div>
 <ol start="5" style="list-style-type: decimal">
-<li>You will want to include a bibliography in your report. An easy way to do this is simply to type it in the end of your document.</li>
+<li>You will want to include a bibliography in your report. An easy way to do this is simply to type it in the end of your document. However, this is not the most efficient way of doing this. I recommend you use Zotero for your bibliographies. You will also be able to use Zotero for essays for other modules and for your dissertation, even if you do not use R or R Markdown and write everything in Word. Once you master Zotero referencing and creating bibliographies will become much easier.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><p>Go to the Zotero website (<a href="https://www.zotero.org" class="uri">https://www.zotero.org</a>) and create an acount.</p></li>
+<li><p>Download and install the Zotero client for your computer (<a href="https://www.zotero.org/download/" class="uri">https://www.zotero.org/download/</a>).</p></li>
+<li><p>Download and install a Zotero plugin for your web browser. Once you have done this you will be able to automatically save references to your Zotero libraries from Google Scholar and other sources.</p></li>
+<li><p>You can use Zotero with Word to reference and automatically create bibliographies. This is not relevant for this module, but for other modules and for your dissertation this is a very useful skill. To learn how to do this see <a href="https://www.zotero.org/support/word_processor_integration" class="uri">https://www.zotero.org/support/word_processor_integration</a></p></li>
+<li><p>To use Zotero with R Markdown you need to do the following. Once you have added all the references to your library, export it as a bib file (File -&gt; Export Library -&gt; choose BibTex as the format). Save your bib file in the same folder as your R Markdown document.</p></li>
+<li><p>To learn how to reference and cite in R Markdown see <a href="https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html" class="uri">https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html</a></p></li>
+<li><p>To include a bibliography add the following line to the YAML header of your R Markdown document:</p></li>
+</ol>
+<p>bibliography: your_bibfile_name.bib</p>
+<ol start="8" style="list-style-type: lower-alpha">
+<li><p>The file <em>example.Rmd</em> available in the Github repo shows the minimal example of referencing and creating a bibliography with one source (see <a href="https://raw.githubusercontent.com/abessudnov/dataanalysis3/master/example.Rmd" class="uri">https://raw.githubusercontent.com/abessudnov/dataanalysis3/master/example.Rmd</a>). The associated bib file is available here: <a href="https://raw.githubusercontent.com/abessudnov/dataanalysis3/master/example.bib" class="uri">https://raw.githubusercontent.com/abessudnov/dataanalysis3/master/example.bib</a>.</p></li>
+<li><p>The bib file can be opened and edited in any text editor and you can also use special software to do this, such as JabRef (<a href="http://www.jabref.org" class="uri">http://www.jabref.org</a>).</p></li>
 </ol>
 
 </div>
