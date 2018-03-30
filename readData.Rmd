@@ -1,0 +1,80 @@
+# Read data {#readdata}
+
+> Please read ch.11 (Data import) from R for Data Science - http://r4ds.had.co.nz/data-import.html
+
+For this module we will use data from the Understanding Society survey (https://discover.ukdataservice.ac.uk/catalogue/?sn=6614). I assume that you have famliarised yourself with the data set, registered an account with the UK Data Service website and downloaded the data in the tab format.
+
+The first thing we need to do is to read the data in R. There are multiple ways of doing this.
+
+For all the examples I will use the individual adult data from wave 1 (*a_indresp.tab*).
+
+## Base R
+
+In base R we have the **read.table** function. I will wrap it into the **system.time** function to measure how long the execution will take.
+
+```{r}
+system.time(UndSoc1 <- read.table("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab",
+                      header = TRUE,
+                      stringsAsFactors = FALSE))
+```
+
+I set *header = TRUE* to make sure that the first row in the data is interpreted as variable names. *stringsAsFacrors = FALSE* means that the text variables will be read in as character vectors rather than factors. We can convert them into factors when necessary.
+
+## Package readr
+
+We can also read in these data with the package **readr** (part of **tidyverse**). The main advantage is that it works faster.
+
+```{r}
+library(readr)
+system.time(UndSoc2 <- read_tsv("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab"))
+```
+
+**readr** was able to read the data set in 14 seconds, compared to 39 seconds with base R.
+
+## Package data.table
+
+The **fread** function from the **data.table** package is probably the fastest way to read in the data. 
+
+```{r}
+library(data.table)
+system.time(UndSoc3 <- fread("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab"))
+```
+
+It only took 3 seconds!
+ 
+With small data sets the choice between these three methods is not very important, but with larger data the gain in efficiency that **readr** and **data.table** provide can be quite substantial.
+
+## Other data formats
+
+In R you can easily read in data in other formats, such as csv files, Stata, SPSS, SAS, Excel and others. There are many tutorials on how to do this on the web. See, for example, https://www.datacamp.com/courses/importing-data-in-r-part-1/ and https://www.datacamp.com/courses/importing-data-in-r-part-2 .
+
+## Saving the R workspace
+
+Once you have read your data into R you can save it as R workspace.
+
+```{r}
+# I will remove some objects from memory to speed things up
+rm(UndSoc2, UndSoc3)
+# saving R workspavce now in myData (you need to create myData first)
+save.image("myData/readTest.RData")
+```
+
+Next time I need this file I can simply load the workspace.
+
+```{r}
+# first let's remove everything from the workspace
+rm(list = ls())
+# load the workspace
+system.time(load("myData/readTest.RData"))
+```
+
+It only took 1.7 seconds.
+
+Of course, in R workspace you can save not only data frames but any objects: models, plots, functions, etc.
+
+
+
+ 
+
+
+
