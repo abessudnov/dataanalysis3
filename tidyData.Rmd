@@ -1,5 +1,8 @@
 # Tidy data
 
+> For this class please read ch.12 on Tidy Data from R for Data Science -- http://r4ds.had.co.nz/tidy-data.html.
+
+
 In the previous part of the course (joiningData.Rmd) we learned how to join together data from seven waves of the Understanding Society. Let us open this data set.
 
 ```{r cache = TRUE}
