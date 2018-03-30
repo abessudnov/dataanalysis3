@@ -2,27 +2,27 @@
 
 > For this class read ch.27 ("R Markdown") from R for Data Science - http://r4ds.had.co.nz/r-markdown.html
 
-The traditional approach for statistical data analysis is to analyse the data and write up the results separatey. For example, you may conduct your analysis in R and then copy the output to Word and write up your results there. This is an error prone approach. The code and the results are not synchronisd so that if you change your code the results will not change automatically. You can also make mistake when copying the results.
+The traditional approach for statistical data analysis is to analyse the data and write up the results separately. For example, you may conduct your analysis in R and then copy the output to Word and write up your results there. This is an error prone approach. The code and the results are not synchronised so that if you change your code the results will not change automatically. You can also make mistakes when copying the results.
 
 R Markdown was designed to combine statistical analysis and communication into a single framework. The code and the results are combined in a single document, and you can also add text, external tables and images if you want. You can use R Markdown to produce documents in different formats (html, Word, pdf, presentation slides).
 
 This website has been produced using R Markdown.
 
-There are many places on the web where you can learn the basics of R Markdown and there is no point for me to repeat them here. Please see ch.27 from R for Data Science (http://r4ds.had.co.nz/r-markdown.html) and the official R Markdown website (https://rmarkdown.rstudio.com) and follow the links. You can also check this webpage: https://stat545.com/block007_first-use-rmarkdown.html (this is part of a course at the University of British Columbia that is similar to our module, but somewhat more advanced).
+There are many places on the web where you can learn the basics of R Markdown and there is no point for me to repeat this here. Please see ch.27 from R for Data Science (http://r4ds.had.co.nz/r-markdown.html) and the official R Markdown website (https://rmarkdown.rstudio.com) and follow the links. You can also check this webpage: https://stat545.com/block007_first-use-rmarkdown.html (this is part of a course at the University of British Columbia that is similar to our module, but somewhat more advanced).
 
 Here I will focus on a few things that are specifically relevant for your reports.
 
-1. You can knit your reports in either pdf or Word formats. If you are going to use Word you will noy be able to use the **stargazer** package for regression output. You may try to use a combination of the packages **memisc** and **pander** to achieve the same result (see https://stackoverflow.com/questions/24342162/regression-tables-in-markdown-format-for-flexible-use-in-r-markdown-v2), but I haven't tried this and I cannot guarantee that it will work. Also see https://rmarkdown.rstudio.com/articles_docx.html
+1. You can knit your reports in either pdf or Word formats. If you are going to use Word you will not be able to use the **stargazer** package for regression output. You may try to use a combination of the packages **memisc** and **pander** to achieve the same result (see https://stackoverflow.com/questions/24342162/regression-tables-in-markdown-format-for-flexible-use-in-r-markdown-v2), but I haven't tried this and I cannot guarantee that it will work. Also see https://rmarkdown.rstudio.com/articles_docx.html
 
 If you want to knit as pdf you will need to install LaTeX first (https://www.latex-project.org). Install LaTeX (complete version), restart your computer, restart R Studio and it should all work automatically.
 
-2. If you knit as pdf with LaTeX **stargazer** will work just fine, but you need to set the *results* argument to 'asis' and run the stargazer in a separate R chunk. The code will look something like
+2. If you knit as pdf with LaTeX **stargazer** will work just fine, but you need to set the *results* argument to 'asis' and run  **stargazer** in a separate R chunk. The code will look something like
 
 <pre><code>```{r results = 'asis'}
 stargazer(m1, m2, m3, m4, type = "latex")
 ```</pre></code>
 
-3. You need to include all your code in your report. You do not need to include messages and warnings. You may also want to use cache to speed up the rendering of your document. To achieve this result include in the beginning of your R Mardown file an R chunk setting the following global options.
+3. You need to include all your code in your report. You do not need to include messages and warnings. You may also want to use cache to speed up rendering of your document. To achieve this result include in the beginning of your R Mardown file an R chunk setting the following global options.
 
 <pre><code>```{r setup}
 knitr::opts_chunk$set(echo = TRUE)
@@ -48,19 +48,19 @@ b) Download and install the Zotero client for your computer (https://www.zotero.
 
 c) Download and install a Zotero plugin for your web browser. Once you have done this you will be able to automatically save references to your Zotero libraries from Google Scholar and other sources.
 
-d) You can use Zotero with Word to reference and automatically create bibliographies. This is not relevent for your reports for this module, but for other modules and for your dissertation this is a very useful skill. To learn how to do this see https://www.zotero.org/support/word_processor_integration
+d) You can use Zotero with Word to reference and automatically create bibliographies. This is not relevant for this module, but for other modules and for your dissertation this is a very useful skill. To learn how to do this see https://www.zotero.org/support/word_processor_integration
 
 e) To use Zotero with R Markdown you need to do the following. Once you have added all the references to your library, export it as a bib file (File -> Export Library -> choose BibTex as the format). Save your bib file in the same folder as your R Markdown document.
 
 f) To learn how to reference and cite in R Markdown see https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html
 
-g) To include a bibliography add the following line in the YAML header of your R Markdown document:
+g) To include a bibliography add the following line to the YAML header of your R Markdown document:
 
 bibliography: your_bibfile_name.bib
 
-h) The file *example.Rmd* available in the Github repo shows the minimal example of referencing and creating a bibliography with ome source (see https://raw.githubusercontent.com/abessudnov/dataanalysis3/master/example.Rmd). The associated bib file is available here: https://raw.githubusercontent.com/abessudnov/dataanalysis3/master/example.bib.
+h) The file *example.Rmd* available in the Github repo shows the minimal example of referencing and creating a bibliography with one source (see https://raw.githubusercontent.com/abessudnov/dataanalysis3/master/example.Rmd). The associated bib file is available here: https://raw.githubusercontent.com/abessudnov/dataanalysis3/master/example.bib.
 
-i) The bib file can be opened and edited in any text editor and you can also use software to do this, such as JabRef (http://www.jabref.org).
+i) The bib file can be opened and edited in any text editor and you can also use special software to do this, such as JabRef (http://www.jabref.org).
 
 
 
