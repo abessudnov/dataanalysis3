@@ -29,7 +29,7 @@ library(readr)
 system.time(UndSoc2 <- read_tsv("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab"))
 ```
 
-**readr** was able to read the data set in 14 seconds, compared to 39 seconds with base R.
+**readr** was able to read the data set much faster than base R.
 
 ## Package data.table
 
@@ -40,7 +40,7 @@ library(data.table)
 system.time(UndSoc3 <- fread("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab"))
 ```
 
-It only took 3 seconds!
+It took less than 3 seconds!
  
 With small data sets the choice between these three methods is not very important, but with larger data the gain in efficiency that **readr** and **data.table** provide can be quite substantial.
 
@@ -67,8 +67,6 @@ rm(list = ls())
 # load the workspace
 system.time(load("myData/readTest.RData"))
 ```
-
-It only took 1.7 seconds.
 
 Of course, in R workspace you can save not only data frames but any objects: models, plots, functions, etc.
 
