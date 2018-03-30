@@ -1,6 +1,6 @@
-# Joining data from the Understanding Society {#joining}
+# Joining data {#joining}
 
-At home you read ch.13 on Relational Data from R for Data Science -- http://r4ds.had.co.nz/relational-data.html. Let us see how we can apply this to the Understanding Society data.
+> For this class please read ch.13 on Relational Data from R for Data Science -- http://r4ds.had.co.nz/relational-data.html.
 
 ## Joining waves 1 and 2
 
