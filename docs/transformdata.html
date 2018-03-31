@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Analysis in Social Science 3</title>
+  <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data Analysis in Social Science 3" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://abessudnov.net/dataanalysis3/" />
+  
+  <meta property="og:description" content="A website for the Data Analysis in Social Science 3 module." />
+  <meta name="github-repo" content="abessudnov/dataanalysis3" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Analysis in Social Science 3" />
+  
+  <meta name="twitter:description" content="A website for the Data Analysis in Social Science 3 module." />
+  
+
+<meta name="author" content="Alexey Bessudnov">
+
+
+<meta name="date" content="2018-03-31">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="readdata.html">
+<link rel="next" href="joining.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113869422-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-113869422-1');
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-to-do-before-the-next-class"><i class="fa fa-check"></i><b>1.1</b> Things to do before the next class</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="module-outline.html"><a href="module-outline.html"><i class="fa fa-check"></i><b>2</b> Module outline</a><ul>
+<li class="chapter" data-level="2.1" data-path="module-outline.html"><a href="module-outline.html#practical-arrangements"><i class="fa fa-check"></i><b>2.1</b> Practical arrangements</a></li>
+<li class="chapter" data-level="2.2" data-path="module-outline.html"><a href="module-outline.html#aims-of-the-module"><i class="fa fa-check"></i><b>2.2</b> Aims of the module</a></li>
+<li class="chapter" data-level="2.3" data-path="module-outline.html"><a href="module-outline.html#attendance"><i class="fa fa-check"></i><b>2.3</b> Attendance</a></li>
+<li class="chapter" data-level="2.4" data-path="module-outline.html"><a href="module-outline.html#assessment"><i class="fa fa-check"></i><b>2.4</b> Assessment</a></li>
+<li class="chapter" data-level="2.5" data-path="module-outline.html"><a href="module-outline.html#syllabus-plan"><i class="fa fa-check"></i><b>2.5</b> Syllabus plan</a></li>
+<li class="chapter" data-level="2.6" data-path="module-outline.html"><a href="module-outline.html#reading-list"><i class="fa fa-check"></i><b>2.6</b> Reading list</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="assignment.html"><a href="assignment.html"><i class="fa fa-check"></i><b>3</b> Assignment</a></li>
+<li class="chapter" data-level="4" data-path="readdata.html"><a href="readdata.html"><i class="fa fa-check"></i><b>4</b> Read data</a><ul>
+<li class="chapter" data-level="4.1" data-path="readdata.html"><a href="readdata.html#base-r"><i class="fa fa-check"></i><b>4.1</b> Base R</a></li>
+<li class="chapter" data-level="4.2" data-path="readdata.html"><a href="readdata.html#package-readr"><i class="fa fa-check"></i><b>4.2</b> Package readr</a></li>
+<li class="chapter" data-level="4.3" data-path="readdata.html"><a href="readdata.html#package-data.table"><i class="fa fa-check"></i><b>4.3</b> Package data.table</a></li>
+<li class="chapter" data-level="4.4" data-path="readdata.html"><a href="readdata.html#other-data-formats"><i class="fa fa-check"></i><b>4.4</b> Other data formats</a></li>
+<li class="chapter" data-level="4.5" data-path="readdata.html"><a href="readdata.html#saving-the-r-workspace"><i class="fa fa-check"></i><b>4.5</b> Saving the R workspace</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="transformdata.html"><a href="transformdata.html"><i class="fa fa-check"></i><b>5</b> Transform data</a><ul>
+<li class="chapter" data-level="5.1" data-path="transformdata.html"><a href="transformdata.html#the-pipe-operator"><i class="fa fa-check"></i><b>5.1</b> The pipe operator (%&gt;%)</a></li>
+<li class="chapter" data-level="5.2" data-path="transformdata.html"><a href="transformdata.html#select-variables"><i class="fa fa-check"></i><b>5.2</b> Select variables</a></li>
+<li class="chapter" data-level="5.3" data-path="transformdata.html"><a href="transformdata.html#select-cases"><i class="fa fa-check"></i><b>5.3</b> Select cases</a></li>
+<li class="chapter" data-level="5.4" data-path="transformdata.html"><a href="transformdata.html#create-new-variables"><i class="fa fa-check"></i><b>5.4</b> Create new variables</a></li>
+<li class="chapter" data-level="5.5" data-path="transformdata.html"><a href="transformdata.html#sort-data"><i class="fa fa-check"></i><b>5.5</b> Sort data</a></li>
+<li class="chapter" data-level="5.6" data-path="transformdata.html"><a href="transformdata.html#summarise-data"><i class="fa fa-check"></i><b>5.6</b> Summarise data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="joining.html"><a href="joining.html"><i class="fa fa-check"></i><b>6</b> Join data</a><ul>
+<li class="chapter" data-level="6.1" data-path="joining.html"><a href="joining.html#joining-waves-1-and-2"><i class="fa fa-check"></i><b>6.1</b> Joining waves 1 and 2</a></li>
+<li class="chapter" data-level="6.2" data-path="joining.html"><a href="joining.html#joining-waves-1-to-7"><i class="fa fa-check"></i><b>6.2</b> Joining waves 1 to 7</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>7</b> Tidy data</a><ul>
+<li class="chapter" data-level="7.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>7.1</b> Long and wide formats</a></li>
+<li class="chapter" data-level="7.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>7.2</b> Cleaning the data</a></li>
+<li class="chapter" data-level="7.3" data-path="tidy-data.html"><a href="tidy-data.html#homework"><i class="fa fa-check"></i><b>7.3</b> Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="datavis.html"><a href="datavis.html"><i class="fa fa-check"></i><b>8</b> Data visualisation</a><ul>
+<li class="chapter" data-level="8.1" data-path="datavis.html"><a href="datavis.html#reading-in-the-data"><i class="fa fa-check"></i><b>8.1</b> Reading in the data</a></li>
+<li class="chapter" data-level="8.2" data-path="datavis.html"><a href="datavis.html#visualising-one-quantitative-variable"><i class="fa fa-check"></i><b>8.2</b> Visualising one quantitative variable</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="datavis.html"><a href="datavis.html#histogram."><i class="fa fa-check"></i><b>8.2.1</b> Histogram.</a></li>
+<li class="chapter" data-level="8.2.2" data-path="datavis.html"><a href="datavis.html#density-chart."><i class="fa fa-check"></i><b>8.2.2</b> Density chart.</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="datavis.html"><a href="datavis.html#visualising-one-categorical-variable"><i class="fa fa-check"></i><b>8.3</b> Visualising one categorical variable</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="datavis.html"><a href="datavis.html#bar-plot."><i class="fa fa-check"></i><b>8.3.1</b> Bar plot.</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="datavis.html"><a href="datavis.html#visualising-two-quantitative-variables"><i class="fa fa-check"></i><b>8.4</b> Visualising two quantitative variables</a></li>
+<li class="chapter" data-level="8.5" data-path="datavis.html"><a href="datavis.html#visualising-one-categorical-and-one-quantitative-variable"><i class="fa fa-check"></i><b>8.5</b> Visualising one categorical and one quantitative variable</a></li>
+<li class="chapter" data-level="8.6" data-path="datavis.html"><a href="datavis.html#visualising-two-categorical-variables"><i class="fa fa-check"></i><b>8.6</b> Visualising two categorical variables</a></li>
+<li class="chapter" data-level="8.7" data-path="datavis.html"><a href="datavis.html#showing-the-relationships-by-group"><i class="fa fa-check"></i><b>8.7</b> Showing the relationships by group</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="datavis2.html"><a href="datavis2.html"><i class="fa fa-check"></i><b>9</b> Data visualisation 2</a><ul>
+<li class="chapter" data-level="9.1" data-path="datavis2.html"><a href="datavis2.html#prepare-the-data"><i class="fa fa-check"></i><b>9.1</b> Prepare the data</a></li>
+<li class="chapter" data-level="9.2" data-path="datavis2.html"><a href="datavis2.html#visualising-income"><i class="fa fa-check"></i><b>9.2</b> Visualising income</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>10</b> R Markdown</a></li>
+<li class="chapter" data-level="11" data-path="modelling.html"><a href="modelling.html"><i class="fa fa-check"></i><b>11</b> Modelling</a><ul>
+<li class="chapter" data-level="11.1" data-path="modelling.html"><a href="modelling.html#cross-sectional-analysis"><i class="fa fa-check"></i><b>11.1</b> Cross-sectional analysis</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="modelling.html"><a href="modelling.html#age-and-political-interest"><i class="fa fa-check"></i><b>11.1.1</b> Age and political interest</a></li>
+<li class="chapter" data-level="11.1.2" data-path="modelling.html"><a href="modelling.html#sex-and-political-interest"><i class="fa fa-check"></i><b>11.1.2</b> Sex and political interest</a></li>
+<li class="chapter" data-level="11.1.3" data-path="modelling.html"><a href="modelling.html#linear-model"><i class="fa fa-check"></i><b>11.1.3</b> Linear model</a></li>
+<li class="chapter" data-level="11.1.4" data-path="modelling.html"><a href="modelling.html#interaction-effect-between-sex-and-age"><i class="fa fa-check"></i><b>11.1.4</b> Interaction effect between sex and age</a></li>
+<li class="chapter" data-level="11.1.5" data-path="modelling.html"><a href="modelling.html#checking-the-assumptions"><i class="fa fa-check"></i><b>11.1.5</b> Checking the assumptions</a></li>
+<li class="chapter" data-level="11.1.6" data-path="modelling.html"><a href="modelling.html#presenting-the-output-for-multiple-regression-models"><i class="fa fa-check"></i><b>11.1.6</b> Presenting the output for multiple regression models</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="modelling.html"><a href="modelling.html#longitudinal-analysis"><i class="fa fa-check"></i><b>11.2</b> Longitudinal analysis</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="modelling.html"><a href="modelling.html#simple-model"><i class="fa fa-check"></i><b>11.2.1</b> Simple model</a></li>
+<li class="chapter" data-level="11.2.2" data-path="modelling.html"><a href="modelling.html#adding-a-time-constant-variable"><i class="fa fa-check"></i><b>11.2.2</b> Adding a time-constant variable</a></li>
+<li class="chapter" data-level="11.2.3" data-path="modelling.html"><a href="modelling.html#adding-a-time-varying-variable"><i class="fa fa-check"></i><b>11.2.3</b> Adding a time-varying variable</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="modelling.html"><a href="modelling.html#further-reading"><i class="fa fa-check"></i><b>11.3</b> Further reading</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Analysis in Social Science 3</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="transformdata" class="section level1">
+<h1><span class="header-section-number">5</span> Transform data</h1>
+<blockquote>
+<p>Please read ch.5 (Data transformation) from R for Data Science - <a href="http://r4ds.had.co.nz/transform.html" class="uri">http://r4ds.had.co.nz/transform.html</a></p>
+</blockquote>
+<p>Once you have imported your data in R you will usually want to clean it, transform it and produce some data summaries. All these tasks can be accomplished with base R. However, it is usually more convenient to use specialised packages for this, such as <strong>dplyr</strong> and <strong>data.table</strong>. In this module we will use <strong>dplyr</strong>.</p>
+<p>Let us read the data from wave 1 of the Understanding Society.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+W1 &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
+<div id="the-pipe-operator" class="section level2">
+<h2><span class="header-section-number">5.1</span> The pipe operator (%&gt;%)</h2>
+<p>Let us start with tabulating a variable for political interest.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(W1<span class="op">$</span>a_vote6)</code></pre></div>
+<pre><code>## 
+##    -9    -7    -2    -1     1     2     3     4 
+##   118  3262    42    42  4882 15862 14017 12769</code></pre>
+<p>Now if we want to convert this table into a table of proportions we need to do the following.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">table</span>(W1<span class="op">$</span>a_vote6))</code></pre></div>
+<pre><code>## 
+##           -9           -7           -2           -1            1 
+## 0.0023139977 0.0639683100 0.0008236263 0.0008236263 0.0957367533 
+##            2            3            4 
+## 0.3110562027 0.2748754755 0.2504020081</code></pre>
+<p>Imagine now that you want to use the <strong>kable()</strong> function from the <strong>knitr</strong> package to print this table. We will need to convert the table into a data frame first and then apply the function kable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
+<span class="kw">kable</span>(<span class="kw">data.frame</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(W1<span class="op">$</span>a_vote6))), <span class="dt">digits =</span> <span class="dv">2</span>)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-9</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">-7</td>
+<td align="right">0.06</td>
+</tr>
+<tr class="odd">
+<td align="left">-2</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">-1</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">0.10</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">0.31</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">0.27</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">0.25</td>
+</tr>
+</tbody>
+</table>
+<p>At this point we have four nested functions and the code becomes difficult to read. With the pipe operator (%&gt;%) you can achieve the same result with the following code.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1<span class="op">$</span>a_vote6 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">table</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">prop.table</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable</span>(<span class="dt">digits =</span> <span class="dv">2</span>)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">.</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-9</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">-7</td>
+<td align="right">0.06</td>
+</tr>
+<tr class="odd">
+<td align="left">-2</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">-1</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">0.10</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">0.31</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">0.27</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">0.25</td>
+</tr>
+</tbody>
+</table>
+<p>The pipe operator passes the results of the execution of a function to the next function. This makes code easier to write, read and understand.</p>
+</div>
+<div id="select-variables" class="section level2">
+<h2><span class="header-section-number">5.2</span> Select variables</h2>
+<p>Imagine we want to select some variables from a data frame. Indeed, <em>W1</em> is too large for our purposes and we do not need all the variables today. Let us select the variables for sex, age, place of birth and measures of weight and height.</p>
+<p>In base R you could do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 &lt;-<span class="st"> </span><span class="kw">subset</span>(W1, <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;pidp&quot;</span>, <span class="st">&quot;a_sex&quot;</span>, <span class="st">&quot;a_dvage&quot;</span>, <span class="st">&quot;a_ukborn&quot;</span>, <span class="st">&quot;a_hlht&quot;</span>, <span class="st">&quot;a_hlhtf&quot;</span>,
+                               <span class="st">&quot;a_hlhti&quot;</span>, <span class="st">&quot;a_hlhtc&quot;</span>, <span class="st">&quot;a_hlwt&quot;</span>, <span class="st">&quot;a_hlwts&quot;</span>, <span class="st">&quot;a_hlwtp&quot;</span>, <span class="st">&quot;a_hlwtk&quot;</span>))
+<span class="kw">head</span>(newW1, <span class="dv">3</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 12
+##       pidp a_sex a_dvage a_ukborn a_hlht a_hlhtf a_hlhti a_hlhtc a_hlwt
+##      &lt;int&gt; &lt;int&gt;   &lt;int&gt;    &lt;int&gt;  &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;  &lt;int&gt;
+## 1 68001367     1      39        1      1       6       0      -8      1
+## 2 68004087     1      59        5      1       5      11      -8      2
+## 3 68006127     2      39        1      1       5       1      -8      1
+## # ... with 3 more variables: a_hlwts &lt;int&gt;, a_hlwtp &lt;int&gt;, a_hlwtk &lt;int&gt;</code></pre>
+<p>With <strong>dplyr</strong> the following code will produce the same result.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(pidp<span class="op">:</span>a_dvage, a_ukborn, a_hlht<span class="op">:</span>a_hlwtk)
+<span class="kw">head</span>(newW1, <span class="dv">3</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 12
+##       pidp a_sex a_dvage a_ukborn a_hlht a_hlhtf a_hlhti a_hlhtc a_hlwt
+##      &lt;int&gt; &lt;int&gt;   &lt;int&gt;    &lt;int&gt;  &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;  &lt;int&gt;
+## 1 68001367     1      39        1      1       6       0      -8      1
+## 2 68004087     1      59        5      1       5      11      -8      2
+## 3 68006127     2      39        1      1       5       1      -8      1
+## # ... with 3 more variables: a_hlwts &lt;int&gt;, a_hlwtp &lt;int&gt;, a_hlwtk &lt;int&gt;</code></pre>
+<p>Note that I combined together the variables that follow each other in the original data frame with :.</p>
+</div>
+<div id="select-cases" class="section level2">
+<h2><span class="header-section-number">5.3</span> Select cases</h2>
+<p>Another common task is to select cases based on some conditions. For example, we may want to have a data frame that only indludes women aged 18 to 25.</p>
+<p>In base R you can do the following.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">women &lt;-<span class="st"> </span>newW1[newW1<span class="op">$</span>a_sex <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>(newW1<span class="op">$</span>a_dvage <span class="op">&gt;=</span><span class="st"> </span><span class="dv">18</span> <span class="op">&amp;</span><span class="st"> </span>newW1<span class="op">$</span>a_dvage <span class="op">&lt;=</span><span class="dv">25</span>),]</code></pre></div>
+<p>In <strong>dplyr</strong> the code will be the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(a_sex <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>(a_dvage <span class="op">&gt;=</span><span class="st"> </span><span class="dv">18</span> <span class="op">&amp;</span><span class="st"> </span>a_dvage <span class="op">&lt;=</span><span class="dv">25</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 12
+##       pidp a_sex a_dvage a_ukborn a_hlht a_hlhtf a_hlhti a_hlhtc a_hlwt
+##      &lt;int&gt; &lt;int&gt;   &lt;int&gt;    &lt;int&gt;  &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;  &lt;int&gt;
+## 1 68010207     2      24        1      1       5       5      -8      1
+## 2 68010891     2      23        1     -7      -7      -7      -7     -7
+## 3 68023131     2      23        1      1       5       9      -8      1
+## # ... with 3 more variables: a_hlwts &lt;int&gt;, a_hlwtp &lt;int&gt;, a_hlwtk &lt;int&gt;</code></pre>
+<p>I am not saving the new data frame as an object here and just print the first three rows from the data to demonstrate the result.</p>
+<p>Imagine now you want to select only people born in Wales or Northern Ireland and aged over 40.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>((a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">3</span> <span class="op">|</span><span class="st"> </span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">&amp;</span><span class="st"> </span>a_dvage <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 12
+##       pidp a_sex a_dvage a_ukborn a_hlht a_hlhtf a_hlhti a_hlhtc a_hlwt
+##      &lt;int&gt; &lt;int&gt;   &lt;int&gt;    &lt;int&gt;  &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;  &lt;int&gt;
+## 1 68051011     2      41        3      1       5       5      -8      1
+## 2 68062567     2      50        4      1       5       1      -8      1
+## 3 68189727     2      95        3      1       5       4      -8      1
+## # ... with 3 more variables: a_hlwts &lt;int&gt;, a_hlwtp &lt;int&gt;, a_hlwtk &lt;int&gt;</code></pre>
+</div>
+<div id="create-new-variables" class="section level2">
+<h2><span class="header-section-number">5.4</span> Create new variables</h2>
+<p>Let us create a new dummy variable <em>scotland</em> that takes the value of 1 if a person was born in Scotland and 0 otherwise.</p>
+<p>I will not show you how to do this in base R (I assume you know this already) and will focus on <strong>dplyr</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">scotland =</span> <span class="kw">ifelse</span>(a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 13
+##       pidp a_sex a_dvage a_ukborn a_hlht a_hlhtf a_hlhti a_hlhtc a_hlwt
+##      &lt;int&gt; &lt;int&gt;   &lt;int&gt;    &lt;int&gt;  &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;  &lt;int&gt;
+## 1 68001367     1      39        1      1       6       0      -8      1
+## 2 68004087     1      59        5      1       5      11      -8      2
+## 3 68006127     2      39        1      1       5       1      -8      1
+## # ... with 4 more variables: a_hlwts &lt;int&gt;, a_hlwtp &lt;int&gt;, a_hlwtk &lt;int&gt;,
+## #   scotland &lt;dbl&gt;</code></pre>
+<p>Here I use the function <strong>ifelse</strong> that evaluates a condition that <em>a_ukborn == 2</em> and returns 1 if this is true and 0 if this is false.</p>
+<p>Now let us imagine we want to code a variable for the place of birth converting numeric values into text and coding missing values as NA.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">placeBirth =</span> <span class="kw">recode</span>(a_ukborn,
+                             <span class="st">&quot;1&quot;</span> =<span class="st"> &quot;England&quot;</span>,
+                             <span class="st">&quot;2&quot;</span> =<span class="st"> &quot;Scotland&quot;</span>,
+                             <span class="st">&quot;3&quot;</span> =<span class="st"> &quot;Wales&quot;</span>,
+                             <span class="st">&quot;4&quot;</span> =<span class="st"> &quot;Northern Ireland&quot;</span>,
+                             <span class="st">&quot;5&quot;</span> =<span class="st"> &quot;not UK&quot;</span>,
+                             <span class="dt">.default =</span> <span class="ot">NA_character_</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 13
+##       pidp a_sex a_dvage a_ukborn a_hlht a_hlhtf a_hlhti a_hlhtc a_hlwt
+##      &lt;int&gt; &lt;int&gt;   &lt;int&gt;    &lt;int&gt;  &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;  &lt;int&gt;
+## 1 68001367     1      39        1      1       6       0      -8      1
+## 2 68004087     1      59        5      1       5      11      -8      2
+## 3 68006127     2      39        1      1       5       1      -8      1
+## # ... with 4 more variables: a_hlwts &lt;int&gt;, a_hlwtp &lt;int&gt;, a_hlwtk &lt;int&gt;,
+## #   placeBirth &lt;chr&gt;</code></pre>
+<p><em>.default = NA_character_</em> codes all the values that were not specifically matched (all negative values in our case) to missing values.</p>
+<p>We can compare the distributions of the original and recoded variables to make sure that everything is correct.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">placeBirth =</span> <span class="kw">recode</span>(a_ukborn,
+                             <span class="st">&quot;1&quot;</span> =<span class="st"> &quot;England&quot;</span>,
+                             <span class="st">&quot;2&quot;</span> =<span class="st"> &quot;Scotland&quot;</span>,
+                             <span class="st">&quot;3&quot;</span> =<span class="st"> &quot;Wales&quot;</span>,
+                             <span class="st">&quot;4&quot;</span> =<span class="st"> &quot;Northern Ireland&quot;</span>,
+                             <span class="st">&quot;5&quot;</span> =<span class="st"> &quot;not UK&quot;</span>,
+                             <span class="dt">.default =</span> <span class="ot">NA_character_</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(a_ukborn, placeBirth)</code></pre></div>
+<pre><code>## # A tibble: 8 x 3
+##   a_ukborn       placeBirth     n
+##      &lt;int&gt;            &lt;chr&gt; &lt;int&gt;
+## 1       -9             &lt;NA&gt;     6
+## 2       -2             &lt;NA&gt;     2
+## 3       -1             &lt;NA&gt;     8
+## 4        1          England 33480
+## 5        2         Scotland  3567
+## 6        3            Wales  2154
+## 7        4 Northern Ireland  2033
+## 8        5           not UK  9744</code></pre>
+<p>Now let us have a slightly more complicated case. We may want to code a variable for the body mass index (BMI) which is defined as weight in kilograms divided by the square of height in meters:</p>
+<p><span class="math display">\[BMI = \frac{weight_{kg}}{{height_{m}}^2}\]</span></p>
+<p>The problem is that in our data set some people gave their weight in kilograms (<em>a_hlwtk</em>) and some in stones and pounds (<em>a_hlwts</em> and <em>a_hlwtp</em>). Similarly, some people gave their height in centimeters (<em>a_hlhtc</em>) and others in feet and inches (<em>a_hlhtf</em> and <em>a_hlhti</em>). We need to start with converting the measures for everyone to kilograms and centimeters and then we will be able to create a variable for BMI.</p>
+<p>These are the formulas for conversion:</p>
+<p>1 feet = 30.48cm 1 inch = 2.54cm</p>
+<p>1 stone = 6.35kg 1 pound = 0.45kg</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1mod &lt;-<span class="st"> </span>newW1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># create a variable for height in cm</span>
+<span class="st">  </span><span class="co"># if height is measured in feet and inches (a_hlht == 1) and is not missing (a_hlhtf &gt; 0),</span>
+<span class="st">  </span><span class="co"># convert it to centimeters</span>
+<span class="st">  </span><span class="co"># otherwise if it is already measured in cm (a_hlht == 2) leave as it is</span>
+<span class="st">  </span><span class="co"># if a_hlht is neither 1 nor 2 code it to missing</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">heightcm =</span> <span class="kw">ifelse</span>(a_hlht <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>a_hlhtf <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
+                           a_hlhtf<span class="op">*</span><span class="fl">30.48</span> <span class="op">+</span><span class="st"> </span>a_hlhti<span class="op">*</span><span class="fl">2.54</span>,
+                           <span class="kw">ifelse</span>(a_hlht <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>a_hlhtc <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
+                                  a_hlhtc, <span class="ot">NA</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># now same with weight</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weightkg =</span> <span class="kw">ifelse</span>(a_hlwt <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>a_hlwts <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
+                           a_hlwts<span class="op">*</span><span class="fl">6.35</span> <span class="op">+</span><span class="st"> </span>a_hlwtp<span class="op">*</span><span class="fl">0.45</span>,
+                           <span class="kw">ifelse</span>(a_hlwt <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>a_hlwtk <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
+                                  a_hlwtk, <span class="ot">NA</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># now create a variable for BMI</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bmi =</span> weightkg <span class="op">/</span><span class="st"> </span>(heightcm <span class="op">/</span><span class="st"> </span><span class="dv">100</span>)<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
+<p>Let us now look at the distribution of BMI.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(W1mod<span class="op">$</span>bmi)</code></pre></div>
+<p><img src="datan3_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+</div>
+<div id="sort-data" class="section level2">
+<h2><span class="header-section-number">5.5</span> Sort data</h2>
+<p>We can sort data with <strong>arrange</strong>.</p>
+<p>We may want to sort the data by BMI.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1mod <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(bmi) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(pidp, bmi) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">5</span>)</code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+##         pidp       bmi
+##        &lt;int&gt;     &lt;dbl&gt;
+## 1  614152207  3.581188
+## 2 1158204567  4.357708
+## 3 1292128539 10.098136
+## 4 1088805127 11.732290
+## 5  478722727 12.050592</code></pre>
+<p>We can also sort cases by BMI in the decreasing order, separatey for each sex.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1mod <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(a_sex, <span class="kw">desc</span>(bmi)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(pidp, a_sex, bmi) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">5</span>)</code></pre></div>
+<pre><code>## # A tibble: 5 x 3
+##         pidp a_sex      bmi
+##        &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;
+## 1  952435887     1 73.90269
+## 2 1632274047     1 66.37745
+## 3  340892847     1 65.19274
+## 4 1292157767     1 63.10072
+## 5  340443367     1 62.98222</code></pre>
+</div>
+<div id="summarise-data" class="section level2">
+<h2><span class="header-section-number">5.6</span> Summarise data</h2>
+<p><strong>dplyr</strong> is also helpful when you want to create a data frame with summary statistics. For example, we may want to calculate mean and median BMI in our sample and the proportion of people with BMI over 30 (considered obese).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1mod <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># create a binary variable for being obese</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bmiover30 =</span> <span class="kw">ifelse</span>(bmi <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">meanBMI =</span> <span class="kw">mean</span>(bmi, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), 
+    <span class="dt">medianBMI =</span> <span class="kw">median</span>(bmi, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), 
+    <span class="dt">proportionObese =</span> <span class="kw">mean</span>(bmiover30, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+    )</code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##    meanBMI medianBMI proportionObese
+##      &lt;dbl&gt;     &lt;dbl&gt;           &lt;dbl&gt;
+## 1 26.04229  25.37527       0.1807575</code></pre>
+<p>We can also produce summary statistics by group. Let us look at the BMI summaries by age group and by sex.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1mod <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># create a variabe for being obese</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bmiover30 =</span> <span class="kw">ifelse</span>(bmi <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># create a variable for age groups</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">agegr =</span> <span class="kw">ifelse</span>(a_dvage <span class="op">&gt;=</span><span class="st"> </span><span class="dv">18</span> <span class="op">&amp;</span><span class="st"> </span>a_dvage <span class="op">&lt;=</span><span class="st"> </span><span class="dv">35</span>, <span class="st">&quot;18-35&quot;</span>,
+                        <span class="kw">ifelse</span>((a_dvage <span class="op">&gt;=</span><span class="st"> </span><span class="dv">36</span> <span class="op">&amp;</span><span class="st"> </span>a_dvage <span class="op">&lt;=</span><span class="st"> </span><span class="dv">55</span>), <span class="st">&quot;36-55&quot;</span>,
+                        <span class="kw">ifelse</span>(a_dvage <span class="op">&gt;=</span><span class="st"> </span><span class="dv">56</span>, <span class="st">&quot;&gt;55&quot;</span>, <span class="ot">NA</span>)))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># filter out people with missing age</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(agegr)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># group by sex and age</span>
+<span class="st">  </span><span class="kw">group_by</span>(a_sex, agegr) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># calculate summary statistics</span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">meanBMI =</span> <span class="kw">mean</span>(bmi, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), 
+    <span class="dt">medianBMI =</span> <span class="kw">median</span>(bmi, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), 
+    <span class="dt">proportion =</span> <span class="kw">mean</span>(bmiover30, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+  )</code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+## # Groups:   a_sex [?]
+##   a_sex agegr  meanBMI medianBMI proportion
+##   &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1     1   &gt;55 26.95474  26.43255  0.1967436
+## 2     1 18-35 24.99670  24.46032  0.1179154
+## 3     1 36-55 27.25879  26.59878  0.2157322
+## 4     2   &gt;55 26.65251  25.96255  0.2168707
+## 5     2 18-35 24.48421  23.37306  0.1262995
+## 6     2 36-55 26.45840  25.38130  0.2179358</code></pre>
+<p>We can see that people aged 18 to 35 have the lowest proportion of obese people both among men and women.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="readdata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="joining.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
