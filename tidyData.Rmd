@@ -6,7 +6,7 @@
 In the previous part of the course (joiningData.Rmd) we learned how to join together data from seven waves of the Understanding Society. Let us open this data set.
 
 ```{r cache = TRUE}
-UndSoc <- read_tsv("myData/all7.tab")
+UndSoc <- readRDS("myData/all7.rds")
 head(UndSoc)
 ```
 
@@ -19,7 +19,7 @@ Let us keep only a few observations and columns in the data and more closely loo
 ```{r cache = TRUE}
 UndSocExample <- UndSoc %>%
   filter(pidp == 68001367 | pidp == 68004087) %>%
-  select(pidp, a_sex: b_vote6)
+  select(pidp, a_sex: b_fimnnet_dv)
 UndSocExample
 ```
 
@@ -42,6 +42,12 @@ UndSocExampleMolten
 
 UndSocExampleSep <- UndSocExampleMolten %>%
         separate(variable, into = c("wave", "variable"), sep = "_")
+UndSocExampleSep
+
+# We have a problem here because one of our variables (fimnnet_dv) has _ in the name and we do not want to separate by it. To avoid this problem we need to add the argument extra = "merge"" in separate().
+
+UndSocExampleSep <- UndSocExampleMolten %>%
+        separate(variable, into = c("wave", "variable"), sep = "_", extra = "merge")
 UndSocExampleSep
 
 # Next we "cast" the molten data frame into the format we want.
@@ -81,12 +87,12 @@ UndSocExample
 
 # This "melts" the data frame. 
 UndSocExample %>%
-  gather(a_sex:b_vote6, key = "variable", value = "value")
+  gather(a_sex:b_fimnnet_dv, key = "variable", value = "value")
 
 # Next we want to split the "variable" column and "cast" in the long format
 UndSocExample %>%
   gather(a_sex:b_vote6, key = "variable", value = "value") %>%
-  separate(variable, into = c("wave", "variable"), sep = "_") %>%
+  separate(variable, into = c("wave", "variable"), sep = "_", extra = "merge") %>%
   spread(key = variable, value = value)
 
 ```
@@ -103,17 +109,16 @@ UndSocExampleLong %>%
 
 ```
 
-**Exercise**. Reshape the full **UndSoc** data frame from wide to long format. Call the object where you will
-store the result **UndSocLong**.
+**Exercise**. Reshape the full **UndSoc** data frame from wide to long format. Call the object where you will store the result **UndSocLong**.
 
 **Solution:**
 
 ```{r cache = TRUE}
 UndSocLong <- UndSoc %>%
-  gather(a_sex:g_vote6, key = "variable", value = "value") %>%
-  separate(variable, into = c("wave", "variable"), sep = "_") %>%
+  gather(a_sex:g_fimnnet_dv, key = "variable", value = "value") %>%
+  separate(variable, into = c("wave", "variable"), sep = "_", extra = "merge") %>%
   spread(key = variable, value = value)
-UndSocLong
+head(UndSocLong, 5)
 ```
 
 ## Cleaning the data
@@ -128,6 +133,7 @@ table(UndSocLong$wave)
 table(UndSocLong$dvage)
 table(UndSocLong$sex)
 table(UndSocLong$vote6)
+summary(UndSocLong$fimnnet_dv)
 ```
 
 Note the negative values for dvage, sex and vote6. These are missing values that need to be coded as missing.
@@ -142,6 +148,8 @@ table(UndSocLong$sex)
 table(UndSocLong$vote6)
 ```
 
+We also have negative values for income (**fimnnet_dv**), but we will leave as it is for now.
+
 We may also want to code **sex** as "male" and "female" and assign meaningful labels to **vote6** converting these variables into factors.
 
 ```{r cache = TRUE}
@@ -150,17 +158,10 @@ UndSocLongClean <- UndSocLong %>%
   mutate(vote6 = recode(vote6, "1" = "very", "2" = "fairly", "3" = "not very", "4" = "not al all")) %>%
   mutate(sex = factor(sex)) %>%
   mutate(vote6 = factor(vote6))
-UndSocLongClean
+head(UndSocLongClean, 10)
 
-write_tsv(UndSocLongClean, "myData/all7clean.tab")
+saveRDS(UndSocLongClean, "myData/all7clean.rds")
 
 ```
-
-## Homework
-
-To prepare for the class on 19 February please read ch. 3 (Data visualisation) from the R for Data Science book and do all the exercises -- http://r4ds.had.co.nz/data-visualisation.html
-
-Please also read ch.12 on tidy data and do all the exercises -- http://r4ds.had.co.nz/tidy-data.html
-
 
 

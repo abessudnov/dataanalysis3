@@ -241,6 +241,11 @@ W1mod %>%
 
 We can see that people aged 18 to 35 have the lowest proportion of obese people both among men and women.
 
+Let us now save **W1mod** for future use.
+
+```{r}
+saveRDS(W1mod, "myData/W1mod.rds")
+```
 
 
 

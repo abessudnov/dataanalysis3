@@ -8,7 +8,7 @@ First we need to read in the data. This is the same data frame that I used for D
 
 ```{r message = FALSE}
 library(tidyverse)
-UndSoc <- read_tsv("myData/all7new.tab") 
+UndSoc <- readRDS("myData/all7clean.rds")
 ```
 
 We have a variable for interest in politics (**vote6**) and we will take it as the outcome variable we want to study. It is a discrete variable measured on a four-point scale (from "not at all interested" to "very interested"). It is an ordinal rather than continuous variable so strictly speaking it is not statisticaly appropriate to calculate the mean of this variable and to use simple linear regression. You will see though that we can still do this and learn something interesting from this exercise.

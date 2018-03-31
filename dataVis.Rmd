@@ -15,17 +15,7 @@ First let us read in the data we used in week 2 when we learned about **dplyr** 
 ```{r cache = TRUE}
 library(tidyverse)
 library(data.table)
-W1 <- fread("exData/W1.csv")
-W1 <- W1 %>%
-  mutate(heightcm = ifelse(a_hlht == 1 & a_hlhtf > 0, 
-                           a_hlhtf*30.48 + a_hlhti*2.54,
-                           ifelse(a_hlht == 2 & a_hlhtc > 0, 
-                                  a_hlhtc, NA))) %>%
-  mutate(weightkg = ifelse(a_hlwt == 1 & a_hlwts > 0, 
-                           a_hlwts*6.35 + a_hlwtp*0.45,
-                           ifelse(a_hlwt == 2 & a_hlwtk > 0, 
-                                  a_hlwtk, NA))) %>%
-  mutate(bmi = weightkg / (heightcm / 100)^2)
+W1 <- readRDS("myData/W1mod.rds")
 head(W1, 3)
 ```
 

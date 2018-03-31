@@ -6,55 +6,11 @@
 
 At the previous class we looked at some simple data visualisation techniques (see http://abessudnov.net/dataanalysis3/datavis.html). Now we will explore how we can visualise longitudinal data.
 
-## Prepare the data
+First we want to read in the data frame we created when we learned to join and tidy data.
 
-First we will create a longitudinal data set following the same algorithm as before (http://abessudnov.net/dataanalysis3/joining.html). I want to add a variable for income so that we have a longirudinal quantitative variable to visualise. We will use *fimnnet_dv* (total monthly net personal income without deductions). 
-
-```{r cache = TRUE}
-library(tidyverse)
-library(data.table)
-library(knitr)
-
-files <- dir("data/UKDA-6614-tab/tab",
-             pattern="indresp", recursive = TRUE, full.names=TRUE)
-files <- files[str_detect(files, "us")]
-vars <- c("sex", "dvage", "vote6", "fimnnet_dv")
-for (i in 1:7) {
-        varsToSelect <- paste(letters[i], vars, sep = "_")
-        varsToSelect <- c("pidp", varsToSelect)
-        data <- fread(files[i], select = varsToSelect)
-        if (i == 1) {
-                all7 <- data  
-        }
-        else {
-                all7 <- full_join(all7, data, by = "pidp")
-        }
-        rm(data)
-}
-# Reshaping the data into the long format
-# Note the use of the extra = "merge" argument with separate.
-# It prevents splitting the "fimnnet_dv" string.
-
-UndSocLong <- all7 %>%
-  gather(a_sex:g_fimnnet_dv, key = "variable", value = "value") %>%
-  separate(variable, into = c("wave", "variable"), sep = "_", extra = "merge") %>%
-  spread(key = variable, value = value)
-# Cleaning the data
-UndSocLong  <- UndSocLong %>%
-  mutate(dvage = ifelse(dvage > 0, dvage, NA)) %>%
-  mutate(sex = ifelse(sex > 0, sex, NA)) %>%
-  mutate(vote6 = ifelse(vote6 > 0, vote6, NA)) %>%
-  mutate(sex = recode(sex, "1" = "male", "2" = "female")) %>%
-  mutate(vote6 = recode(vote6, "1" = "very", "2" = "fairly", "3" = "not very", "4" = "not al all")) %>%
-  mutate(sex = factor(sex)) %>%
-  mutate(vote6 = factor(vote6))
-
-# Let's write this data frame into myData 
-write_tsv(UndSocLong, "myData/all7new.tab")
-
+```{r}
+UndSocLong <- readRDS("myData/all7clean.rds")
 ```
-
-Note that net income can be negative (I am not sure why).
 
 ## Visualising income
 

@@ -1,0 +1,133 @@
+# Iteration {#iteration}
+
+> Please read ch.21 (Iteration) from R for Data Science - http://r4ds.had.co.nz/iteration.html
+
+In the Understanding Society data we have seven waves and seven separate individual files for adult questionnaires. We will need to read them all for the data to be joined. Of course, we can read them one by one, but this is inconvenient.
+
+We will use this example to learn about iteration, one of the most important concepts in programming. You should read ch.21 from R for Data Science and do the exercises to learn the basics; here we will consider how we can apply iteration to our case.
+
+Let us first consider a very simple **for** loop.
+
+```{r}
+for (i in 1:5) {
+  print(i)
+}
+```
+
+This loop goes through the values from 1 to 5 and in each iteration it prints the number on the screen. With the Understanding Society data, we want to go from 1 to 7 (as we have seven waves) and in each iteration we want to read in the data and join it to the data from other waves. Let us see how we can write a loop that does it.
+
+First, we need to identify the files we want to open. The **dir** function will return the paths and names of all the data files in our data folder that contain the pattern *indresp*.
+
+```{r}
+files <- dir("data/UKDA-6614-tab/tab",
+             pattern="indresp", recursive = TRUE, full.names=TRUE)
+files
+```
+
+There are 25 files as we also have data from the BHPS, not just the Understanding Society. We do not need the BHPS, so we want to select only the files from the Understanding Society. We can use the function **str_detect** from the package **stringr** to select only the files whose paths contain *us*.
+
+```{r}
+# stringr will return a logical vector. Note that I specify which package the function comes from
+# without explicitly attaching it.
+stringr::str_detect(files, "us")
+# Now I only select the files from UndSoc
+files <- files[stringr::str_detect(files, "us")]
+files
+```
+
+Now we have a vector of file names we want to loop over. We can write a short loop that prints the path and files name.
+
+```{r}
+for (i in 1:7) {
+  print(files[i])
+}
+
+```
+
+Note that the same task can be achieved simply with:
+
+```{r}
+for (i in files) {
+  print(i)
+}
+```
+
+You will see a bit later why I wanted to loop over numbers rather than elements of the character vector.
+
+Now we need to read in the data. We can read the whole files, but this is inefficient as we will only need a few variables. The function **fread** from the package **data.table** allows us to specify the variables we want to read. Let us choose the id variable (**pidp**), sex, age, interest in politics and net monthly income. The problem is that in each wave these variables have different names indicated by a prefix. **pidp** does not change and has the same name in each wave. All the other variables have a prefix **a_** in wave 1, **b_** in wave 2, etc. We will need to find a way to loop over not just file names in **files**, but also prefixes at the same time.
+
+Let us start with creating a vector of the variable names without the prefixes.
+
+```{r}
+vars <- c("sex", "dvage", "vote6", "fimnnet_dv")
+```
+
+If we want to add a prefix to the elements of this vector we can use the function **paste**.
+
+```{r}
+paste("a", vars, sep = "_")
+```
+
+The constant **letters** contains all the letters of the English alphabet, so the same expression can be written as the following.
+
+```{r}
+paste(letters[1], vars, sep = "_")
+```
+
+Now we can write a loop that goes through the values 1 to 7 and in each iteration reads the correct data file choosing the variables with the correct prefix.
+
+```{r}
+# Attach data.table
+library(data.table)
+for (i in 1:7) {
+        # Create a vector of the variables with the correct prefix.
+        varsToSelect <- paste(letters[i], vars, sep = "_")
+        # Add pidp to this vector (no prefix for pidp)
+        varsToSelect <- c("pidp", varsToSelect)
+        # Now read the data. 
+        data <- fread(files[i], select = varsToSelect)
+        # print the first line
+        print(head(data, 1))
+}        
+```
+
+Now we need to join all these data frames together, and we want to do this in the loop. It is clear what we need to do in the second and later iterations of the loop: join the data from wave 2 with the data from wave 1, etc. But what shall we do in the first iteration? There is no data frame yet to be joined with the data from wave 1. Clearly our algorithm for the first iteration needs to be different from the algorithm for all other iterations. We will use the **if ... else** control structure for this.
+
+In the first iteration of the loop we simply want to save the data from wave 1. In the second and other iterations we want the data to be joined with the data frame we have from the previous iteration.
+
+```{r}
+for (i in 1:7) {
+        # Create a vector of the variables with the correct prefix.
+        varsToSelect <- paste(letters[i], vars, sep = "_")
+        # Add pidp to this vector (no prefix for pidp)
+        varsToSelect <- c("pidp", varsToSelect)
+        # Now read the data. 
+        data <- fread(files[i], select = varsToSelect)
+        if (i == 1) {
+                all7 <- data  
+        }
+        else {
+                all7 <- full_join(all7, data, by = "pidp")
+        }
+        # Now we can remove data to free up memory
+        rm(data)
+} 
+```
+
+**all7** now contains the data from all seven waves.
+
+```{r}
+head(all7, 3)
+```
+
+I will now save this file for future use using the **saveRDS** function in the *myData* folder (make sure first you have this folder on your computer). 
+
+```{r}
+saveRDS(all7, "myData/all7.rds")
+```
+
+
+
+
+
+
