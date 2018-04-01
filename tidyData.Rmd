@@ -150,14 +150,12 @@ table(UndSocLong$vote6)
 
 We also have negative values for income (**fimnnet_dv**), but we will leave as it is for now.
 
-We may also want to code **sex** as "male" and "female" and assign meaningful labels to **vote6** converting these variables into factors.
+We may also want to code **sex** as "male" and "female" and assign meaningful labels to **vote6**.
 
 ```{r cache = TRUE}
 UndSocLongClean <- UndSocLong %>%
   mutate(sex = recode(sex, "1" = "male", "2" = "female")) %>%
-  mutate(vote6 = recode(vote6, "1" = "very", "2" = "fairly", "3" = "not very", "4" = "not al all")) %>%
-  mutate(sex = factor(sex)) %>%
-  mutate(vote6 = factor(vote6))
+  mutate(vote6 = recode(vote6, "1" = "very", "2" = "fairly", "3" = "not very", "4" = "not al all"))
 head(UndSocLongClean, 10)
 
 saveRDS(UndSocLongClean, "myData/all7clean.rds")
