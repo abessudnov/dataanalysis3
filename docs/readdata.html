@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov">
 
 
-<meta name="date" content="2018-03-31">
+<meta name="date" content="2018-04-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -209,7 +209,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
                       <span class="dt">header =</span> <span class="ot">TRUE</span>,
                       <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##  40.438   1.059  41.527</code></pre>
+##  45.252   1.345  46.743</code></pre>
 <p>I set <em>header = TRUE</em> to make sure that the first row in the data is interpreted as variable names. <em>stringsAsFacrors = FALSE</em> means that the text variables will be read in as character vectors rather than factors. We can convert them into factors when necessary.</p>
 </div>
 <div id="package-readr" class="section level2">
@@ -218,7 +218,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
 <span class="kw">system.time</span>(UndSoc2 &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   9.829   0.481  10.319</code></pre>
+##   9.548   0.577  10.188</code></pre>
 <p><strong>readr</strong> was able to read the data set much faster than base R.</p>
 </div>
 <div id="package-data.table" class="section level2">
@@ -230,7 +230,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 Read 78.4% of 50994 rows
 Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code></pre>
 <pre><code>##    user  system elapsed 
-##   2.402   0.210   2.615</code></pre>
+##   2.628   0.234   2.878</code></pre>
 <p>It took less than 3 seconds!</p>
 <p>With small data sets the choice between these three methods is not very important, but with larger data the gain in efficiency that <strong>readr</strong> and <strong>data.table</strong> provide can be quite substantial.</p>
 </div>
@@ -251,7 +251,7 @@ Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code>
 <span class="co"># load the workspace</span>
 <span class="kw">system.time</span>(<span class="kw">load</span>(<span class="st">&quot;myData/readTest.RData&quot;</span>))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.416   0.110   1.527</code></pre>
+##   1.553   0.144   1.704</code></pre>
 <p>Of course, in R workspace you can save not only data frames but any objects: models, plots, functions, etc.</p>
 
 </div>

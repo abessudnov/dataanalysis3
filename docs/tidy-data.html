@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov">
 
 
-<meta name="date" content="2018-03-31">
+<meta name="date" content="2018-04-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -529,12 +529,10 @@ UndSocExample <span class="op">%&gt;%</span>
 ##      1      2      3      4 
 ##  30981 102212  86790  84351</code></pre>
 <p>We also have negative values for income (<strong>fimnnet_dv</strong>), but we will leave as it is for now.</p>
-<p>We may also want to code <strong>sex</strong> as “male” and “female” and assign meaningful labels to <strong>vote6</strong> converting these variables into factors.</p>
+<p>We may also want to code <strong>sex</strong> as “male” and “female” and assign meaningful labels to <strong>vote6</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSocLongClean &lt;-<span class="st"> </span>UndSocLong <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">recode</span>(sex, <span class="st">&quot;1&quot;</span> =<span class="st"> &quot;male&quot;</span>, <span class="st">&quot;2&quot;</span> =<span class="st"> &quot;female&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">vote6 =</span> <span class="kw">recode</span>(vote6, <span class="st">&quot;1&quot;</span> =<span class="st"> &quot;very&quot;</span>, <span class="st">&quot;2&quot;</span> =<span class="st"> &quot;fairly&quot;</span>, <span class="st">&quot;3&quot;</span> =<span class="st"> &quot;not very&quot;</span>, <span class="st">&quot;4&quot;</span> =<span class="st"> &quot;not al all&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">factor</span>(sex)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">vote6 =</span> <span class="kw">factor</span>(vote6))
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">vote6 =</span> <span class="kw">recode</span>(vote6, <span class="st">&quot;1&quot;</span> =<span class="st"> &quot;very&quot;</span>, <span class="st">&quot;2&quot;</span> =<span class="st"> &quot;fairly&quot;</span>, <span class="st">&quot;3&quot;</span> =<span class="st"> &quot;not very&quot;</span>, <span class="st">&quot;4&quot;</span> =<span class="st"> &quot;not al all&quot;</span>))
 <span class="kw">head</span>(UndSocLongClean, <span class="dv">10</span>)</code></pre></div>
 <pre><code>##     pidp wave dvage fimnnet_dv    sex  vote6
 ## 1  22445    a    NA         NA   &lt;NA&gt;   &lt;NA&gt;
