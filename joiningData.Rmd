@@ -63,7 +63,7 @@ format(object.size(UndSoc2ed), units = "auto")
 
 ```
 
-I will remove the larger data sets from the memory to free it up.
+I then remove the larger data sets from the memory to free it up.
 
 ```{r cache = TRUE}
 rm(UndSoc1, UndSoc2)
