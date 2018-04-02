@@ -6,7 +6,7 @@
 
 I will start with joining data from waves 1 and 2 and then expand the algorithm to all the seven waves. First we need to read the data into R.
 
-I am using the fundtion **read_tsv()** from the **readr** package here since the data are tab separated.
+I am using the function **read_tsv()** from the **readr** package here since the data are tab separated.
 
 ```{r cache = TRUE}
 # First I attach the packages I will use later. You need to install these packages first.
