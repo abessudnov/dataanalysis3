@@ -6,7 +6,7 @@
 
 I will start with joining data from waves 1 and 2 and then expand the algorithm to all the seven waves. First we need to read the data into R.
 
-I am using the fundtion **read_tsv()** from the **readr** package here since the data are tab separated.
+I am using the function **read_tsv()** from the **readr** package here since the data are tab separated.
 
 ```{r cache = TRUE}
 # First I attach the packages I will use later. You need to install these packages first.
@@ -63,7 +63,7 @@ format(object.size(UndSoc2ed), units = "auto")
 
 ```
 
-I will remove the larger data sets from the memory to free it up.
+I then remove the larger data sets from the memory to free it up.
 
 ```{r cache = TRUE}
 rm(UndSoc1, UndSoc2)
