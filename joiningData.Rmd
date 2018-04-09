@@ -1,6 +1,6 @@
 # Join data {#joining}
 
-> Prerequisite: Chapter 13 'Relational Data' from R for Data Science, available at http://r4ds.had.co.nz/relational-data.html.
+> Prerequisite: Chapter 13 'Relational Data' from R for Data Science, available at http://r4ds.had.co.nz/relational-data.html
 
 ## Introduction to joining data
 
