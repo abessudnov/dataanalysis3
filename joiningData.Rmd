@@ -31,7 +31,7 @@ object.size(UndSoc2)
 
 ```
 
-However, this does not us an answer that we can easily interpret. Therefore, by using the **format()** command, we can specify how we want R to show us this data. In this case, by adding **units = ""** we can tell R to show us how large the files are in specific units.
+However, this does not give us an answer that we can easily interpret. Therefore, by using the **format()** command, we can specify how we want R to show us this data. In this case, by adding **units = ""** we can tell R to show us how large the files are in specific units.
 
 ```{r cache = TRUE}
 format(object.size(UndSoc1), units = "auto")
@@ -92,7 +92,7 @@ When we join two data frames together, we have to choose which variable we want 
 
 ### Inner join
 
-The first join we will use is the inner join. By using **inner_join()** we can join both waves together and keep the observations the are present in both data frames. This means that respondents who were in both waves 1 and 2 will be in our new data frame, but anyone who appeared in only wave 1 *or* wave 2 will be excluded.
+The first join we will use is the inner join. By using **inner_join()** we can join both waves together and keep the observations that are present in both data frames. This means that respondents who were in both waves 1 and 2 will be in our new data frame, but anyone who appeared in only wave 1 *or* wave 2 will be excluded.
 
 ```{r cache = TRUE}
 inner <- UndSoc1ed %>%
@@ -103,14 +103,14 @@ We can see that this has excluded a number of respondents from both waves 1 and 
 
 ### Left join
 
-However, we may not want to exclude all of the respondents who do not appear in both waves. If, for example, we were working with three waves of data and wanted to compare how the answers given by respondents in wave 1 changed over time, we would want to keep answers from people who were in waves 1 and 3, even if they were not in wave 2. To do this, we can use **left_join()**, which will keep answer from everyone who appeared in wave 1, and exclude answers from everyone who did not.
+However, we may not want to exclude all of the respondents who do not appear in both waves. If, for example, we were working with three waves of data and wanted to compare how the answers given by respondents in wave 1 changed over time, we would want to keep answers from people who were in waves 1 and 3, even if they were not in wave 2. To do this, we can use **left_join()**, which will keep answers from everyone who appeared in wave 1, and exclude answers from everyone who did not.
 
 ```{r cache = TRUE}
 left <- UndSoc1ed %>%
         left_join(UndSoc2ed, by = "pidp")
 ```
 
-To check we have done this correctly, we can compare the number of observations in *UndSoc1ed* and *left*, which should be the same. As we can see they each have `r nrow(left)` observations, we can be confident our new data frame has been created successfully. If any respondents appeared in wave 1 but not wave 2, their answers for wave 2 will show as 'NA' values. We can have a quick look at how this new data frame looks with **head**.
+To check we have done this correctly, we can compare the number of observations in *UndSoc1ed* and *left*, which should be the same. As we can see they each have `r nrow(left)` observations, we can be confident our new data frame has been created successfully. If any respondents appeared in wave 1 but not wave 2, their answers for wave 2 will show as 'NA' values. We can have a quick look at how this new data frame looks with **head()**.
 
 ```{r cache = TRUE}
 head(left)
