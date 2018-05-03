@@ -1,6 +1,6 @@
 ---
 title: "Data Analysis in Social Science 3"
-author: "Alexey Bessudnov"
+author: "Alexey Bessudnov & Max Shilling"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output:

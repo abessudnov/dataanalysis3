@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -22,10 +22,10 @@
   <meta name="twitter:description" content="A website for the Data Analysis in Social Science 3 module." />
   
 
-<meta name="author" content="Alexey Bessudnov">
+<meta name="author" content="Alexey Bessudnov &amp; Max Shilling">
 
 
-<meta name="date" content="2018-04-01">
+<meta name="date" content="2018-05-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -136,7 +136,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.6" data-path="transformdata.html"><a href="transformdata.html#summarise-data"><i class="fa fa-check"></i><b>5.6</b> Summarise data</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="joining.html"><a href="joining.html"><i class="fa fa-check"></i><b>6</b> Join data</a><ul>
-<li class="chapter" data-level="6.1" data-path="joining.html"><a href="joining.html#joining-waves-1-and-2"><i class="fa fa-check"></i><b>6.1</b> Joining waves 1 and 2</a></li>
+<li class="chapter" data-level="6.1" data-path="joining.html"><a href="joining.html#introduction-to-joining-data"><i class="fa fa-check"></i><b>6.1</b> Introduction to joining data</a></li>
+<li class="chapter" data-level="6.2" data-path="joining.html"><a href="joining.html#loading-the-data"><i class="fa fa-check"></i><b>6.2</b> Loading the data</a></li>
+<li class="chapter" data-level="6.3" data-path="joining.html"><a href="joining.html#joining-waves-1-and-2"><i class="fa fa-check"></i><b>6.3</b> Joining waves 1 and 2</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="joining.html"><a href="joining.html#the-key"><i class="fa fa-check"></i><b>6.3.1</b> The ‘key’</a></li>
+<li class="chapter" data-level="6.3.2" data-path="joining.html"><a href="joining.html#inner-join"><i class="fa fa-check"></i><b>6.3.2</b> Inner join</a></li>
+<li class="chapter" data-level="6.3.3" data-path="joining.html"><a href="joining.html#left-join"><i class="fa fa-check"></i><b>6.3.3</b> Left join</a></li>
+<li class="chapter" data-level="6.3.4" data-path="joining.html"><a href="joining.html#right-join"><i class="fa fa-check"></i><b>6.3.4</b> Right join</a></li>
+<li class="chapter" data-level="6.3.5" data-path="joining.html"><a href="joining.html#full-join"><i class="fa fa-check"></i><b>6.3.5</b> Full join</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="iteration.html"><a href="iteration.html"><i class="fa fa-check"></i><b>7</b> Iteration</a></li>
 <li class="chapter" data-level="8" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>8</b> Tidy data</a><ul>
@@ -197,48 +205,53 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="joining" class="section level1">
 <h1><span class="header-section-number">6</span> Join data</h1>
 <blockquote>
-<p>For this class please read ch.13 on Relational Data from R for Data Science – <a href="http://r4ds.had.co.nz/relational-data.html" class="uri">http://r4ds.had.co.nz/relational-data.html</a>.</p>
+<p>Prerequisite: Chapter 13 ‘Relational Data’ from R for Data Science, available at <a href="http://r4ds.had.co.nz/relational-data.html" class="uri">http://r4ds.had.co.nz/relational-data.html</a></p>
 </blockquote>
-<div id="joining-waves-1-and-2" class="section level2">
-<h2><span class="header-section-number">6.1</span> Joining waves 1 and 2</h2>
-<p>I will start with joining data from waves 1 and 2 and then expand the algorithm to all the seven waves. First we need to read the data into R.</p>
-<p>I am using the fundtion <strong>read_tsv()</strong> from the <strong>readr</strong> package here since the data are tab separated.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First I attach the packages I will use later. You need to install these packages first.</span>
+<div id="introduction-to-joining-data" class="section level2">
+<h2><span class="header-section-number">6.1</span> Introduction to joining data</h2>
+<p>When you work with data, it is rare that all the data you need will be confined to just one table. As a result, you will often find that you have to manipulate multiple data tables, or data frames. In order to do this, it helps to be able to join these multiple sources of data into just one table.</p>
+<p>This is very relevant for your assignment, as you are required to work with multiple waves of the Understanding Society data set. Without being able to join these waves together, you will struggle to analyse more than one wave at a time.</p>
+<p>This class will teach you a number of ways to do this. We will start by joining just two waves together in the four ways introduced in Chapter 13 of R for Data Science into one, easy to work with, table. The next class will focus on joining multiple waves together at once.</p>
+</div>
+<div id="loading-the-data" class="section level2">
+<h2><span class="header-section-number">6.2</span> Loading the data</h2>
+<p>Before we join the waves together, we first need to read the individual waves into R. To do this, we need to use the function <strong>read_tsv()</strong> from the <strong>readr</strong> package, as the data are tab separated. We can load this by attaching the <strong>tidyverse</strong> package (you will need to install the tidyverse package first if you have not already done so, with the <strong>install.packages()</strong> function).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This code attaches the tidyverse package and then reads the first two waves of Understanding Society separately into R.</span>
 <span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(data.table)
-<span class="kw">library</span>(reshape2)
 
 UndSoc1 &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)
 UndSoc2 &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w2/b_indresp.tab&quot;</span>)</code></pre></div>
-<p>These are very large files that take a lot of space in the memory.</p>
+<p>You may have noticed that this took a lot longer to load into R than other data files you have used in the past. This is because the files themselves are large, and take up a lot of space in the memory. We can see just how much space they take up by using the <strong>object.size()</strong> command.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">object.size</span>(UndSoc1)</code></pre></div>
+<pre><code>## 286289824 bytes</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">object.size</span>(UndSoc2)</code></pre></div>
+<pre><code>## 367629552 bytes</code></pre>
+<p>However, this does not give us an answer that we can easily interpret. Therefore, by using the <strong>format()</strong> command, we can specify how we want R to show us this data. In this case, by adding <strong>units = “”</strong> we can tell R to show us how large the files are in specific units.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">format</span>(<span class="kw">object.size</span>(UndSoc1), <span class="dt">units =</span> <span class="st">&quot;auto&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;273 Mb&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">format</span>(<span class="kw">object.size</span>(UndSoc2), <span class="dt">units =</span> <span class="st">&quot;auto&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;350.6 Mb&quot;</code></pre>
-<p>Before joining these two data frames I may want to select only the variables I need. These are:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># By adding units = &#39;auto&#39; R automatically chooses the clearest way to show us the size of the files.</span></code></pre></div>
+<p>To make the files we are working with smaller, and thus make R carry out our analysis quicker, we can select only the variables we need for our analysis. We are only going to load a few variables here to keep this simple; you can always add more to your analysis. Here, as we are looking at level of interest in politics, they are:</p>
 <ul>
-<li><p><strong>pidp</strong>: this is the unique cross-wave individual number (in both waves),</p></li>
-<li><p><strong>a_sex</strong>: sex from wave 1,</p></li>
-<li><p><strong>a_dvage</strong>: age from wave 1,</p></li>
-<li><p><strong>a_vote6</strong>: level of interest in politics from wave 1,</p></li>
-<li><p><strong>b_sex</strong>: sex from wave 2,</p></li>
-<li><p><strong>b_dvage</strong>: age from wave 2,</p></li>
-<li><p><strong>b_vote6</strong>: level of interest in politics from wave 2.</p></li>
+<li><p><strong>pidp</strong>: this is the id number given to each respondent to identify them in each wave</p></li>
+<li><p><strong>a_sex</strong>: sex from wave 1</p></li>
+<li><p><strong>a_dvage</strong>: age from wave 1</p></li>
+<li><p><strong>a_vote6</strong>: level of interest in politics from wave 1</p></li>
+<li><p><strong>b_sex</strong>: sex from wave 2</p></li>
+<li><p><strong>b_dvage</strong>: age from wave 2</p></li>
+<li><p><strong>b_vote6</strong>: level of interest in politics from wave 2</p></li>
 </ul>
-<p>Note that for now I keep it intentionally simple.</p>
-<p>First I will edit both data sets to keep only the variables I need.</p>
+<p>By using what we learnt in the previous class, <em>Transforming Data</em>, we can edit both data sets to keep only the variables we need.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSoc1ed &lt;-<span class="st"> </span>UndSoc1 <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">select</span>(pidp, a_sex, a_dvage, a_vote6)
 UndSoc2ed &lt;-<span class="st"> </span>UndSoc2 <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">select</span>(pidp, b_sex, b_dvage, b_vote6)</code></pre></div>
-<p>Note that these are much smaller objects.</p>
+<p>We can check that these are much smaller objects, and that our code was successful.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">format</span>(<span class="kw">object.size</span>(UndSoc1ed), <span class="dt">units =</span> <span class="st">&quot;auto&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;1.3 Mb&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">format</span>(<span class="kw">object.size</span>(UndSoc2ed), <span class="dt">units =</span> <span class="st">&quot;auto&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;5.5 Mb&quot;</code></pre>
-<p>I will remove the larger data sets from the memory to free it up.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(UndSoc1, UndSoc2)</code></pre></div>
-<p>Let us explore the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(UndSoc1ed)</code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##       pidp a_sex a_dvage a_vote6
@@ -259,38 +272,63 @@ UndSoc2ed &lt;-<span class="st"> </span>UndSoc2 <span class="op">%&gt;%</span>
 ## 4 68007487     2      58       2
 ## 5 68008167     2      39       4
 ## 6 68008171     1      52      -7</code></pre>
-<p>Now we can join the data sets. As you know already, there can be several types of joins. Inner join will keep the observations that match in both data frames.</p>
+<p>As we no longer have any use for the original data we loaded into R, we can remove them from R to free up the memory they are unnecessarily taking up.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(UndSoc1, UndSoc2)</code></pre></div>
+</div>
+<div id="joining-waves-1-and-2" class="section level2">
+<h2><span class="header-section-number">6.3</span> Joining waves 1 and 2</h2>
+<p>Now our data is ready for us to join the data sets. As you already know, there can be several types of joins. Here, we will use each of them to join the two waves of data together, and look at the differences between them. However, first it is important to understand how joining data works.</p>
+<div id="the-key" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> The ‘key’</h3>
+<p>When we join two data frames together, we have to choose which variable we want to join them by, known as the ‘key’. As we are working with a data set that has an id number (the variable <strong>pidp</strong> in the data set) that is unique to each respondent, it makes sense to join the two waves we are using by this id number, so we can compare responses by each person in each wave of data. To do this, we use the <strong>by = “”</strong> command.</p>
+</div>
+<div id="inner-join" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> Inner join</h3>
+<p>The first join we will use is the inner join. By using <strong>inner_join()</strong> we can join both waves together and keep the observations that are present in both data frames. This means that respondents who were in both waves 1 and 2 will be in our new data frame, but anyone who appeared in only wave 1 <em>or</em> wave 2 will be excluded.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">inner &lt;-<span class="st"> </span>UndSoc1ed <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">inner_join</span>(UndSoc2ed, <span class="dt">by =</span> <span class="st">&quot;pidp&quot;</span>)</code></pre></div>
-<p>Note that I use the variable <strong>pidp</strong> as the key for joining.</p>
-<p>The same result can be achieved with the function <strong>merge</strong> from base R.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">inner2 &lt;-<span class="st"> </span>UndSoc1ed <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw">merge</span>(UndSoc2ed, <span class="dt">by =</span> <span class="st">&quot;pidp&quot;</span>)
-<span class="kw">identical</span>(<span class="kw">as.data.frame</span>(inner), inner2)</code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
-<p>These two data frames are identical. Note the use of <strong>as.data.frame()</strong>. <strong>inner</strong> is a tibble and unless converted into a simple data frame it is not identical to <strong>inner2</strong> because of the differences in object type.</p>
-<p>Inner join will only retain individuals that are present in both waves. This is why we only have 38388 observations in the joined data compared to 50994 in wave 1. But do we want this? Imagine that the person is present in wave 1, does not participate in wave 2, but then re-appears in wave 3. We probably want to include such individuals as well.</p>
-<p>Left join will keep all individuals in wave 1 and only those in wave 2 that can be matched to them.</p>
+<p>We can see that this has excluded a number of respondents from both waves 1 and 2 who only appeared in one wave and not the other, as we only have 38388 observations in the our new data frame compared to 50994 in UndSoc1, and 54597 in UndSoc2.</p>
+</div>
+<div id="left-join" class="section level3">
+<h3><span class="header-section-number">6.3.3</span> Left join</h3>
+<p>However, we may not want to exclude all of the respondents who do not appear in both waves. If, for example, we were working with three waves of data and wanted to compare how the answers given by respondents in wave 1 changed over time, we would want to keep answers from people who were in waves 1 and 3, even if they were not in wave 2. To do this, we can use <strong>left_join()</strong>, which will keep answers from everyone who appeared in wave 1, and exclude answers from everyone who did not.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">left &lt;-<span class="st"> </span>UndSoc1ed <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw">left_join</span>(UndSoc2ed, <span class="dt">by =</span> <span class="st">&quot;pidp&quot;</span>)
-<span class="co"># or, identically,</span>
-<span class="co"># left &lt;- UndSoc1ed %&gt;%</span>
-<span class="co">#         merge(UndSoc2ed, by = &quot;pidp&quot;, all.x = TRUE)</span></code></pre></div>
-<p>You can check that the number of individuals in wave 1 and the joined data frame is the same.</p>
-<p>Right join will keep all individuals from wave 2 and only those from wave 1 that can be matched to them.</p>
+<span class="st">        </span><span class="kw">left_join</span>(UndSoc2ed, <span class="dt">by =</span> <span class="st">&quot;pidp&quot;</span>)</code></pre></div>
+<p>To check we have done this correctly, we can compare the number of observations in <em>UndSoc1ed</em> and <em>left</em>, which should be the same. As we can see they each have 50994 observations, we can be confident our new data frame has been created successfully. If any respondents appeared in wave 1 but not wave 2, their answers for wave 2 will show as ‘NA’ values. We can have a quick look at how this new data frame looks with <strong>head()</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(left)</code></pre></div>
+<pre><code>## # A tibble: 6 x 7
+##       pidp a_sex a_dvage a_vote6 b_sex b_dvage b_vote6
+##      &lt;int&gt; &lt;int&gt;   &lt;int&gt;   &lt;int&gt; &lt;int&gt;   &lt;int&gt;   &lt;int&gt;
+## 1 68001367     1      39       3    NA      NA      NA
+## 2 68004087     1      59       2     1      60       2
+## 3 68006127     2      39       4     2      40       4
+## 4 68006135     2      17       4    NA      NA      NA
+## 5 68006807     2      72       4     2      73       4
+## 6 68007487     2      57       1     2      58       2</code></pre>
+</div>
+<div id="right-join" class="section level3">
+<h3><span class="header-section-number">6.3.4</span> Right join</h3>
+<p>The command <strong>right_join()</strong> is very similar to <strong>left_join()</strong>, except that instead of keeping all the respondents who were in wave 1, this will keep all the respondents who appeared in wave 2 and exclude those who did not. Again, any respondents who appeared in wave 2 but not wave 1 will have their answers for wave 1 show as ‘NA’ values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">right &lt;-<span class="st"> </span>UndSoc1ed <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">right_join</span>(UndSoc2ed, <span class="dt">by =</span> <span class="st">&quot;pidp&quot;</span>)
-<span class="co"># or, identically,</span>
-<span class="co"># right &lt;- UndSoc1ed %&gt;%</span>
-<span class="co">#         merge(UndSoc2ed, by = &quot;pidp&quot;, all.y = TRUE)</span></code></pre></div>
-<p>Usually I would want all the individuals from both waves to remain in the data set, no matter if they can be matched to other waves. If I need to exclude them from the analysis I prefer to do this manually. This can be achieved with full join.</p>
+<span class="kw">head</span>(right)</code></pre></div>
+<pre><code>## # A tibble: 6 x 7
+##       pidp a_sex a_dvage a_vote6 b_sex b_dvage b_vote6
+##      &lt;int&gt; &lt;int&gt;   &lt;int&gt;   &lt;int&gt; &lt;int&gt;   &lt;int&gt;   &lt;int&gt;
+## 1 68004087     1      59       2     1      60       2
+## 2 68006127     2      39       4     2      40       4
+## 3 68006807     2      72       4     2      73       4
+## 4 68007487     2      57       1     2      58       2
+## 5 68008167     2      38       3     2      39       4
+## 6 68008171     1      51      -7     1      52      -7</code></pre>
+</div>
+<div id="full-join" class="section level3">
+<h3><span class="header-section-number">6.3.5</span> Full join</h3>
+<p>Usually, we would want all the respondents from both waves to remain in the data set, no matter if they appeared in the other waves or not. If we need to exclude any respondents from our analysis we can do this manually. We can do a full join with the <strong>full_join()</strong> command.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full &lt;-<span class="st"> </span>UndSoc1ed <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw">full_join</span>(UndSoc2ed, <span class="dt">by =</span> <span class="st">&quot;pidp&quot;</span>)
-<span class="co"># or, identically,</span>
-<span class="co"># full &lt;- UndSoc1ed %&gt;%</span>
-<span class="co">#          merge(UndSoc2ed, by = &quot;pidp&quot;, all = TRUE)</span></code></pre></div>
-<p>Note that <strong>full</strong> has 67203 observations compared to 50994 in wave 1 and 54597 in wave 2. This is because it includes a) all individuals that took part in both waves 1 and 2, b) those who took part in wave 1, but not in wave 2, c) those who missed wave 1 but joined the study in wave 2.</p>
-<p>Let us explore the joined data set.</p>
+<span class="st">        </span><span class="kw">full_join</span>(UndSoc2ed, <span class="dt">by =</span> <span class="st">&quot;pidp&quot;</span>)</code></pre></div>
+<p>By doing a full join, our new data frame has 67203 observations compared to 50994 in wave 1 and 54597 in wave 2. This is because it includes not only all the individuals that took part in <em>both</em> waves 1 and 2, but also those who only took part in either wave 1 <em>or</em> wave 2.</p>
+<p>Now that we have joined two waves together, we could begin our analysis of these waves, if we had decided to just analyse the first couple of waves from the <em>Understanding Society</em> dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(full)</code></pre></div>
 <pre><code>## # A tibble: 6 x 7
 ##       pidp a_sex a_dvage a_vote6 b_sex b_dvage b_vote6
@@ -301,8 +339,9 @@ UndSoc2ed &lt;-<span class="st"> </span>UndSoc2 <span class="op">%&gt;%</span>
 ## 4 68006135     2      17       4    NA      NA      NA
 ## 5 68006807     2      72       4     2      73       4
 ## 6 68007487     2      57       1     2      58       2</code></pre>
-<p>We have missing values for wave 1 variable for those people who joined in wave 2.</p>
+<p>If you wanted to work with more than just these two waves, you could manually join each new wave to our ‘full’ data frame. However, this is a slow and cumbersome process, so the next class will teach you how to join several waves of data together at once, using <em>iteration</em> and <em>loops</em>.</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -349,9 +388,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
