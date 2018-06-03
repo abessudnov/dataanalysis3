@@ -1,0 +1,311 @@
+# Read data {#readdata}
+
+> Prerequisite: Chapter 11 ‘Data Import’ from R for Data Science, available at http://r4ds.had.co.nz/data-import.html
+
+## Introduction to Reading Data
+
+Once you have downlaoded the data from the Understanding Society survey to your computer, the first thing you need to do is read the data into R. There are a number of ways to do this, and this class will cover loading data into R by using base R and both the readr and data.table packages.
+
+The data we will be loading into R is the individual adult questionnaire answers from wave 1 (*UKDA-6614-tab/tab/us_w1/a_indresp.tab*). This should be saved in the *data* folder you created in your project folder (this was covered in the Introduction section to the course).
+
+## Reading common data files into R
+
+### Ways to read data into R
+
+#### Using base R
+
+To read this data into R using functions from base R, we can first use the **read.table()** function. To read the data in correctly, we need to use **header = TRUE** as the first row of the data contains the names of the variables, and also **stringsAsFactors = FALSE**, which stops R from treating text variables as factors. We can convert these into factors later, when necessary.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+UndSoc.1 <- read.table("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab",
+                      header = TRUE,
+                      stringsAsFactors = FALSE)
+```
+
+Different types of files need to read into R in different ways. The **read.table()** function reads data that is *tab separated* (the file will be called 'name*.tab*'), the **read.csv()** function reads data that is *comma separed* (the file will be called 'name*.csv*') and **read.delim()** reads data that is separated in any way. These work in the same way, so once you've mastered one, you've mastered them all.
+
+#### Using the readr package
+
+We can also read data into R using the package *readr*, part of the *tidyverse* package, with the **read_tsv()** command. This is the equivalent command to **read.table()** from base R.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+# We can either load the entire 'tidyverse' package into R, which includes the readr package as well as others such as ggplot2, or just the 'readr' package on its own.
+
+library(readr)
+
+UndSoc.2 <- read_tsv("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab")
+```
+
+The readr package also allows us to read different types of files into R. The commands **read_csv()** and **read_delim()** read comma and any type of separated data into R respectively.
+
+#### Using the data.table package
+
+The final way we are going to read this data into R is by using the **fread()** function from the *data.table* package. The advantage of the **fread()** command is that it can read any type of separated data into R, without you having to change anything if the file type you are trying to read changes.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+library(data.table)
+
+UndSoc.3 <- fread("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab")
+```
+
+### Comparing these three methods
+
+One of the important differences between these three methods for reading data into R is the length of time they take to read the data. We can compare this by reading the data into R again, this time wrapping our code with the command **system.time()**.
+
+#### Using base R
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+# Base R
+system.time(UndSoc.1 <- read.table("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab",
+                      header = TRUE,
+                      stringsAsFactors = FALSE))
+```
+
+It takes about 23 seconds to read the data into R using this method.
+
+#### Using the readr package
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+system.time(UndSoc.2 <- read_tsv("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab"))
+```
+
+It takes only 5 seconds to read the data into R using this method.
+
+#### Using the data.table package
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+system.time(UndSoc.3 <- fread("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab"))
+```
+
+It takes just 3 seconds to read the data into R using this method, a whole 20 seconds quicker than using the commands from base R!
+
+From this we can see clear differences in loading time. With small data sets, the difference between these three methods will not be very noticeable or important, but with larger data the increase in loading times the *readr* and *data.table* packages provide can be quite substantial.
+
+### Editing a dataset while reading it into R
+
+#### Skipping rows of data
+
+Sometimes we do not want to read in the entire dataset we have into R, but instead want to ignore the first few rows. For example, if we were to do some sentiment analysis on Hamlet (found here: http://www.gutenberg.org/cache/epub/2265/pg2265.html), we would want to only read in the play itself, not the introductions before the start of the play. Once we've saved the play as a *.txt* file in our data folder, we can use the **skip = ""** command to only read the file from the start of the play, with each line of the script counting as a row.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+Hamlet <- read.delim("data/Hamlet.txt",
+                     skip = 331,
+                     header = FALSE)
+```
+
+#### Reading only select variables
+
+When working with large datasets, like the one you will be using for your assignment, there are only certain variables that are of interest. As a result, it makes sense to only load these variables in, to make analysing your data easier to do.
+
+Let's say that we're interested in how political interest is distributed across the UK, and want to analyse how this is differentiated by sex and age. The variables we need to read into R are these two (*a_sex* and *a_dvage*), as well as interest in politics (*a_vote6*) and the personal identification variable for each individual (*a_pidp*). We can use the **select = ""** command to do this.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+UndSoc.4 <- fread("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab",
+                 select = c("pidp", "a_sex", "a_dvage", "a_vote6"))
+```
+
+#### Setting *NA* values
+
+Sometimes, if we look at the raw data we are about to analyse, we see that there are a number of missing values. Instead of recoding these values as *NA* after we have loaded our data (found, in this example, at https://raw.githubusercontent.com/abessudnov/dataanalysis3/master/exData/Table3.txt), we can do this while reading our data into R using the **na.strings = ""** command.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+MissingData <- read.table("data/MissingData.txt",
+                 header = TRUE,
+                 skip = 2,
+                 na.strings = c("*", "**", "--"))
+```
+
+## Reading other data files
+
+### Excel
+
+In R, you can also read data that was created in Excel. Excel files are saved primarily as *.xls* or *.xlsx* files. Fortunately, after installing the *readxl* package, the command **read_excel()** can read both formats into R. Using the example Excel document found at (https://github.com/abessudnov/dataanalysis3/blob/master/exData/tableExcel.xlsx), we can easily read this into R.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+library(readxl)
+
+Excel <- read_excel("data/tableExcel.xlsx")
+```
+
+When reading Excel files into R, **read_excel()** defaults to loading the first sheet. If there are multiple sheets in our document (by opening the Excel file we can see that there are 2 in this case), we can load different sheets in with the **sheet = ""** command.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+Excel2 <- read_excel("data/tableExcel.xlsx",
+                     sheet = 2)
+```
+
+However, if we look at the sheet we have just loaded, we can see that there are two *NA* values, one of which is coded as *"NA"*. Furthermore, if we compare how these *NA* values appear in our data with the ones from our *MissingData* dataset, we can see that they aren't actually coded as missing values, but instead as values called *NA* and *"NA"*.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+head(MissingData)
+
+head(Excel2)
+```
+
+To fix this, we need to set both these values as *NA*, which we can do with the **na = ""** command.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+Excel3 <- read_excel("data/tableExcel.xlsx",
+                     sheet = 2,
+                     na = c('NA', '"NA"'))
+
+# Note that as one of the missing values is called "NA", you have to use inverted commas ('') around the entire value for R to change it to an NA value, rather than the usual speech marks (""). Inverted commas and speech marks are interchangable in R, though if you use one to open a command, you cannot use the other to close it.
+```
+
+We can now see that this dataset has true *NA* values in it for the missing data.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+head(Excel3)
+```
+
+### SPSS
+
+As many people use SPSS instead of R to analyse data, there are times when you will have to use data that is intended for use in SPSS. The *haven* package allows us to do this, and as an example we will read a dataset combining data from the *Big Allied and Dangerous* and the *Global Terrorism Database* databases (found at http://vle.exeter.ac.uk/mod/resource/view.php?id=679842).
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+library(haven)
+
+SPSS <- read_spss("data/BAAD and GTD merged.sav")
+```
+
+## Saving datasets
+
+Once you have read your data into R you can save it as a file so you can load it back into R at a later date to continue working on it. Again, there are a number of different ways to do this.
+
+### Saving data as a text file
+
+Having read the first wave of data into R with only the variables we are interested in (see *Reading only select variables*), we can save this data as a text file using base R, without having to install any new packages. All we need to do is create a folder called *myData* in the folder where you have saved your project, and then you can save your dataset to this folder.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+write.csv(UndSoc.4, "myData/UndSoc.4.csv")
+```
+
+As you had to get specific permission to access the *Understanding Society* dataset, it is important you do not save this data to Github. This applies to every method of saving data from R we will cover here. Add the following line to your *gitignore* file to keep the *myData* folder untracked:
+
+**myData/**
+
+### Saving data as an Excel file
+
+To save our data as an Excel file, we need to first install the *writexl* package, and use the command **write_xlsx()**.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+library(writexl)
+
+write_xlsx(UndSoc.4, path = 'myData/UndSoc.4.xlsx', col_names = TRUE)
+```
+
+### Saving data as an SPSS file
+
+We can use the *haven* package we used to read files saved for use in SPSS to write data as SPSS files too, using the **write_sav()** command.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+write_sav(UndSoc.4, "myData/UndSoc.4.sav")
+```
+
+### Loading these datasets back into R
+
+To read any of these datasets back into R, use what you learnt in *Reading common data files into R*.
+
+## Saving the working environment
+
+If you want to save an entire workspace, rather than just individual files, the command **save.image()** does this. This saves not only all loaded data frames but any saved objects: models, plots, functions, etc.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+# Saving the workspace.
+
+save.image("myData/Workspace.RData")
+
+# Clearing the current workspace.
+
+rm(list = ls())
+
+# Loading the workspace back into R.
+
+load("myData/Workspace.RData")
+```
+
+## Reading in multiple waves from Understanding Society
+
+For your assignment, you are required to analyse at least two waves of data from the Understanding Soceity dataset. We will cover how to join multiple waves together in a future lesson, but before doing this, let's read in the first to waves of Understanding Society. To do this, we need to use the function **read_tsv()** from the readr package, as the data are tab separated. We will do load this by attaching the *tidyverse* package (you will need to install the tidyverse package first if you have not already done so, with the **install.packages()** function), as we will be using other packages within *tidyverse* in our analysis later.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+# First, we clear the current workspace.
+
+rm(list = ls())
+
+# This code attaches the tidyverse package and then reads the first two waves of Understanding Society separately into R.
+
+library(tidyverse)
+
+UndSoc1 <- read_tsv("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab")
+
+UndSoc2 <- read_tsv("data/UKDA-6614-tab/tab/us_w2/b_indresp.tab")
+```
+
+As we discussed earlier in this class, these files take a lot longer to load into R than other data files you have used in the past. This is because the files themselves are large, and take up a lot of space in the memory. We can see just how much space they take up by using the **object.size()** command.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+object.size(UndSoc1)
+
+object.size(UndSoc2)
+```
+
+However, this does not give us an answer that we can easily interpret. Therefore, by using the **format()** command, we can specify how we want R to show us this data. In this case, by adding **units = “”** we can tell R to show us how large the files are in specific units.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+# By adding units = "auto" R automatically chooses the clearest way to show us the size of the files.
+
+format(object.size(UndSoc1), units = "auto")
+
+format(object.size(UndSoc2), units = "auto")
+```
+
+To make the files we are working with smaller, and thus make R carry out our analysis quicker, we can select only the variables we need for our analysis. We are only going to load a few variables here to keep this simple; you can always add more to your analysis. Here, as we are looking at level of interest in politics, they are:
+
+* pidp: this is the id number given to each respondent to identify them in each wave
+
+* a_sex: sex from wave 1
+
+* a_dvage: age from wave 1
+
+* a_vote6: level of interest in politics from wave 1
+
+* b_sex: sex from wave 2
+
+* b_dvage: age from wave 2
+
+* b_vote6: level of interest in politics from wave 2
+
+By using what we covered earlier, we can select only the variables we want to read into R, making the loading times decrease significantly as they are much smaller datasets.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+UndSoc1ed <- fread("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab",
+                 select = c("pidp", "a_sex", "a_dvage", "a_vote6"))
+
+UndSoc2ed <- fread("data/UKDA-6614-tab/tab/us_w2/b_indresp.tab",
+                 select = c("pidp", "b_sex", "b_dvage", "b_vote6"))
+```
+
+We can check that these are much smaller objects, and that our code was successful.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+format(object.size(UndSoc1ed), units = "auto")
+
+format(object.size(UndSoc2ed), units = "auto")
+
+head(UndSoc1ed)
+
+head(UndSoc2ed)
+```
+
+As we no longer have any use for the original data we loaded into R, we can remove them from R to free up the memory they are unnecessarily taking up.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+rm(UndSoc1, UndSoc2)
+```
+
+We can then save these datasets so we can easily load them into R at a later date to continue working on them. We will use these in future classes. Here, we save the workspace, which includes just waves 1 and 2 of the Understanding Society data, for future use.
+
+```{r cache = TRUE, warning = FALSE, message = FALSE}
+save.image("myData/ReadData.RData")
+```
