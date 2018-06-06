@@ -14,7 +14,7 @@ This class will teach you a number of ways to do this. We will start by joining 
 
 Following on from the class *Read data*, you should have the two waves of data we are going to join already saved in your *myData* folder, named *UndSoc1ed* and *UndSoc2ed*, with these loaded into the workspace saved as *ReadData*. Once you have loaded this workspace back into R, you are ready to join these two waves together.
 
-```{r cache = TRUE, warning = FALSE, message = FALSE}
+```{r}
 load("myData/ReadData.RData")
 ```
 
@@ -28,7 +28,7 @@ When we join two data frames together, we have to choose which variable we want 
 
 The first join we will use is the inner join. By using **inner_join()** we can join both waves together and keep the observations that are present in both data frames. This means that respondents who were in both waves 1 and 2 will be in our new data frame, but anyone who appeared in only wave 1 *or* wave 2 will be excluded.
 
-```{r cache = TRUE, warning = FALSE, message = FALSE}
+```{r}
 # Attaching the tidyverse package
 
 library(tidyverse)
@@ -43,14 +43,14 @@ We can see that this has excluded a number of respondents from both waves 1 and 
 
 However, we may not want to exclude all of the respondents who do not appear in both waves. If, for example, we were working with three waves of data and wanted to compare how the answers given by respondents in wave 1 changed over time, we would want to keep answers from people who were in waves 1 and 3, even if they were not in wave 2. To do this, we can use **left_join()**, which will keep answers from everyone who appeared in wave 1, and exclude answers from everyone who did not.
 
-```{r cache = TRUE, warning = FALSE, message = FALSE}
+```{r}
 left <- UndSoc1ed %>%
         left_join(UndSoc2ed, by = "pidp")
 ```
 
 To check we have done this correctly, we can compare the number of observations in *UndSoc1ed* and *left*, which should be the same. As we can see they each have `r nrow(left)` observations, we can be confident our new data frame has been created successfully. If any respondents appeared in wave 1 but not wave 2, their answers for wave 2 will show as 'NA' values. We can have a quick look at how this new data frame looks with **head()**.
 
-```{r cache = TRUE, warning = FALSE, message = FALSE}
+```{r}
 head(left)
 ```
 
@@ -58,7 +58,7 @@ head(left)
 
 The command **right_join()** is very similar to **left_join()**, except that instead of keeping all the respondents who were in wave 1, this will keep all the respondents who appeared in wave 2 and exclude those who did not. Again, any respondents who appeared in wave 2 but not wave 1 will have their answers for wave 1 show as 'NA' values.
 
-```{r cache = TRUE, warning = FALSE, message = FALSE}
+```{r}
 right <- UndSoc1ed %>%
         right_join(UndSoc2ed, by = "pidp")
 head(right)
@@ -68,7 +68,7 @@ head(right)
 
 Usually, we would want all the respondents from both waves to remain in the data set, no matter if they appeared in the other waves or not. If we need to exclude any respondents from our analysis we can do this manually. We can do a full join with the **full_join()** command.
 
-```{r cache = TRUE, warning = FALSE, message = FALSE}
+```{r}
 full <- UndSoc1ed %>%
         full_join(UndSoc2ed, by = "pidp")
 ```
@@ -77,7 +77,7 @@ By doing a full join, our new data frame has `r nrow(full)` observations compare
 
 Now that we have joined two waves together, we could begin our analysis of these waves, if we had decided to just analyse the first couple of waves from the *Understanding Society* dataset.
 
-```{r cache = TRUE, warning = FALSE, message = FALSE}
+```{r}
 head(full)
 ```
 
