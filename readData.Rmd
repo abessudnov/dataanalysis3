@@ -61,15 +61,11 @@ system.time(UndSoc.1 <- read.table("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab",
                       stringsAsFactors = FALSE))
 ```
 
-It takes about 23 seconds to read the data into R using this method.
-
 #### Using the readr package
 
 ```{r cache = TRUE, warning = FALSE, message = FALSE}
 system.time(UndSoc.2 <- read_tsv("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab"))
 ```
-
-It takes only 5 seconds to read the data into R using this method.
 
 #### Using the data.table package
 
@@ -77,19 +73,17 @@ It takes only 5 seconds to read the data into R using this method.
 system.time(UndSoc.3 <- fread("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab"))
 ```
 
-It takes just 3 seconds to read the data into R using this method, a whole 20 seconds quicker than using the commands from base R!
-
 From this we can see clear differences in loading time. With small data sets, the difference between these three methods will not be very noticeable or important, but with larger data the increase in loading times the *readr* and *data.table* packages provide can be quite substantial.
 
 ### Editing a dataset while reading it into R
 
 #### Skipping rows of data
 
-Sometimes we do not want to read in the entire dataset we have into R, but instead want to ignore the first few rows. For example, if we were to do some sentiment analysis on Hamlet (found here: http://www.gutenberg.org/cache/epub/2265/pg2265.html), we would want to only read in the play itself, not the introductions before the start of the play. Once we've saved the play as a *.txt* file in our data folder, we can use the **skip = ""** command to only read the file from the start of the play, with each line of the script counting as a row.
+Sometimes we do not want to read in the entire dataset we have into R, but instead want to ignore the first few rows. For example, if we were to do some sentiment analysis on Hamlet (found here: http://www.gutenberg.org/files/1524/1524-0.txt, we would want to only read in the play itself, not the introductions before the start of the play. We can use the **skip = ""** command to only read the file from the start of the play, with each line of the script counting as a row.
 
 ```{r cache = TRUE, warning = FALSE, message = FALSE}
-Hamlet <- read.delim("data/Hamlet.txt",
-                     skip = 331,
+Hamlet <- read.delim("http://www.gutenberg.org/files/1524/1524-0.txt",
+                     skip = 30,
                      header = FALSE)
 ```
 
@@ -109,7 +103,7 @@ UndSoc.4 <- fread("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab",
 Sometimes, if we look at the raw data we are about to analyse, we see that there are a number of missing values. Instead of recoding these values as *NA* after we have loaded our data (found, in this example, at https://raw.githubusercontent.com/abessudnov/dataanalysis3/master/exData/Table3.txt), we can do this while reading our data into R using the **na.strings = ""** command.
 
 ```{r cache = TRUE, warning = FALSE, message = FALSE}
-MissingData <- read.table("data/MissingData.txt",
+MissingData <- read.table("exData/Table3.txt",
                  header = TRUE,
                  skip = 2,
                  na.strings = c("*", "**", "--"))
@@ -124,13 +118,13 @@ In R, you can also read data that was created in Excel. Excel files are saved pr
 ```{r cache = TRUE, warning = FALSE, message = FALSE}
 library(readxl)
 
-Excel <- read_excel("data/tableExcel.xlsx")
+Excel <- read_excel("exData/tableExcel.xlsx")
 ```
 
 When reading Excel files into R, **read_excel()** defaults to loading the first sheet. If there are multiple sheets in our document (by opening the Excel file we can see that there are 2 in this case), we can load different sheets in with the **sheet = ""** command.
 
 ```{r cache = TRUE, warning = FALSE, message = FALSE}
-Excel2 <- read_excel("data/tableExcel.xlsx",
+Excel2 <- read_excel("exData/tableExcel.xlsx",
                      sheet = 2)
 ```
 
@@ -145,7 +139,7 @@ head(Excel2)
 To fix this, we need to set both these values as *NA*, which we can do with the **na = ""** command.
 
 ```{r cache = TRUE, warning = FALSE, message = FALSE}
-Excel3 <- read_excel("data/tableExcel.xlsx",
+Excel3 <- read_excel("exData/tableExcel.xlsx",
                      sheet = 2,
                      na = c('NA', '"NA"'))
 
@@ -160,13 +154,15 @@ head(Excel3)
 
 ### SPSS
 
-As many people use SPSS instead of R to analyse data, there are times when you will have to use data that is intended for use in SPSS. The *haven* package allows us to do this, and as an example we will read a dataset combining data from the *Big Allied and Dangerous* and the *Global Terrorism Database* databases (found at http://vle.exeter.ac.uk/mod/resource/view.php?id=679842).
+As many people use SPSS instead of R to analyse data, there are times when you will have to use data that is intended for use in SPSS. The *haven* package allows us to do this, and as an example we will read a dataset containing some data from a survey.
 
 ```{r cache = TRUE, warning = FALSE, message = FALSE}
 library(haven)
 
-SPSS <- read_spss("data/BAAD and GTD merged.sav")
+SPSS <- read_spss("exData/survey.sav")
 ```
+
+You can also use *haven* to read data in the Stata and SAS formats.
 
 ## Saving datasets
 
@@ -210,6 +206,18 @@ To read any of these datasets back into R, use what you learnt in *Reading commo
 
 If you want to save an entire workspace, rather than just individual files, the command **save.image()** does this. This saves not only all loaded data frames but any saved objects: models, plots, functions, etc.
 
+Before saving the entirer workspace we'll remove all the objects from it, except two: *Hamlet* and *MissingData*. We'll do this just to save time, otherwise saving the data image will take too long. 
+
+```{r}
+# First we'll print all the objects we currently have in the memory.
+
+ls()
+
+# Then we can remove all the objects, except the 4th and the 5th.
+
+rm(list = ls()[-c(4,5)])
+```
+
 ```{r cache = TRUE, warning = FALSE, message = FALSE}
 # Saving the workspace.
 
@@ -226,20 +234,16 @@ load("myData/Workspace.RData")
 
 ## Reading in multiple waves from Understanding Society
 
-For your assignment, you are required to analyse at least two waves of data from the Understanding Society dataset. We will cover how to join multiple waves together in a future lesson, but before doing this, let's read in the first two waves of Understanding Society. To do this, we need to use the function **read_tsv()** from the readr package, as the data are tab separated. We will load this by attaching the *tidyverse* package (you will need to install the tidyverse package first if you have not already done so, with the **install.packages()** function), as we will be using other packages within *tidyverse* in our analysis later.
+For your assignment, you are required to analyse at least two waves of data from the Understanding Society dataset. We will cover how to join multiple waves together in a future lesson, but before doing this, let's read in the first two waves of Understanding Society. To do this, we need to use the function **fread()** from the data.table package, as the data are tab separated.
 
 ```{r cache = TRUE, warning = FALSE, message = FALSE}
 # First, we clear the current workspace.
 
 rm(list = ls())
 
-# This code attaches the tidyverse package and then reads the first two waves of Understanding Society separately into R.
+UndSoc1 <- fread("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab")
 
-library(tidyverse)
-
-UndSoc1 <- read_tsv("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab")
-
-UndSoc2 <- read_tsv("data/UKDA-6614-tab/tab/us_w2/b_indresp.tab")
+UndSoc2 <- fread("data/UKDA-6614-tab/tab/us_w2/b_indresp.tab")
 ```
 
 As we discussed earlier in this class, these files take a lot longer to load into R than other data files you have used in the past. This is because the files themselves are large, and take up a lot of space in the memory. We can see just how much space they take up by using the **object.size()** command.
