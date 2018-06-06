@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov &amp; Max Shilling">
 
 
-<meta name="date" content="2018-05-03">
+<meta name="date" content="2018-06-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -121,11 +121,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3" data-path="assignment.html"><a href="assignment.html"><i class="fa fa-check"></i><b>3</b> Assignment</a></li>
 <li class="chapter" data-level="4" data-path="readdata.html"><a href="readdata.html"><i class="fa fa-check"></i><b>4</b> Read data</a><ul>
-<li class="chapter" data-level="4.1" data-path="readdata.html"><a href="readdata.html#base-r"><i class="fa fa-check"></i><b>4.1</b> Base R</a></li>
-<li class="chapter" data-level="4.2" data-path="readdata.html"><a href="readdata.html#package-readr"><i class="fa fa-check"></i><b>4.2</b> Package readr</a></li>
-<li class="chapter" data-level="4.3" data-path="readdata.html"><a href="readdata.html#package-data.table"><i class="fa fa-check"></i><b>4.3</b> Package data.table</a></li>
-<li class="chapter" data-level="4.4" data-path="readdata.html"><a href="readdata.html#other-data-formats"><i class="fa fa-check"></i><b>4.4</b> Other data formats</a></li>
-<li class="chapter" data-level="4.5" data-path="readdata.html"><a href="readdata.html#saving-the-r-workspace"><i class="fa fa-check"></i><b>4.5</b> Saving the R workspace</a></li>
+<li class="chapter" data-level="4.1" data-path="readdata.html"><a href="readdata.html#introduction-to-reading-data"><i class="fa fa-check"></i><b>4.1</b> Introduction to Reading Data</a></li>
+<li class="chapter" data-level="4.2" data-path="readdata.html"><a href="readdata.html#reading-common-data-files-into-r"><i class="fa fa-check"></i><b>4.2</b> Reading common data files into R</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="readdata.html"><a href="readdata.html#ways-to-read-data-into-r"><i class="fa fa-check"></i><b>4.2.1</b> Ways to read data into R</a></li>
+<li class="chapter" data-level="4.2.2" data-path="readdata.html"><a href="readdata.html#comparing-these-three-methods"><i class="fa fa-check"></i><b>4.2.2</b> Comparing these three methods</a></li>
+<li class="chapter" data-level="4.2.3" data-path="readdata.html"><a href="readdata.html#editing-a-dataset-while-reading-it-into-r"><i class="fa fa-check"></i><b>4.2.3</b> Editing a dataset while reading it into R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="readdata.html"><a href="readdata.html#reading-other-data-files"><i class="fa fa-check"></i><b>4.3</b> Reading other data files</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="readdata.html"><a href="readdata.html#excel"><i class="fa fa-check"></i><b>4.3.1</b> Excel</a></li>
+<li class="chapter" data-level="4.3.2" data-path="readdata.html"><a href="readdata.html#spss"><i class="fa fa-check"></i><b>4.3.2</b> SPSS</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="readdata.html"><a href="readdata.html#saving-datasets"><i class="fa fa-check"></i><b>4.4</b> Saving datasets</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="readdata.html"><a href="readdata.html#saving-data-as-a-text-file"><i class="fa fa-check"></i><b>4.4.1</b> Saving data as a text file</a></li>
+<li class="chapter" data-level="4.4.2" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-excel-file"><i class="fa fa-check"></i><b>4.4.2</b> Saving data as an Excel file</a></li>
+<li class="chapter" data-level="4.4.3" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-spss-file"><i class="fa fa-check"></i><b>4.4.3</b> Saving data as an SPSS file</a></li>
+<li class="chapter" data-level="4.4.4" data-path="readdata.html"><a href="readdata.html#loading-these-datasets-back-into-r"><i class="fa fa-check"></i><b>4.4.4</b> Loading these datasets back into R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="readdata.html"><a href="readdata.html#saving-the-working-environment"><i class="fa fa-check"></i><b>4.5</b> Saving the working environment</a></li>
+<li class="chapter" data-level="4.6" data-path="readdata.html"><a href="readdata.html#reading-in-multiple-waves-from-understanding-society"><i class="fa fa-check"></i><b>4.6</b> Reading in multiple waves from Understanding Society</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="transformdata.html"><a href="transformdata.html"><i class="fa fa-check"></i><b>5</b> Transform data</a><ul>
 <li class="chapter" data-level="5.1" data-path="transformdata.html"><a href="transformdata.html#the-pipe-operator"><i class="fa fa-check"></i><b>5.1</b> The pipe operator (%&gt;%)</a></li>
@@ -137,13 +150,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="6" data-path="joining.html"><a href="joining.html"><i class="fa fa-check"></i><b>6</b> Join data</a><ul>
 <li class="chapter" data-level="6.1" data-path="joining.html"><a href="joining.html#introduction-to-joining-data"><i class="fa fa-check"></i><b>6.1</b> Introduction to joining data</a></li>
-<li class="chapter" data-level="6.2" data-path="joining.html"><a href="joining.html#loading-the-data"><i class="fa fa-check"></i><b>6.2</b> Loading the data</a></li>
-<li class="chapter" data-level="6.3" data-path="joining.html"><a href="joining.html#joining-waves-1-and-2"><i class="fa fa-check"></i><b>6.3</b> Joining waves 1 and 2</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="joining.html"><a href="joining.html#the-key"><i class="fa fa-check"></i><b>6.3.1</b> The ‘key’</a></li>
-<li class="chapter" data-level="6.3.2" data-path="joining.html"><a href="joining.html#inner-join"><i class="fa fa-check"></i><b>6.3.2</b> Inner join</a></li>
-<li class="chapter" data-level="6.3.3" data-path="joining.html"><a href="joining.html#left-join"><i class="fa fa-check"></i><b>6.3.3</b> Left join</a></li>
-<li class="chapter" data-level="6.3.4" data-path="joining.html"><a href="joining.html#right-join"><i class="fa fa-check"></i><b>6.3.4</b> Right join</a></li>
-<li class="chapter" data-level="6.3.5" data-path="joining.html"><a href="joining.html#full-join"><i class="fa fa-check"></i><b>6.3.5</b> Full join</a></li>
+<li class="chapter" data-level="6.2" data-path="joining.html"><a href="joining.html#joining-waves-1-and-2"><i class="fa fa-check"></i><b>6.2</b> Joining waves 1 and 2</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="joining.html"><a href="joining.html#the-key"><i class="fa fa-check"></i><b>6.2.1</b> The ‘key’</a></li>
+<li class="chapter" data-level="6.2.2" data-path="joining.html"><a href="joining.html#inner-join"><i class="fa fa-check"></i><b>6.2.2</b> Inner join</a></li>
+<li class="chapter" data-level="6.2.3" data-path="joining.html"><a href="joining.html#left-join"><i class="fa fa-check"></i><b>6.2.3</b> Left join</a></li>
+<li class="chapter" data-level="6.2.4" data-path="joining.html"><a href="joining.html#right-join"><i class="fa fa-check"></i><b>6.2.4</b> Right join</a></li>
+<li class="chapter" data-level="6.2.5" data-path="joining.html"><a href="joining.html#full-join"><i class="fa fa-check"></i><b>6.2.5</b> Full join</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="iteration.html"><a href="iteration.html"><i class="fa fa-check"></i><b>7</b> Iteration</a></li>
@@ -234,14 +246,14 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(W1, <span class="kw">aes</span>(<span class="dt">x=</span>bmi)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
 </div>
 <div id="density-chart." class="section level3">
 <h3><span class="header-section-number">9.2.2</span> Density chart.</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(W1, <span class="kw">aes</span>(<span class="dt">x=</span>bmi)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
 </div>
 </div>
 <div id="visualising-one-categorical-variable" class="section level2">
@@ -272,7 +284,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>cbirth)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Country of birth&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(W1<span class="op">$</span>cbirth, <span class="dt">useNA =</span> <span class="st">&quot;always&quot;</span>)</code></pre></div>
 <pre><code>## 
 ##          England Northern Ireland           Not UK         Scotland 
@@ -288,7 +300,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span>lm)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
 </div>
 <div id="visualising-one-categorical-and-one-quantitative-variable" class="section level2">
 <h2><span class="header-section-number">9.5</span> Visualising one categorical and one quantitative variable</h2>
@@ -320,7 +332,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Age group&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
 </div>
 <div id="visualising-two-categorical-variables" class="section level2">
 <h2><span class="header-section-number">9.6</span> Visualising two categorical variables</h2>
@@ -331,7 +343,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Country of birth&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>agegr)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
 <p>Alternatively you can do a jitter plot, but in our case it wouldn’t look nice.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(cbirth)) <span class="op">%&gt;%</span>
@@ -339,7 +351,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Country of birth&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Age group&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
 </div>
 <div id="showing-the-relationships-by-group" class="section level2">
 <h2><span class="header-section-number">9.7</span> Showing the relationships by group</h2>
@@ -350,7 +362,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">                </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">                </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
 <span class="st">                </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>cbirth)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
 
 </div>
 </div>

@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov &amp; Max Shilling">
 
 
-<meta name="date" content="2018-05-03">
+<meta name="date" content="2018-06-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -121,11 +121,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3" data-path="assignment.html"><a href="assignment.html"><i class="fa fa-check"></i><b>3</b> Assignment</a></li>
 <li class="chapter" data-level="4" data-path="readdata.html"><a href="readdata.html"><i class="fa fa-check"></i><b>4</b> Read data</a><ul>
-<li class="chapter" data-level="4.1" data-path="readdata.html"><a href="readdata.html#base-r"><i class="fa fa-check"></i><b>4.1</b> Base R</a></li>
-<li class="chapter" data-level="4.2" data-path="readdata.html"><a href="readdata.html#package-readr"><i class="fa fa-check"></i><b>4.2</b> Package readr</a></li>
-<li class="chapter" data-level="4.3" data-path="readdata.html"><a href="readdata.html#package-data.table"><i class="fa fa-check"></i><b>4.3</b> Package data.table</a></li>
-<li class="chapter" data-level="4.4" data-path="readdata.html"><a href="readdata.html#other-data-formats"><i class="fa fa-check"></i><b>4.4</b> Other data formats</a></li>
-<li class="chapter" data-level="4.5" data-path="readdata.html"><a href="readdata.html#saving-the-r-workspace"><i class="fa fa-check"></i><b>4.5</b> Saving the R workspace</a></li>
+<li class="chapter" data-level="4.1" data-path="readdata.html"><a href="readdata.html#introduction-to-reading-data"><i class="fa fa-check"></i><b>4.1</b> Introduction to Reading Data</a></li>
+<li class="chapter" data-level="4.2" data-path="readdata.html"><a href="readdata.html#reading-common-data-files-into-r"><i class="fa fa-check"></i><b>4.2</b> Reading common data files into R</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="readdata.html"><a href="readdata.html#ways-to-read-data-into-r"><i class="fa fa-check"></i><b>4.2.1</b> Ways to read data into R</a></li>
+<li class="chapter" data-level="4.2.2" data-path="readdata.html"><a href="readdata.html#comparing-these-three-methods"><i class="fa fa-check"></i><b>4.2.2</b> Comparing these three methods</a></li>
+<li class="chapter" data-level="4.2.3" data-path="readdata.html"><a href="readdata.html#editing-a-dataset-while-reading-it-into-r"><i class="fa fa-check"></i><b>4.2.3</b> Editing a dataset while reading it into R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="readdata.html"><a href="readdata.html#reading-other-data-files"><i class="fa fa-check"></i><b>4.3</b> Reading other data files</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="readdata.html"><a href="readdata.html#excel"><i class="fa fa-check"></i><b>4.3.1</b> Excel</a></li>
+<li class="chapter" data-level="4.3.2" data-path="readdata.html"><a href="readdata.html#spss"><i class="fa fa-check"></i><b>4.3.2</b> SPSS</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="readdata.html"><a href="readdata.html#saving-datasets"><i class="fa fa-check"></i><b>4.4</b> Saving datasets</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="readdata.html"><a href="readdata.html#saving-data-as-a-text-file"><i class="fa fa-check"></i><b>4.4.1</b> Saving data as a text file</a></li>
+<li class="chapter" data-level="4.4.2" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-excel-file"><i class="fa fa-check"></i><b>4.4.2</b> Saving data as an Excel file</a></li>
+<li class="chapter" data-level="4.4.3" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-spss-file"><i class="fa fa-check"></i><b>4.4.3</b> Saving data as an SPSS file</a></li>
+<li class="chapter" data-level="4.4.4" data-path="readdata.html"><a href="readdata.html#loading-these-datasets-back-into-r"><i class="fa fa-check"></i><b>4.4.4</b> Loading these datasets back into R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="readdata.html"><a href="readdata.html#saving-the-working-environment"><i class="fa fa-check"></i><b>4.5</b> Saving the working environment</a></li>
+<li class="chapter" data-level="4.6" data-path="readdata.html"><a href="readdata.html#reading-in-multiple-waves-from-understanding-society"><i class="fa fa-check"></i><b>4.6</b> Reading in multiple waves from Understanding Society</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="transformdata.html"><a href="transformdata.html"><i class="fa fa-check"></i><b>5</b> Transform data</a><ul>
 <li class="chapter" data-level="5.1" data-path="transformdata.html"><a href="transformdata.html#the-pipe-operator"><i class="fa fa-check"></i><b>5.1</b> The pipe operator (%&gt;%)</a></li>
@@ -137,13 +150,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="6" data-path="joining.html"><a href="joining.html"><i class="fa fa-check"></i><b>6</b> Join data</a><ul>
 <li class="chapter" data-level="6.1" data-path="joining.html"><a href="joining.html#introduction-to-joining-data"><i class="fa fa-check"></i><b>6.1</b> Introduction to joining data</a></li>
-<li class="chapter" data-level="6.2" data-path="joining.html"><a href="joining.html#loading-the-data"><i class="fa fa-check"></i><b>6.2</b> Loading the data</a></li>
-<li class="chapter" data-level="6.3" data-path="joining.html"><a href="joining.html#joining-waves-1-and-2"><i class="fa fa-check"></i><b>6.3</b> Joining waves 1 and 2</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="joining.html"><a href="joining.html#the-key"><i class="fa fa-check"></i><b>6.3.1</b> The ‘key’</a></li>
-<li class="chapter" data-level="6.3.2" data-path="joining.html"><a href="joining.html#inner-join"><i class="fa fa-check"></i><b>6.3.2</b> Inner join</a></li>
-<li class="chapter" data-level="6.3.3" data-path="joining.html"><a href="joining.html#left-join"><i class="fa fa-check"></i><b>6.3.3</b> Left join</a></li>
-<li class="chapter" data-level="6.3.4" data-path="joining.html"><a href="joining.html#right-join"><i class="fa fa-check"></i><b>6.3.4</b> Right join</a></li>
-<li class="chapter" data-level="6.3.5" data-path="joining.html"><a href="joining.html#full-join"><i class="fa fa-check"></i><b>6.3.5</b> Full join</a></li>
+<li class="chapter" data-level="6.2" data-path="joining.html"><a href="joining.html#joining-waves-1-and-2"><i class="fa fa-check"></i><b>6.2</b> Joining waves 1 and 2</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="joining.html"><a href="joining.html#the-key"><i class="fa fa-check"></i><b>6.2.1</b> The ‘key’</a></li>
+<li class="chapter" data-level="6.2.2" data-path="joining.html"><a href="joining.html#inner-join"><i class="fa fa-check"></i><b>6.2.2</b> Inner join</a></li>
+<li class="chapter" data-level="6.2.3" data-path="joining.html"><a href="joining.html#left-join"><i class="fa fa-check"></i><b>6.2.3</b> Left join</a></li>
+<li class="chapter" data-level="6.2.4" data-path="joining.html"><a href="joining.html#right-join"><i class="fa fa-check"></i><b>6.2.4</b> Right join</a></li>
+<li class="chapter" data-level="6.2.5" data-path="joining.html"><a href="joining.html#full-join"><i class="fa fa-check"></i><b>6.2.5</b> Full join</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="iteration.html"><a href="iteration.html"><i class="fa fa-check"></i><b>7</b> Iteration</a></li>
