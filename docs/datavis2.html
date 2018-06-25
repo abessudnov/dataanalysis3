@@ -22,10 +22,10 @@
   <meta name="twitter:description" content="A website for the Data Analysis in Social Science 3 module." />
   
 
-<meta name="author" content="Alexey Bessudnov &amp; Max Shilling">
+<meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-06-06">
+<meta name="date" content="2018-06-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -141,12 +141,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.6" data-path="readdata.html"><a href="readdata.html#reading-in-multiple-waves-from-understanding-society"><i class="fa fa-check"></i><b>4.6</b> Reading in multiple waves from Understanding Society</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="transformdata.html"><a href="transformdata.html"><i class="fa fa-check"></i><b>5</b> Transform data</a><ul>
-<li class="chapter" data-level="5.1" data-path="transformdata.html"><a href="transformdata.html#the-pipe-operator"><i class="fa fa-check"></i><b>5.1</b> The pipe operator (%&gt;%)</a></li>
-<li class="chapter" data-level="5.2" data-path="transformdata.html"><a href="transformdata.html#select-variables"><i class="fa fa-check"></i><b>5.2</b> Select variables</a></li>
-<li class="chapter" data-level="5.3" data-path="transformdata.html"><a href="transformdata.html#select-cases"><i class="fa fa-check"></i><b>5.3</b> Select cases</a></li>
-<li class="chapter" data-level="5.4" data-path="transformdata.html"><a href="transformdata.html#create-new-variables"><i class="fa fa-check"></i><b>5.4</b> Create new variables</a></li>
-<li class="chapter" data-level="5.5" data-path="transformdata.html"><a href="transformdata.html#sort-data"><i class="fa fa-check"></i><b>5.5</b> Sort data</a></li>
-<li class="chapter" data-level="5.6" data-path="transformdata.html"><a href="transformdata.html#summarise-data"><i class="fa fa-check"></i><b>5.6</b> Summarise data</a></li>
+<li class="chapter" data-level="5.1" data-path="transformdata.html"><a href="transformdata.html#introduction-to-transforming-data"><i class="fa fa-check"></i><b>5.1</b> Introduction to transforming data</a></li>
+<li class="chapter" data-level="5.2" data-path="transformdata.html"><a href="transformdata.html#operators-recap"><i class="fa fa-check"></i><b>5.2</b> Operators recap</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="transformdata.html"><a href="transformdata.html#relational-operators"><i class="fa fa-check"></i><b>5.2.1</b> Relational operators</a></li>
+<li class="chapter" data-level="5.2.2" data-path="transformdata.html"><a href="transformdata.html#logical-operators"><i class="fa fa-check"></i><b>5.2.2</b> Logical operators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="transformdata.html"><a href="transformdata.html#the-pipe-operator"><i class="fa fa-check"></i><b>5.3</b> The pipe operator (%&gt;%)</a></li>
+<li class="chapter" data-level="5.4" data-path="transformdata.html"><a href="transformdata.html#select-variables"><i class="fa fa-check"></i><b>5.4</b> Select variables</a></li>
+<li class="chapter" data-level="5.5" data-path="transformdata.html"><a href="transformdata.html#select-cases"><i class="fa fa-check"></i><b>5.5</b> Select cases</a></li>
+<li class="chapter" data-level="5.6" data-path="transformdata.html"><a href="transformdata.html#recode-variables-both-base-r-and-dplyr-using-ifelse"><i class="fa fa-check"></i><b>5.6</b> Recode variables Both base R and dplyr using ifelse</a></li>
+<li class="chapter" data-level="5.7" data-path="transformdata.html"><a href="transformdata.html#create-new-variables"><i class="fa fa-check"></i><b>5.7</b> Create new variables</a></li>
+<li class="chapter" data-level="5.8" data-path="transformdata.html"><a href="transformdata.html#sort-data"><i class="fa fa-check"></i><b>5.8</b> Sort data</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="joining.html"><a href="joining.html"><i class="fa fa-check"></i><b>6</b> Join data</a><ul>
 <li class="chapter" data-level="6.1" data-path="joining.html"><a href="joining.html#introduction-to-joining-data"><i class="fa fa-check"></i><b>6.1</b> Introduction to joining data</a></li>
@@ -233,21 +238,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Wave&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Net monthly income&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
 <p>The chart does not look nice because of the outliers. We can either remove the outliers or display only a specified range of the box plots.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(UndSocLong, <span class="kw">aes</span>(<span class="dt">x =</span> wave, <span class="dt">y=</span> fimnnet_dv)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Wave&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Net monthly income&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylim</span>(<span class="op">-</span><span class="dv">500</span>, <span class="dv">5000</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
 <p>We can see that the median income has been slowly increasing.</p>
 <p>Another way to display these data is a density plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(UndSocLong, <span class="kw">aes</span>(<span class="dt">x =</span> fimnnet_dv)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Net monthly income&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlim</span>(<span class="op">-</span><span class="dv">500</span>, <span class="dv">5000</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
 <p>We see a peak at zero incomes, and for positive incomes the distribution is close to normal.</p>
 <p>We can also create this chart for each wave separately.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(UndSocLong, <span class="kw">aes</span>(<span class="dt">x =</span> fimnnet_dv)) <span class="op">+</span>
@@ -255,7 +260,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Net monthly income&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlim</span>(<span class="op">-</span><span class="dv">500</span>, <span class="dv">5000</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>wave)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
 <p>Now we may want to visualise the change of income across the waves.</p>
 <p>We can plot the income trajectories for each individual in the data set. Let us do this for the first five individuals.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 5 individuals, 7 waves: 5*7 = 35</span>
@@ -454,7 +459,7 @@ first5 &lt;-<span class="st"> </span>UndSocLong <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> pidp), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span>
 <span class="st">        </span><span class="kw">ylab</span>(<span class="st">&quot;Net monthly income&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">xlab</span>(<span class="st">&quot;Year&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
 <p>This chart nicely illustrates individual income trajectories, but if we try this for even 100 people the chart will be a complete mess.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSocLong <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">700</span>) <span class="op">%&gt;%</span>
@@ -463,7 +468,7 @@ first5 &lt;-<span class="st"> </span>UndSocLong <span class="op">%&gt;%</span>
 <span class="st">                </span><span class="kw">geom_line</span>(<span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span>
 <span class="st">                </span><span class="kw">ylab</span>(<span class="st">&quot;Net monthly income&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">                </span><span class="kw">xlab</span>(<span class="st">&quot;Wave&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
 <p>Instead we can visualise summary statistics, such as mean or median. For a variable with outliers such as income median would be a better summary.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First we create a data frame of medians.</span>
 medians &lt;-<span class="st"> </span>UndSocLong <span class="op">%&gt;%</span>
@@ -517,7 +522,7 @@ medians &lt;-<span class="st"> </span>UndSocLong <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">ylab</span>(<span class="st">&quot;Median net monthly income&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">xlab</span>(<span class="st">&quot;Wave&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
 <p>There are a number of things we may want to do with this chart. First, we may want to change wave to year. Second, we may want to display confidence intervals for the point estimates.</p>
 <p>First, let us create a variable for year. We need to do this in the original data frame. For each wave in the Understanding Society, the data were collected for two years. So for Wave 1 the field work was conducted in 2009 and 2010. For simplicity, I will code the first year only.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSocLong &lt;-<span class="st"> </span>UndSocLong <span class="op">%&gt;%</span>
@@ -546,7 +551,7 @@ medians &lt;-<span class="st"> </span>UndSocLong <span class="op">%&gt;%</span>
 <span class="st">                </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>lowerIncome, <span class="dt">ymax=</span>upperIncome), <span class="dt">alpha=</span><span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">                </span><span class="kw">ylab</span>(<span class="st">&quot;Median net monthly income&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">                </span><span class="kw">xlab</span>(<span class="st">&quot;Year&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
 <p>The confidence intervals are quite wide. This is not surprising given our sample size.</p>
 <p>Another chart we can produce is not only for the medians (or means), but for different quantiles. Let us take the following quantiles: 0.01, 0.05, 0.1, 0.5. 0.9, 0.95, 0.99. This will show the change in income for the 1% poorest, 5% poorest, 10% poorest, etc.</p>
 <p>This can be done in several ways. If we use summarise to produce multiple quantiles it can get clumsy.</p>
@@ -570,7 +575,7 @@ medians &lt;-<span class="st"> </span>UndSocLong <span class="op">%&gt;%</span>
 <span class="st">                </span><span class="kw">geom_line</span>(<span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span>
 <span class="st">                </span><span class="kw">ylab</span>(<span class="st">&quot;Net monthly income&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">                </span><span class="kw">xlab</span>(<span class="st">&quot;Year&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
 <p>A more economical way to write the code is the following. This time I will also select only people with positive net incomes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
 UndSocLong <span class="op">%&gt;%</span>
@@ -584,7 +589,7 @@ UndSocLong <span class="op">%&gt;%</span>
 <span class="st">                </span><span class="kw">geom_line</span>(<span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span>
 <span class="st">                </span><span class="kw">ylab</span>(<span class="st">&quot;Net monthly income&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">                </span><span class="kw">xlab</span>(<span class="st">&quot;Year&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
 
 </div>
 </div>

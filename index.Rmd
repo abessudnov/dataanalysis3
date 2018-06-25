@@ -1,6 +1,6 @@
 ---
 title: "Data Analysis in Social Science 3"
-author: "Alexey Bessudnov & Max Shilling"
+author: "Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output:

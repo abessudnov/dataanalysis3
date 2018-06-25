@@ -22,10 +22,10 @@
   <meta name="twitter:description" content="A website for the Data Analysis in Social Science 3 module." />
   
 
-<meta name="author" content="Alexey Bessudnov &amp; Max Shilling">
+<meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-06-06">
+<meta name="date" content="2018-06-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -141,12 +141,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.6" data-path="readdata.html"><a href="readdata.html#reading-in-multiple-waves-from-understanding-society"><i class="fa fa-check"></i><b>4.6</b> Reading in multiple waves from Understanding Society</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="transformdata.html"><a href="transformdata.html"><i class="fa fa-check"></i><b>5</b> Transform data</a><ul>
-<li class="chapter" data-level="5.1" data-path="transformdata.html"><a href="transformdata.html#the-pipe-operator"><i class="fa fa-check"></i><b>5.1</b> The pipe operator (%&gt;%)</a></li>
-<li class="chapter" data-level="5.2" data-path="transformdata.html"><a href="transformdata.html#select-variables"><i class="fa fa-check"></i><b>5.2</b> Select variables</a></li>
-<li class="chapter" data-level="5.3" data-path="transformdata.html"><a href="transformdata.html#select-cases"><i class="fa fa-check"></i><b>5.3</b> Select cases</a></li>
-<li class="chapter" data-level="5.4" data-path="transformdata.html"><a href="transformdata.html#create-new-variables"><i class="fa fa-check"></i><b>5.4</b> Create new variables</a></li>
-<li class="chapter" data-level="5.5" data-path="transformdata.html"><a href="transformdata.html#sort-data"><i class="fa fa-check"></i><b>5.5</b> Sort data</a></li>
-<li class="chapter" data-level="5.6" data-path="transformdata.html"><a href="transformdata.html#summarise-data"><i class="fa fa-check"></i><b>5.6</b> Summarise data</a></li>
+<li class="chapter" data-level="5.1" data-path="transformdata.html"><a href="transformdata.html#introduction-to-transforming-data"><i class="fa fa-check"></i><b>5.1</b> Introduction to transforming data</a></li>
+<li class="chapter" data-level="5.2" data-path="transformdata.html"><a href="transformdata.html#operators-recap"><i class="fa fa-check"></i><b>5.2</b> Operators recap</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="transformdata.html"><a href="transformdata.html#relational-operators"><i class="fa fa-check"></i><b>5.2.1</b> Relational operators</a></li>
+<li class="chapter" data-level="5.2.2" data-path="transformdata.html"><a href="transformdata.html#logical-operators"><i class="fa fa-check"></i><b>5.2.2</b> Logical operators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="transformdata.html"><a href="transformdata.html#the-pipe-operator"><i class="fa fa-check"></i><b>5.3</b> The pipe operator (%&gt;%)</a></li>
+<li class="chapter" data-level="5.4" data-path="transformdata.html"><a href="transformdata.html#select-variables"><i class="fa fa-check"></i><b>5.4</b> Select variables</a></li>
+<li class="chapter" data-level="5.5" data-path="transformdata.html"><a href="transformdata.html#select-cases"><i class="fa fa-check"></i><b>5.5</b> Select cases</a></li>
+<li class="chapter" data-level="5.6" data-path="transformdata.html"><a href="transformdata.html#recode-variables-both-base-r-and-dplyr-using-ifelse"><i class="fa fa-check"></i><b>5.6</b> Recode variables Both base R and dplyr using ifelse</a></li>
+<li class="chapter" data-level="5.7" data-path="transformdata.html"><a href="transformdata.html#create-new-variables"><i class="fa fa-check"></i><b>5.7</b> Create new variables</a></li>
+<li class="chapter" data-level="5.8" data-path="transformdata.html"><a href="transformdata.html#sort-data"><i class="fa fa-check"></i><b>5.8</b> Sort data</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="joining.html"><a href="joining.html"><i class="fa fa-check"></i><b>6</b> Join data</a><ul>
 <li class="chapter" data-level="6.1" data-path="joining.html"><a href="joining.html#introduction-to-joining-data"><i class="fa fa-check"></i><b>6.1</b> Introduction to joining data</a></li>
@@ -324,6 +329,9 @@ files</code></pre></div>
 }        </code></pre></div>
 <pre><code>##        pidp a_sex a_dvage a_vote6 a_fimnnet_dv
 ## 1: 68001367     1      39       3         1400
+## 
+Read 0.0% of 54597 rows
+Read 54597 rows and 5 (of 1615) columns from 0.233 GB file in 00:00:05
 ##        pidp b_sex b_dvage b_vote6 b_fimnnet_dv
 ## 1: 68004087     1      60       2     1276.667
 ## 
@@ -339,17 +347,17 @@ Read 47157 rows and 5 (of 2086) columns from 0.262 GB file in 00:00:05
 ## 1: 68004087     1      62       1     914.3333
 ## 
 Read 0.0% of 44903 rows
-Read 44903 rows and 5 (of 2583) columns from 0.310 GB file in 00:00:05
+Read 44903 rows and 5 (of 2583) columns from 0.310 GB file in 00:00:06
 ##        pidp e_sex e_dvage e_vote6 e_fimnnet_dv
 ## 1: 68004087     1      63       2     1015.667
 ## 
 Read 0.0% of 45290 rows
-Read 45290 rows and 5 (of 2060) columns from 0.263 GB file in 00:00:04
+Read 45290 rows and 5 (of 2060) columns from 0.263 GB file in 00:00:05
 ##        pidp f_sex f_dvage f_vote6 f_fimnnet_dv
 ## 1: 68004087     1      64       2       1007.5
 ## 
 Read 0.0% of 42217 rows
-Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:08
+Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:06
 ##        pidp g_sex g_dvage g_vote6 g_fimnnet_dv
 ## 1: 68004087     1      65       2     1258.333</code></pre>
 <p>Now we need to join all these data frames together, and we want to do this in the loop. It is clear what we need to do in the second and later iterations of the loop: join the data from wave 2 with the data from wave 1, etc. But what shall we do in the first iteration? There is no data frame yet to be joined with the data from wave 1. Clearly our algorithm for the first iteration needs to be different from the algorithm for all other iterations. We will use the <strong>if … else</strong> control structure for this.</p>
