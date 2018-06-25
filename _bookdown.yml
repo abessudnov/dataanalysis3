@@ -3,6 +3,6 @@ delete_merged_file: true
 output_dir: "docs"
 before_chapter_script: ["removeObjects.R"]
 rmd_files: ["index.Rmd", "moduleOutline.Rmd",
-            "assignment.Rmd", "readData.Rmd", "transformData.Rmd",
+            "assignment.Rmd", "readData.Rmd", "TransformData.Rmd",
             "joiningData.Rmd", "iteration.Rmd", "tidyData.Rmd", 
             "dataVis.Rmd", "datavis2.Rmd", "rmarkdown.Rmd", "modelling.Rmd"]
