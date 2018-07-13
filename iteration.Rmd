@@ -1,52 +1,100 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 # Iteration {#iteration}
 
-> Please read ch.21 (Iteration) from R for Data Science - http://r4ds.had.co.nz/iteration.html
+> Prerequisite: Chapter 21 'Iteration' from R for Data Science, available at http://r4ds.had.co.nz/iteration.html
 
-In the Understanding Society data we have seven waves and seven separate individual files for adult questionnaires. We will need to read them all for the data to be joined. Of course, we can read them one by one, but this is inconvenient.
+## Introduction to iteration
 
-We will use this example to learn about iteration, one of the most important concepts in programming. You should read ch.21 from R for Data Science and do the exercises to learn the basics; here we will consider how we can apply iteration to our case.
+In the *Understanding Society* data we have seven waves and seven separate files for adult questionnaires. We will need to read them all for the data to be joined. Of course, we can read them one by one, but this is inconvenient.
 
-Let us first consider a very simple **for** loop.
+We will use this example to learn about iteration, one of the most important concepts in programming. You should read Chapter 21 from *R for Data Science* and do the exercises to learn the basics; here we will consider how we can apply iteration to our case.
 
-```{r}
+Iteration simply means repeating a process, and the ability to do this comes with three major benefits for coding. When you need to reproduce the same, or similar, lines of code, iteration allows you to do these all at once, reducing the number of lines of code you need to write. Additionally, if you need to change sections of your code, you only need to change the original function, rather than every line you have re-written (or copy and pasted over). Finally, if you made a mistake in your original code, using iteration means you will only have to correct the error(s) in one place, rather than many.
+
+### The *for* loop
+
+Before we focus on using iterations and loops to load multiple waves of data in at once, let's first write a simple **for** loop.
+
+The **for** loop carries out a command within criteria you have set. Let's say we wanted to work out what the square and cube of the numbers from 1 to 20 were. We could calculate this for each number individually, but doing this would result in 40 separate lines of code. With a simple **for** loop, we can instead write this as follows:
+
+```{r cache = TRUE}
+n <- c(1:20)
+
+for(i in 1:length(n)){
+  print(c(n[i], n[i]^2, n[i]^3))
+}
+```
+
+### The *while* loop
+
+Another type of loop you will come across, though not one we will be using to load the *Understanding Society* data, is the **while** loop. Simply put, the while loop will carry out a command while certain criteria are filled, and stop once they are not (in our example, once x <! 36). Let's say, for example, we now wanted to see the square and cube of numbers from 21 to 35. We can write this in a **while** loop in the following way:
+
+```{r cache - TRUE}
+x <- 21
+
+while (x < 36) {
+  print(c(x, x^2, x^3))
+  x = x + 1
+}
+```
+
+## Loading *Understanding Society* using iteration
+
+To load the *Understanding Society* data, let's first consider a very simple **for** loop.
+
+```{r cache = TRUE}
 for (i in 1:5) {
   print(i)
 }
 ```
 
-This loop goes through the values from 1 to 5 and in each iteration it prints the number on the screen. With the Understanding Society data, we want to go from 1 to 7 (as we have seven waves) and in each iteration we want to read in the data and join it to the data from other waves. Let us see how we can write a loop that does it.
+This loop goes through the values from 1 to 5 and, in each iteration, prints the number on the screen. With the *Understanding Society* data, we want to go from 1 to 7 (as we have seven waves) and in each iteration we want to read in the data and join it to the data from other waves. Let's see how we can write a loop that does this.
 
 First, we need to identify the files we want to open. The **dir** function will return the paths and names of all the data files in our data folder that contain the pattern *indresp*.
 
-```{r}
-files <- dir("data/UKDA-6614-tab/tab",
-             pattern="indresp", recursive = TRUE, full.names=TRUE)
+```{r cache = TRUE}
+files <- dir(
+             # Select the folder in which the files are stored.
+             "data/UKDA-6614-tab/tab",
+             # Tell R which pattern you want present in the files it will display.
+             pattern = "indresp",
+             # We want this process to repeat through the entire folder.
+             recursive = TRUE,
+             # And finally want R to show us the entire file path, rather than just the names of the individual files.
+             full.names = TRUE)
+
 files
 ```
 
-There are 25 files as we also have data from the BHPS, not just the Understanding Society. We do not need the BHPS, so we want to select only the files from the Understanding Society. We can use the function **str_detect** from the package **stringr** to select only the files whose paths contain *us*.
+There are 25 files as we also have data from the *BHPS*, not just *Understanding Society*. We do not need the *BHPS*, so we want to select only the files from *Understanding Society*. We can use the function **str_detect** from the package **stringr** to select only the files whose paths contain *us*.
 
-```{r}
-# stringr will return a logical vector. Note that I specify which package the function comes from
-# without explicitly attaching it.
+```{r cache = TRUE}
+# stringr will return a logical vector. Note that I specify which package the function comes from without explicitly attaching it.
+
 stringr::str_detect(files, "us")
+
 # Now I only select the files from UndSoc
+
 files <- files[stringr::str_detect(files, "us")]
+
 files
 ```
 
-Now we have a vector of file names we want to loop over. We can write a short loop that prints the path and files name.
+Now we have a vector of file names we want to loop over. We can write a short loop that prints the path and files' names.
 
-```{r}
+```{r cache = TRUE}
 for (i in 1:7) {
   print(files[i])
 }
-
 ```
 
 Note that the same task can be achieved simply with:
 
-```{r}
+```{r cache = TRUE}
 for (i in files) {
   print(i)
 }
@@ -54,31 +102,33 @@ for (i in files) {
 
 You will see a bit later why I wanted to loop over numbers rather than elements of the character vector.
 
-Now we need to read in the data. We can read the whole files, but this is inefficient as we will only need a few variables. The function **fread** from the package **data.table** allows us to specify the variables we want to read. Let us choose the id variable (**pidp**), sex, age, interest in politics and net monthly income. The problem is that in each wave these variables have different names indicated by a prefix. **pidp** does not change and has the same name in each wave. All the other variables have a prefix **a_** in wave 1, **b_** in wave 2, etc. We will need to find a way to loop over not just file names in **files**, but also prefixes at the same time.
+Now we need to read in the data. We can read the files in their entirety, but this is inefficient as we will only need a few variables. The function **fread** from the package **data.table** allows us to specify the variables we want to read (look back at *Read Data* if you need a recap here). Let's choose the id variable (**pidp**), sex, age, interest in politics and net monthly income. The problem is that in each wave these variables have different names indicated by a prefix. **pidp** does not change and has the same name in each wave. All the other variables have a prefix **a_** in wave 1, **b_** in wave 2, etc. We will need to find a way to loop over not just file names in **files**, but also prefixes at the same time.
 
-Let us start with creating a vector of the variable names without the prefixes.
+Let's start with creating a vector of the variable names without the prefixes.
 
-```{r}
+```{r cache = TRUE}
 vars <- c("sex", "dvage", "vote6", "fimnnet_dv")
 ```
 
 If we want to add a prefix to the elements of this vector we can use the function **paste**.
 
-```{r}
+```{r cache = TRUE}
 paste("a", vars, sep = "_")
 ```
 
-The constant **letters** contains all the letters of the English alphabet, so the same expression can be written as the following.
+The constant **letters** contains all the letters of the English alphabet, so the same expression can be written as the following:
 
-```{r}
+```{r cache = TRUE}
 paste(letters[1], vars, sep = "_")
 ```
 
 Now we can write a loop that goes through the values 1 to 7 and in each iteration reads the correct data file choosing the variables with the correct prefix.
 
-```{r}
-# Attach data.table
+```{r cache = TRUE}
+# Attach data.table for the fread function.
+
 library(data.table)
+
 for (i in 1:7) {
         # Create a vector of the variables with the correct prefix.
         varsToSelect <- paste(letters[i], vars, sep = "_")
@@ -91,11 +141,15 @@ for (i in 1:7) {
 }        
 ```
 
-Now we need to join all these data frames together, and we want to do this in the loop. It is clear what we need to do in the second and later iterations of the loop: join the data from wave 2 with the data from wave 1, etc. But what shall we do in the first iteration? There is no data frame yet to be joined with the data from wave 1. Clearly our algorithm for the first iteration needs to be different from the algorithm for all other iterations. We will use the **if ... else** control structure for this.
+Now we need to join all these data frames together, and we want to do this in the loop. It is clear what we need to do in the second and later iterations of the loop: join the data from wave 2 with the data from wave 1, and so on. But what shall we do in the first iteration? There is no data frame yet to be joined with the data from wave 1. Clearly our algorithm for the first iteration needs to be different from the algorithm for all other iterations. We will use the **if ... else** control structure for this.
 
 In the first iteration of the loop we simply want to save the data from wave 1. In the second and other iterations we want the data to be joined with the data frame we have from the previous iteration.
 
-```{r}
+```{r cache = TRUE}
+# Attach dplyr for the full_join function.
+
+library(dplyr)
+
 for (i in 1:7) {
         # Create a vector of the variables with the correct prefix.
         varsToSelect <- paste(letters[i], vars, sep = "_")
@@ -116,18 +170,12 @@ for (i in 1:7) {
 
 **all7** now contains the data from all seven waves.
 
-```{r}
+```{r cache = TRUE}
 head(all7, 3)
 ```
 
-I will now save this file for future use using the **saveRDS** function in the *myData* folder (make sure first you have this folder on your computer). 
+We will now save this file for future use using the **saveRDS** function in the *myData* folder (make sure first you have this folder on your computer).
 
-```{r}
+```{r cache = TRUE}
 saveRDS(all7, "myData/all7.rds")
 ```
-
-
-
-
-
-
