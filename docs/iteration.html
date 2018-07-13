@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-06-25">
+<meta name="date" content="2018-07-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -163,7 +163,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.2.5" data-path="joining.html"><a href="joining.html#full-join"><i class="fa fa-check"></i><b>6.2.5</b> Full join</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="iteration.html"><a href="iteration.html"><i class="fa fa-check"></i><b>7</b> Iteration</a></li>
+<li class="chapter" data-level="7" data-path="iteration.html"><a href="iteration.html"><i class="fa fa-check"></i><b>7</b> Iteration</a><ul>
+<li class="chapter" data-level="7.1" data-path="iteration.html"><a href="iteration.html#introduction-to-iteration"><i class="fa fa-check"></i><b>7.1</b> Introduction to iteration</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="iteration.html"><a href="iteration.html#the-for-loop"><i class="fa fa-check"></i><b>7.1.1</b> The <em>for</em> loop</a></li>
+<li class="chapter" data-level="7.1.2" data-path="iteration.html"><a href="iteration.html#the-while-loop"><i class="fa fa-check"></i><b>7.1.2</b> The <em>while</em> loop</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="iteration.html"><a href="iteration.html#loading-understanding-society-using-iteration"><i class="fa fa-check"></i><b>7.2</b> Loading <em>Understanding Society</em> using iteration</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>8</b> Tidy data</a><ul>
 <li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a></li>
 <li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.2</b> Cleaning the data</a></li>
@@ -222,11 +228,72 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="iteration" class="section level1">
 <h1><span class="header-section-number">7</span> Iteration</h1>
 <blockquote>
-<p>Please read ch.21 (Iteration) from R for Data Science - <a href="http://r4ds.had.co.nz/iteration.html" class="uri">http://r4ds.had.co.nz/iteration.html</a></p>
+<p>Prerequisite: Chapter 21 ‘Iteration’ from R for Data Science, available at <a href="http://r4ds.had.co.nz/iteration.html" class="uri">http://r4ds.had.co.nz/iteration.html</a></p>
 </blockquote>
-<p>In the Understanding Society data we have seven waves and seven separate individual files for adult questionnaires. We will need to read them all for the data to be joined. Of course, we can read them one by one, but this is inconvenient.</p>
-<p>We will use this example to learn about iteration, one of the most important concepts in programming. You should read ch.21 from R for Data Science and do the exercises to learn the basics; here we will consider how we can apply iteration to our case.</p>
-<p>Let us first consider a very simple <strong>for</strong> loop.</p>
+<div id="introduction-to-iteration" class="section level2">
+<h2><span class="header-section-number">7.1</span> Introduction to iteration</h2>
+<p>In the <em>Understanding Society</em> data we have seven waves and seven separate files for adult questionnaires. We will need to read them all for the data to be joined. Of course, we can read them one by one, but this is inconvenient.</p>
+<p>We will use this example to learn about iteration, one of the most important concepts in programming. You should read Chapter 21 from <em>R for Data Science</em> and do the exercises to learn the basics; here we will consider how we can apply iteration to our case.</p>
+<p>Iteration simply means repeating a process, and the ability to do this comes with three major benefits for coding. When you need to reproduce the same, or similar, lines of code, iteration allows you to do these all at once, reducing the number of lines of code you need to write. Additionally, if you need to change sections of your code, you only need to change the original function, rather than every line you have re-written (or copy and pasted over). Finally, if you made a mistake in your original code, using iteration means you will only have to correct the error(s) in one place, rather than many.</p>
+<div id="the-for-loop" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> The <em>for</em> loop</h3>
+<p>Before we focus on using iterations and loops to load multiple waves of data in at once, let’s first write a simple <strong>for</strong> loop.</p>
+<p>The <strong>for</strong> loop carries out a command within criteria you have set. Let’s say we wanted to work out what the square and cube of the numbers from 1 to 20 were. We could calculate this for each number individually, but doing this would result in 40 separate lines of code. With a simple <strong>for</strong> loop, we can instead write this as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)
+
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(n)){
+  <span class="kw">print</span>(<span class="kw">c</span>(n[i], n[i]<span class="op">^</span><span class="dv">2</span>, n[i]<span class="op">^</span><span class="dv">3</span>))
+}</code></pre></div>
+<pre><code>## [1] 1 1 1
+## [1] 2 4 8
+## [1]  3  9 27
+## [1]  4 16 64
+## [1]   5  25 125
+## [1]   6  36 216
+## [1]   7  49 343
+## [1]   8  64 512
+## [1]   9  81 729
+## [1]   10  100 1000
+## [1]   11  121 1331
+## [1]   12  144 1728
+## [1]   13  169 2197
+## [1]   14  196 2744
+## [1]   15  225 3375
+## [1]   16  256 4096
+## [1]   17  289 4913
+## [1]   18  324 5832
+## [1]   19  361 6859
+## [1]   20  400 8000</code></pre>
+</div>
+<div id="the-while-loop" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> The <em>while</em> loop</h3>
+<p>Another type of loop you will come across, though not one we will be using to load the <em>Understanding Society</em> data, is the <strong>while</strong> loop. Simply put, the while loop will carry out a command while certain criteria are filled, and stop once they are not (in our example, once x &lt; 36). Let’s say, for example, we now wanted to see the square and cube of numbers from 21 to 35. We can write this in a <strong>while</strong> loop in the following way:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">21</span>
+
+<span class="cf">while</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="dv">36</span>) {
+  <span class="kw">print</span>(<span class="kw">c</span>(x, x<span class="op">^</span><span class="dv">2</span>, x<span class="op">^</span><span class="dv">3</span>))
+  x =<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+}</code></pre></div>
+<pre><code>## [1]   21  441 9261
+## [1]    22   484 10648
+## [1]    23   529 12167
+## [1]    24   576 13824
+## [1]    25   625 15625
+## [1]    26   676 17576
+## [1]    27   729 19683
+## [1]    28   784 21952
+## [1]    29   841 24389
+## [1]    30   900 27000
+## [1]    31   961 29791
+## [1]    32  1024 32768
+## [1]    33  1089 35937
+## [1]    34  1156 39304
+## [1]    35  1225 42875</code></pre>
+</div>
+</div>
+<div id="loading-understanding-society-using-iteration" class="section level2">
+<h2><span class="header-section-number">7.2</span> Loading <em>Understanding Society</em> using iteration</h2>
+<p>To load the <em>Understanding Society</em> data, let’s first consider a very simple <strong>for</strong> loop.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {
   <span class="kw">print</span>(i)
 }</code></pre></div>
@@ -235,10 +302,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## [1] 3
 ## [1] 4
 ## [1] 5</code></pre>
-<p>This loop goes through the values from 1 to 5 and in each iteration it prints the number on the screen. With the Understanding Society data, we want to go from 1 to 7 (as we have seven waves) and in each iteration we want to read in the data and join it to the data from other waves. Let us see how we can write a loop that does it.</p>
+<p>This loop goes through the values from 1 to 5 and, in each iteration, prints the number on the screen. With the <em>Understanding Society</em> data, we want to go from 1 to 7 (as we have seven waves) and in each iteration we want to read in the data and join it to the data from other waves. Let’s see how we can write a loop that does this.</p>
 <p>First, we need to identify the files we want to open. The <strong>dir</strong> function will return the paths and names of all the data files in our data folder that contain the pattern <em>indresp</em>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="st">&quot;data/UKDA-6614-tab/tab&quot;</span>,
-             <span class="dt">pattern=</span><span class="st">&quot;indresp&quot;</span>, <span class="dt">recursive =</span> <span class="ot">TRUE</span>, <span class="dt">full.names=</span><span class="ot">TRUE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">dir</span>(
+             <span class="co"># Select the folder in which the files are stored.</span>
+             <span class="st">&quot;data/UKDA-6614-tab/tab&quot;</span>,
+             <span class="co"># Tell R which pattern you want present in the files it will display.</span>
+             <span class="dt">pattern =</span> <span class="st">&quot;indresp&quot;</span>,
+             <span class="co"># We want this process to repeat through the entire folder.</span>
+             <span class="dt">recursive =</span> <span class="ot">TRUE</span>,
+             <span class="co"># And finally want R to show us the entire file path, rather than just the names of the individual files.</span>
+             <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
+
 files</code></pre></div>
 <pre><code>##  [1] &quot;data/UKDA-6614-tab/tab/bhps_w1/ba_indresp.tab&quot; 
 ##  [2] &quot;data/UKDA-6614-tab/tab/bhps_w10/bj_indresp.tab&quot;
@@ -265,15 +340,17 @@ files</code></pre></div>
 ## [23] &quot;data/UKDA-6614-tab/tab/us_w5/e_indresp.tab&quot;    
 ## [24] &quot;data/UKDA-6614-tab/tab/us_w6/f_indresp.tab&quot;    
 ## [25] &quot;data/UKDA-6614-tab/tab/us_w7/g_indresp.tab&quot;</code></pre>
-<p>There are 25 files as we also have data from the BHPS, not just the Understanding Society. We do not need the BHPS, so we want to select only the files from the Understanding Society. We can use the function <strong>str_detect</strong> from the package <strong>stringr</strong> to select only the files whose paths contain <em>us</em>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># stringr will return a logical vector. Note that I specify which package the function comes from</span>
-<span class="co"># without explicitly attaching it.</span>
+<p>There are 25 files as we also have data from the <em>BHPS</em>, not just <em>Understanding Society</em>. We do not need the <em>BHPS</em>, so we want to select only the files from <em>Understanding Society</em>. We can use the function <strong>str_detect</strong> from the package <strong>stringr</strong> to select only the files whose paths contain <em>us</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># stringr will return a logical vector. Note that I specify which package the function comes from without explicitly attaching it.</span>
+
 stringr<span class="op">::</span><span class="kw">str_detect</span>(files, <span class="st">&quot;us&quot;</span>)</code></pre></div>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [12] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
 ## [23]  TRUE  TRUE  TRUE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now I only select the files from UndSoc</span>
+
 files &lt;-<span class="st"> </span>files[stringr<span class="op">::</span><span class="kw">str_detect</span>(files, <span class="st">&quot;us&quot;</span>)]
+
 files</code></pre></div>
 <pre><code>## [1] &quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;
 ## [2] &quot;data/UKDA-6614-tab/tab/us_w2/b_indresp.tab&quot;
@@ -282,7 +359,7 @@ files</code></pre></div>
 ## [5] &quot;data/UKDA-6614-tab/tab/us_w5/e_indresp.tab&quot;
 ## [6] &quot;data/UKDA-6614-tab/tab/us_w6/f_indresp.tab&quot;
 ## [7] &quot;data/UKDA-6614-tab/tab/us_w7/g_indresp.tab&quot;</code></pre>
-<p>Now we have a vector of file names we want to loop over. We can write a short loop that prints the path and files name.</p>
+<p>Now we have a vector of file names we want to loop over. We can write a short loop that prints the path and files’ names.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>) {
   <span class="kw">print</span>(files[i])
 }</code></pre></div>
@@ -305,18 +382,20 @@ files</code></pre></div>
 ## [1] &quot;data/UKDA-6614-tab/tab/us_w6/f_indresp.tab&quot;
 ## [1] &quot;data/UKDA-6614-tab/tab/us_w7/g_indresp.tab&quot;</code></pre>
 <p>You will see a bit later why I wanted to loop over numbers rather than elements of the character vector.</p>
-<p>Now we need to read in the data. We can read the whole files, but this is inefficient as we will only need a few variables. The function <strong>fread</strong> from the package <strong>data.table</strong> allows us to specify the variables we want to read. Let us choose the id variable (<strong>pidp</strong>), sex, age, interest in politics and net monthly income. The problem is that in each wave these variables have different names indicated by a prefix. <strong>pidp</strong> does not change and has the same name in each wave. All the other variables have a prefix <strong>a_</strong> in wave 1, <strong>b_</strong> in wave 2, etc. We will need to find a way to loop over not just file names in <strong>files</strong>, but also prefixes at the same time.</p>
-<p>Let us start with creating a vector of the variable names without the prefixes.</p>
+<p>Now we need to read in the data. We can read the files in their entirety, but this is inefficient as we will only need a few variables. The function <strong>fread</strong> from the package <strong>data.table</strong> allows us to specify the variables we want to read (look back at <em>Read Data</em> if you need a recap here). Let’s choose the id variable (<strong>pidp</strong>), sex, age, interest in politics and net monthly income. The problem is that in each wave these variables have different names indicated by a prefix. <strong>pidp</strong> does not change and has the same name in each wave. All the other variables have a prefix <strong>a_</strong> in wave 1, <strong>b_</strong> in wave 2, etc. We will need to find a way to loop over not just file names in <strong>files</strong>, but also prefixes at the same time.</p>
+<p>Let’s start with creating a vector of the variable names without the prefixes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vars &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;dvage&quot;</span>, <span class="st">&quot;vote6&quot;</span>, <span class="st">&quot;fimnnet_dv&quot;</span>)</code></pre></div>
 <p>If we want to add a prefix to the elements of this vector we can use the function <strong>paste</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;a&quot;</span>, vars, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;a_sex&quot;        &quot;a_dvage&quot;      &quot;a_vote6&quot;      &quot;a_fimnnet_dv&quot;</code></pre>
-<p>The constant <strong>letters</strong> contains all the letters of the English alphabet, so the same expression can be written as the following.</p>
+<p>The constant <strong>letters</strong> contains all the letters of the English alphabet, so the same expression can be written as the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(letters[<span class="dv">1</span>], vars, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;a_sex&quot;        &quot;a_dvage&quot;      &quot;a_vote6&quot;      &quot;a_fimnnet_dv&quot;</code></pre>
 <p>Now we can write a loop that goes through the values 1 to 7 and in each iteration reads the correct data file choosing the variables with the correct prefix.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Attach data.table</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Attach data.table for the fread function.</span>
+
 <span class="kw">library</span>(data.table)
+
 <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>) {
         <span class="co"># Create a vector of the variables with the correct prefix.</span>
         varsToSelect &lt;-<span class="st"> </span><span class="kw">paste</span>(letters[i], vars, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)
@@ -327,42 +406,49 @@ files</code></pre></div>
         <span class="co"># print the first line</span>
         <span class="kw">print</span>(<span class="kw">head</span>(data, <span class="dv">1</span>))
 }        </code></pre></div>
-<pre><code>##        pidp a_sex a_dvage a_vote6 a_fimnnet_dv
+<pre><code>## 
+Read 0.0% of 50994 rows
+Read 50994 rows and 5 (of 1364) columns from 0.187 GB file in 00:00:03
+##        pidp a_sex a_dvage a_vote6 a_fimnnet_dv
 ## 1: 68001367     1      39       3         1400
 ## 
 Read 0.0% of 54597 rows
-Read 54597 rows and 5 (of 1615) columns from 0.233 GB file in 00:00:05
+Read 54597 rows and 5 (of 1615) columns from 0.233 GB file in 00:00:04
 ##        pidp b_sex b_dvage b_vote6 b_fimnnet_dv
 ## 1: 68004087     1      60       2     1276.667
 ## 
 Read 0.0% of 49739 rows
 Read 80.4% of 49739 rows
-Read 49739 rows and 5 (of 3024) columns from 0.402 GB file in 00:00:07
+Read 49739 rows and 5 (of 3024) columns from 0.402 GB file in 00:00:06
 ##        pidp c_sex c_dvage c_vote6 c_fimnnet_dv
 ## 1: 68004087     1      61       2     914.3333
 ## 
 Read 0.0% of 47157 rows
-Read 47157 rows and 5 (of 2086) columns from 0.262 GB file in 00:00:05
+Read 47157 rows and 5 (of 2086) columns from 0.262 GB file in 00:00:04
 ##        pidp d_sex d_dvage d_vote6 d_fimnnet_dv
 ## 1: 68004087     1      62       1     914.3333
 ## 
 Read 0.0% of 44903 rows
-Read 44903 rows and 5 (of 2583) columns from 0.310 GB file in 00:00:06
+Read 44903 rows and 5 (of 2583) columns from 0.310 GB file in 00:00:05
 ##        pidp e_sex e_dvage e_vote6 e_fimnnet_dv
 ## 1: 68004087     1      63       2     1015.667
 ## 
 Read 0.0% of 45290 rows
-Read 45290 rows and 5 (of 2060) columns from 0.263 GB file in 00:00:05
+Read 45290 rows and 5 (of 2060) columns from 0.263 GB file in 00:00:04
 ##        pidp f_sex f_dvage f_vote6 f_fimnnet_dv
 ## 1: 68004087     1      64       2       1007.5
 ## 
 Read 0.0% of 42217 rows
-Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:06
+Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:07
 ##        pidp g_sex g_dvage g_vote6 g_fimnnet_dv
 ## 1: 68004087     1      65       2     1258.333</code></pre>
-<p>Now we need to join all these data frames together, and we want to do this in the loop. It is clear what we need to do in the second and later iterations of the loop: join the data from wave 2 with the data from wave 1, etc. But what shall we do in the first iteration? There is no data frame yet to be joined with the data from wave 1. Clearly our algorithm for the first iteration needs to be different from the algorithm for all other iterations. We will use the <strong>if … else</strong> control structure for this.</p>
+<p>Now we need to join all these data frames together, and we want to do this in the loop. It is clear what we need to do in the second and later iterations of the loop: join the data from wave 2 with the data from wave 1, and so on. But what shall we do in the first iteration? There is no data frame yet to be joined with the data from wave 1. Clearly our algorithm for the first iteration needs to be different from the algorithm for all other iterations. We will use the <strong>if … else</strong> control structure for this.</p>
 <p>In the first iteration of the loop we simply want to save the data from wave 1. In the second and other iterations we want the data to be joined with the data frame we have from the previous iteration.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Attach dplyr for the full_join function.</span>
+
+<span class="kw">library</span>(dplyr)
+
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>) {
         <span class="co"># Create a vector of the variables with the correct prefix.</span>
         varsToSelect &lt;-<span class="st"> </span><span class="kw">paste</span>(letters[i], vars, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)
         <span class="co"># Add pidp to this vector (no prefix for pidp)</span>
@@ -396,9 +482,10 @@ Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:06
 ## 1           NA    NA      NA      NA           NA
 ## 2     1007.500     1      65       2     1258.333
 ## 3     1108.833     2      45       4      385.000</code></pre>
-<p>I will now save this file for future use using the <strong>saveRDS</strong> function in the <em>myData</em> folder (make sure first you have this folder on your computer).</p>
+<p>We will now save this file for future use using the <strong>saveRDS</strong> function in the <em>myData</em> folder (make sure first you have this folder on your computer).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">saveRDS</span>(all7, <span class="st">&quot;myData/all7.rds&quot;</span>)</code></pre></div>
 
+</div>
 </div>
             </section>
 
