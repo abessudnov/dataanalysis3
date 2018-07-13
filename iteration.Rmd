@@ -21,7 +21,7 @@ Before we focus on using iterations and loops to load multiple waves of data in 
 
 The **for** loop carries out a command within criteria you have set. Let's say we wanted to work out what the square and cube of the numbers from 1 to 20 were. We could calculate this for each number individually, but doing this would result in 40 separate lines of code. With a simple **for** loop, we can instead write this as follows:
 
-```{r cache = TRUE}
+```{r}
 n <- c(1:20)
 
 for(i in 1:length(n)){
@@ -31,9 +31,9 @@ for(i in 1:length(n)){
 
 ### The *while* loop
 
-Another type of loop you will come across, though not one we will be using to load the *Understanding Society* data, is the **while** loop. Simply put, the while loop will carry out a command while certain criteria are filled, and stop once they are not (in our example, once x <! 36). Let's say, for example, we now wanted to see the square and cube of numbers from 21 to 35. We can write this in a **while** loop in the following way:
+Another type of loop you will come across, though not one we will be using to load the *Understanding Society* data, is the **while** loop. Simply put, the while loop will carry out a command while certain criteria are filled, and stop once they are not (in our example, once x < 36). Let's say, for example, we now wanted to see the square and cube of numbers from 21 to 35. We can write this in a **while** loop in the following way:
 
-```{r cache - TRUE}
+```{r}
 x <- 21
 
 while (x < 36) {
@@ -46,7 +46,7 @@ while (x < 36) {
 
 To load the *Understanding Society* data, let's first consider a very simple **for** loop.
 
-```{r cache = TRUE}
+```{r}
 for (i in 1:5) {
   print(i)
 }
@@ -56,7 +56,7 @@ This loop goes through the values from 1 to 5 and, in each iteration, prints the
 
 First, we need to identify the files we want to open. The **dir** function will return the paths and names of all the data files in our data folder that contain the pattern *indresp*.
 
-```{r cache = TRUE}
+```{r}
 files <- dir(
              # Select the folder in which the files are stored.
              "data/UKDA-6614-tab/tab",
@@ -72,7 +72,7 @@ files
 
 There are 25 files as we also have data from the *BHPS*, not just *Understanding Society*. We do not need the *BHPS*, so we want to select only the files from *Understanding Society*. We can use the function **str_detect** from the package **stringr** to select only the files whose paths contain *us*.
 
-```{r cache = TRUE}
+```{r}
 # stringr will return a logical vector. Note that I specify which package the function comes from without explicitly attaching it.
 
 stringr::str_detect(files, "us")
@@ -86,7 +86,7 @@ files
 
 Now we have a vector of file names we want to loop over. We can write a short loop that prints the path and files' names.
 
-```{r cache = TRUE}
+```{r}
 for (i in 1:7) {
   print(files[i])
 }
@@ -94,7 +94,7 @@ for (i in 1:7) {
 
 Note that the same task can be achieved simply with:
 
-```{r cache = TRUE}
+```{r}
 for (i in files) {
   print(i)
 }
@@ -106,25 +106,25 @@ Now we need to read in the data. We can read the files in their entirety, but th
 
 Let's start with creating a vector of the variable names without the prefixes.
 
-```{r cache = TRUE}
+```{r}
 vars <- c("sex", "dvage", "vote6", "fimnnet_dv")
 ```
 
 If we want to add a prefix to the elements of this vector we can use the function **paste**.
 
-```{r cache = TRUE}
+```{r}
 paste("a", vars, sep = "_")
 ```
 
 The constant **letters** contains all the letters of the English alphabet, so the same expression can be written as the following:
 
-```{r cache = TRUE}
+```{r}
 paste(letters[1], vars, sep = "_")
 ```
 
 Now we can write a loop that goes through the values 1 to 7 and in each iteration reads the correct data file choosing the variables with the correct prefix.
 
-```{r cache = TRUE}
+```{r}
 # Attach data.table for the fread function.
 
 library(data.table)
@@ -145,7 +145,7 @@ Now we need to join all these data frames together, and we want to do this in th
 
 In the first iteration of the loop we simply want to save the data from wave 1. In the second and other iterations we want the data to be joined with the data frame we have from the previous iteration.
 
-```{r cache = TRUE}
+```{r}
 # Attach dplyr for the full_join function.
 
 library(dplyr)
@@ -170,12 +170,12 @@ for (i in 1:7) {
 
 **all7** now contains the data from all seven waves.
 
-```{r cache = TRUE}
+```{r}
 head(all7, 3)
 ```
 
 We will now save this file for future use using the **saveRDS** function in the *myData* folder (make sure first you have this folder on your computer).
 
-```{r cache = TRUE}
+```{r}
 saveRDS(all7, "myData/all7.rds")
 ```
