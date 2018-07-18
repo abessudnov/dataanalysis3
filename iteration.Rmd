@@ -1,8 +1,3 @@
----
-output:
-  word_document: default
-  html_document: default
----
 # Iteration {#iteration}
 
 > Prerequisite: Chapter 21 'Iteration' from R for Data Science, available at http://r4ds.had.co.nz/iteration.html
@@ -174,7 +169,7 @@ for (i in 1:7) {
 head(all7, 3)
 ```
 
-We will now save this file for future use using the **saveRDS** function in the *myData* folder (make sure first you have this folder on your computer).
+We will now save this file for future use using the **saveRDS** function in the *myData* folder (make sure first you have this folder on your computer). We went through saving individual files in *Read Data*, covering saving objects as RDS files at http://abessudnov.net/dataanalysis3/readdata.html#saving-an-object-as-an-rds-file
 
 ```{r}
 saveRDS(all7, "myData/all7.rds")
