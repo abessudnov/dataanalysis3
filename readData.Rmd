@@ -200,7 +200,7 @@ write_sav(UndSoc.4, "myData/UndSoc.4.sav")
 
 ### Saving an object as an RDS file
 
-Finally, we can just save a file for future use in R as an RDS file.
+Finally, we can just save a file for future use in R as an RDS file. It will work faster with large objects, but it will only allow saving one object (such as a data frame) at a time and it will also drop the name of the object while saving.
 
 ```{r}
 saveRDS(UndSoc.4, "myData/UndSoc.4.rds")
@@ -210,7 +210,7 @@ saveRDS(UndSoc.4, "myData/UndSoc.4.rds")
 
 To read any of these datasets back into R, use what you learnt in *Reading common data files into R*.
 
-When loading an RDS file back into R, simply use the **readRDS()** command.
+When loading an RDS file back into R, simply use the **readRDS()** command. Note that we assign a new name to the object.
 
 ```{r}
 RDS <- readRDS("myData/UndSoc.4.rds")
