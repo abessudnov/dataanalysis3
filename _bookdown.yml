@@ -5,4 +5,4 @@ before_chapter_script: ["removeObjects.R"]
 rmd_files: ["index.Rmd", "moduleOutline.Rmd",
             "assignment.Rmd", "readData.Rmd", "transformData.Rmd",
             "joiningData.Rmd", "iteration.Rmd", "tidyData.Rmd", 
-            "dataVis.Rmd", "datavis2.Rmd", "rmarkdown.Rmd", "modelling.Rmd"]
+            "dataVis.Rmd", "dataVis2.Rmd", "rmarkdown.Rmd", "modelling.Rmd"]
