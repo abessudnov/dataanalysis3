@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Analysis in Social Science 3</title>
+  <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data Analysis in Social Science 3" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://abessudnov.net/dataanalysis3/" />
+  
+  <meta property="og:description" content="A website for the Data Analysis in Social Science 3 module." />
+  <meta name="github-repo" content="abessudnov/dataanalysis3" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Analysis in Social Science 3" />
+  
+  <meta name="twitter:description" content="A website for the Data Analysis in Social Science 3 module." />
+  
+
+<meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
+
+
+<meta name="date" content="2018-07-23">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="readdata.html">
+<link rel="next" href="joining.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113869422-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-113869422-1');
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-to-do-before-the-next-class"><i class="fa fa-check"></i><b>1.1</b> Things to do before the next class</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="module-outline.html"><a href="module-outline.html"><i class="fa fa-check"></i><b>2</b> Module outline</a><ul>
+<li class="chapter" data-level="2.1" data-path="module-outline.html"><a href="module-outline.html#practical-arrangements"><i class="fa fa-check"></i><b>2.1</b> Practical arrangements</a></li>
+<li class="chapter" data-level="2.2" data-path="module-outline.html"><a href="module-outline.html#aims-of-the-module"><i class="fa fa-check"></i><b>2.2</b> Aims of the module</a></li>
+<li class="chapter" data-level="2.3" data-path="module-outline.html"><a href="module-outline.html#attendance"><i class="fa fa-check"></i><b>2.3</b> Attendance</a></li>
+<li class="chapter" data-level="2.4" data-path="module-outline.html"><a href="module-outline.html#assessment"><i class="fa fa-check"></i><b>2.4</b> Assessment</a></li>
+<li class="chapter" data-level="2.5" data-path="module-outline.html"><a href="module-outline.html#syllabus-plan"><i class="fa fa-check"></i><b>2.5</b> Syllabus plan</a></li>
+<li class="chapter" data-level="2.6" data-path="module-outline.html"><a href="module-outline.html#reading-list"><i class="fa fa-check"></i><b>2.6</b> Reading list</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="assignment.html"><a href="assignment.html"><i class="fa fa-check"></i><b>3</b> Assignment</a></li>
+<li class="chapter" data-level="4" data-path="readdata.html"><a href="readdata.html"><i class="fa fa-check"></i><b>4</b> Read data</a><ul>
+<li class="chapter" data-level="4.1" data-path="readdata.html"><a href="readdata.html#introduction-to-reading-data"><i class="fa fa-check"></i><b>4.1</b> Introduction to Reading Data</a></li>
+<li class="chapter" data-level="4.2" data-path="readdata.html"><a href="readdata.html#reading-common-data-files-into-r"><i class="fa fa-check"></i><b>4.2</b> Reading common data files into R</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="readdata.html"><a href="readdata.html#ways-to-read-data-into-r"><i class="fa fa-check"></i><b>4.2.1</b> Ways to read data into R</a></li>
+<li class="chapter" data-level="4.2.2" data-path="readdata.html"><a href="readdata.html#comparing-these-three-methods"><i class="fa fa-check"></i><b>4.2.2</b> Comparing these three methods</a></li>
+<li class="chapter" data-level="4.2.3" data-path="readdata.html"><a href="readdata.html#editing-a-dataset-while-reading-it-into-r"><i class="fa fa-check"></i><b>4.2.3</b> Editing a dataset while reading it into R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="readdata.html"><a href="readdata.html#reading-other-data-files"><i class="fa fa-check"></i><b>4.3</b> Reading other data files</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="readdata.html"><a href="readdata.html#excel"><i class="fa fa-check"></i><b>4.3.1</b> Excel</a></li>
+<li class="chapter" data-level="4.3.2" data-path="readdata.html"><a href="readdata.html#spss"><i class="fa fa-check"></i><b>4.3.2</b> SPSS</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="readdata.html"><a href="readdata.html#saving-datasets"><i class="fa fa-check"></i><b>4.4</b> Saving datasets</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="readdata.html"><a href="readdata.html#saving-data-as-a-text-file"><i class="fa fa-check"></i><b>4.4.1</b> Saving data as a text file</a></li>
+<li class="chapter" data-level="4.4.2" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-excel-file"><i class="fa fa-check"></i><b>4.4.2</b> Saving data as an Excel file</a></li>
+<li class="chapter" data-level="4.4.3" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-spss-file"><i class="fa fa-check"></i><b>4.4.3</b> Saving data as an SPSS file</a></li>
+<li class="chapter" data-level="4.4.4" data-path="readdata.html"><a href="readdata.html#saving-an-object-as-an-rds-file"><i class="fa fa-check"></i><b>4.4.4</b> Saving an object as an RDS file</a></li>
+<li class="chapter" data-level="4.4.5" data-path="readdata.html"><a href="readdata.html#loading-these-datasets-back-into-r"><i class="fa fa-check"></i><b>4.4.5</b> Loading these datasets back into R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="readdata.html"><a href="readdata.html#saving-the-working-environment"><i class="fa fa-check"></i><b>4.5</b> Saving the working environment</a></li>
+<li class="chapter" data-level="4.6" data-path="readdata.html"><a href="readdata.html#reading-in-multiple-waves-from-understanding-society"><i class="fa fa-check"></i><b>4.6</b> Reading in multiple waves from Understanding Society</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="transformdata.html"><a href="transformdata.html"><i class="fa fa-check"></i><b>5</b> Transform data</a><ul>
+<li class="chapter" data-level="5.1" data-path="transformdata.html"><a href="transformdata.html#introduction-to-transforming-data"><i class="fa fa-check"></i><b>5.1</b> Introduction to transforming data</a></li>
+<li class="chapter" data-level="5.2" data-path="transformdata.html"><a href="transformdata.html#operators-recap"><i class="fa fa-check"></i><b>5.2</b> Operators recap</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="transformdata.html"><a href="transformdata.html#relational-operators"><i class="fa fa-check"></i><b>5.2.1</b> Relational operators</a></li>
+<li class="chapter" data-level="5.2.2" data-path="transformdata.html"><a href="transformdata.html#logical-operators"><i class="fa fa-check"></i><b>5.2.2</b> Logical operators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="transformdata.html"><a href="transformdata.html#the-pipe-operator"><i class="fa fa-check"></i><b>5.3</b> The pipe operator (%&gt;%)</a></li>
+<li class="chapter" data-level="5.4" data-path="transformdata.html"><a href="transformdata.html#select-variables"><i class="fa fa-check"></i><b>5.4</b> Select variables</a></li>
+<li class="chapter" data-level="5.5" data-path="transformdata.html"><a href="transformdata.html#select-cases"><i class="fa fa-check"></i><b>5.5</b> Select cases</a></li>
+<li class="chapter" data-level="5.6" data-path="transformdata.html"><a href="transformdata.html#recode-variables-both-base-r-and-dplyr-using-ifelse"><i class="fa fa-check"></i><b>5.6</b> Recode variables Both base R and dplyr using ifelse</a></li>
+<li class="chapter" data-level="5.7" data-path="transformdata.html"><a href="transformdata.html#create-new-variables"><i class="fa fa-check"></i><b>5.7</b> Create new variables</a></li>
+<li class="chapter" data-level="5.8" data-path="transformdata.html"><a href="transformdata.html#sort-data"><i class="fa fa-check"></i><b>5.8</b> Sort data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="joining.html"><a href="joining.html"><i class="fa fa-check"></i><b>6</b> Join data</a><ul>
+<li class="chapter" data-level="6.1" data-path="joining.html"><a href="joining.html#introduction-to-joining-data"><i class="fa fa-check"></i><b>6.1</b> Introduction to joining data</a></li>
+<li class="chapter" data-level="6.2" data-path="joining.html"><a href="joining.html#joining-waves-1-and-2"><i class="fa fa-check"></i><b>6.2</b> Joining waves 1 and 2</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="joining.html"><a href="joining.html#the-key"><i class="fa fa-check"></i><b>6.2.1</b> The ‘key’</a></li>
+<li class="chapter" data-level="6.2.2" data-path="joining.html"><a href="joining.html#inner-join"><i class="fa fa-check"></i><b>6.2.2</b> Inner join</a></li>
+<li class="chapter" data-level="6.2.3" data-path="joining.html"><a href="joining.html#left-join"><i class="fa fa-check"></i><b>6.2.3</b> Left join</a></li>
+<li class="chapter" data-level="6.2.4" data-path="joining.html"><a href="joining.html#right-join"><i class="fa fa-check"></i><b>6.2.4</b> Right join</a></li>
+<li class="chapter" data-level="6.2.5" data-path="joining.html"><a href="joining.html#full-join"><i class="fa fa-check"></i><b>6.2.5</b> Full join</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="iteration.html"><a href="iteration.html"><i class="fa fa-check"></i><b>7</b> Iteration</a><ul>
+<li class="chapter" data-level="7.1" data-path="iteration.html"><a href="iteration.html#introduction-to-iteration"><i class="fa fa-check"></i><b>7.1</b> Introduction to iteration</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="iteration.html"><a href="iteration.html#the-for-loop"><i class="fa fa-check"></i><b>7.1.1</b> The <em>for</em> loop</a></li>
+<li class="chapter" data-level="7.1.2" data-path="iteration.html"><a href="iteration.html#the-while-loop"><i class="fa fa-check"></i><b>7.1.2</b> The <em>while</em> loop</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="iteration.html"><a href="iteration.html#loading-understanding-society-using-iteration"><i class="fa fa-check"></i><b>7.2</b> Loading <em>Understanding Society</em> using iteration</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>8</b> Tidy data</a><ul>
+<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a></li>
+<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.2</b> Cleaning the data</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="datavis.html"><a href="datavis.html"><i class="fa fa-check"></i><b>9</b> Data visualisation</a><ul>
+<li class="chapter" data-level="9.1" data-path="datavis.html"><a href="datavis.html#reading-in-the-data"><i class="fa fa-check"></i><b>9.1</b> Reading in the data</a></li>
+<li class="chapter" data-level="9.2" data-path="datavis.html"><a href="datavis.html#visualising-one-quantitative-variable"><i class="fa fa-check"></i><b>9.2</b> Visualising one quantitative variable</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="datavis.html"><a href="datavis.html#histogram."><i class="fa fa-check"></i><b>9.2.1</b> Histogram.</a></li>
+<li class="chapter" data-level="9.2.2" data-path="datavis.html"><a href="datavis.html#density-chart."><i class="fa fa-check"></i><b>9.2.2</b> Density chart.</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="datavis.html"><a href="datavis.html#visualising-one-categorical-variable"><i class="fa fa-check"></i><b>9.3</b> Visualising one categorical variable</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="datavis.html"><a href="datavis.html#bar-plot."><i class="fa fa-check"></i><b>9.3.1</b> Bar plot.</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="datavis.html"><a href="datavis.html#visualising-two-quantitative-variables"><i class="fa fa-check"></i><b>9.4</b> Visualising two quantitative variables</a></li>
+<li class="chapter" data-level="9.5" data-path="datavis.html"><a href="datavis.html#visualising-one-categorical-and-one-quantitative-variable"><i class="fa fa-check"></i><b>9.5</b> Visualising one categorical and one quantitative variable</a></li>
+<li class="chapter" data-level="9.6" data-path="datavis.html"><a href="datavis.html#visualising-two-categorical-variables"><i class="fa fa-check"></i><b>9.6</b> Visualising two categorical variables</a></li>
+<li class="chapter" data-level="9.7" data-path="datavis.html"><a href="datavis.html#showing-the-relationships-by-group"><i class="fa fa-check"></i><b>9.7</b> Showing the relationships by group</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="datavis2.html"><a href="datavis2.html"><i class="fa fa-check"></i><b>10</b> Data visualisation 2</a><ul>
+<li class="chapter" data-level="10.1" data-path="datavis2.html"><a href="datavis2.html#visualising-income"><i class="fa fa-check"></i><b>10.1</b> Visualising income</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>11</b> R Markdown</a></li>
+<li class="chapter" data-level="12" data-path="modelling.html"><a href="modelling.html"><i class="fa fa-check"></i><b>12</b> Modelling</a><ul>
+<li class="chapter" data-level="12.1" data-path="modelling.html"><a href="modelling.html#cross-sectional-analysis"><i class="fa fa-check"></i><b>12.1</b> Cross-sectional analysis</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="modelling.html"><a href="modelling.html#age-and-political-interest"><i class="fa fa-check"></i><b>12.1.1</b> Age and political interest</a></li>
+<li class="chapter" data-level="12.1.2" data-path="modelling.html"><a href="modelling.html#sex-and-political-interest"><i class="fa fa-check"></i><b>12.1.2</b> Sex and political interest</a></li>
+<li class="chapter" data-level="12.1.3" data-path="modelling.html"><a href="modelling.html#linear-model"><i class="fa fa-check"></i><b>12.1.3</b> Linear model</a></li>
+<li class="chapter" data-level="12.1.4" data-path="modelling.html"><a href="modelling.html#interaction-effect-between-sex-and-age"><i class="fa fa-check"></i><b>12.1.4</b> Interaction effect between sex and age</a></li>
+<li class="chapter" data-level="12.1.5" data-path="modelling.html"><a href="modelling.html#checking-the-assumptions"><i class="fa fa-check"></i><b>12.1.5</b> Checking the assumptions</a></li>
+<li class="chapter" data-level="12.1.6" data-path="modelling.html"><a href="modelling.html#presenting-the-output-for-multiple-regression-models"><i class="fa fa-check"></i><b>12.1.6</b> Presenting the output for multiple regression models</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="modelling.html"><a href="modelling.html#longitudinal-analysis"><i class="fa fa-check"></i><b>12.2</b> Longitudinal analysis</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="modelling.html"><a href="modelling.html#simple-model"><i class="fa fa-check"></i><b>12.2.1</b> Simple model</a></li>
+<li class="chapter" data-level="12.2.2" data-path="modelling.html"><a href="modelling.html#adding-a-time-constant-variable"><i class="fa fa-check"></i><b>12.2.2</b> Adding a time-constant variable</a></li>
+<li class="chapter" data-level="12.2.3" data-path="modelling.html"><a href="modelling.html#adding-a-time-varying-variable"><i class="fa fa-check"></i><b>12.2.3</b> Adding a time-varying variable</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="modelling.html"><a href="modelling.html#further-reading"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Analysis in Social Science 3</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="transformdata" class="section level1">
+<h1><span class="header-section-number">5</span> Transform data</h1>
+<blockquote>
+<p>Prerequisite: Chapter 11 ‘Data transformation’ from R for Data Science, available at <a href="http://r4ds.had.co.nz/transform.html" class="uri">http://r4ds.had.co.nz/transform.html</a></p>
+</blockquote>
+<div id="introduction-to-transforming-data" class="section level2">
+<h2><span class="header-section-number">5.1</span> Introduction to transforming data</h2>
+<p>Once you have imported your data in R you will usually want to clean it, transform it and produce some data summaries. All these tasks can be accomplished with base R. However, it is usually more convenient to use specialised packages for this, such as <strong>dplyr</strong> and <strong>data.table</strong>. In this module we will use <strong>dplyr</strong>.</p>
+<p>We are going to work with wave 1 from the <em>Understanding Society</em> dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, install the &#39;data.table&#39; package.</span>
+
+<span class="kw">library</span>(data.table)
+
+<span class="co"># Revisit the class &quot;Read Data&quot; if you need a reminder on how to best read data into R.</span>
+
+W1 &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
+<pre><code>## 
+Read 78.4% of 50994 rows
+Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:04</code></pre>
+</div>
+<div id="operators-recap" class="section level2">
+<h2><span class="header-section-number">5.2</span> Operators recap</h2>
+<p>However, before we learn how to transform data in R, we are going to recap on operators you will need that you should have covered in other courses using R. These operators are <em>relational</em> and <em>logical</em>.</p>
+<div id="relational-operators" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Relational operators</h3>
+<p>Relational operators are used when comparing values, and will help with selecting cases, recoding and creating variables in your assignment. Below is a table with some useful relational operators available in R.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>&lt;</td>
+<td>Less than</td>
+</tr>
+<tr class="even">
+<td><code>&gt;</code></td>
+<td>Greater than</td>
+</tr>
+<tr class="odd">
+<td>&lt;!</td>
+<td>Not less than</td>
+</tr>
+<tr class="even">
+<td><code>&gt;!</code></td>
+<td>Not greater than</td>
+</tr>
+<tr class="odd">
+<td>&lt;=</td>
+<td>Less than or equal to</td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td>Greater than or equal to</td>
+</tr>
+<tr class="odd">
+<td>==</td>
+<td>Equal to</td>
+</tr>
+<tr class="even">
+<td>!=</td>
+<td>Not equal to</td>
+</tr>
+</tbody>
+</table>
+<p>For example, if we code <em>x</em> to be 5 and <em>y</em> to be 6, we can use these operators to compare the two. R gives us a <em>TRUE</em> or <em>FALSE</em> reading for each comparison we make.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">5</span>
+
+y &lt;-<span class="st"> </span><span class="dv">6</span>
+
+x <span class="op">&lt;</span><span class="st"> </span>y</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">==</span><span class="st"> </span>y</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">!=</span><span class="st"> </span>y</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>If we were selecting variables from a data frame that were greater than <em>x</em>, for example, we could use these operators to do so. This will be covered later in this class.</p>
+</div>
+<div id="logical-operators" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Logical operators</h3>
+<p>Logical operators are used to help compare values, and are especially useful when comparing multiple values. Below is a table of some useful logical operators available in R.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>&amp;</td>
+<td>And</td>
+</tr>
+<tr class="even">
+<td><code>|</code></td>
+<td>Or</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="dv">7</span>
+
+x <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&lt;</span><span class="st"> </span>y</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">|</span><span class="st"> </span>z <span class="op">&lt;</span><span class="st"> </span>y</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">|</span><span class="st"> </span>z <span class="op">&lt;!</span><span class="st"> </span>y</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Again, these operators will be used more later in this class, and are necessary when recoding values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Cleaning up the working environment.</span>
+
+<span class="kw">rm</span>(x, y, z)</code></pre></div>
+</div>
+</div>
+<div id="the-pipe-operator" class="section level2">
+<h2><span class="header-section-number">5.3</span> The pipe operator (%&gt;%)</h2>
+<p>The first step in transforming data is understanding what the pipe operator <em>%&gt;%</em> is, and how it works. To do this, we are going to create a simple table showing the proportions of responses given to the variable <em>political interest</em> (<strong>a_vote6</strong>). To begin with, we create a table showing the numbers of responses given for each category.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(W1<span class="op">$</span>a_vote6)</code></pre></div>
+<pre><code>## 
+##    -9    -7    -2    -1     1     2     3     4 
+##   118  3262    42    42  4882 15862 14017 12769</code></pre>
+<p>To convert this table into a table of proportions we do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">table</span>(W1<span class="op">$</span>a_vote6))</code></pre></div>
+<pre><code>## 
+##           -9           -7           -2           -1            1 
+## 0.0023139977 0.0639683100 0.0008236263 0.0008236263 0.0957367533 
+##            2            3            4 
+## 0.3110562027 0.2748754755 0.2504020081</code></pre>
+<p>To print this table in an easy-to-read manner, we would usually use the <strong>kable()</strong> function from the <em>knitr</em> package, and would need to convert the table into a data frame first and then apply the function <strong>kable()</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Loading the &#39;knitr&#39; package into R.</span>
+
+<span class="kw">library</span>(knitr)
+
+<span class="co"># Printing the table of proportions.</span>
+
+<span class="kw">kable</span>(<span class="kw">data.frame</span>(<span class="kw">prop.table</span>(<span class="kw">table</span>(W1<span class="op">$</span>a_vote6))), <span class="dt">digits =</span> <span class="dv">2</span>)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-9</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">-7</td>
+<td align="right">0.06</td>
+</tr>
+<tr class="odd">
+<td align="left">-2</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">-1</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">0.10</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">0.31</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">0.27</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">0.25</td>
+</tr>
+</tbody>
+</table>
+<p>As you can see, at this point we have four ‘nested’ functions (functions within other functions) and the code becomes difficult to read. With the pipe operator <strong>%&gt;%</strong> (Shift+Ctrl+M on Windows or Shift+Cmd+M on Mac) you can achieve the same result with the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Loading the &#39;tidyverse&#39; package, in which the package containing the pipe operator (&#39;dplyr&#39;) is found.</span>
+
+<span class="kw">library</span>(tidyverse)
+
+W1<span class="op">$</span>a_vote6 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">table</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">prop.table</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable</span>(<span class="dt">digits =</span> <span class="dv">2</span>)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">.</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-9</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">-7</td>
+<td align="right">0.06</td>
+</tr>
+<tr class="odd">
+<td align="left">-2</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">-1</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">0.10</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">0.31</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">0.27</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">0.25</td>
+</tr>
+</tbody>
+</table>
+<p>The pipe operator passes the results of the execution of a function to the next function, essentially treating the entire chunk of code as a ladder, which is executed from top to bottom, with each extra line of code being run on the results from the previous line. This makes code easier to write, read and understand.</p>
+</div>
+<div id="select-variables" class="section level2">
+<h2><span class="header-section-number">5.4</span> Select variables</h2>
+<p>For your assignment, you will only want to work with select variables from <em>Understanding Society</em>. You learnt how to read in only select variables from a dataset in the <em>Read data</em> class, though if you have already loaded in a dataset (as we have here) and want to select only certain variables from this, you need to learn how to transform the data as you do not want to have to keep loading data in to R every time you decide to add or remove a variable from your analysis.</p>
+<p>Here, we will select the variables for sex, age, place of birth and measures of weight and height, as well as the personal identification variable for each individual. In base R you could use the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 &lt;-<span class="st"> </span><span class="kw">subset</span>(W1, <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;pidp&quot;</span>, <span class="st">&quot;a_sex&quot;</span>, <span class="st">&quot;a_dvage&quot;</span>, <span class="st">&quot;a_ukborn&quot;</span>, <span class="st">&quot;a_hlht&quot;</span>, <span class="st">&quot;a_hlhtf&quot;</span>, <span class="st">&quot;a_hlhti&quot;</span>, <span class="st">&quot;a_hlhtc&quot;</span>, <span class="st">&quot;a_hlwt&quot;</span>, <span class="st">&quot;a_hlwts&quot;</span>, <span class="st">&quot;a_hlwtp&quot;</span>, <span class="st">&quot;a_hlwtk&quot;</span>))
+<span class="kw">head</span>(newW1, <span class="dv">3</span>)</code></pre></div>
+<pre><code>##        pidp a_sex a_dvage a_ukborn a_hlht a_hlhtf a_hlhti a_hlhtc a_hlwt
+## 1: 68001367     1      39        1      1       6       0      -8      1
+## 2: 68004087     1      59        5      1       5      11      -8      2
+## 3: 68006127     2      39        1      1       5       1      -8      1
+##    a_hlwts a_hlwtp a_hlwtk
+## 1:      15       8      -8
+## 2:      -8      -8      70
+## 3:      14       7      -8</code></pre>
+<p>However, with <strong>dplyr</strong>, we are able to do this with much less code, as follows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 &lt;-<span class="st"> </span>W1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(pidp<span class="op">:</span>a_dvage, a_ukborn, a_hlht<span class="op">:</span>a_hlwtk)
+<span class="kw">head</span>(newW1, <span class="dv">3</span>)</code></pre></div>
+<pre><code>##        pidp a_sex a_dvage a_ukborn a_hlht a_hlhtf a_hlhti a_hlhtc a_hlwt
+## 1: 68001367     1      39        1      1       6       0      -8      1
+## 2: 68004087     1      59        5      1       5      11      -8      2
+## 3: 68006127     2      39        1      1       5       1      -8      1
+##    a_hlwts a_hlwtp a_hlwtk
+## 1:      15       8      -8
+## 2:      -8      -8      70
+## 3:      14       7      -8</code></pre>
+<p>As some of the variables we want to select from the <em>W1</em> data appear next to one another, we can use a colon to select these adjacent variables, meaning we do not need to write out every variable we want to select.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Clearing W1 from the working environment.</span>
+
+<span class="kw">rm</span>(W1)</code></pre></div>
+</div>
+<div id="select-cases" class="section level2">
+<h2><span class="header-section-number">5.5</span> Select cases</h2>
+<p>Relatedly, sometimes you will want to only work with certain cases in variables that meet certain conditions. Here, we only include women aged 18 to 25 in a new data frame. To do this in base R, we use what we recapped in <em>Operators recap</em> and can save the new data frame as follows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">women &lt;-<span class="st"> </span>newW1[newW1<span class="op">$</span>a_sex <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>(newW1<span class="op">$</span>a_dvage <span class="op">&gt;=</span><span class="st"> </span><span class="dv">18</span> <span class="op">&amp;</span><span class="st"> </span>newW1<span class="op">$</span>a_dvage <span class="op">&lt;=</span><span class="dv">25</span>),]</code></pre></div>
+<p>Once again, by using <strong>dplyr</strong>, our code will be shorter and easier to read.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(a_sex <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>(a_dvage <span class="op">&gt;=</span><span class="st"> </span><span class="dv">18</span> <span class="op">&amp;</span><span class="st"> </span>a_dvage <span class="op">&lt;=</span><span class="dv">25</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)</code></pre></div>
+<pre><code>##       pidp a_sex a_dvage a_ukborn a_hlht a_hlhtf a_hlhti a_hlhtc a_hlwt
+## 1 68010207     2      24        1      1       5       5      -8      1
+## 2 68010891     2      23        1     -7      -7      -7      -7     -7
+## 3 68023131     2      23        1      1       5       9      -8      1
+##   a_hlwts a_hlwtp a_hlwtk
+## 1      10      10      -8
+## 2      -7      -7      -7
+## 3      11      13      -8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note: In this case we are not saving the new data frame as an object, but instead printing the first three rows from the data to demonstrate the result.</span></code></pre></div>
+<p>We can make this as complicated as we want and use more than one variable. For example, here is a new data frame that includes only people born in Wales or Northern Ireland <em>and</em> over the age of 40.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>((a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">3</span> <span class="op">|</span><span class="st"> </span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">&amp;</span><span class="st"> </span>a_dvage <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)</code></pre></div>
+<pre><code>##       pidp a_sex a_dvage a_ukborn a_hlht a_hlhtf a_hlhti a_hlhtc a_hlwt
+## 1 68051011     2      41        3      1       5       5      -8      1
+## 2 68062567     2      50        4      1       5       1      -8      1
+## 3 68189727     2      95        3      1       5       4      -8      1
+##   a_hlwts a_hlwtp a_hlwtk
+## 1      10       2      -8
+## 2       9       2      -8
+## 3      10       3      -8</code></pre>
+</div>
+<div id="recode-variables-both-base-r-and-dplyr-using-ifelse" class="section level2">
+<h2><span class="header-section-number">5.6</span> Recode variables Both base R and dplyr using ifelse</h2>
+<p>Wanting to change the output of variables is common when working with data, as variables are often coded in ways that make them easy to code for those recording the variables, but difficult to understand without a code book for people analysing the data. This is the case with some of the variables in <em>Understanding Society</em>.</p>
+<p>The <strong>ifelse</strong> command is used to recode variables, and works by <strong>a)</strong> using a relational operator to specify the range of values you want to include from the original variable, <strong>b)</strong> setting what you want to recode this value/set of values as, <strong>c)</strong> finally setting what values <em>outside</em> the range you specified are recoded as.</p>
+<p>As a simple example, here we create a new dummy variable using base R named <em>a_Scotland</em> that takes the value of 1 if a person was born in Scotland (with a value of <em>2</em> from the <em>a_ukborn</em> variable) and 0 otherwise.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1<span class="op">$</span>a_Scotland &lt;-<span class="st"> </span><span class="kw">ifelse</span>(newW1<span class="op">$</span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</code></pre></div>
+<p>However, there are often times when you will want to recode a number of values from a variable. If you look at the code book for <em>Understanding Society</em>, you can see that the variable <em>ukborn</em> is coded to give numerical values that correspond to a country of birth. To make interpreting this variable easier, both for us and for anyone reading our analysis of the <em>Understanding Society</em> data, we can recode this variable to instead show the country name, rather than a numerical value, as its output. In this case, as there are multiple values we want to recode, the final clause in the <strong>ifelse()</strong> command can be set as another <strong>ifelse()</strong> command to recode other values from this variable, before setting those outside all of the values we are interested in (such as responses where this question was refused an answer) as <em>NA</em> to finish the command.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Instead of recoding the variable and overwriting the original, we create a new variable to put the recoded variable in, as if we make a mistake with our code and have overwritten the original data, we will have to reload the dataset and start this process again. It is good coding practice to never overwrite original data.</span>
+
+newW1<span class="op">$</span>a_uk &lt;-<span class="st"> </span><span class="kw">ifelse</span>(newW1<span class="op">$</span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&#39;England&#39;</span>,
+                     <span class="kw">ifelse</span>(newW1<span class="op">$</span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="st">&#39;Scotland&#39;</span>,
+                            <span class="kw">ifelse</span>(newW1<span class="op">$</span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">3</span>, <span class="st">&#39;Wales&#39;</span>,
+                                   <span class="kw">ifelse</span>(newW1<span class="op">$</span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">4</span>, <span class="st">&#39;NIR&#39;</span>,
+                                          <span class="kw">ifelse</span>(newW1<span class="op">$</span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">5</span>, <span class="st">&#39;Overseas&#39;</span>,
+                                                 <span class="ot">NA</span>)))))</code></pre></div>
+<p>Once again, however, <strong>dplyr</strong> makes this process shorter to write and easier to read. The <strong>recode</strong> command allows us to do this. However, this will overwrite our original variable, and as already discussed, this is bad practice. Consequently, we will use the <strong>mutate</strong> command (which we will explore in more detail in <em>Create new variables</em>) to make a new variable in which to put this recoding.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The command &#39;.default = NA_character_&#39; codes all the values that were not specifically matched (all negative values in our case) to missing values.</span>
+
+AltW1 &lt;-<span class="st"> </span>newW1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">a_placeBirth =</span> <span class="kw">recode</span>(a_ukborn,
+                             <span class="st">&quot;1&quot;</span> =<span class="st"> &quot;England&quot;</span>,
+                             <span class="st">&quot;2&quot;</span> =<span class="st"> &quot;Scotland&quot;</span>,
+                             <span class="st">&quot;3&quot;</span> =<span class="st"> &quot;Wales&quot;</span>,
+                             <span class="st">&quot;4&quot;</span> =<span class="st"> &quot;Northern Ireland&quot;</span>,
+                             <span class="st">&quot;5&quot;</span> =<span class="st"> &quot;not UK&quot;</span>,
+                             <span class="dt">.default =</span> <span class="ot">NA_character_</span>))</code></pre></div>
+<p>It is always a good idea to compare the distributions of the original and recoded variables to make sure that our code was correct. It is simplest to use the <strong>count()</strong> command to do this.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AltW1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(a_ukborn, a_placeBirth)</code></pre></div>
+<pre><code>## # A tibble: 8 x 3
+##   a_ukborn     a_placeBirth     n
+##      &lt;int&gt;            &lt;chr&gt; &lt;int&gt;
+## 1       -9             &lt;NA&gt;     6
+## 2       -2             &lt;NA&gt;     2
+## 3       -1             &lt;NA&gt;     8
+## 4        1          England 33480
+## 5        2         Scotland  3567
+## 6        3            Wales  2154
+## 7        4 Northern Ireland  2033
+## 8        5           not UK  9744</code></pre>
+</div>
+<div id="create-new-variables" class="section level2">
+<h2><span class="header-section-number">5.7</span> Create new variables</h2>
+<p>As already mentioned, the <strong>mutate()</strong> command is used to create new variables, which can go far beyond merely recoding existing variables. Our next example is a much more complicated case, creating a new variable in which we code a variable for the Body Mass Index (BMI), which is defined as weight in kilograms divided by the square of height in meters:</p>
+<p><span class="math display">\[BMI = \frac{weight_{kg}}{{height_{m}}^2}\]</span></p>
+<p>The problem we immediately encounter is that in our dataset some people gave their weight in kilograms (<em>a_hlwtk</em>) and some in stones and pounds (<em>a_hlwts</em> and <em>a_hlwtp</em>). Similarly, some people gave their height in centimetres (<em>a_hlhtc</em>) and others in feet and inches (<em>a_hlhtf</em> and <em>a_hlhti</em>). We need to start with converting the measures for everyone to kilograms and centimetres and then we will be able to create a variable for BMI.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Imperial measurement</th>
+<th>Metric conversion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 foot</td>
+<td>40.38 centimetres</td>
+</tr>
+<tr class="even">
+<td>1 inch</td>
+<td>2.54 centimetres</td>
+</tr>
+<tr class="odd">
+<td>1 stone</td>
+<td>6.35 kilograms</td>
+</tr>
+<tr class="even">
+<td>1 pound</td>
+<td>0.45 kilograms</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1mod &lt;-<span class="st"> </span>newW1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Start your code by creating a new variable for height in centimetres.</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">heightcm =</span> <span class="kw">ifelse</span>(a_hlht <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>a_hlhtf <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,
+                           a_hlhtf <span class="op">*</span><span class="st"> </span><span class="fl">30.48</span> <span class="op">+</span><span class="st"> </span>a_hlhti <span class="op">*</span><span class="st"> </span><span class="fl">2.54</span>,
+                           <span class="kw">ifelse</span>(a_hlht <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>a_hlhtc <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,
+                                  a_hlhtc, <span class="ot">NA</span>))) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="co"># New variable &#39;heightcm&#39;: if height is measured in feet and inches (a_hlht == 1) and is not missing (a_hlhtf &gt; 0),</span>
+<span class="st">    </span><span class="co"># Multiply feet by 30.48 and inches by 2.54 to convert these measurements to centimetres and add them together, entering height as this new value.</span>
+<span class="st">    </span><span class="co"># If height is not measured in feet and inches, but centimetres instead (a_hlht == 2), and is not missing (a_hlhtf &gt; 0), enter height as this value, and if height is measured in neither feet and inches nor in centimetres, set the value for height as &#39;NA&#39;.</span>
+<span class="st">  </span><span class="co"># Now do the same for weight, converting into kilograms.</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weightkg =</span> <span class="kw">ifelse</span>(a_hlwt <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>a_hlwts <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
+                           a_hlwts <span class="op">*</span><span class="st"> </span><span class="fl">6.35</span> <span class="op">+</span><span class="st"> </span>a_hlwtp <span class="op">*</span><span class="st"> </span><span class="fl">0.45</span>,
+                           <span class="kw">ifelse</span>(a_hlwt <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>a_hlwtk <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
+                                  a_hlwtk, <span class="ot">NA</span>))) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="co"># New variable &#39;weightkg&#39;: if weight is measured in stone and pounds (a_hlwt == 1) and is not missing (a_hlwts &gt; 0),</span>
+<span class="st">    </span><span class="co"># Multiply stone by 6.35 and pounds by 0.45 to convert these measurements to kilograms and add these together, entering weight as this new value.</span>
+<span class="st">    </span><span class="co"># If weight is not measured in stone and pounds, but kilograms instead (a_hlwt == 2), and is not missing (a_hlhtf &gt; 0), enter weight as this value, and if weight is measured in neither stone and pounds nor in kilograms, set the value for weight as &#39;NA&#39;.</span>
+<span class="st">  </span><span class="co"># Finally create a variable for BMI.</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bmi =</span> weightkg <span class="op">/</span><span class="st"> </span>(heightcm <span class="op">/</span><span class="st"> </span><span class="dv">100</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
+    <span class="co"># New variable &#39;bmi&#39;: &#39;weightkg&#39; / (&#39;hightcm&#39; / 100) ^ 2)</span></code></pre></div>
+<p>Now we are able to look at the distribution of BMI across the <em>Understanding Society</em> dataset, using a histogram.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(W1mod<span class="op">$</span>bmi)</code></pre></div>
+<p><img src="datan3_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+</div>
+<div id="sort-data" class="section level2">
+<h2><span class="header-section-number">5.8</span> Sort data</h2>
+<p>We can sort data with the <strong>arrange()</strong> command from <strong>dplyr</strong>.</p>
+<p>Initially, we sort the data by BMI.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1mod <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(bmi) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(pidp, bmi) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">5</span>)</code></pre></div>
+<pre><code>##         pidp       bmi
+## 1  614152207  3.581188
+## 2 1158204567  4.357708
+## 3 1292128539 10.098136
+## 4 1088805127 11.732290
+## 5  478722727 12.050592</code></pre>
+<p>However, we can also sort data by a number of factors. Finally, we sort by BMI in decreasing order, separately for each sex.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+W1mod <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(a_sex, <span class="kw">desc</span>(bmi)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(pidp, a_sex, bmi) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">5</span>)</code></pre></div>
+<pre><code>##         pidp a_sex      bmi
+## 1  952435887     1 73.90269
+## 2 1632274047     1 66.37745
+## 3  340892847     1 65.19274
+## 4 1292157767     1 63.10072
+## 5  340443367     1 62.98222</code></pre>
+<p>Here, we have just printed the first five rows of this data as an example. If you wanted, you could save these ordered datasets in the working environment, the same way we saved our new datasets earlier.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="readdata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="joining.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

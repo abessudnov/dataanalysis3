@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Analysis in Social Science 3</title>
+  <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data Analysis in Social Science 3" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://abessudnov.net/dataanalysis3/" />
+  
+  <meta property="og:description" content="A website for the Data Analysis in Social Science 3 module." />
+  <meta name="github-repo" content="abessudnov/dataanalysis3" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Analysis in Social Science 3" />
+  
+  <meta name="twitter:description" content="A website for the Data Analysis in Social Science 3 module." />
+  
+
+<meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
+
+
+<meta name="date" content="2018-07-23">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="module-outline.html">
+<link rel="next" href="readdata.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113869422-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-113869422-1');
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-to-do-before-the-next-class"><i class="fa fa-check"></i><b>1.1</b> Things to do before the next class</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="module-outline.html"><a href="module-outline.html"><i class="fa fa-check"></i><b>2</b> Module outline</a><ul>
+<li class="chapter" data-level="2.1" data-path="module-outline.html"><a href="module-outline.html#practical-arrangements"><i class="fa fa-check"></i><b>2.1</b> Practical arrangements</a></li>
+<li class="chapter" data-level="2.2" data-path="module-outline.html"><a href="module-outline.html#aims-of-the-module"><i class="fa fa-check"></i><b>2.2</b> Aims of the module</a></li>
+<li class="chapter" data-level="2.3" data-path="module-outline.html"><a href="module-outline.html#attendance"><i class="fa fa-check"></i><b>2.3</b> Attendance</a></li>
+<li class="chapter" data-level="2.4" data-path="module-outline.html"><a href="module-outline.html#assessment"><i class="fa fa-check"></i><b>2.4</b> Assessment</a></li>
+<li class="chapter" data-level="2.5" data-path="module-outline.html"><a href="module-outline.html#syllabus-plan"><i class="fa fa-check"></i><b>2.5</b> Syllabus plan</a></li>
+<li class="chapter" data-level="2.6" data-path="module-outline.html"><a href="module-outline.html#reading-list"><i class="fa fa-check"></i><b>2.6</b> Reading list</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="assignment.html"><a href="assignment.html"><i class="fa fa-check"></i><b>3</b> Assignment</a></li>
+<li class="chapter" data-level="4" data-path="readdata.html"><a href="readdata.html"><i class="fa fa-check"></i><b>4</b> Read data</a><ul>
+<li class="chapter" data-level="4.1" data-path="readdata.html"><a href="readdata.html#introduction-to-reading-data"><i class="fa fa-check"></i><b>4.1</b> Introduction to Reading Data</a></li>
+<li class="chapter" data-level="4.2" data-path="readdata.html"><a href="readdata.html#reading-common-data-files-into-r"><i class="fa fa-check"></i><b>4.2</b> Reading common data files into R</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="readdata.html"><a href="readdata.html#ways-to-read-data-into-r"><i class="fa fa-check"></i><b>4.2.1</b> Ways to read data into R</a></li>
+<li class="chapter" data-level="4.2.2" data-path="readdata.html"><a href="readdata.html#comparing-these-three-methods"><i class="fa fa-check"></i><b>4.2.2</b> Comparing these three methods</a></li>
+<li class="chapter" data-level="4.2.3" data-path="readdata.html"><a href="readdata.html#editing-a-dataset-while-reading-it-into-r"><i class="fa fa-check"></i><b>4.2.3</b> Editing a dataset while reading it into R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="readdata.html"><a href="readdata.html#reading-other-data-files"><i class="fa fa-check"></i><b>4.3</b> Reading other data files</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="readdata.html"><a href="readdata.html#excel"><i class="fa fa-check"></i><b>4.3.1</b> Excel</a></li>
+<li class="chapter" data-level="4.3.2" data-path="readdata.html"><a href="readdata.html#spss"><i class="fa fa-check"></i><b>4.3.2</b> SPSS</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="readdata.html"><a href="readdata.html#saving-datasets"><i class="fa fa-check"></i><b>4.4</b> Saving datasets</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="readdata.html"><a href="readdata.html#saving-data-as-a-text-file"><i class="fa fa-check"></i><b>4.4.1</b> Saving data as a text file</a></li>
+<li class="chapter" data-level="4.4.2" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-excel-file"><i class="fa fa-check"></i><b>4.4.2</b> Saving data as an Excel file</a></li>
+<li class="chapter" data-level="4.4.3" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-spss-file"><i class="fa fa-check"></i><b>4.4.3</b> Saving data as an SPSS file</a></li>
+<li class="chapter" data-level="4.4.4" data-path="readdata.html"><a href="readdata.html#saving-an-object-as-an-rds-file"><i class="fa fa-check"></i><b>4.4.4</b> Saving an object as an RDS file</a></li>
+<li class="chapter" data-level="4.4.5" data-path="readdata.html"><a href="readdata.html#loading-these-datasets-back-into-r"><i class="fa fa-check"></i><b>4.4.5</b> Loading these datasets back into R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="readdata.html"><a href="readdata.html#saving-the-working-environment"><i class="fa fa-check"></i><b>4.5</b> Saving the working environment</a></li>
+<li class="chapter" data-level="4.6" data-path="readdata.html"><a href="readdata.html#reading-in-multiple-waves-from-understanding-society"><i class="fa fa-check"></i><b>4.6</b> Reading in multiple waves from Understanding Society</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="transformdata.html"><a href="transformdata.html"><i class="fa fa-check"></i><b>5</b> Transform data</a><ul>
+<li class="chapter" data-level="5.1" data-path="transformdata.html"><a href="transformdata.html#introduction-to-transforming-data"><i class="fa fa-check"></i><b>5.1</b> Introduction to transforming data</a></li>
+<li class="chapter" data-level="5.2" data-path="transformdata.html"><a href="transformdata.html#operators-recap"><i class="fa fa-check"></i><b>5.2</b> Operators recap</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="transformdata.html"><a href="transformdata.html#relational-operators"><i class="fa fa-check"></i><b>5.2.1</b> Relational operators</a></li>
+<li class="chapter" data-level="5.2.2" data-path="transformdata.html"><a href="transformdata.html#logical-operators"><i class="fa fa-check"></i><b>5.2.2</b> Logical operators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="transformdata.html"><a href="transformdata.html#the-pipe-operator"><i class="fa fa-check"></i><b>5.3</b> The pipe operator (%&gt;%)</a></li>
+<li class="chapter" data-level="5.4" data-path="transformdata.html"><a href="transformdata.html#select-variables"><i class="fa fa-check"></i><b>5.4</b> Select variables</a></li>
+<li class="chapter" data-level="5.5" data-path="transformdata.html"><a href="transformdata.html#select-cases"><i class="fa fa-check"></i><b>5.5</b> Select cases</a></li>
+<li class="chapter" data-level="5.6" data-path="transformdata.html"><a href="transformdata.html#recode-variables-both-base-r-and-dplyr-using-ifelse"><i class="fa fa-check"></i><b>5.6</b> Recode variables Both base R and dplyr using ifelse</a></li>
+<li class="chapter" data-level="5.7" data-path="transformdata.html"><a href="transformdata.html#create-new-variables"><i class="fa fa-check"></i><b>5.7</b> Create new variables</a></li>
+<li class="chapter" data-level="5.8" data-path="transformdata.html"><a href="transformdata.html#sort-data"><i class="fa fa-check"></i><b>5.8</b> Sort data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="joining.html"><a href="joining.html"><i class="fa fa-check"></i><b>6</b> Join data</a><ul>
+<li class="chapter" data-level="6.1" data-path="joining.html"><a href="joining.html#introduction-to-joining-data"><i class="fa fa-check"></i><b>6.1</b> Introduction to joining data</a></li>
+<li class="chapter" data-level="6.2" data-path="joining.html"><a href="joining.html#joining-waves-1-and-2"><i class="fa fa-check"></i><b>6.2</b> Joining waves 1 and 2</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="joining.html"><a href="joining.html#the-key"><i class="fa fa-check"></i><b>6.2.1</b> The ‘key’</a></li>
+<li class="chapter" data-level="6.2.2" data-path="joining.html"><a href="joining.html#inner-join"><i class="fa fa-check"></i><b>6.2.2</b> Inner join</a></li>
+<li class="chapter" data-level="6.2.3" data-path="joining.html"><a href="joining.html#left-join"><i class="fa fa-check"></i><b>6.2.3</b> Left join</a></li>
+<li class="chapter" data-level="6.2.4" data-path="joining.html"><a href="joining.html#right-join"><i class="fa fa-check"></i><b>6.2.4</b> Right join</a></li>
+<li class="chapter" data-level="6.2.5" data-path="joining.html"><a href="joining.html#full-join"><i class="fa fa-check"></i><b>6.2.5</b> Full join</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="iteration.html"><a href="iteration.html"><i class="fa fa-check"></i><b>7</b> Iteration</a><ul>
+<li class="chapter" data-level="7.1" data-path="iteration.html"><a href="iteration.html#introduction-to-iteration"><i class="fa fa-check"></i><b>7.1</b> Introduction to iteration</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="iteration.html"><a href="iteration.html#the-for-loop"><i class="fa fa-check"></i><b>7.1.1</b> The <em>for</em> loop</a></li>
+<li class="chapter" data-level="7.1.2" data-path="iteration.html"><a href="iteration.html#the-while-loop"><i class="fa fa-check"></i><b>7.1.2</b> The <em>while</em> loop</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="iteration.html"><a href="iteration.html#loading-understanding-society-using-iteration"><i class="fa fa-check"></i><b>7.2</b> Loading <em>Understanding Society</em> using iteration</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>8</b> Tidy data</a><ul>
+<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a></li>
+<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.2</b> Cleaning the data</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="datavis.html"><a href="datavis.html"><i class="fa fa-check"></i><b>9</b> Data visualisation</a><ul>
+<li class="chapter" data-level="9.1" data-path="datavis.html"><a href="datavis.html#reading-in-the-data"><i class="fa fa-check"></i><b>9.1</b> Reading in the data</a></li>
+<li class="chapter" data-level="9.2" data-path="datavis.html"><a href="datavis.html#visualising-one-quantitative-variable"><i class="fa fa-check"></i><b>9.2</b> Visualising one quantitative variable</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="datavis.html"><a href="datavis.html#histogram."><i class="fa fa-check"></i><b>9.2.1</b> Histogram.</a></li>
+<li class="chapter" data-level="9.2.2" data-path="datavis.html"><a href="datavis.html#density-chart."><i class="fa fa-check"></i><b>9.2.2</b> Density chart.</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="datavis.html"><a href="datavis.html#visualising-one-categorical-variable"><i class="fa fa-check"></i><b>9.3</b> Visualising one categorical variable</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="datavis.html"><a href="datavis.html#bar-plot."><i class="fa fa-check"></i><b>9.3.1</b> Bar plot.</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="datavis.html"><a href="datavis.html#visualising-two-quantitative-variables"><i class="fa fa-check"></i><b>9.4</b> Visualising two quantitative variables</a></li>
+<li class="chapter" data-level="9.5" data-path="datavis.html"><a href="datavis.html#visualising-one-categorical-and-one-quantitative-variable"><i class="fa fa-check"></i><b>9.5</b> Visualising one categorical and one quantitative variable</a></li>
+<li class="chapter" data-level="9.6" data-path="datavis.html"><a href="datavis.html#visualising-two-categorical-variables"><i class="fa fa-check"></i><b>9.6</b> Visualising two categorical variables</a></li>
+<li class="chapter" data-level="9.7" data-path="datavis.html"><a href="datavis.html#showing-the-relationships-by-group"><i class="fa fa-check"></i><b>9.7</b> Showing the relationships by group</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="datavis2.html"><a href="datavis2.html"><i class="fa fa-check"></i><b>10</b> Data visualisation 2</a><ul>
+<li class="chapter" data-level="10.1" data-path="datavis2.html"><a href="datavis2.html#visualising-income"><i class="fa fa-check"></i><b>10.1</b> Visualising income</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>11</b> R Markdown</a></li>
+<li class="chapter" data-level="12" data-path="modelling.html"><a href="modelling.html"><i class="fa fa-check"></i><b>12</b> Modelling</a><ul>
+<li class="chapter" data-level="12.1" data-path="modelling.html"><a href="modelling.html#cross-sectional-analysis"><i class="fa fa-check"></i><b>12.1</b> Cross-sectional analysis</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="modelling.html"><a href="modelling.html#age-and-political-interest"><i class="fa fa-check"></i><b>12.1.1</b> Age and political interest</a></li>
+<li class="chapter" data-level="12.1.2" data-path="modelling.html"><a href="modelling.html#sex-and-political-interest"><i class="fa fa-check"></i><b>12.1.2</b> Sex and political interest</a></li>
+<li class="chapter" data-level="12.1.3" data-path="modelling.html"><a href="modelling.html#linear-model"><i class="fa fa-check"></i><b>12.1.3</b> Linear model</a></li>
+<li class="chapter" data-level="12.1.4" data-path="modelling.html"><a href="modelling.html#interaction-effect-between-sex-and-age"><i class="fa fa-check"></i><b>12.1.4</b> Interaction effect between sex and age</a></li>
+<li class="chapter" data-level="12.1.5" data-path="modelling.html"><a href="modelling.html#checking-the-assumptions"><i class="fa fa-check"></i><b>12.1.5</b> Checking the assumptions</a></li>
+<li class="chapter" data-level="12.1.6" data-path="modelling.html"><a href="modelling.html#presenting-the-output-for-multiple-regression-models"><i class="fa fa-check"></i><b>12.1.6</b> Presenting the output for multiple regression models</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="modelling.html"><a href="modelling.html#longitudinal-analysis"><i class="fa fa-check"></i><b>12.2</b> Longitudinal analysis</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="modelling.html"><a href="modelling.html#simple-model"><i class="fa fa-check"></i><b>12.2.1</b> Simple model</a></li>
+<li class="chapter" data-level="12.2.2" data-path="modelling.html"><a href="modelling.html#adding-a-time-constant-variable"><i class="fa fa-check"></i><b>12.2.2</b> Adding a time-constant variable</a></li>
+<li class="chapter" data-level="12.2.3" data-path="modelling.html"><a href="modelling.html#adding-a-time-varying-variable"><i class="fa fa-check"></i><b>12.2.3</b> Adding a time-varying variable</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="modelling.html"><a href="modelling.html#further-reading"><i class="fa fa-check"></i><b>12.3</b> Further reading</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Analysis in Social Science 3</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="assignment" class="section level1">
+<h1><span class="header-section-number">3</span> Assignment</h1>
+<p>Your assignment for this module is to choose a topic, conduct an independent statistical analysis with the Understanding Society data and write up your results in a report that is about 3,500 words long.</p>
+<p>I wanted to give you as much flexibility as possible in preparing the report. I will not provide a detailed guidance on what you should analyse and how you should this. As this is an advanced module I expect you to be able to formulate a research question, identify the data you need and conduct the analysis independently. In other words, the idea is to throw you into the sea of data and find out if you can come up with a nice statistical report that answers a well defined question.</p>
+<p>However, there are a few rules.</p>
+<ol style="list-style-type: decimal">
+<li><p>You must use the Understanding Society data and I suggest you use data from the <em>indresp</em> files (these are individual adult questionnaires).</p></li>
+<li><p>You must use longitudinal data, i.e. data from more than one wave and preferrably all seven waves of the Understanding Society. This will depend on your question though. If you only have data at two time points available and produce good analysis this is totally fine. But if you have data in all seven waves and only use two this is not fine.</p></li>
+<li>Generally you would select one time-varying variable and explore changes over time, in the whole sample and different population subgroups. For example, you may explore how people’s incomes changed from 2008 to 2016. You may want to conduct your analysis by gender, age group, location, etc. Other possible variables:
+<ul>
+<li>Health</li>
+<li>Employment and job mobility</li>
+<li>State benefits</li>
+<li>Any other topic that you find interesting and that has longitudinal data available in the Understanding Society.</li>
+</ul></li>
+<li><p>You cannot use data on political interest and political preferences as we will explore these data in class.</p></li>
+<li><p>You must prepare your report in R Markdown. Submit the pdf file (with all the R syntax visible) through eBart. You do no need to submit your work on Github.</p></li>
+<li><p>Please keep your R syntax clear and provide commentary explaining to me what you do.</p></li>
+<li><p>The deadline for your reports is 3 May at 2pm.</p></li>
+</ol>
+<p>I suggest the following steps for your reports.</p>
+<ol style="list-style-type: decimal">
+<li><p>First you need to find a topic that interests you and that has longitudinal data available. Check the User Manual, the questionnaires and data dictionaries for individual waves. Note that the Understanding Society has some modules that are present in each wave and some rotating modules that are only present in one or several waves. Once you have found a variable that interests you make sure that it is present in the data at least at two or more time points.</p></li>
+<li><p>Next you need to read the data into R. Start simple and only read in the data for your outcome variable and maybe sex and age. You will be able to add more variables later as long as you keep your syntax. Clean the data and look at the distributions.</p></li>
+<li><p>Think about the best way to describe and visualise your data. Do you see any interesting patterns and trends? At this stage you should start thinking about the story you want to tell us with your analysis.</p></li>
+<li><p>I do not expect you to do anything fancy statistically. Just providing descriptive statistics and visualisations is fine, as long as I can see that you have thought carefully about which statistics and graphs are best to answer your questions. Every table and chart you have in your report must contribute something to your story. That said, if you want to use some statistical modelling in your report (for example, linear regression) and you do this correctly this will be appreciated and I will give you extra marks for doing this.</p></li>
+<li><p>Once you have a feeling about the general direction of your analysis start adding the details. Maybe you want to explore some more variables; then you need to add them to the data set. For example, for the analysis of political interest I would start with looking at descriptive statistics for political interest for each wave and establish if it was stable or increased/decreased. Then I would think about how I can visualise the results. Then I may start adding details. Was the trend the same for men and women? Different age groups? Different parts of the country? Then if I want to do something fancy I would remember that in 2010 the UK had a general election. Can we get the date of the interview from the data and explore how political interest changed monthly in 2010? And then if I really want to do something very fancy I would read about applyng models with fixed effects to longitudinal data, talk to Alexey in his office hours and explore if change in people’s income over time is associated with the change in political interest. (The latter part is optional.)</p></li>
+<li>Write up the results.
+<ul>
+<li>Start with a brief introduction. For political interest that would be approximately the following: Why are we interested in political interest? What happened in British politics between 2008 and 2016 that could affect the level of political interest? Maybe you can find and cite two or three papers that have already explored this topic.</li>
+<li>Then present your research questions. What are you aiming to achieve with your report? What questions will you answer?</li>
+<li>Briefly describe the data (variables you are going to use, what waves they are coming from, etc.).</li>
+<li>Present your statistical results. The structure of this part will depend on your results. This should not be just a collection of tables and graphs. Explain what you see in all those tables and graphs and why you have included them.</li>
+<li>Discussion. This is a very important part. You need to discuss here how the statistical results you have got contribute to our understanding of your topic (for example, political interest in Britain). Explain in substantive terms your results and discuss them. Why has political interest increased (or decresed, or ramained stable)? What factors contributed to this?</li>
+</ul></li>
+<li><p>The length of the report is 3,500 words, but I am not going to count your words and writing slightly more or slightly less is fine. Do not submit 100 pages. In the same way, if your report is obviously too short this is going to affect your mark.</p></li>
+</ol>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="module-outline.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="readdata.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
