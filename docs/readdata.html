@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-07-13">
+<meta name="date" content="2018-07-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -135,7 +135,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.4.1" data-path="readdata.html"><a href="readdata.html#saving-data-as-a-text-file"><i class="fa fa-check"></i><b>4.4.1</b> Saving data as a text file</a></li>
 <li class="chapter" data-level="4.4.2" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-excel-file"><i class="fa fa-check"></i><b>4.4.2</b> Saving data as an Excel file</a></li>
 <li class="chapter" data-level="4.4.3" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-spss-file"><i class="fa fa-check"></i><b>4.4.3</b> Saving data as an SPSS file</a></li>
-<li class="chapter" data-level="4.4.4" data-path="readdata.html"><a href="readdata.html#loading-these-datasets-back-into-r"><i class="fa fa-check"></i><b>4.4.4</b> Loading these datasets back into R</a></li>
+<li class="chapter" data-level="4.4.4" data-path="readdata.html"><a href="readdata.html#saving-an-object-as-an-rds-file"><i class="fa fa-check"></i><b>4.4.4</b> Saving an object as an RDS file</a></li>
+<li class="chapter" data-level="4.4.5" data-path="readdata.html"><a href="readdata.html#loading-these-datasets-back-into-r"><i class="fa fa-check"></i><b>4.4.5</b> Loading these datasets back into R</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="readdata.html"><a href="readdata.html#saving-the-working-environment"><i class="fa fa-check"></i><b>4.5</b> Saving the working environment</a></li>
 <li class="chapter" data-level="4.6" data-path="readdata.html"><a href="readdata.html#reading-in-multiple-waves-from-understanding-society"><i class="fa fa-check"></i><b>4.6</b> Reading in multiple waves from Understanding Society</a></li>
@@ -398,9 +399,16 @@ SPSS &lt;-<span class="st"> </span><span class="kw">read_spss</span>(<span class
 <p>We can use the <em>haven</em> package we used to read files saved for use in SPSS to write data as SPSS files too, using the <strong>write_sav()</strong> command.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write_sav</span>(UndSoc.<span class="dv">4</span>, <span class="st">&quot;myData/UndSoc.4.sav&quot;</span>)</code></pre></div>
 </div>
+<div id="saving-an-object-as-an-rds-file" class="section level3">
+<h3><span class="header-section-number">4.4.4</span> Saving an object as an RDS file</h3>
+<p>Finally, we can just save a file for future use in R as an RDS file. It will work faster with large objects, but it will only allow saving one object (such as a data frame) at a time and it will also drop the name of the object while saving.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">saveRDS</span>(UndSoc.<span class="dv">4</span>, <span class="st">&quot;myData/UndSoc.4.rds&quot;</span>)</code></pre></div>
+</div>
 <div id="loading-these-datasets-back-into-r" class="section level3">
-<h3><span class="header-section-number">4.4.4</span> Loading these datasets back into R</h3>
+<h3><span class="header-section-number">4.4.5</span> Loading these datasets back into R</h3>
 <p>To read any of these datasets back into R, use what you learnt in <em>Reading common data files into R</em>.</p>
+<p>When loading an RDS file back into R, simply use the <strong>readRDS()</strong> command. Note that we assign a new name to the object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">RDS &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;myData/UndSoc.4.rds&quot;</span>)</code></pre></div>
 </div>
 </div>
 <div id="saving-the-working-environment" class="section level2">
@@ -411,7 +419,8 @@ SPSS &lt;-<span class="st"> </span><span class="kw">read_spss</span>(<span class
 
 <span class="kw">ls</span>()</code></pre></div>
 <pre><code>##  [1] &quot;Excel&quot;       &quot;Excel2&quot;      &quot;Excel3&quot;      &quot;Hamlet&quot;      &quot;MissingData&quot;
-##  [6] &quot;SPSS&quot;        &quot;UndSoc.1&quot;    &quot;UndSoc.2&quot;    &quot;UndSoc.3&quot;    &quot;UndSoc.4&quot;</code></pre>
+##  [6] &quot;RDS&quot;         &quot;SPSS&quot;        &quot;UndSoc.1&quot;    &quot;UndSoc.2&quot;    &quot;UndSoc.3&quot;   
+## [11] &quot;UndSoc.4&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Then we can remove all the objects, except the 4th and the 5th.</span>
 
 <span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>()[<span class="op">-</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>)])</code></pre></div>
@@ -436,13 +445,16 @@ SPSS &lt;-<span class="st"> </span><span class="kw">read_spss</span>(<span class
 
 UndSoc1 &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
 <pre><code>## 
-Read 58.8% of 50994 rows
-Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:04</code></pre>
+Read 0.0% of 50994 rows
+Read 39.2% of 50994 rows
+Read 78.4% of 50994 rows
+Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:07</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSoc2 &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w2/b_indresp.tab&quot;</span>)</code></pre></div>
 <pre><code>## 
-Read 54.9% of 54597 rows
-Read 91.6% of 54597 rows
-Read 54597 rows and 1615 (of 1615) columns from 0.233 GB file in 00:00:04</code></pre>
+Read 0.0% of 54597 rows
+Read 36.6% of 54597 rows
+Read 73.3% of 54597 rows
+Read 54597 rows and 1615 (of 1615) columns from 0.233 GB file in 00:00:07</code></pre>
 <p>As we discussed earlier in this class, these files take a lot longer to load into R than other data files you have used in the past. This is because the files themselves are large, and take up a lot of space in the memory. We can see just how much space they take up by using the <strong>object.size()</strong> command.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">object.size</span>(UndSoc1)</code></pre></div>
 <pre><code>## 286020872 bytes</code></pre>

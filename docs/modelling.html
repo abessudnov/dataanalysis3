@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-07-13">
+<meta name="date" content="2018-07-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -135,7 +135,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.4.1" data-path="readdata.html"><a href="readdata.html#saving-data-as-a-text-file"><i class="fa fa-check"></i><b>4.4.1</b> Saving data as a text file</a></li>
 <li class="chapter" data-level="4.4.2" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-excel-file"><i class="fa fa-check"></i><b>4.4.2</b> Saving data as an Excel file</a></li>
 <li class="chapter" data-level="4.4.3" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-spss-file"><i class="fa fa-check"></i><b>4.4.3</b> Saving data as an SPSS file</a></li>
-<li class="chapter" data-level="4.4.4" data-path="readdata.html"><a href="readdata.html#loading-these-datasets-back-into-r"><i class="fa fa-check"></i><b>4.4.4</b> Loading these datasets back into R</a></li>
+<li class="chapter" data-level="4.4.4" data-path="readdata.html"><a href="readdata.html#saving-an-object-as-an-rds-file"><i class="fa fa-check"></i><b>4.4.4</b> Saving an object as an RDS file</a></li>
+<li class="chapter" data-level="4.4.5" data-path="readdata.html"><a href="readdata.html#loading-these-datasets-back-into-r"><i class="fa fa-check"></i><b>4.4.5</b> Loading these datasets back into R</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="readdata.html"><a href="readdata.html#saving-the-working-environment"><i class="fa fa-check"></i><b>4.5</b> Saving the working environment</a></li>
 <li class="chapter" data-level="4.6" data-path="readdata.html"><a href="readdata.html#reading-in-multiple-waves-from-understanding-society"><i class="fa fa-check"></i><b>4.6</b> Reading in multiple waves from Understanding Society</a></li>
@@ -264,14 +265,14 @@ UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wave1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dvage, <span class="dt">y =</span> polinterest)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>()</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
 <p>I fit a non-parametric smooth here with <strong>geom_smooth</strong>, and the association between age and political interest seems to be non-linear.</p>
 <p>We can also fit a regression line and see how well it describes the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wave1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dvage, <span class="dt">y =</span> polinterest)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
 <p>Up to the age of about 70 years two lines are pretty close and I’d say that the linear function adequately describes the data. However, for people older than 75 the linear assocition is inadequate and provides a really poor fit.</p>
 </div>
 <div id="sex-and-political-interest" class="section level3">
@@ -280,7 +281,7 @@ UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wave1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> polinterest)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
 <p>We see that mean political interest is somewhat higher for men compared to women.</p>
 </div>
 <div id="linear-model" class="section level3">
@@ -339,7 +340,7 @@ UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wave1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dvage, <span class="dt">y =</span> polinterest)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>))</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
 <p>Note that this visualisation does not control for sex.</p>
 </div>
 <div id="interaction-effect-between-sex-and-age" class="section level3">
@@ -399,7 +400,7 @@ UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wave1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dvage, <span class="dt">y =</span> polinterest, <span class="dt">colour =</span> sex)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>))</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
 <p>We can see that the lines for men and women are indeed different, although the non-linear pattern of the association is similar for both sexes.</p>
 </div>
 <div id="checking-the-assumptions" class="section level3">
@@ -850,7 +851,7 @@ UndSoc <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> meanPI)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>()</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
 <p>The model that describes this chart will be the following.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m5 &lt;-<span class="st"> </span><span class="kw">lm</span>(polinterest <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(year), UndSoc)
 <span class="kw">summary</span>(m5)</code></pre></div>
@@ -892,7 +893,7 @@ UndSoc <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> meanPI, <span class="dt">colour =</span> sex)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>()</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
 <p>It does not look like there was an interaction between sex and year, but we can check it formally.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m6 &lt;-<span class="st"> </span><span class="kw">lm</span>(polinterest <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(year)<span class="op">*</span>sex, UndSoc)
 <span class="kw">summary</span>(m6)</code></pre></div>

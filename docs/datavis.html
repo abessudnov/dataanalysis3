@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-07-13">
+<meta name="date" content="2018-07-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -135,7 +135,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.4.1" data-path="readdata.html"><a href="readdata.html#saving-data-as-a-text-file"><i class="fa fa-check"></i><b>4.4.1</b> Saving data as a text file</a></li>
 <li class="chapter" data-level="4.4.2" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-excel-file"><i class="fa fa-check"></i><b>4.4.2</b> Saving data as an Excel file</a></li>
 <li class="chapter" data-level="4.4.3" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-spss-file"><i class="fa fa-check"></i><b>4.4.3</b> Saving data as an SPSS file</a></li>
-<li class="chapter" data-level="4.4.4" data-path="readdata.html"><a href="readdata.html#loading-these-datasets-back-into-r"><i class="fa fa-check"></i><b>4.4.4</b> Loading these datasets back into R</a></li>
+<li class="chapter" data-level="4.4.4" data-path="readdata.html"><a href="readdata.html#saving-an-object-as-an-rds-file"><i class="fa fa-check"></i><b>4.4.4</b> Saving an object as an RDS file</a></li>
+<li class="chapter" data-level="4.4.5" data-path="readdata.html"><a href="readdata.html#loading-these-datasets-back-into-r"><i class="fa fa-check"></i><b>4.4.5</b> Loading these datasets back into R</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="readdata.html"><a href="readdata.html#saving-the-working-environment"><i class="fa fa-check"></i><b>4.5</b> Saving the working environment</a></li>
 <li class="chapter" data-level="4.6" data-path="readdata.html"><a href="readdata.html#reading-in-multiple-waves-from-understanding-society"><i class="fa fa-check"></i><b>4.6</b> Reading in multiple waves from Understanding Society</a></li>
@@ -257,14 +258,14 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(W1, <span class="kw">aes</span>(<span class="dt">x=</span>bmi)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
 </div>
 <div id="density-chart." class="section level3">
 <h3><span class="header-section-number">9.2.2</span> Density chart.</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(W1, <span class="kw">aes</span>(<span class="dt">x=</span>bmi)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
 </div>
 </div>
 <div id="visualising-one-categorical-variable" class="section level2">
@@ -295,7 +296,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>cbirth)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Country of birth&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(W1<span class="op">$</span>cbirth, <span class="dt">useNA =</span> <span class="st">&quot;always&quot;</span>)</code></pre></div>
 <pre><code>## 
 ##          England Northern Ireland           Not UK         Scotland 
@@ -311,7 +312,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span>lm)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
 </div>
 <div id="visualising-one-categorical-and-one-quantitative-variable" class="section level2">
 <h2><span class="header-section-number">9.5</span> Visualising one categorical and one quantitative variable</h2>
@@ -343,7 +344,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Age group&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
 </div>
 <div id="visualising-two-categorical-variables" class="section level2">
 <h2><span class="header-section-number">9.6</span> Visualising two categorical variables</h2>
@@ -354,7 +355,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Country of birth&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>agegr)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
 <p>Alternatively you can do a jitter plot, but in our case it wouldn’t look nice.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(cbirth)) <span class="op">%&gt;%</span>
@@ -362,7 +363,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Country of birth&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Age group&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
 </div>
 <div id="showing-the-relationships-by-group" class="section level2">
 <h2><span class="header-section-number">9.7</span> Showing the relationships by group</h2>
@@ -373,7 +374,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">                </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">                </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
 <span class="st">                </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>cbirth)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
 
 </div>
 </div>

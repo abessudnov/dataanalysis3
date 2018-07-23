@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-07-13">
+<meta name="date" content="2018-07-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -135,7 +135,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.4.1" data-path="readdata.html"><a href="readdata.html#saving-data-as-a-text-file"><i class="fa fa-check"></i><b>4.4.1</b> Saving data as a text file</a></li>
 <li class="chapter" data-level="4.4.2" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-excel-file"><i class="fa fa-check"></i><b>4.4.2</b> Saving data as an Excel file</a></li>
 <li class="chapter" data-level="4.4.3" data-path="readdata.html"><a href="readdata.html#saving-data-as-an-spss-file"><i class="fa fa-check"></i><b>4.4.3</b> Saving data as an SPSS file</a></li>
-<li class="chapter" data-level="4.4.4" data-path="readdata.html"><a href="readdata.html#loading-these-datasets-back-into-r"><i class="fa fa-check"></i><b>4.4.4</b> Loading these datasets back into R</a></li>
+<li class="chapter" data-level="4.4.4" data-path="readdata.html"><a href="readdata.html#saving-an-object-as-an-rds-file"><i class="fa fa-check"></i><b>4.4.4</b> Saving an object as an RDS file</a></li>
+<li class="chapter" data-level="4.4.5" data-path="readdata.html"><a href="readdata.html#loading-these-datasets-back-into-r"><i class="fa fa-check"></i><b>4.4.5</b> Loading these datasets back into R</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="readdata.html"><a href="readdata.html#saving-the-working-environment"><i class="fa fa-check"></i><b>4.5</b> Saving the working environment</a></li>
 <li class="chapter" data-level="4.6" data-path="readdata.html"><a href="readdata.html#reading-in-multiple-waves-from-understanding-society"><i class="fa fa-check"></i><b>4.6</b> Reading in multiple waves from Understanding Society</a></li>
@@ -242,10 +243,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 W1 &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
 <pre><code>## 
-Read 0.0% of 50994 rows
-Read 39.2% of 50994 rows
-Read 78.4% of 50994 rows
-Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:06</code></pre>
+Read 58.8% of 50994 rows
+Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:04</code></pre>
 </div>
 <div id="operators-recap" class="section level2">
 <h2><span class="header-section-number">5.2</span> Operators recap</h2>
@@ -614,7 +613,7 @@ AltW1 &lt;-<span class="st"> </span>newW1 <span class="op">%&gt;%</span><span cl
     <span class="co"># New variable &#39;bmi&#39;: &#39;weightkg&#39; / (&#39;hightcm&#39; / 100) ^ 2)</span></code></pre></div>
 <p>Now we are able to look at the distribution of BMI across the <em>Understanding Society</em> dataset, using a histogram.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(W1mod<span class="op">$</span>bmi)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 </div>
 <div id="sort-data" class="section level2">
 <h2><span class="header-section-number">5.8</span> Sort data</h2>
