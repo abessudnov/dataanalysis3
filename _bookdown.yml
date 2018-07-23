@@ -1,6 +1,6 @@
 book_filename: "datan3"
 delete_merged_file: true
-output_dir: "_book"
+output_dir: "docs"
 before_chapter_script: ["removeObjects.R"]
 rmd_files: ["index.Rmd", "moduleOutline.Rmd",
             "assignment.Rmd", "readData.Rmd", "transformData.Rmd",
