@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -243,8 +243,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 W1 &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
 <pre><code>## 
-Read 58.8% of 50994 rows
-Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:04</code></pre>
+Read 78.4% of 50994 rows
+Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code></pre>
 </div>
 <div id="operators-recap" class="section level2">
 <h2><span class="header-section-number">5.2</span> Operators recap</h2>
@@ -689,11 +689,9 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
-    script.src = src;
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

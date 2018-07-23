@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -412,29 +412,25 @@ files</code></pre></div>
 ##        pidp b_sex b_dvage b_vote6 b_fimnnet_dv
 ## 1: 68004087     1      60       2     1276.667
 ## 
-Read 0.0% of 49739 rows
-Read 80.4% of 49739 rows
-Read 49739 rows and 5 (of 3024) columns from 0.402 GB file in 00:00:07
+Read 40.2% of 49739 rows
+Read 49739 rows and 5 (of 3024) columns from 0.402 GB file in 00:00:04
 ##        pidp c_sex c_dvage c_vote6 c_fimnnet_dv
 ## 1: 68004087     1      61       2     914.3333
-## 
-Read 0.0% of 47157 rows
-Read 47157 rows and 5 (of 2086) columns from 0.262 GB file in 00:00:07
 ##        pidp d_sex d_dvage d_vote6 d_fimnnet_dv
 ## 1: 68004087     1      62       1     914.3333
 ## 
-Read 0.0% of 44903 rows
-Read 44903 rows and 5 (of 2583) columns from 0.310 GB file in 00:00:15
+Read 66.8% of 44903 rows
+Read 44903 rows and 5 (of 2583) columns from 0.310 GB file in 00:00:03
 ##        pidp e_sex e_dvage e_vote6 e_fimnnet_dv
 ## 1: 68004087     1      63       2     1015.667
 ## 
-Read 0.0% of 45290 rows
-Read 45290 rows and 5 (of 2060) columns from 0.263 GB file in 00:00:10
+Read 88.3% of 45290 rows
+Read 45290 rows and 5 (of 2060) columns from 0.263 GB file in 00:00:03
 ##        pidp f_sex f_dvage f_vote6 f_fimnnet_dv
 ## 1: 68004087     1      64       2       1007.5
 ## 
-Read 0.0% of 42217 rows
-Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:05
+Read 71.1% of 42217 rows
+Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:03
 ##        pidp g_sex g_dvage g_vote6 g_fimnnet_dv
 ## 1: 68004087     1      65       2     1258.333</code></pre>
 <p>Now we need to join all these data frames together, and we want to do this in the loop. It is clear what we need to do in the second and later iterations of the loop: join the data from wave 2 with the data from wave 1, and so on. But what shall we do in the first iteration? There is no data frame yet to be joined with the data from wave 1. Clearly our algorithm for the first iteration needs to be different from the algorithm for all other iterations. We will use the <strong>if … else</strong> control structure for this.</p>
@@ -460,27 +456,23 @@ Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:05
         <span class="kw">rm</span>(data)
 } </code></pre></div>
 <pre><code>## 
-Read 0.0% of 50994 rows
-Read 50994 rows and 5 (of 1364) columns from 0.187 GB file in 00:00:05
+Read 91.6% of 54597 rows
+Read 54597 rows and 5 (of 1615) columns from 0.233 GB file in 00:00:03
 ## 
-Read 0.0% of 54597 rows
-Read 54597 rows and 5 (of 1615) columns from 0.233 GB file in 00:00:04
+Read 40.2% of 49739 rows
+Read 49739 rows and 5 (of 3024) columns from 0.402 GB file in 00:00:04
 ## 
-Read 0.0% of 49739 rows
-Read 80.4% of 49739 rows
-Read 49739 rows and 5 (of 3024) columns from 0.402 GB file in 00:00:07
+Read 84.8% of 47157 rows
+Read 47157 rows and 5 (of 2086) columns from 0.262 GB file in 00:00:03
 ## 
-Read 0.0% of 47157 rows
-Read 47157 rows and 5 (of 2086) columns from 0.262 GB file in 00:00:06
+Read 66.8% of 44903 rows
+Read 44903 rows and 5 (of 2583) columns from 0.310 GB file in 00:00:03
 ## 
-Read 0.0% of 44903 rows
-Read 44903 rows and 5 (of 2583) columns from 0.310 GB file in 00:00:13
+Read 88.3% of 45290 rows
+Read 45290 rows and 5 (of 2060) columns from 0.263 GB file in 00:00:03
 ## 
-Read 0.0% of 45290 rows
-Read 45290 rows and 5 (of 2060) columns from 0.263 GB file in 00:00:09
-## 
-Read 0.0% of 42217 rows
-Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:05</code></pre>
+Read 71.1% of 42217 rows
+Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:03</code></pre>
 <p><strong>all7</strong> now contains the data from all seven waves.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(all7, <span class="dv">3</span>)</code></pre></div>
 <pre><code>##       pidp a_sex a_dvage a_vote6 a_fimnnet_dv b_sex b_dvage b_vote6
@@ -548,11 +540,9 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
-    script.src = src;
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

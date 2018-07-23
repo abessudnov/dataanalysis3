@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -265,9 +265,8 @@ UndSoc.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">
 
 UndSoc.<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
 <pre><code>## 
-Read 58.8% of 50994 rows
-Read 98.1% of 50994 rows
-Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:04</code></pre>
+Read 78.4% of 50994 rows
+Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code></pre>
 </div>
 </div>
 <div id="comparing-these-three-methods" class="section level3">
@@ -280,23 +279,22 @@ Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:04</code>
                       <span class="dt">header =</span> <span class="ot">TRUE</span>,
                       <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   20.13    0.54   21.39</code></pre>
+##  39.617   1.226  40.996</code></pre>
 </div>
 <div id="using-the-readr-package-1" class="section level4">
 <h4><span class="header-section-number">4.2.2.2</span> Using the readr package</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(UndSoc.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##    4.65    0.11    5.51</code></pre>
+##   9.531   0.490  10.046</code></pre>
 </div>
 <div id="using-the-data.table-package-1" class="section level4">
 <h4><span class="header-section-number">4.2.2.3</span> Using the data.table package</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(UndSoc.<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>))</code></pre></div>
 <pre><code>## 
-Read 58.8% of 50994 rows
-Read 98.1% of 50994 rows
-Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:04</code></pre>
+Read 78.4% of 50994 rows
+Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code></pre>
 <pre><code>##    user  system elapsed 
-##    2.62    0.06    3.33</code></pre>
+##   2.531   0.208   2.748</code></pre>
 <p>From this we can see clear differences in loading time. With small data sets, the difference between these three methods will not be very noticeable or important, but with larger data the increase in loading times the <em>readr</em> and <em>data.table</em> packages provide can be quite substantial.</p>
 </div>
 </div>
@@ -445,16 +443,13 @@ SPSS &lt;-<span class="st"> </span><span class="kw">read_spss</span>(<span class
 
 UndSoc1 &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
 <pre><code>## 
-Read 0.0% of 50994 rows
-Read 39.2% of 50994 rows
 Read 78.4% of 50994 rows
-Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:07</code></pre>
+Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSoc2 &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w2/b_indresp.tab&quot;</span>)</code></pre></div>
 <pre><code>## 
-Read 0.0% of 54597 rows
-Read 36.6% of 54597 rows
-Read 73.3% of 54597 rows
-Read 54597 rows and 1615 (of 1615) columns from 0.233 GB file in 00:00:07</code></pre>
+Read 54.9% of 54597 rows
+Read 91.6% of 54597 rows
+Read 54597 rows and 1615 (of 1615) columns from 0.233 GB file in 00:00:04</code></pre>
 <p>As we discussed earlier in this class, these files take a lot longer to load into R than other data files you have used in the past. This is because the files themselves are large, and take up a lot of space in the memory. We can see just how much space they take up by using the <strong>object.size()</strong> command.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">object.size</span>(UndSoc1)</code></pre></div>
 <pre><code>## 286020872 bytes</code></pre>
@@ -555,11 +550,9 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
-    script.src = src;
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
