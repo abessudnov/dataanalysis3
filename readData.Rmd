@@ -18,8 +18,8 @@ To read this data into R using functions from base R, we can first use the **rea
 
 ```{r}
 UndSoc.1 <- read.table("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab",
-                      header = TRUE,
-                      stringsAsFactors = FALSE)
+                       header = TRUE,
+                       stringsAsFactors = FALSE)
 ```
 
 Different types of files need to read into R in different ways. The **read.table()** function reads data that is *tab separated* (the file will be called 'name*.tab*'), the **read.csv()** function reads data that is *comma separated* (the file will be called 'name*.csv*') and **read.delim()** reads data that is separated in any way. These work in the same way, so once you've mastered one, you've mastered them all.
@@ -29,7 +29,8 @@ Different types of files need to read into R in different ways. The **read.table
 We can also read data into R using the package *readr*, part of the *tidyverse* package, with the **read_tsv()** command. This is the equivalent command to **read.table()** from base R.
 
 ```{r}
-# We can either load the entire 'tidyverse' package into R, which includes the readr package as well as others such as ggplot2, or just the 'readr' package on its own.
+# We can either load the entire 'tidyverse' package into R, which includes the readr
+# package as well as others such as ggplot2, or just the 'readr' package on its own.
 
 library(readr)
 
@@ -57,8 +58,8 @@ One of the important differences between these three methods for reading data in
 ```{r}
 # Base R
 system.time(UndSoc.1 <- read.table("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab",
-                      header = TRUE,
-                      stringsAsFactors = FALSE))
+                                   header = TRUE,
+                                   stringsAsFactors = FALSE))
 ```
 
 #### Using the readr package
@@ -79,7 +80,7 @@ From this we can see clear differences in loading time. With small data sets, th
 
 #### Skipping rows of data
 
-Sometimes we do not want to read in the entire dataset we have into R, but instead want to ignore the first few rows. For example, if we were to do some sentiment analysis on Hamlet (found here: http://www.gutenberg.org/files/1524/1524-0.txt, we would want to only read in the play itself, not the introductions before the start of the play. We can use the **skip = ""** command to only read the file from the start of the play, with each line of the script counting as a row.
+Sometimes we do not want to read in the entire dataset we have into R, but instead want to ignore the first few rows. For example, if we were to do some sentiment analysis on Hamlet (found here: http://www.gutenberg.org/files/1524/1524-0.txt), we would want to only read in the play itself, not the introductions before the start of the play. We can use the **skip = ""** command to only read the file from the start of the play, with each line of the script counting as a row.
 
 ```{r}
 Hamlet <- read.delim("http://www.gutenberg.org/files/1524/1524-0.txt",
@@ -95,7 +96,7 @@ Let's say that we're interested in how political interest is distributed across 
 
 ```{r}
 UndSoc.4 <- fread("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab",
-                 select = c("pidp", "a_sex", "a_dvage", "a_vote6"))
+                  select = c("pidp", "a_sex", "a_dvage", "a_vote6"))
 ```
 
 #### Setting *NA* values
@@ -104,9 +105,9 @@ Sometimes, if we look at the raw data we are about to analyse, we see that there
 
 ```{r}
 MissingData <- read.table("exData/Table3.txt",
-                 header = TRUE,
-                 skip = 2,
-                 na.strings = c("*", "**", "--"))
+                          header = TRUE,
+                          skip = 2,
+                          na.strings = c("*", "**", "--"))
 ```
 
 ## Reading other data files
@@ -140,10 +141,13 @@ To fix this, we need to set both these values as *NA*, which we can do with the 
 
 ```{r}
 Excel3 <- read_excel("exData/tableExcel.xlsx",
-                     sheet = 2,
-                     na = c('NA', '"NA"'))
+sheet = 2,
+na = c('NA', '"NA"'))
 
-# Note that as one of the missing values is called "NA", you have to use inverted commas ('') around the entire value for R to change it to an NA value, rather than the usual speech marks (""). Inverted commas and speech marks are interchangable in R, though if you use one to open a command, you cannot use the other to close it.
+# Note that as one of the missing values is called "NA", you have to use inverted commas
+# ('') around the entire value for R to change it to an NA value, rather than the usual
+# speech marks (""). Inverted commas and speech marks are interchangable in R, though
+# if you use one to open a command, you cannot use the other to close it.
 ```
 
 We can now see that this dataset has true *NA* values in it for the missing data.
@@ -271,7 +275,8 @@ object.size(UndSoc2)
 However, this does not give us an answer that we can easily interpret. Therefore, by using the **format()** command, we can specify how we want R to show us this data. In this case, by adding **units = “”** we can tell R to show us how large the files are in specific units.
 
 ```{r}
-# By adding units = "auto" R automatically chooses the clearest way to show us the size of the files.
+# By adding units = "auto" R automatically chooses the clearest way to show us the
+# size of the files.
 
 format(object.size(UndSoc1), units = "auto")
 
@@ -298,10 +303,10 @@ By using what we covered earlier, we can select only the variables we want to re
 
 ```{r}
 UndSoc1ed <- fread("data/UKDA-6614-tab/tab/us_w1/a_indresp.tab",
-                 select = c("pidp", "a_sex", "a_dvage", "a_vote6"))
+select = c("pidp", "a_sex", "a_dvage", "a_vote6"))
 
 UndSoc2ed <- fread("data/UKDA-6614-tab/tab/us_w2/b_indresp.tab",
-                 select = c("pidp", "b_sex", "b_dvage", "b_vote6"))
+select = c("pidp", "b_sex", "b_dvage", "b_vote6"))
 ```
 
 We can check that these are much smaller objects, and that our code was successful.

@@ -59,7 +59,8 @@ files <- dir(
              pattern = "indresp",
              # We want this process to repeat through the entire folder.
              recursive = TRUE,
-             # And finally want R to show us the entire file path, rather than just the names of the individual files.
+             # And finally want R to show us the entire file path, rather than just
+             # the names of the individual files.
              full.names = TRUE)
 
 files
@@ -68,7 +69,8 @@ files
 There are 25 files as we also have data from the *BHPS*, not just *Understanding Society*. We do not need the *BHPS*, so we want to select only the files from *Understanding Society*. We can use the function **str_detect** from the package **stringr** to select only the files whose paths contain *us*.
 
 ```{r}
-# stringr will return a logical vector. Note that I specify which package the function comes from without explicitly attaching it.
+# stringr will return a logical vector. Note that I specify which package the
+# function comes from without explicitly attaching it.
 
 stringr::str_detect(files, "us")
 
