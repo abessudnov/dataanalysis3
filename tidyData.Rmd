@@ -1,65 +1,119 @@
 # Tidy data
 
-> For this class please read ch.12 on Tidy Data from R for Data Science -- http://r4ds.had.co.nz/tidy-data.html.
+> Prerequisite: Chapter 12 ‘Tidy data’ from R for Data Science, available at http://r4ds.had.co.nz/tidy-data.html.
 
 
-In the previous part of the course (joiningData.Rmd) we learned how to join together data from seven waves of the Understanding Society. Let us open this data set.
+Earlier in this course (entitiled 'Join Data') we learned how to join together data from seven waves of the Understanding Society. Let us open this data set.
 
 ```{r cache = TRUE}
 UndSoc <- readRDS("myData/all7.rds")
+
 head(UndSoc)
 ```
 
-Now we will work on how these data can be represented and prepared for the analysis. Please read ch.12 on Tidy Data from the R for Data Science Book -- http://r4ds.had.co.nz/tidy-data.html.
+Now we will work on how these data can be represented and prepared for analysis.
 
 ## Long and wide formats
 
 Let us keep only a few observations and columns in the data and more closely look at its structure.
 
 ```{r cache = TRUE}
+# First attach the tidyverse package.
+
+library(tidyverse)
+
 UndSocExample <- UndSoc %>%
   filter(pidp == 68001367 | pidp == 68004087) %>%
   select(pidp, a_sex: b_fimnnet_dv)
+
 UndSocExample
 ```
 
-These are the data for two individuals only in waves 1 and 2. The data are represented in the wide format. This means that we have one row for each individual, and data from different waves are recorded in several columns. For example, the data on sex from wave 1 is in column *a_sex* and the data on sex from wave is in *b_sex*.
+These are the data for two individuals only in waves 1 and 2, presented in the 'wide' format. This means that we have one row for each individual, and data from different waves are recorded in several columns. For example, the data on sex from wave 1 is in column *a_sex* and the data on sex from wave 2 is in column *b_sex*. This quite literally makes the table of the data wider than if each wave was represented by a new row, which would instead make the table longer and narrower.
 
-You will find this representation of the data common in longitudinal data sets. It may be convenient for certain purposes, but it is generally recommended to keep the data in the long format (that corresponds to the tidy data principles as described in the R for Data Science book).
+In longitudinal data sets, it is common to find data presented in this 'wide' format. While this may be convenient for certain purposes, it is generally recommended to work with data in the 'long' format (that corresponds to the 'tidy data' principles as described in the *R for Data Science* book).
 
-To move from the wide to the long format we can use the function **melt** and **cast** functions from the **reshape2** package.
+### Reshaping the data
+
+To restructure the data from the 'wide' format to the 'long' format, we can use the **gather** and **spread** functions from the **tidyr** package (part of **tidyverse**) with **separate**, shown below:
 
 ```{r cache = TRUE}
+# Here is our data in its current format:
+
+UndSocExample
+
+# First, we want to 'melt' the data frame, putting each new variable on a new row.
+
+UndSocExample %>%
+  gather(a_sex:b_fimnnet_dv, key = "variable", value = "value")
+
+# Then, we split the 'variable' column into separate columns for each variable and 'cast' these new columns in the 'long' format.
+
+UndSocLongExample <- UndSocExample %>%
+  gather(a_sex:b_fimnnet_dv, key = "variable", value = "value") %>%
+  separate(variable, into = c("wave", "variable"), sep = "_", extra = "merge") %>%
+  spread(key = variable, value = value)
+
+# The key command here is the 'separate' command, which takes the letter representing the wave from which the data was taken, and puts this instead as a new variable, called 'wave'.
+```
+
+Now the data are in the 'long' format. This means that we have as many rows for each individual as the number of waves, a variable indicating wave, and all other variables are in columns. In most cases with longitudinal data, the 'long' format is easier to work with.
+
+If we want to restructure our data back to the 'wide' format from the 'long' format, we use the same **gather** and **spread** commands, but this time with the **unite** command, shown below:
+
+```{r cache = TRUE}
+# The data in its 'long' format:
+
+UndSocLongExample
+
+# Here, we again use the 'gather' command to 'melt' the data frame, putting every variable on a new row, then 'cast' these new rows in the 'wide' data format.
+
+UndSocLongExample %>%
+  gather(dvage:vote6, key = "variable", value = "value") %>%
+  unite("variable", c("wave", "variable"), sep = "_") %>%
+  spread(key = variable, value = value)
+
+# The key command here is the 'unite' command, which takes the letter representing the wave from which the data was taken, and recombines this with each variable, meaning each variable has a letter in front of it that represents the wave the data is from.
+```
+
+### Reshaping the data using the reshape2 package
+
+To move from the 'wide' to the 'long' format we can also use the functions **melt** and **dcast**, from the **reshape2** package. The **melt** function is roughly equivalent to **gather** and the **dcast** function is roughly equivalent to **spread**.
+
+```{r cache = TRUE}
+# You can use require() to install packages if and only if they are necessary in your code.
+
 require(reshape2)
 
 # First we "melt" the data frame.
+
 UndSocExampleMolten <- UndSocExample %>%
   melt(id = "pidp")
 UndSocExampleMolten
 
-# Next I want to split the column variable into a column indicating wave and a column indicating variable name. 
-# I will use the function separate() from tidyr.
+# Next we need to split the column variable into a column indicating wave and a column indicating variable name.
 
 UndSocExampleSep <- UndSocExampleMolten %>%
         separate(variable, into = c("wave", "variable"), sep = "_")
+
 UndSocExampleSep
 
-# We have a problem here because one of our variables (fimnnet_dv) has _ in the name and we do not want to separate by it. To avoid this problem we need to add the argument extra = "merge"" in separate().
+# We have a problem here because one of our variables (fimnnet_dv) has '_' in the name and we do not want to separate by it. To avoid this problem we need to add the argument 'extra = "merge"' in separate().
 
 UndSocExampleSep <- UndSocExampleMolten %>%
         separate(variable, into = c("wave", "variable"), sep = "_", extra = "merge")
+
 UndSocExampleSep
 
-# Next we "cast" the molten data frame into the format we want.
+# Finally, we "cast" the molten data frame into the format we want.
 
 UndSocExampleLong <- UndSocExampleSep %>%
   dcast(pidp + wave ~ variable)
+
 UndSocExampleLong
 ```
 
-Now the data are in the "long format". This means that we have as many rows for each individual as the number of waves, a variable indicating wave, and all other variables are in columns. In most cases with longitudinal data, the long format is easier to work with.
-
-What if we want to convert the data back to the wide format?
+To convert the data back to the 'wide' format, we do the following:
 
 ```{r cache = TRUE}
 # First melt
@@ -78,88 +132,74 @@ UndSocExampleWide <- UndSocExampleUnited %>%
 UndSocExampleWide
 ```
 
-We can also restructure the data using the **gather** and **spread** functions from the **tidyr** package (part of **tidyverse**). **gather** is roughy equivalent to **melt** and **spread** is roughy equivalent to **dcast**.
+## Exercise:
 
-Moving from wide to long:
+Reshape the full **UndSoc** data frame from 'wide' to 'long' format. Call the object where you will store the result **UndSocLong**.
 
-```{r cache = TRUE}
-UndSocExample
-
-# This "melts" the data frame. 
-UndSocExample %>%
-  gather(a_sex:b_fimnnet_dv, key = "variable", value = "value")
-
-# Next we want to split the "variable" column and "cast" in the long format
-UndSocExample %>%
-  gather(a_sex:b_vote6, key = "variable", value = "value") %>%
-  separate(variable, into = c("wave", "variable"), sep = "_", extra = "merge") %>%
-  spread(key = variable, value = value)
-
-```
-
-If we want to move from long to wide:
-
-```{r cache = TRUE}
-UndSocExampleLong
-
-UndSocExampleLong %>%
-  gather(dvage:vote6, key = "variable", value = "value") %>%
-  unite("variable", c("wave", "variable"), sep = "_") %>%
-  spread(key = variable, value = value)
-
-```
-
-**Exercise**. Reshape the full **UndSoc** data frame from wide to long format. Call the object where you will store the result **UndSocLong**.
-
-**Solution:**
+### Solution:
 
 ```{r cache = TRUE}
 UndSocLong <- UndSoc %>%
   gather(a_sex:g_fimnnet_dv, key = "variable", value = "value") %>%
   separate(variable, into = c("wave", "variable"), sep = "_", extra = "merge") %>%
   spread(key = variable, value = value)
+
 head(UndSocLong, 5)
 ```
 
 ## Cleaning the data
 
-Before we begin the analysis we want to make sure that the data have been cleaned and all the missing values have been correctly identified. It usually makes sense to separate the cleaning and analysis stages into separate scripts.
+Before we begin the analysis, we want to make sure that the data have been cleaned and all the missing values have been correctly identified. It usually makes sense to separate the cleaning and analysis stages into separate scripts.
 
-Let us explore the data set we have. Note that if we had not converted the data into the long format we would have to tabulate and clean each variable seven times.
+Let us explore the data set we have. Note that if we had not converted the data into the 'long' format we would have to tabulate and clean each variable seven times.
 
 ```{r cache = TRUE}
 summary(UndSocLong)
+
 table(UndSocLong$wave)
+
 table(UndSocLong$dvage)
+
 table(UndSocLong$sex)
+
 table(UndSocLong$vote6)
+
 summary(UndSocLong$fimnnet_dv)
 ```
 
-Note the negative values for dvage, sex and vote6. These are missing values that need to be coded as missing.
+Note the negative values for *dvage*, *sex* and *vote6*. These are missing values that need to be coded as *NA*.
 
 ```{r cache = TRUE}
 UndSocLong  <- UndSocLong %>%
   mutate(dvage = ifelse(dvage > 0, dvage, NA)) %>%
   mutate(sex = ifelse(sex > 0, sex, NA)) %>%
   mutate(vote6 = ifelse(vote6 > 0, vote6, NA))
+
+# If you need a recap on how the ifelse function works, we previously covered it in 'Transform Data', section 6 'Recode variables Both base R and dplyr using ifelse'.
+
 table(UndSocLong$dvage)
+
 table(UndSocLong$sex)
+
 table(UndSocLong$vote6)
 ```
 
 We also have negative values for income (**fimnnet_dv**), but we will leave as it is for now.
 
-We may also want to code **sex** as "male" and "female" and assign meaningful labels to **vote6**.
+We may want to code *sex* as 'male' and 'female' and assign meaningful labels to *vote6*.
 
 ```{r cache = TRUE}
 UndSocLongClean <- UndSocLong %>%
   mutate(sex = recode(sex, "1" = "male", "2" = "female")) %>%
-  mutate(vote6 = recode(vote6, "1" = "very", "2" = "fairly", "3" = "not very", "4" = "not al all"))
+  mutate(vote6 = recode(vote6, "1" = "very", "2" = "fairly", "3" = "not very", "4" = "not at all"))
+
 head(UndSocLongClean, 10)
-
-saveRDS(UndSocLongClean, "myData/all7clean.rds")
-
 ```
 
+You will have noticed that we used the **ifelse** command to code the negative values from the *dvage*, *sex* and *vote6* variables as missing values, whereas we used the **recode** command to assign labels to the values in the data for the *sex* and *vote6* variables. This is because the **ifelse** function works with conditional statements (used in creating *NA* values for missing numbers) and the **recode** function requires fewer lines of code to recode multiple values in a variable, as it can simply reassign values, rather than having to set values to a number of conditional statements (explained in *Transform Data*, section 6 *Recode variables Both base R and dplyr using ifelse*).
 
+Finally, we save this cleaned data in our *myData* folder, as *all7clean*.
+
+```{r cache = TRUE}
+saveRDS(UndSocLongClean, "myData/all7clean.rds")
+```
