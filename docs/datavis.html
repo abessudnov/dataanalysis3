@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-07-23">
+<meta name="date" content="2018-08-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -172,8 +172,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2" data-path="iteration.html"><a href="iteration.html#loading-understanding-society-using-iteration"><i class="fa fa-check"></i><b>7.2</b> Loading <em>Understanding Society</em> using iteration</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>8</b> Tidy data</a><ul>
-<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a></li>
-<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.2</b> Cleaning the data</a></li>
+<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="tidy-data.html"><a href="tidy-data.html#reshaping-the-data"><i class="fa fa-check"></i><b>8.1.1</b> Reshaping the data</a></li>
+<li class="chapter" data-level="8.1.2" data-path="tidy-data.html"><a href="tidy-data.html#reshaping-the-data-using-the-reshape2-package"><i class="fa fa-check"></i><b>8.1.2</b> Reshaping the data using the reshape2 package</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#exercise"><i class="fa fa-check"></i><b>8.2</b> Exercise:</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="tidy-data.html"><a href="tidy-data.html#solution"><i class="fa fa-check"></i><b>8.2.1</b> Solution:</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.3</b> Cleaning the data</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="datavis.html"><a href="datavis.html"><i class="fa fa-check"></i><b>9</b> Data visualisation</a><ul>
 <li class="chapter" data-level="9.1" data-path="datavis.html"><a href="datavis.html#reading-in-the-data"><i class="fa fa-check"></i><b>9.1</b> Reading in the data</a></li>
@@ -258,14 +264,14 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(W1, <span class="kw">aes</span>(<span class="dt">x=</span>bmi)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
 </div>
 <div id="density-chart." class="section level3">
 <h3><span class="header-section-number">9.2.2</span> Density chart.</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(W1, <span class="kw">aes</span>(<span class="dt">x=</span>bmi)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
 </div>
 </div>
 <div id="visualising-one-categorical-variable" class="section level2">
@@ -296,7 +302,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>cbirth)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Country of birth&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(W1<span class="op">$</span>cbirth, <span class="dt">useNA =</span> <span class="st">&quot;always&quot;</span>)</code></pre></div>
 <pre><code>## 
 ##          England Northern Ireland           Not UK         Scotland 
@@ -312,7 +318,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span>lm)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
 </div>
 <div id="visualising-one-categorical-and-one-quantitative-variable" class="section level2">
 <h2><span class="header-section-number">9.5</span> Visualising one categorical and one quantitative variable</h2>
@@ -344,7 +350,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Age group&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Body mass index&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
 </div>
 <div id="visualising-two-categorical-variables" class="section level2">
 <h2><span class="header-section-number">9.6</span> Visualising two categorical variables</h2>
@@ -355,7 +361,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Country of birth&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>agegr)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
 <p>Alternatively you can do a jitter plot, but in our case it wouldn’t look nice.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W1 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(cbirth)) <span class="op">%&gt;%</span>
@@ -363,7 +369,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Country of birth&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Age group&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
 </div>
 <div id="showing-the-relationships-by-group" class="section level2">
 <h2><span class="header-section-number">9.7</span> Showing the relationships by group</h2>
@@ -374,7 +380,7 @@ W1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st
 <span class="st">                </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">                </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
 <span class="st">                </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>cbirth)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
 
 </div>
 </div>
@@ -422,9 +428,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

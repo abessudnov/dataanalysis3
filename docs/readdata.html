@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-07-23">
+<meta name="date" content="2018-08-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -172,8 +172,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2" data-path="iteration.html"><a href="iteration.html#loading-understanding-society-using-iteration"><i class="fa fa-check"></i><b>7.2</b> Loading <em>Understanding Society</em> using iteration</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>8</b> Tidy data</a><ul>
-<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a></li>
-<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.2</b> Cleaning the data</a></li>
+<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="tidy-data.html"><a href="tidy-data.html#reshaping-the-data"><i class="fa fa-check"></i><b>8.1.1</b> Reshaping the data</a></li>
+<li class="chapter" data-level="8.1.2" data-path="tidy-data.html"><a href="tidy-data.html#reshaping-the-data-using-the-reshape2-package"><i class="fa fa-check"></i><b>8.1.2</b> Reshaping the data using the reshape2 package</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#exercise"><i class="fa fa-check"></i><b>8.2</b> Exercise:</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="tidy-data.html"><a href="tidy-data.html#solution"><i class="fa fa-check"></i><b>8.2.1</b> Solution:</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.3</b> Cleaning the data</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="datavis.html"><a href="datavis.html"><i class="fa fa-check"></i><b>9</b> Data visualisation</a><ul>
 <li class="chapter" data-level="9.1" data-path="datavis.html"><a href="datavis.html#reading-in-the-data"><i class="fa fa-check"></i><b>9.1</b> Reading in the data</a></li>
@@ -244,14 +250,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h4><span class="header-section-number">4.2.1.1</span> Using base R</h4>
 <p>To read this data into R using functions from base R, we can first use the <strong>read.table()</strong> function. To read the data in correctly, we need to use <strong>header = TRUE</strong> as the first row of the data contains the names of the variables, and also <strong>stringsAsFactors = FALSE</strong>, which stops R from treating text variables as factors. We can convert these into factors later, when necessary.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSoc.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>,
-                      <span class="dt">header =</span> <span class="ot">TRUE</span>,
-                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre></div>
+                       <span class="dt">header =</span> <span class="ot">TRUE</span>,
+                       <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>Different types of files need to read into R in different ways. The <strong>read.table()</strong> function reads data that is <em>tab separated</em> (the file will be called ‘name<em>.tab</em>’), the <strong>read.csv()</strong> function reads data that is <em>comma separated</em> (the file will be called ‘name<em>.csv</em>’) and <strong>read.delim()</strong> reads data that is separated in any way. These work in the same way, so once you’ve mastered one, you’ve mastered them all.</p>
 </div>
 <div id="using-the-readr-package" class="section level4">
 <h4><span class="header-section-number">4.2.1.2</span> Using the readr package</h4>
 <p>We can also read data into R using the package <em>readr</em>, part of the <em>tidyverse</em> package, with the <strong>read_tsv()</strong> command. This is the equivalent command to <strong>read.table()</strong> from base R.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can either load the entire &#39;tidyverse&#39; package into R, which includes the readr package as well as others such as ggplot2, or just the &#39;readr&#39; package on its own.</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can either load the entire &#39;tidyverse&#39; package into R, which includes the readr</span>
+<span class="co"># package as well as others such as ggplot2, or just the &#39;readr&#39; package on its own.</span>
 
 <span class="kw">library</span>(readr)
 
@@ -265,8 +272,9 @@ UndSoc.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">
 
 UndSoc.<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
 <pre><code>## 
-Read 78.4% of 50994 rows
-Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code></pre>
+Read 58.8% of 50994 rows
+Read 98.1% of 50994 rows
+Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:04</code></pre>
 </div>
 </div>
 <div id="comparing-these-three-methods" class="section level3">
@@ -276,25 +284,26 @@ Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code>
 <h4><span class="header-section-number">4.2.2.1</span> Using base R</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Base R</span>
 <span class="kw">system.time</span>(UndSoc.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>,
-                      <span class="dt">header =</span> <span class="ot">TRUE</span>,
-                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>))</code></pre></div>
+                                   <span class="dt">header =</span> <span class="ot">TRUE</span>,
+                                   <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##  39.617   1.226  40.996</code></pre>
+##   22.63    0.44   23.71</code></pre>
 </div>
 <div id="using-the-readr-package-1" class="section level4">
 <h4><span class="header-section-number">4.2.2.2</span> Using the readr package</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(UndSoc.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   9.531   0.490  10.046</code></pre>
+##    4.54    0.17    6.32</code></pre>
 </div>
 <div id="using-the-data.table-package-1" class="section level4">
 <h4><span class="header-section-number">4.2.2.3</span> Using the data.table package</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(UndSoc.<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>))</code></pre></div>
 <pre><code>## 
-Read 78.4% of 50994 rows
-Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code></pre>
+Read 58.8% of 50994 rows
+Read 98.1% of 50994 rows
+Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:04</code></pre>
 <pre><code>##    user  system elapsed 
-##   2.531   0.208   2.748</code></pre>
+##    2.72    0.04    3.39</code></pre>
 <p>From this we can see clear differences in loading time. With small data sets, the difference between these three methods will not be very noticeable or important, but with larger data the increase in loading times the <em>readr</em> and <em>data.table</em> packages provide can be quite substantial.</p>
 </div>
 </div>
@@ -302,7 +311,7 @@ Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code>
 <h3><span class="header-section-number">4.2.3</span> Editing a dataset while reading it into R</h3>
 <div id="skipping-rows-of-data" class="section level4">
 <h4><span class="header-section-number">4.2.3.1</span> Skipping rows of data</h4>
-<p>Sometimes we do not want to read in the entire dataset we have into R, but instead want to ignore the first few rows. For example, if we were to do some sentiment analysis on Hamlet (found here: <a href="http://www.gutenberg.org/files/1524/1524-0.txt" class="uri">http://www.gutenberg.org/files/1524/1524-0.txt</a>, we would want to only read in the play itself, not the introductions before the start of the play. We can use the <strong>skip = “”</strong> command to only read the file from the start of the play, with each line of the script counting as a row.</p>
+<p>Sometimes we do not want to read in the entire dataset we have into R, but instead want to ignore the first few rows. For example, if we were to do some sentiment analysis on Hamlet (found here: <a href="http://www.gutenberg.org/files/1524/1524-0.txt" class="uri">http://www.gutenberg.org/files/1524/1524-0.txt</a>), we would want to only read in the play itself, not the introductions before the start of the play. We can use the <strong>skip = “”</strong> command to only read the file from the start of the play, with each line of the script counting as a row.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamlet &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;http://www.gutenberg.org/files/1524/1524-0.txt&quot;</span>,
                      <span class="dt">skip =</span> <span class="dv">30</span>,
                      <span class="dt">header =</span> <span class="ot">FALSE</span>)</code></pre></div>
@@ -312,15 +321,15 @@ Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code>
 <p>When working with large datasets, like the one you will be using for your assignment, there are only certain variables that are of interest. As a result, it makes sense to load in only these variables, to make analysing your data easier to do.</p>
 <p>Let’s say that we’re interested in how political interest is distributed across the UK, and want to analyse how this is differentiated by sex and age. The variables we need to read into R are these two (<em>a_sex</em> and <em>a_dvage</em>), as well as interest in politics (<em>a_vote6</em>) and the personal identification variable for each individual (<em>a_pidp</em>). We can use the <strong>select = “”</strong> command to do this.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSoc.<span class="dv">4</span> &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>,
-                 <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;pidp&quot;</span>, <span class="st">&quot;a_sex&quot;</span>, <span class="st">&quot;a_dvage&quot;</span>, <span class="st">&quot;a_vote6&quot;</span>))</code></pre></div>
+                  <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;pidp&quot;</span>, <span class="st">&quot;a_sex&quot;</span>, <span class="st">&quot;a_dvage&quot;</span>, <span class="st">&quot;a_vote6&quot;</span>))</code></pre></div>
 </div>
 <div id="setting-na-values" class="section level4">
 <h4><span class="header-section-number">4.2.3.3</span> Setting <em>NA</em> values</h4>
 <p>Sometimes, if we look at the raw data we are about to analyse, we see that there are a number of missing values. Instead of recoding these values as <em>NA</em> after we have loaded our data (found, in this example, at <a href="https://raw.githubusercontent.com/abessudnov/dataanalysis3/master/exData/Table3.txt" class="uri">https://raw.githubusercontent.com/abessudnov/dataanalysis3/master/exData/Table3.txt</a>), we can do this while reading our data into R using the <strong>na.strings = “”</strong> command.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MissingData &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;exData/Table3.txt&quot;</span>,
-                 <span class="dt">header =</span> <span class="ot">TRUE</span>,
-                 <span class="dt">skip =</span> <span class="dv">2</span>,
-                 <span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;*&quot;</span>, <span class="st">&quot;**&quot;</span>, <span class="st">&quot;--&quot;</span>))</code></pre></div>
+                          <span class="dt">header =</span> <span class="ot">TRUE</span>,
+                          <span class="dt">skip =</span> <span class="dv">2</span>,
+                          <span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;*&quot;</span>, <span class="st">&quot;**&quot;</span>, <span class="st">&quot;--&quot;</span>))</code></pre></div>
 </div>
 </div>
 </div>
@@ -353,10 +362,13 @@ Excel &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span cla
 ## 3     C     3       15</code></pre>
 <p>To fix this, we need to set both these values as <em>NA</em>, which we can do with the <strong>na = “”</strong> command.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Excel3 &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;exData/tableExcel.xlsx&quot;</span>,
-                     <span class="dt">sheet =</span> <span class="dv">2</span>,
-                     <span class="dt">na =</span> <span class="kw">c</span>(<span class="st">&#39;NA&#39;</span>, <span class="st">&#39;&quot;NA&quot;&#39;</span>))
+<span class="dt">sheet =</span> <span class="dv">2</span>,
+<span class="dt">na =</span> <span class="kw">c</span>(<span class="st">&#39;NA&#39;</span>, <span class="st">&#39;&quot;NA&quot;&#39;</span>))
 
-<span class="co"># Note that as one of the missing values is called &quot;NA&quot;, you have to use inverted commas (&#39;&#39;) around the entire value for R to change it to an NA value, rather than the usual speech marks (&quot;&quot;). Inverted commas and speech marks are interchangable in R, though if you use one to open a command, you cannot use the other to close it.</span></code></pre></div>
+<span class="co"># Note that as one of the missing values is called &quot;NA&quot;, you have to use inverted commas</span>
+<span class="co"># (&#39;&#39;) around the entire value for R to change it to an NA value, rather than the usual</span>
+<span class="co"># speech marks (&quot;&quot;). Inverted commas and speech marks are interchangable in R, though</span>
+<span class="co"># if you use one to open a command, you cannot use the other to close it.</span></code></pre></div>
 <p>We can now see that this dataset has true <em>NA</em> values in it for the missing data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(Excel3)</code></pre></div>
 <pre><code>## # A tibble: 3 x 3
@@ -447,16 +459,18 @@ Read 78.4% of 50994 rows
 Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSoc2 &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w2/b_indresp.tab&quot;</span>)</code></pre></div>
 <pre><code>## 
-Read 54.9% of 54597 rows
-Read 91.6% of 54597 rows
-Read 54597 rows and 1615 (of 1615) columns from 0.233 GB file in 00:00:04</code></pre>
+Read 0.0% of 54597 rows
+Read 36.6% of 54597 rows
+Read 73.3% of 54597 rows
+Read 54597 rows and 1615 (of 1615) columns from 0.233 GB file in 00:00:07</code></pre>
 <p>As we discussed earlier in this class, these files take a lot longer to load into R than other data files you have used in the past. This is because the files themselves are large, and take up a lot of space in the memory. We can see just how much space they take up by using the <strong>object.size()</strong> command.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">object.size</span>(UndSoc1)</code></pre></div>
 <pre><code>## 286020872 bytes</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">object.size</span>(UndSoc2)</code></pre></div>
 <pre><code>## 364341464 bytes</code></pre>
 <p>However, this does not give us an answer that we can easily interpret. Therefore, by using the <strong>format()</strong> command, we can specify how we want R to show us this data. In this case, by adding <strong>units = “”</strong> we can tell R to show us how large the files are in specific units.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># By adding units = &quot;auto&quot; R automatically chooses the clearest way to show us the size of the files.</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># By adding units = &quot;auto&quot; R automatically chooses the clearest way to show us the</span>
+<span class="co"># size of the files.</span>
 
 <span class="kw">format</span>(<span class="kw">object.size</span>(UndSoc1), <span class="dt">units =</span> <span class="st">&quot;auto&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;272.8 Mb&quot;</code></pre>
@@ -474,10 +488,13 @@ Read 54597 rows and 1615 (of 1615) columns from 0.233 GB file in 00:00:04</code>
 </ul>
 <p>By using what we covered earlier, we can select only the variables we want to read into R, making the loading times decrease significantly as they are much smaller datasets.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSoc1ed &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>,
-                 <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;pidp&quot;</span>, <span class="st">&quot;a_sex&quot;</span>, <span class="st">&quot;a_dvage&quot;</span>, <span class="st">&quot;a_vote6&quot;</span>))
+<span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;pidp&quot;</span>, <span class="st">&quot;a_sex&quot;</span>, <span class="st">&quot;a_dvage&quot;</span>, <span class="st">&quot;a_vote6&quot;</span>))
 
 UndSoc2ed &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w2/b_indresp.tab&quot;</span>,
-                 <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;pidp&quot;</span>, <span class="st">&quot;b_sex&quot;</span>, <span class="st">&quot;b_dvage&quot;</span>, <span class="st">&quot;b_vote6&quot;</span>))</code></pre></div>
+<span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;pidp&quot;</span>, <span class="st">&quot;b_sex&quot;</span>, <span class="st">&quot;b_dvage&quot;</span>, <span class="st">&quot;b_vote6&quot;</span>))</code></pre></div>
+<pre><code>## 
+Read 0.0% of 54597 rows
+Read 54597 rows and 4 (of 1615) columns from 0.233 GB file in 00:00:04</code></pre>
 <p>We can check that these are much smaller objects, and that our code was successful.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">format</span>(<span class="kw">object.size</span>(UndSoc1ed), <span class="dt">units =</span> <span class="st">&quot;auto&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;798.3 Kb&quot;</code></pre>
@@ -550,9 +567,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

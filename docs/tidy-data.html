@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-07-23">
+<meta name="date" content="2018-08-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -172,8 +172,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2" data-path="iteration.html"><a href="iteration.html#loading-understanding-society-using-iteration"><i class="fa fa-check"></i><b>7.2</b> Loading <em>Understanding Society</em> using iteration</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>8</b> Tidy data</a><ul>
-<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a></li>
-<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.2</b> Cleaning the data</a></li>
+<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="tidy-data.html"><a href="tidy-data.html#reshaping-the-data"><i class="fa fa-check"></i><b>8.1.1</b> Reshaping the data</a></li>
+<li class="chapter" data-level="8.1.2" data-path="tidy-data.html"><a href="tidy-data.html#reshaping-the-data-using-the-reshape2-package"><i class="fa fa-check"></i><b>8.1.2</b> Reshaping the data using the reshape2 package</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#exercise"><i class="fa fa-check"></i><b>8.2</b> Exercise:</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="tidy-data.html"><a href="tidy-data.html#solution"><i class="fa fa-check"></i><b>8.2.1</b> Solution:</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.3</b> Cleaning the data</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="datavis.html"><a href="datavis.html"><i class="fa fa-check"></i><b>9</b> Data visualisation</a><ul>
 <li class="chapter" data-level="9.1" data-path="datavis.html"><a href="datavis.html#reading-in-the-data"><i class="fa fa-check"></i><b>9.1</b> Reading in the data</a></li>
@@ -229,10 +235,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="tidy-data" class="section level1">
 <h1><span class="header-section-number">8</span> Tidy data</h1>
 <blockquote>
-<p>For this class please read ch.12 on Tidy Data from R for Data Science – <a href="http://r4ds.had.co.nz/tidy-data.html" class="uri">http://r4ds.had.co.nz/tidy-data.html</a>.</p>
+<p>Prerequisite: Chapter 12 ‘Tidy data’ from R for Data Science, available at <a href="http://r4ds.had.co.nz/tidy-data.html" class="uri">http://r4ds.had.co.nz/tidy-data.html</a>.</p>
 </blockquote>
-<p>In the previous part of the course (joiningData.Rmd) we learned how to join together data from seven waves of the Understanding Society. Let us open this data set.</p>
+<p>Earlier in this course (entitiled ‘Join Data’) we learned how to join together data from seven waves of the Understanding Society. Let us open this data set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;myData/all7.rds&quot;</span>)
+
 <span class="kw">head</span>(UndSoc)</code></pre></div>
 <pre><code>##       pidp a_sex a_dvage a_vote6 a_fimnnet_dv b_sex b_dvage b_vote6
 ## 1 68001367     1      39       3    1400.0000    NA      NA      NA
@@ -262,13 +269,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 4           NA     2      23      -7     909.2457
 ## 5      904.209     2      78       3     996.6353
 ## 6           NA    NA      NA      NA           NA</code></pre>
-<p>Now we will work on how these data can be represented and prepared for the analysis. Please read ch.12 on Tidy Data from the R for Data Science Book – <a href="http://r4ds.had.co.nz/tidy-data.html" class="uri">http://r4ds.had.co.nz/tidy-data.html</a>.</p>
+<p>Now we will work on how these data can be represented and prepared for analysis.</p>
 <div id="long-and-wide-formats" class="section level2">
 <h2><span class="header-section-number">8.1</span> Long and wide formats</h2>
 <p>Let us keep only a few observations and columns in the data and more closely look at its structure.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSocExample &lt;-<span class="st"> </span>UndSoc <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First attach the tidyverse package.</span>
+
+<span class="kw">library</span>(tidyverse)
+
+UndSocExample &lt;-<span class="st"> </span>UndSoc <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(pidp <span class="op">==</span><span class="st"> </span><span class="dv">68001367</span> <span class="op">|</span><span class="st"> </span>pidp <span class="op">==</span><span class="st"> </span><span class="dv">68004087</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(pidp, a_sex<span class="op">:</span><span class="st"> </span>b_fimnnet_dv)
+
 UndSocExample</code></pre></div>
 <pre><code>##       pidp a_sex a_dvage a_vote6 a_fimnnet_dv b_sex b_dvage b_vote6
 ## 1 68001367     1      39       3    1400.0000    NA      NA      NA
@@ -276,12 +288,82 @@ UndSocExample</code></pre></div>
 ##   b_fimnnet_dv
 ## 1           NA
 ## 2     1276.667</code></pre>
-<p>These are the data for two individuals only in waves 1 and 2. The data are represented in the wide format. This means that we have one row for each individual, and data from different waves are recorded in several columns. For example, the data on sex from wave 1 is in column <em>a_sex</em> and the data on sex from wave is in <em>b_sex</em>.</p>
-<p>You will find this representation of the data common in longitudinal data sets. It may be convenient for certain purposes, but it is generally recommended to keep the data in the long format (that corresponds to the tidy data principles as described in the R for Data Science book).</p>
-<p>To move from the wide to the long format we can use the function <strong>melt</strong> and <strong>cast</strong> functions from the <strong>reshape2</strong> package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(reshape2)
+<p>These are the data for two individuals only in waves 1 and 2, presented in the ‘wide’ format. This means that we have one row for each individual, and data from different waves are recorded in several columns. For example, the data on sex from wave 1 is in column <em>a_sex</em> and the data on sex from wave 2 is in column <em>b_sex</em>. This quite literally makes the table of the data wider than if each wave was represented by a new row, which would instead make the table longer and narrower.</p>
+<p>In longitudinal data sets, it is common to find data presented in this ‘wide’ format. While this may be convenient for certain purposes, it is generally recommended to work with data in the ‘long’ format (that corresponds to the ‘tidy data’ principles as described in the <em>R for Data Science</em> book).</p>
+<div id="reshaping-the-data" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> Reshaping the data</h3>
+<p>To restructure the data from the ‘wide’ format to the ‘long’ format, we can use the <strong>gather</strong> and <strong>spread</strong> functions from the <strong>tidyr</strong> package (part of <strong>tidyverse</strong>) with <strong>separate</strong>, shown below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here is our data in its current format:</span>
+
+UndSocExample</code></pre></div>
+<pre><code>##       pidp a_sex a_dvage a_vote6 a_fimnnet_dv b_sex b_dvage b_vote6
+## 1 68001367     1      39       3    1400.0000    NA      NA      NA
+## 2 68004087     1      59       2     802.0833     1      60       2
+##   b_fimnnet_dv
+## 1           NA
+## 2     1276.667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, we want to &#39;melt&#39; the data frame, putting each new variable on a new row.</span>
+
+UndSocExample <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(a_sex<span class="op">:</span>b_fimnnet_dv, <span class="dt">key =</span> <span class="st">&quot;variable&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;value&quot;</span>)</code></pre></div>
+<pre><code>##        pidp     variable     value
+## 1  68001367        a_sex    1.0000
+## 2  68004087        a_sex    1.0000
+## 3  68001367      a_dvage   39.0000
+## 4  68004087      a_dvage   59.0000
+## 5  68001367      a_vote6    3.0000
+## 6  68004087      a_vote6    2.0000
+## 7  68001367 a_fimnnet_dv 1400.0000
+## 8  68004087 a_fimnnet_dv  802.0833
+## 9  68001367        b_sex        NA
+## 10 68004087        b_sex    1.0000
+## 11 68001367      b_dvage        NA
+## 12 68004087      b_dvage   60.0000
+## 13 68001367      b_vote6        NA
+## 14 68004087      b_vote6    2.0000
+## 15 68001367 b_fimnnet_dv        NA
+## 16 68004087 b_fimnnet_dv 1276.6666</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Then, we split the &#39;variable&#39; column into separate columns for each variable and &#39;cast&#39; these new columns in the &#39;long&#39; format.</span>
+
+UndSocLongExample &lt;-<span class="st"> </span>UndSocExample <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(a_sex<span class="op">:</span>b_fimnnet_dv, <span class="dt">key =</span> <span class="st">&quot;variable&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">separate</span>(variable, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;wave&quot;</span>, <span class="st">&quot;variable&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">extra =</span> <span class="st">&quot;merge&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> variable, <span class="dt">value =</span> value)
+
+<span class="co"># The key command here is the &#39;separate&#39; command, which takes the letter representing the wave from which the data was taken, and puts this instead as a new variable, called &#39;wave&#39;.</span></code></pre></div>
+<p>Now the data are in the ‘long’ format. This means that we have as many rows for each individual as the number of waves, a variable indicating wave, and all other variables are in columns. In most cases with longitudinal data, the ‘long’ format is easier to work with.</p>
+<p>If we want to restructure our data back to the ‘wide’ format from the ‘long’ format, we use the same <strong>gather</strong> and <strong>spread</strong> commands, but this time with the <strong>unite</strong> command, shown below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The data in its &#39;long&#39; format:</span>
+
+UndSocLongExample</code></pre></div>
+<pre><code>##       pidp wave dvage fimnnet_dv sex vote6
+## 1 68001367    a    39  1400.0000   1     3
+## 2 68001367    b    NA         NA  NA    NA
+## 3 68004087    a    59   802.0833   1     2
+## 4 68004087    b    60  1276.6666   1     2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here, we again use the &#39;gather&#39; command to &#39;melt&#39; the data frame, putting every variable on a new row, then &#39;cast&#39; these new rows in the &#39;wide&#39; data format.</span>
+
+UndSocLongExample <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(dvage<span class="op">:</span>vote6, <span class="dt">key =</span> <span class="st">&quot;variable&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="st">&quot;variable&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;wave&quot;</span>, <span class="st">&quot;variable&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> variable, <span class="dt">value =</span> value)</code></pre></div>
+<pre><code>##       pidp a_dvage a_fimnnet_dv a_sex a_vote6 b_dvage b_fimnnet_dv b_sex
+## 1 68001367      39    1400.0000     1       3      NA           NA    NA
+## 2 68004087      59     802.0833     1       2      60     1276.667     1
+##   b_vote6
+## 1      NA
+## 2       2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The key command here is the &#39;unite&#39; command, which takes the letter representing the wave from which the data was taken, and recombines this with each variable, meaning each variable has a letter in front of it that represents the wave the data is from.</span></code></pre></div>
+</div>
+<div id="reshaping-the-data-using-the-reshape2-package" class="section level3">
+<h3><span class="header-section-number">8.1.2</span> Reshaping the data using the reshape2 package</h3>
+<p>To move from the ‘wide’ to the ‘long’ format we can also use the functions <strong>melt</strong> and <strong>dcast</strong>, from the <strong>reshape2</strong> package. The <strong>melt</strong> function is roughly equivalent to <strong>gather</strong> and the <strong>dcast</strong> function is roughly equivalent to <strong>spread</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can use require() to install packages if and only if they are necessary in your code.</span>
+
+<span class="kw">require</span>(reshape2)
 
 <span class="co"># First we &quot;melt&quot; the data frame.</span>
+
 UndSocExampleMolten &lt;-<span class="st"> </span>UndSocExample <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">melt</span>(<span class="dt">id =</span> <span class="st">&quot;pidp&quot;</span>)
 UndSocExampleMolten</code></pre></div>
@@ -302,11 +384,11 @@ UndSocExampleMolten</code></pre></div>
 ## 14 68004087      b_vote6    2.0000
 ## 15 68001367 b_fimnnet_dv        NA
 ## 16 68004087 b_fimnnet_dv 1276.6666</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Next I want to split the column variable into a column indicating wave and a column indicating variable name. </span>
-<span class="co"># I will use the function separate() from tidyr.</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Next we need to split the column variable into a column indicating wave and a column indicating variable name.</span>
 
 UndSocExampleSep &lt;-<span class="st"> </span>UndSocExampleMolten <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">separate</span>(variable, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;wave&quot;</span>, <span class="st">&quot;variable&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)
+
 UndSocExampleSep</code></pre></div>
 <pre><code>##        pidp wave variable     value
 ## 1  68001367    a      sex    1.0000
@@ -325,10 +407,11 @@ UndSocExampleSep</code></pre></div>
 ## 14 68004087    b    vote6    2.0000
 ## 15 68001367    b  fimnnet        NA
 ## 16 68004087    b  fimnnet 1276.6666</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We have a problem here because one of our variables (fimnnet_dv) has _ in the name and we do not want to separate by it. To avoid this problem we need to add the argument extra = &quot;merge&quot;&quot; in separate().</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We have a problem here because one of our variables (fimnnet_dv) has &#39;_&#39; in the name and we do not want to separate by it. To avoid this problem we need to add the argument &#39;extra = &quot;merge&quot;&#39; in separate().</span>
 
 UndSocExampleSep &lt;-<span class="st"> </span>UndSocExampleMolten <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">separate</span>(variable, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;wave&quot;</span>, <span class="st">&quot;variable&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">extra =</span> <span class="st">&quot;merge&quot;</span>)
+
 UndSocExampleSep</code></pre></div>
 <pre><code>##        pidp wave   variable     value
 ## 1  68001367    a        sex    1.0000
@@ -347,18 +430,18 @@ UndSocExampleSep</code></pre></div>
 ## 14 68004087    b      vote6    2.0000
 ## 15 68001367    b fimnnet_dv        NA
 ## 16 68004087    b fimnnet_dv 1276.6666</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Next we &quot;cast&quot; the molten data frame into the format we want.</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Finally, we &quot;cast&quot; the molten data frame into the format we want.</span>
 
 UndSocExampleLong &lt;-<span class="st"> </span>UndSocExampleSep <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">dcast</span>(pidp <span class="op">+</span><span class="st"> </span>wave <span class="op">~</span><span class="st"> </span>variable)
+
 UndSocExampleLong</code></pre></div>
 <pre><code>##       pidp wave dvage fimnnet_dv sex vote6
 ## 1 68001367    a    39  1400.0000   1     3
 ## 2 68001367    b    NA         NA  NA    NA
 ## 3 68004087    a    59   802.0833   1     2
 ## 4 68004087    b    60  1276.6666   1     2</code></pre>
-<p>Now the data are in the “long format”. This means that we have as many rows for each individual as the number of waves, a variable indicating wave, and all other variables are in columns. In most cases with longitudinal data, the long format is easier to work with.</p>
-<p>What if we want to convert the data back to the wide format?</p>
+<p>To convert the data back to the ‘wide’ format, we do the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First melt</span>
 UndSocExampleMolten2 &lt;-<span class="st"> </span>UndSocExampleLong <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">melt</span>(<span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;pidp&quot;</span>, <span class="st">&quot;wave&quot;</span>))
@@ -411,68 +494,18 @@ UndSocExampleWide</code></pre></div>
 ##   b_vote6
 ## 1      NA
 ## 2       2</code></pre>
-<p>We can also restructure the data using the <strong>gather</strong> and <strong>spread</strong> functions from the <strong>tidyr</strong> package (part of <strong>tidyverse</strong>). <strong>gather</strong> is roughy equivalent to <strong>melt</strong> and <strong>spread</strong> is roughy equivalent to <strong>dcast</strong>.</p>
-<p>Moving from wide to long:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSocExample</code></pre></div>
-<pre><code>##       pidp a_sex a_dvage a_vote6 a_fimnnet_dv b_sex b_dvage b_vote6
-## 1 68001367     1      39       3    1400.0000    NA      NA      NA
-## 2 68004087     1      59       2     802.0833     1      60       2
-##   b_fimnnet_dv
-## 1           NA
-## 2     1276.667</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This &quot;melts&quot; the data frame. </span>
-UndSocExample <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(a_sex<span class="op">:</span>b_fimnnet_dv, <span class="dt">key =</span> <span class="st">&quot;variable&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;value&quot;</span>)</code></pre></div>
-<pre><code>##        pidp     variable     value
-## 1  68001367        a_sex    1.0000
-## 2  68004087        a_sex    1.0000
-## 3  68001367      a_dvage   39.0000
-## 4  68004087      a_dvage   59.0000
-## 5  68001367      a_vote6    3.0000
-## 6  68004087      a_vote6    2.0000
-## 7  68001367 a_fimnnet_dv 1400.0000
-## 8  68004087 a_fimnnet_dv  802.0833
-## 9  68001367        b_sex        NA
-## 10 68004087        b_sex    1.0000
-## 11 68001367      b_dvage        NA
-## 12 68004087      b_dvage   60.0000
-## 13 68001367      b_vote6        NA
-## 14 68004087      b_vote6    2.0000
-## 15 68001367 b_fimnnet_dv        NA
-## 16 68004087 b_fimnnet_dv 1276.6666</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Next we want to split the &quot;variable&quot; column and &quot;cast&quot; in the long format</span>
-UndSocExample <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(a_sex<span class="op">:</span>b_vote6, <span class="dt">key =</span> <span class="st">&quot;variable&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">separate</span>(variable, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;wave&quot;</span>, <span class="st">&quot;variable&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">extra =</span> <span class="st">&quot;merge&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> variable, <span class="dt">value =</span> value)</code></pre></div>
-<pre><code>##       pidp b_fimnnet_dv wave dvage fimnnet_dv sex vote6
-## 1 68001367           NA    a    39  1400.0000   1     3
-## 2 68001367           NA    b    NA         NA  NA    NA
-## 3 68004087     1276.667    a    59   802.0833   1     2
-## 4 68004087     1276.667    b    60         NA   1     2</code></pre>
-<p>If we want to move from long to wide:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSocExampleLong</code></pre></div>
-<pre><code>##       pidp wave dvage fimnnet_dv sex vote6
-## 1 68001367    a    39  1400.0000   1     3
-## 2 68001367    b    NA         NA  NA    NA
-## 3 68004087    a    59   802.0833   1     2
-## 4 68004087    b    60  1276.6666   1     2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSocExampleLong <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(dvage<span class="op">:</span>vote6, <span class="dt">key =</span> <span class="st">&quot;variable&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">unite</span>(<span class="st">&quot;variable&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;wave&quot;</span>, <span class="st">&quot;variable&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> variable, <span class="dt">value =</span> value)</code></pre></div>
-<pre><code>##       pidp a_dvage a_fimnnet_dv a_sex a_vote6 b_dvage b_fimnnet_dv b_sex
-## 1 68001367      39    1400.0000     1       3      NA           NA    NA
-## 2 68004087      59     802.0833     1       2      60     1276.667     1
-##   b_vote6
-## 1      NA
-## 2       2</code></pre>
-<p><strong>Exercise</strong>. Reshape the full <strong>UndSoc</strong> data frame from wide to long format. Call the object where you will store the result <strong>UndSocLong</strong>.</p>
-<p><strong>Solution:</strong></p>
+</div>
+</div>
+<div id="exercise" class="section level2">
+<h2><span class="header-section-number">8.2</span> Exercise:</h2>
+<p>Reshape the full <strong>UndSoc</strong> data frame from ‘wide’ to ‘long’ format. Call the object where you will store the result <strong>UndSocLong</strong>.</p>
+<div id="solution" class="section level3">
+<h3><span class="header-section-number">8.2.1</span> Solution:</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSocLong &lt;-<span class="st"> </span>UndSoc <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>(a_sex<span class="op">:</span>g_fimnnet_dv, <span class="dt">key =</span> <span class="st">&quot;variable&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">separate</span>(variable, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;wave&quot;</span>, <span class="st">&quot;variable&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">extra =</span> <span class="st">&quot;merge&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> variable, <span class="dt">value =</span> value)
+
 <span class="kw">head</span>(UndSocLong, <span class="dv">5</span>)</code></pre></div>
 <pre><code>##    pidp wave dvage fimnnet_dv sex vote6
 ## 1 22445    a    NA         NA  NA    NA
@@ -481,10 +514,11 @@ UndSocExample <span class="op">%&gt;%</span>
 ## 4 22445    d    27   1140.000   2     2
 ## 5 22445    e    28   1602.667   2     2</code></pre>
 </div>
+</div>
 <div id="cleaning-the-data" class="section level2">
-<h2><span class="header-section-number">8.2</span> Cleaning the data</h2>
-<p>Before we begin the analysis we want to make sure that the data have been cleaned and all the missing values have been correctly identified. It usually makes sense to separate the cleaning and analysis stages into separate scripts.</p>
-<p>Let us explore the data set we have. Note that if we had not converted the data into the long format we would have to tabulate and clean each variable seven times.</p>
+<h2><span class="header-section-number">8.3</span> Cleaning the data</h2>
+<p>Before we begin the analysis, we want to make sure that the data have been cleaned and all the missing values have been correctly identified. It usually makes sense to separate the cleaning and analysis stages into separate scripts.</p>
+<p>Let us explore the data set we have. Note that if we had not converted the data into the ‘long’ format we would have to tabulate and clean each variable seven times.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(UndSocLong)</code></pre></div>
 <pre><code>##       pidp               wave               dvage          fimnnet_dv    
 ##  Min.   :2.244e+04   Length:584703      Min.   : -9.00   Min.   :-42904  
@@ -533,11 +567,14 @@ UndSocExample <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(UndSocLong<span class="op">$</span>fimnnet_dv)</code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
 ##  -42904     630    1159    1383    1800   15000  249806</code></pre>
-<p>Note the negative values for dvage, sex and vote6. These are missing values that need to be coded as missing.</p>
+<p>Note the negative values for <em>dvage</em>, <em>sex</em> and <em>vote6</em>. These are missing values that need to be coded as <em>NA</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSocLong  &lt;-<span class="st"> </span>UndSocLong <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dvage =</span> <span class="kw">ifelse</span>(dvage <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, dvage, <span class="ot">NA</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">ifelse</span>(sex <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, sex, <span class="ot">NA</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">vote6 =</span> <span class="kw">ifelse</span>(vote6 <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, vote6, <span class="ot">NA</span>))
+
+<span class="co"># If you need a recap on how the ifelse function works, we previously covered it in &#39;Transform Data&#39;, section 6 &#39;Recode variables Both base R and dplyr using ifelse&#39;.</span>
+
 <span class="kw">table</span>(UndSocLong<span class="op">$</span>dvage)</code></pre></div>
 <pre><code>## 
 ##   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30 
@@ -561,10 +598,11 @@ UndSocExample <span class="op">%&gt;%</span>
 ##      1      2      3      4 
 ##  30981 102212  86790  84351</code></pre>
 <p>We also have negative values for income (<strong>fimnnet_dv</strong>), but we will leave as it is for now.</p>
-<p>We may also want to code <strong>sex</strong> as “male” and “female” and assign meaningful labels to <strong>vote6</strong>.</p>
+<p>We may want to code <em>sex</em> as ‘male’ and ‘female’ and assign meaningful labels to <em>vote6</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSocLongClean &lt;-<span class="st"> </span>UndSocLong <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">recode</span>(sex, <span class="st">&quot;1&quot;</span> =<span class="st"> &quot;male&quot;</span>, <span class="st">&quot;2&quot;</span> =<span class="st"> &quot;female&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">vote6 =</span> <span class="kw">recode</span>(vote6, <span class="st">&quot;1&quot;</span> =<span class="st"> &quot;very&quot;</span>, <span class="st">&quot;2&quot;</span> =<span class="st"> &quot;fairly&quot;</span>, <span class="st">&quot;3&quot;</span> =<span class="st"> &quot;not very&quot;</span>, <span class="st">&quot;4&quot;</span> =<span class="st"> &quot;not al all&quot;</span>))
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">vote6 =</span> <span class="kw">recode</span>(vote6, <span class="st">&quot;1&quot;</span> =<span class="st"> &quot;very&quot;</span>, <span class="st">&quot;2&quot;</span> =<span class="st"> &quot;fairly&quot;</span>, <span class="st">&quot;3&quot;</span> =<span class="st"> &quot;not very&quot;</span>, <span class="st">&quot;4&quot;</span> =<span class="st"> &quot;not at all&quot;</span>))
+
 <span class="kw">head</span>(UndSocLongClean, <span class="dv">10</span>)</code></pre></div>
 <pre><code>##     pidp wave dvage fimnnet_dv    sex  vote6
 ## 1  22445    a    NA         NA   &lt;NA&gt;   &lt;NA&gt;
@@ -577,6 +615,8 @@ UndSocExample <span class="op">%&gt;%</span>
 ## 8  29925    a    NA         NA   &lt;NA&gt;   &lt;NA&gt;
 ## 9  29925    b    NA         NA   &lt;NA&gt;   &lt;NA&gt;
 ## 10 29925    c    NA         NA   &lt;NA&gt;   &lt;NA&gt;</code></pre>
+<p>You will have noticed that we used the <strong>ifelse</strong> command to code the negative values from the <em>dvage</em>, <em>sex</em> and <em>vote6</em> variables as missing values, whereas we used the <strong>recode</strong> command to assign labels to the values in the data for the <em>sex</em> and <em>vote6</em> variables. This is because the <strong>ifelse</strong> function works with conditional statements (used in creating <em>NA</em> values for missing numbers) and the <strong>recode</strong> function requires fewer lines of code to recode multiple values in a variable, as it can simply reassign values, rather than having to set values to a number of conditional statements (explained in <em>Transform Data</em>, section 6 <em>Recode variables Both base R and dplyr using ifelse</em>).</p>
+<p>Finally, we save this cleaned data in our <em>myData</em> folder, as <em>all7clean</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">saveRDS</span>(UndSocLongClean, <span class="st">&quot;myData/all7clean.rds&quot;</span>)</code></pre></div>
 
 </div>
@@ -625,9 +665,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

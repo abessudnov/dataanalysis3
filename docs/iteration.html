@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-07-23">
+<meta name="date" content="2018-08-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -172,8 +172,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2" data-path="iteration.html"><a href="iteration.html#loading-understanding-society-using-iteration"><i class="fa fa-check"></i><b>7.2</b> Loading <em>Understanding Society</em> using iteration</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>8</b> Tidy data</a><ul>
-<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a></li>
-<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.2</b> Cleaning the data</a></li>
+<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="tidy-data.html"><a href="tidy-data.html#reshaping-the-data"><i class="fa fa-check"></i><b>8.1.1</b> Reshaping the data</a></li>
+<li class="chapter" data-level="8.1.2" data-path="tidy-data.html"><a href="tidy-data.html#reshaping-the-data-using-the-reshape2-package"><i class="fa fa-check"></i><b>8.1.2</b> Reshaping the data using the reshape2 package</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#exercise"><i class="fa fa-check"></i><b>8.2</b> Exercise:</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="tidy-data.html"><a href="tidy-data.html#solution"><i class="fa fa-check"></i><b>8.2.1</b> Solution:</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.3</b> Cleaning the data</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="datavis.html"><a href="datavis.html"><i class="fa fa-check"></i><b>9</b> Data visualisation</a><ul>
 <li class="chapter" data-level="9.1" data-path="datavis.html"><a href="datavis.html#reading-in-the-data"><i class="fa fa-check"></i><b>9.1</b> Reading in the data</a></li>
@@ -312,7 +318,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
              <span class="dt">pattern =</span> <span class="st">&quot;indresp&quot;</span>,
              <span class="co"># We want this process to repeat through the entire folder.</span>
              <span class="dt">recursive =</span> <span class="ot">TRUE</span>,
-             <span class="co"># And finally want R to show us the entire file path, rather than just the names of the individual files.</span>
+             <span class="co"># And finally want R to show us the entire file path, rather than just</span>
+             <span class="co"># the names of the individual files.</span>
              <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
 
 files</code></pre></div>
@@ -342,7 +349,8 @@ files</code></pre></div>
 ## [24] &quot;data/UKDA-6614-tab/tab/us_w6/f_indresp.tab&quot;    
 ## [25] &quot;data/UKDA-6614-tab/tab/us_w7/g_indresp.tab&quot;</code></pre>
 <p>There are 25 files as we also have data from the <em>BHPS</em>, not just <em>Understanding Society</em>. We do not need the <em>BHPS</em>, so we want to select only the files from <em>Understanding Society</em>. We can use the function <strong>str_detect</strong> from the package <strong>stringr</strong> to select only the files whose paths contain <em>us</em>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># stringr will return a logical vector. Note that I specify which package the function comes from without explicitly attaching it.</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># stringr will return a logical vector. Note that I specify which package the</span>
+<span class="co"># function comes from without explicitly attaching it.</span>
 
 stringr<span class="op">::</span><span class="kw">str_detect</span>(files, <span class="st">&quot;us&quot;</span>)</code></pre></div>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -412,25 +420,30 @@ files</code></pre></div>
 ##        pidp b_sex b_dvage b_vote6 b_fimnnet_dv
 ## 1: 68004087     1      60       2     1276.667
 ## 
-Read 40.2% of 49739 rows
-Read 49739 rows and 5 (of 3024) columns from 0.402 GB file in 00:00:04
+Read 0.0% of 49739 rows
+Read 80.4% of 49739 rows
+Read 49739 rows and 5 (of 3024) columns from 0.402 GB file in 00:00:07
 ##        pidp c_sex c_dvage c_vote6 c_fimnnet_dv
 ## 1: 68004087     1      61       2     914.3333
+## 
+Read 0.0% of 47157 rows
+Read 47157 rows and 5 (of 2086) columns from 0.262 GB file in 00:00:04
 ##        pidp d_sex d_dvage d_vote6 d_fimnnet_dv
 ## 1: 68004087     1      62       1     914.3333
 ## 
-Read 66.8% of 44903 rows
-Read 44903 rows and 5 (of 2583) columns from 0.310 GB file in 00:00:03
+Read 0.0% of 44903 rows
+Read 44903 rows and 5 (of 2583) columns from 0.310 GB file in 00:00:05
 ##        pidp e_sex e_dvage e_vote6 e_fimnnet_dv
 ## 1: 68004087     1      63       2     1015.667
 ## 
-Read 88.3% of 45290 rows
-Read 45290 rows and 5 (of 2060) columns from 0.263 GB file in 00:00:03
+Read 0.0% of 45290 rows
+Read 45290 rows and 5 (of 2060) columns from 0.263 GB file in 00:00:05
 ##        pidp f_sex f_dvage f_vote6 f_fimnnet_dv
 ## 1: 68004087     1      64       2       1007.5
 ## 
-Read 71.1% of 42217 rows
-Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:03
+Read 0.0% of 42217 rows
+Read 23.7% of 42217 rows
+Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:06
 ##        pidp g_sex g_dvage g_vote6 g_fimnnet_dv
 ## 1: 68004087     1      65       2     1258.333</code></pre>
 <p>Now we need to join all these data frames together, and we want to do this in the loop. It is clear what we need to do in the second and later iterations of the loop: join the data from wave 2 with the data from wave 1, and so on. But what shall we do in the first iteration? There is no data frame yet to be joined with the data from wave 1. Clearly our algorithm for the first iteration needs to be different from the algorithm for all other iterations. We will use the <strong>if … else</strong> control structure for this.</p>
@@ -456,23 +469,28 @@ Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:03
         <span class="kw">rm</span>(data)
 } </code></pre></div>
 <pre><code>## 
-Read 91.6% of 54597 rows
-Read 54597 rows and 5 (of 1615) columns from 0.233 GB file in 00:00:03
+Read 0.0% of 50994 rows
+Read 98.1% of 50994 rows
+Read 50994 rows and 5 (of 1364) columns from 0.187 GB file in 00:00:04
 ## 
-Read 40.2% of 49739 rows
-Read 49739 rows and 5 (of 3024) columns from 0.402 GB file in 00:00:04
+Read 0.0% of 54597 rows
+Read 54597 rows and 5 (of 1615) columns from 0.233 GB file in 00:00:04
 ## 
-Read 84.8% of 47157 rows
-Read 47157 rows and 5 (of 2086) columns from 0.262 GB file in 00:00:03
+Read 0.0% of 49739 rows
+Read 80.4% of 49739 rows
+Read 49739 rows and 5 (of 3024) columns from 0.402 GB file in 00:00:07
 ## 
-Read 66.8% of 44903 rows
-Read 44903 rows and 5 (of 2583) columns from 0.310 GB file in 00:00:03
+Read 0.0% of 47157 rows
+Read 47157 rows and 5 (of 2086) columns from 0.262 GB file in 00:00:04
 ## 
-Read 88.3% of 45290 rows
-Read 45290 rows and 5 (of 2060) columns from 0.263 GB file in 00:00:03
+Read 0.0% of 44903 rows
+Read 44903 rows and 5 (of 2583) columns from 0.310 GB file in 00:00:05
 ## 
-Read 71.1% of 42217 rows
-Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:03</code></pre>
+Read 0.0% of 45290 rows
+Read 45290 rows and 5 (of 2060) columns from 0.263 GB file in 00:00:04
+## 
+Read 0.0% of 42217 rows
+Read 42217 rows and 5 (of 2799) columns from 0.321 GB file in 00:00:07</code></pre>
 <p><strong>all7</strong> now contains the data from all seven waves.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(all7, <span class="dv">3</span>)</code></pre></div>
 <pre><code>##       pidp a_sex a_dvage a_vote6 a_fimnnet_dv b_sex b_dvage b_vote6
@@ -540,9 +558,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

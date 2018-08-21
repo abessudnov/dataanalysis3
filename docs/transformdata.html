@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-07-23">
+<meta name="date" content="2018-08-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -172,8 +172,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2" data-path="iteration.html"><a href="iteration.html#loading-understanding-society-using-iteration"><i class="fa fa-check"></i><b>7.2</b> Loading <em>Understanding Society</em> using iteration</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>8</b> Tidy data</a><ul>
-<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a></li>
-<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.2</b> Cleaning the data</a></li>
+<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="tidy-data.html"><a href="tidy-data.html#reshaping-the-data"><i class="fa fa-check"></i><b>8.1.1</b> Reshaping the data</a></li>
+<li class="chapter" data-level="8.1.2" data-path="tidy-data.html"><a href="tidy-data.html#reshaping-the-data-using-the-reshape2-package"><i class="fa fa-check"></i><b>8.1.2</b> Reshaping the data using the reshape2 package</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#exercise"><i class="fa fa-check"></i><b>8.2</b> Exercise:</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="tidy-data.html"><a href="tidy-data.html#solution"><i class="fa fa-check"></i><b>8.2.1</b> Solution:</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.3</b> Cleaning the data</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="datavis.html"><a href="datavis.html"><i class="fa fa-check"></i><b>9</b> Data visualisation</a><ul>
 <li class="chapter" data-level="9.1" data-path="datavis.html"><a href="datavis.html#reading-in-the-data"><i class="fa fa-check"></i><b>9.1</b> Reading in the data</a></li>
@@ -244,7 +250,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 W1 &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/UKDA-6614-tab/tab/us_w1/a_indresp.tab&quot;</span>)</code></pre></div>
 <pre><code>## 
 Read 78.4% of 50994 rows
-Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:03</code></pre>
+Read 50994 rows and 1364 (of 1364) columns from 0.187 GB file in 00:00:04</code></pre>
 </div>
 <div id="operators-recap" class="section level2">
 <h2><span class="header-section-number">5.2</span> Operators recap</h2>
@@ -407,7 +413,8 @@ x <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&lt;<
 </tbody>
 </table>
 <p>As you can see, at this point we have four ‘nested’ functions (functions within other functions) and the code becomes difficult to read. With the pipe operator <strong>%&gt;%</strong> (Shift+Ctrl+M on Windows or Shift+Cmd+M on Mac) you can achieve the same result with the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Loading the &#39;tidyverse&#39; package, in which the package containing the pipe operator (&#39;dplyr&#39;) is found.</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Loading the &#39;tidyverse&#39; package, in which the package containing the</span>
+<span class="co"># pipe operator (&#39;dplyr&#39;) is found.</span>
 
 <span class="kw">library</span>(tidyverse)
 
@@ -464,7 +471,9 @@ W1<span class="op">$</span>a_vote6 <span class="op">%&gt;%</span>
 <h2><span class="header-section-number">5.4</span> Select variables</h2>
 <p>For your assignment, you will only want to work with select variables from <em>Understanding Society</em>. You learnt how to read in only select variables from a dataset in the <em>Read data</em> class, though if you have already loaded in a dataset (as we have here) and want to select only certain variables from this, you need to learn how to transform the data as you do not want to have to keep loading data in to R every time you decide to add or remove a variable from your analysis.</p>
 <p>Here, we will select the variables for sex, age, place of birth and measures of weight and height, as well as the personal identification variable for each individual. In base R you could use the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 &lt;-<span class="st"> </span><span class="kw">subset</span>(W1, <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;pidp&quot;</span>, <span class="st">&quot;a_sex&quot;</span>, <span class="st">&quot;a_dvage&quot;</span>, <span class="st">&quot;a_ukborn&quot;</span>, <span class="st">&quot;a_hlht&quot;</span>, <span class="st">&quot;a_hlhtf&quot;</span>, <span class="st">&quot;a_hlhti&quot;</span>, <span class="st">&quot;a_hlhtc&quot;</span>, <span class="st">&quot;a_hlwt&quot;</span>, <span class="st">&quot;a_hlwts&quot;</span>, <span class="st">&quot;a_hlwtp&quot;</span>, <span class="st">&quot;a_hlwtk&quot;</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 &lt;-<span class="st"> </span><span class="kw">subset</span>(W1, <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;pidp&quot;</span>, <span class="st">&quot;a_sex&quot;</span>, <span class="st">&quot;a_dvage&quot;</span>, <span class="st">&quot;a_ukborn&quot;</span>, <span class="st">&quot;a_hlht&quot;</span>,
+                               <span class="st">&quot;a_hlhtf&quot;</span>, <span class="st">&quot;a_hlhti&quot;</span>, <span class="st">&quot;a_hlhtc&quot;</span>, <span class="st">&quot;a_hlwt&quot;</span>, <span class="st">&quot;a_hlwts&quot;</span>,
+                               <span class="st">&quot;a_hlwtp&quot;</span>, <span class="st">&quot;a_hlwtk&quot;</span>))
 <span class="kw">head</span>(newW1, <span class="dv">3</span>)</code></pre></div>
 <pre><code>##        pidp a_sex a_dvage a_ukborn a_hlht a_hlhtf a_hlhti a_hlhtc a_hlwt
 ## 1: 68001367     1      39        1      1       6       0      -8      1
@@ -507,7 +516,8 @@ W1<span class="op">$</span>a_vote6 <span class="op">%&gt;%</span>
 ## 1      10      10      -8
 ## 2      -7      -7      -7
 ## 3      11      13      -8</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note: In this case we are not saving the new data frame as an object, but instead printing the first three rows from the data to demonstrate the result.</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note: In this case we are not saving the new data frame as an object, but instead</span>
+<span class="co"># printing the first three rows from the data to demonstrate the result.</span></code></pre></div>
 <p>We can make this as complicated as we want and use more than one variable. For example, here is a new data frame that includes only people born in Wales or Northern Ireland <em>and</em> over the age of 40.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>((a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">3</span> <span class="op">|</span><span class="st"> </span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">&amp;</span><span class="st"> </span>a_dvage <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span>) <span class="op">%&gt;%</span>
@@ -528,7 +538,10 @@ W1<span class="op">$</span>a_vote6 <span class="op">%&gt;%</span>
 <p>As a simple example, here we create a new dummy variable using base R named <em>a_Scotland</em> that takes the value of 1 if a person was born in Scotland (with a value of <em>2</em> from the <em>a_ukborn</em> variable) and 0 otherwise.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newW1<span class="op">$</span>a_Scotland &lt;-<span class="st"> </span><span class="kw">ifelse</span>(newW1<span class="op">$</span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</code></pre></div>
 <p>However, there are often times when you will want to recode a number of values from a variable. If you look at the code book for <em>Understanding Society</em>, you can see that the variable <em>ukborn</em> is coded to give numerical values that correspond to a country of birth. To make interpreting this variable easier, both for us and for anyone reading our analysis of the <em>Understanding Society</em> data, we can recode this variable to instead show the country name, rather than a numerical value, as its output. In this case, as there are multiple values we want to recode, the final clause in the <strong>ifelse()</strong> command can be set as another <strong>ifelse()</strong> command to recode other values from this variable, before setting those outside all of the values we are interested in (such as responses where this question was refused an answer) as <em>NA</em> to finish the command.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Instead of recoding the variable and overwriting the original, we create a new variable to put the recoded variable in, as if we make a mistake with our code and have overwritten the original data, we will have to reload the dataset and start this process again. It is good coding practice to never overwrite original data.</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Instead of recoding the variable and overwriting the original, we create a new variable</span>
+<span class="co"># to put the recoded variable in, as if we make a mistake with our code and have overwritten</span>
+<span class="co"># the original data, we will have to reload the dataset and start this process again. It is</span>
+<span class="co"># good coding practice to never overwrite original data.</span>
 
 newW1<span class="op">$</span>a_uk &lt;-<span class="st"> </span><span class="kw">ifelse</span>(newW1<span class="op">$</span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&#39;England&#39;</span>,
                      <span class="kw">ifelse</span>(newW1<span class="op">$</span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="st">&#39;Scotland&#39;</span>,
@@ -537,7 +550,8 @@ newW1<span class="op">$</span>a_uk &lt;-<span class="st"> </span><span class="kw
                                           <span class="kw">ifelse</span>(newW1<span class="op">$</span>a_ukborn <span class="op">==</span><span class="st"> </span><span class="dv">5</span>, <span class="st">&#39;Overseas&#39;</span>,
                                                  <span class="ot">NA</span>)))))</code></pre></div>
 <p>Once again, however, <strong>dplyr</strong> makes this process shorter to write and easier to read. The <strong>recode</strong> command allows us to do this. However, this will overwrite our original variable, and as already discussed, this is bad practice. Consequently, we will use the <strong>mutate</strong> command (which we will explore in more detail in <em>Create new variables</em>) to make a new variable in which to put this recoding.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The command &#39;.default = NA_character_&#39; codes all the values that were not specifically matched (all negative values in our case) to missing values.</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The command &#39;.default = NA_character_&#39; codes all the values that were not specifically</span>
+<span class="co"># matched (all negative values in our case) to missing values.</span>
 
 AltW1 &lt;-<span class="st"> </span>newW1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">a_placeBirth =</span> <span class="kw">recode</span>(a_ukborn,
                              <span class="st">&quot;1&quot;</span> =<span class="st"> &quot;England&quot;</span>,
@@ -597,17 +611,26 @@ AltW1 &lt;-<span class="st"> </span>newW1 <span class="op">%&gt;%</span><span cl
                            a_hlhtf <span class="op">*</span><span class="st"> </span><span class="fl">30.48</span> <span class="op">+</span><span class="st"> </span>a_hlhti <span class="op">*</span><span class="st"> </span><span class="fl">2.54</span>,
                            <span class="kw">ifelse</span>(a_hlht <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>a_hlhtc <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,
                                   a_hlhtc, <span class="ot">NA</span>))) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="co"># New variable &#39;heightcm&#39;: if height is measured in feet and inches (a_hlht == 1) and is not missing (a_hlhtf &gt; 0),</span>
-<span class="st">    </span><span class="co"># Multiply feet by 30.48 and inches by 2.54 to convert these measurements to centimetres and add them together, entering height as this new value.</span>
-<span class="st">    </span><span class="co"># If height is not measured in feet and inches, but centimetres instead (a_hlht == 2), and is not missing (a_hlhtf &gt; 0), enter height as this value, and if height is measured in neither feet and inches nor in centimetres, set the value for height as &#39;NA&#39;.</span>
+<span class="st">    </span><span class="co"># New variable &#39;heightcm&#39;: if height is measured in feet and inches (a_hlht == 1)</span>
+<span class="st">    </span><span class="co"># and is not missing (a_hlhtf &gt; 0),</span>
+<span class="st">    </span><span class="co"># Multiply feet by 30.48 and inches by 2.54 to convert these measurements to</span>
+<span class="st">    </span><span class="co"># centimetres and add them together, entering height as this new value.</span>
+<span class="st">    </span><span class="co"># If height is not measured in feet and inches, but centimetres instead</span>
+<span class="st">    </span><span class="co"># (a_hlht == 2), and is not missing (a_hlhtf &gt; 0), enter height as this value,</span>
+<span class="st">    </span><span class="co"># and if height is measured in neither feet and inches nor in centimetres, set</span>
+<span class="st">    </span><span class="co"># the value for height as &#39;NA&#39;.</span>
 <span class="st">  </span><span class="co"># Now do the same for weight, converting into kilograms.</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weightkg =</span> <span class="kw">ifelse</span>(a_hlwt <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>a_hlwts <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
                            a_hlwts <span class="op">*</span><span class="st"> </span><span class="fl">6.35</span> <span class="op">+</span><span class="st"> </span>a_hlwtp <span class="op">*</span><span class="st"> </span><span class="fl">0.45</span>,
                            <span class="kw">ifelse</span>(a_hlwt <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>a_hlwtk <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, 
                                   a_hlwtk, <span class="ot">NA</span>))) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="co"># New variable &#39;weightkg&#39;: if weight is measured in stone and pounds (a_hlwt == 1) and is not missing (a_hlwts &gt; 0),</span>
-<span class="st">    </span><span class="co"># Multiply stone by 6.35 and pounds by 0.45 to convert these measurements to kilograms and add these together, entering weight as this new value.</span>
-<span class="st">    </span><span class="co"># If weight is not measured in stone and pounds, but kilograms instead (a_hlwt == 2), and is not missing (a_hlhtf &gt; 0), enter weight as this value, and if weight is measured in neither stone and pounds nor in kilograms, set the value for weight as &#39;NA&#39;.</span>
+<span class="st">    </span><span class="co"># New variable &#39;weightkg&#39;: if weight is measured in stone and pounds (a_hlwt == 1)</span>
+<span class="st">    </span><span class="co"># and is not missing (a_hlwts &gt; 0),</span>
+<span class="st">    </span><span class="co"># Multiply stone by 6.35 and pounds by 0.45 to convert these measurements to</span>
+<span class="st">    </span><span class="co"># kilograms and add these together, entering weight as this new value.</span>
+<span class="st">    </span><span class="co"># If weight is not measured in stone and pounds, but kilograms instead (a_hlwt == 2),</span>
+<span class="st">    </span><span class="co"># and is not missing (a_hlhtf &gt; 0), enter weight as this value, and if weight is</span>
+<span class="st">    </span><span class="co"># measured in neither stone and pounds nor in kilograms, set the value for weight as &#39;NA&#39;.</span>
 <span class="st">  </span><span class="co"># Finally create a variable for BMI.</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bmi =</span> weightkg <span class="op">/</span><span class="st"> </span>(heightcm <span class="op">/</span><span class="st"> </span><span class="dv">100</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
     <span class="co"># New variable &#39;bmi&#39;: &#39;weightkg&#39; / (&#39;hightcm&#39; / 100) ^ 2)</span></code></pre></div>
@@ -689,9 +712,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

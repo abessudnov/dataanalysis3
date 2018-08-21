@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Data Analysis in Social Science 3</title>
   <meta name="description" content="A website for the Data Analysis in Social Science 3 module.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Data Analysis in Social Science 3" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Alexey Bessudnov, expanded and edited by Max Shilling (BSc Sociology student 2018)">
 
 
-<meta name="date" content="2018-07-23">
+<meta name="date" content="2018-08-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -172,8 +172,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2" data-path="iteration.html"><a href="iteration.html#loading-understanding-society-using-iteration"><i class="fa fa-check"></i><b>7.2</b> Loading <em>Understanding Society</em> using iteration</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>8</b> Tidy data</a><ul>
-<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a></li>
-<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.2</b> Cleaning the data</a></li>
+<li class="chapter" data-level="8.1" data-path="tidy-data.html"><a href="tidy-data.html#long-and-wide-formats"><i class="fa fa-check"></i><b>8.1</b> Long and wide formats</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="tidy-data.html"><a href="tidy-data.html#reshaping-the-data"><i class="fa fa-check"></i><b>8.1.1</b> Reshaping the data</a></li>
+<li class="chapter" data-level="8.1.2" data-path="tidy-data.html"><a href="tidy-data.html#reshaping-the-data-using-the-reshape2-package"><i class="fa fa-check"></i><b>8.1.2</b> Reshaping the data using the reshape2 package</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="tidy-data.html"><a href="tidy-data.html#exercise"><i class="fa fa-check"></i><b>8.2</b> Exercise:</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="tidy-data.html"><a href="tidy-data.html#solution"><i class="fa fa-check"></i><b>8.2.1</b> Solution:</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="tidy-data.html"><a href="tidy-data.html#cleaning-the-data"><i class="fa fa-check"></i><b>8.3</b> Cleaning the data</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="datavis.html"><a href="datavis.html"><i class="fa fa-check"></i><b>9</b> Data visualisation</a><ul>
 <li class="chapter" data-level="9.1" data-path="datavis.html"><a href="datavis.html#reading-in-the-data"><i class="fa fa-check"></i><b>9.1</b> Reading in the data</a></li>
@@ -239,7 +245,7 @@ UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class
 <p>First let us look at the distribution of the variable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(UndSoc<span class="op">$</span>vote6)</code></pre></div>
 <pre><code>## 
-##     fairly not al all   not very       very 
+##     fairly not at all   not very       very 
 ##     102212      84351      86790      30981</code></pre>
 <p>To do the modelling we want to recode it to numeric. I will do this in such a way that larger values indicate stronger interest in politics.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UndSoc &lt;-<span class="st"> </span>UndSoc <span class="op">%&gt;%</span>
@@ -250,8 +256,8 @@ UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class
 
 <span class="kw">table</span>(UndSoc<span class="op">$</span>polinterest)</code></pre></div>
 <pre><code>## 
-##      1      2      3      4 
-##  84351  86790 102212  30981</code></pre>
+##      2      3      4 
+##  86790 102212  30981</code></pre>
 <div id="cross-sectional-analysis" class="section level2">
 <h2><span class="header-section-number">12.1</span> Cross-sectional analysis</h2>
 <p>Let us start from cross-sectional analysis, i.e. the analysis of the data at one point in time. You can choose any wave to do this; I will go with wave 1.</p>
@@ -265,14 +271,14 @@ UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wave1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dvage, <span class="dt">y =</span> polinterest)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>()</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
 <p>I fit a non-parametric smooth here with <strong>geom_smooth</strong>, and the association between age and political interest seems to be non-linear.</p>
 <p>We can also fit a regression line and see how well it describes the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wave1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dvage, <span class="dt">y =</span> polinterest)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
 <p>Up to the age of about 70 years two lines are pretty close and I’d say that the linear function adequately describes the data. However, for people older than 75 the linear assocition is inadequate and provides a really poor fit.</p>
 </div>
 <div id="sex-and-political-interest" class="section level3">
@@ -281,7 +287,7 @@ UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wave1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> polinterest)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="dt">fun.y =</span> <span class="st">&quot;mean&quot;</span>)</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
 <p>We see that mean political interest is somewhat higher for men compared to women.</p>
 </div>
 <div id="linear-model" class="section level3">
@@ -297,20 +303,20 @@ UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -1.8578 -0.9275 -0.0703  0.7293  2.1042 
+## -0.9617 -0.6462  0.1435  0.3634  1.4375 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 1.7688374  0.0123862  142.81   &lt;2e-16 ***
-## sexmale     0.3115085  0.0087412   35.64   &lt;2e-16 ***
-## dvage       0.0079332  0.0002393   33.16   &lt;2e-16 ***
+## (Intercept) 2.5243012  0.0109096  231.38   &lt;2e-16 ***
+## sexmale     0.2103080  0.0073021   28.80   &lt;2e-16 ***
+## dvage       0.0023902  0.0002032   11.76   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.946 on 47527 degrees of freedom
-##   (3464 observations deleted due to missingness)
-## Multiple R-squared:  0.04805,    Adjusted R-squared:  0.04801 
-## F-statistic:  1199 on 2 and 47527 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 0.6796 on 34758 degrees of freedom
+##   (16233 observations deleted due to missingness)
+## Multiple R-squared:  0.02699,    Adjusted R-squared:  0.02694 
+## F-statistic: 482.1 on 2 and 34758 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Both age and sex are highly statistically significant predictors of political interest. Men on average are 0.3 points higher on the political interest scale. For age, a one-year difference is associated with about 0.01 change in political interest (older people are more interested). For two people with the age difference of about 30 years this corresponds to the difference in political interest of about 0.3.</p>
 <p>We have seen that the association between age and political interest is non-linear. To model this, we may want to include the quadratic term for age.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m2 &lt;-<span class="st"> </span><span class="kw">lm</span>(polinterest <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>dvage <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(dvage<span class="op">^</span><span class="dv">2</span>), wave1)
@@ -320,27 +326,27 @@ UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class
 ## lm(formula = polinterest ~ sex + dvage + I(dvage^2), data = wave1)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.61209 -0.83774 -0.09245  0.72122  2.23983 
+##     Min      1Q  Median      3Q     Max 
+## -0.8971 -0.6681  0.1229  0.3422  1.5046 
 ## 
 ## Coefficients:
 ##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  1.390e+00  2.781e-02   49.97   &lt;2e-16 ***
-## sexmale      3.123e-01  8.720e-03   35.82   &lt;2e-16 ***
-## dvage        2.616e-02  1.221e-03   21.42   &lt;2e-16 ***
-## I(dvage^2)  -1.880e-04  1.236e-05  -15.22   &lt;2e-16 ***
+## (Intercept)  2.344e+00  2.487e-02  94.245  &lt; 2e-16 ***
+## sexmale      2.106e-01  7.295e-03  28.873  &lt; 2e-16 ***
+## dvage        1.081e-02  1.065e-03  10.148  &lt; 2e-16 ***
+## I(dvage^2)  -8.534e-05  1.060e-05  -8.051 8.44e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.9437 on 47526 degrees of freedom
-##   (3464 observations deleted due to missingness)
-## Multiple R-squared:  0.05266,    Adjusted R-squared:  0.0526 
-## F-statistic: 880.7 on 3 and 47526 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 0.679 on 34757 degrees of freedom
+##   (16233 observations deleted due to missingness)
+## Multiple R-squared:  0.0288, Adjusted R-squared:  0.02872 
+## F-statistic: 343.6 on 3 and 34757 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The quadratic term is statistically significanty indicating a non-linear fit. Note, however, that the coefficients are now more difficult to interpret. We can visualise the association between age and political interest to get some idea of the effect size.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wave1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dvage, <span class="dt">y =</span> polinterest)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>))</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
 <p>Note that this visualisation does not control for sex.</p>
 </div>
 <div id="interaction-effect-between-sex-and-age" class="section level3">
@@ -353,22 +359,22 @@ UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class
 ## lm(formula = polinterest ~ sex * dvage, data = wave1)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.82832 -0.91573 -0.06676  0.71663  2.11783 
+##     Min      1Q  Median      3Q     Max 
+## -0.9572 -0.6465  0.1438  0.3634  1.4401 
 ## 
 ## Coefficients:
 ##                 Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    1.7479264  0.0157990 110.636   &lt;2e-16 ***
-## sexmale        0.3587056  0.0238008  15.071   &lt;2e-16 ***
-## dvage          0.0083904  0.0003213  26.115   &lt;2e-16 ***
-## sexmale:dvage -0.0010263  0.0004814  -2.132    0.033 *  
+## (Intercept)    2.5202621  0.0142701 176.611   &lt;2e-16 ***
+## sexmale        0.2188102  0.0206942  10.573   &lt;2e-16 ***
+## dvage          0.0024749  0.0002802   8.831   &lt;2e-16 ***
+## sexmale:dvage -0.0001787  0.0004070  -0.439    0.661    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.946 on 47526 degrees of freedom
-##   (3464 observations deleted due to missingness)
-## Multiple R-squared:  0.04814,    Adjusted R-squared:  0.04808 
-## F-statistic: 801.2 on 3 and 47526 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 0.6796 on 34757 degrees of freedom
+##   (16233 observations deleted due to missingness)
+## Multiple R-squared:  0.027,  Adjusted R-squared:  0.02691 
+## F-statistic: 321.5 on 3 and 34757 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>We see that the interaction effect is indeed statistically significant and negative suggesting that for men the association between age and political interest is weaker.</p>
 <p>We can also fit a quadratic model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m4 &lt;-<span class="st"> </span><span class="kw">lm</span>(polinterest <span class="op">~</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span>dvage <span class="op">+</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(dvage<span class="op">^</span><span class="dv">2</span>), wave1)
@@ -378,29 +384,29 @@ UndSoc &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class
 ## lm(formula = polinterest ~ sex * dvage + sex * I(dvage^2), data = wave1)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.60079 -0.84767 -0.07443  0.71480  2.22023 
+##     Min      1Q  Median      3Q     Max 
+## -0.9061 -0.6595  0.1183  0.3506  1.4727 
 ## 
 ## Coefficients:
 ##                      Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)         1.463e+00  3.689e-02  39.674  &lt; 2e-16 ***
-## sexmale             1.409e-01  5.545e-02   2.541   0.0111 *  
-## dvage               2.201e-02  1.629e-03  13.517  &lt; 2e-16 ***
-## I(dvage^2)         -1.400e-04  1.641e-05  -8.532  &lt; 2e-16 ***
-## sexmale:dvage       9.684e-03  2.462e-03   3.933 8.41e-05 ***
-## sexmale:I(dvage^2) -1.120e-04  2.493e-05  -4.494 7.02e-06 ***
+## (Intercept)         2.434e+00  3.404e-02  71.496  &lt; 2e-16 ***
+## sexmale             1.827e-02  4.928e-02   0.371  0.71089    
+## dvage               6.477e-03  1.462e-03   4.431 9.40e-06 ***
+## I(dvage^2)         -4.032e-05  1.445e-05  -2.790  0.00528 ** 
+## sexmale:dvage       9.371e-03  2.135e-03   4.389 1.14e-05 ***
+## sexmale:I(dvage^2) -9.803e-05  2.127e-05  -4.610 4.05e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.9435 on 47524 degrees of freedom
-##   (3464 observations deleted due to missingness)
-## Multiple R-squared:  0.05318,    Adjusted R-squared:  0.05308 
-## F-statistic: 533.9 on 5 and 47524 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 0.6788 on 34755 degrees of freedom
+##   (16233 observations deleted due to missingness)
+## Multiple R-squared:  0.02941,    Adjusted R-squared:  0.02927 
+## F-statistic: 210.6 on 5 and 34755 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The interaction effect is highly statistically significant. To make sense of the association between age and political interest for men and women it is best to visualise this model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wave1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> dvage, <span class="dt">y =</span> polinterest, <span class="dt">colour =</span> sex)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>))</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
 <p>We can see that the lines for men and women are indeed different, although the non-linear pattern of the association is similar for both sexes.</p>
 </div>
 <div id="checking-the-assumptions" class="section level3">
@@ -464,32 +470,32 @@ polinterest
 sexmale
 </td>
 <td>
-0.312<sup>***</sup>
+0.210<sup>***</sup>
 </td>
 <td>
-0.312<sup>***</sup>
+0.211<sup>***</sup>
 </td>
 <td>
-0.359<sup>***</sup>
+0.219<sup>***</sup>
 </td>
 <td>
-0.141<sup>**</sup>
+0.018
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
 </td>
 <td>
-(0.009)
+(0.007)
 </td>
 <td>
-(0.009)
+(0.007)
 </td>
 <td>
-(0.024)
+(0.021)
 </td>
 <td>
-(0.055)
+(0.049)
 </td>
 </tr>
 <tr>
@@ -509,16 +515,16 @@ sexmale
 dvage
 </td>
 <td>
-0.008<sup>***</sup>
+0.002<sup>***</sup>
 </td>
 <td>
-0.026<sup>***</sup>
+0.011<sup>***</sup>
 </td>
 <td>
-0.008<sup>***</sup>
+0.002<sup>***</sup>
 </td>
 <td>
-0.022<sup>***</sup>
+0.006<sup>***</sup>
 </td>
 </tr>
 <tr>
@@ -534,7 +540,7 @@ dvage
 (0.0003)
 </td>
 <td>
-(0.002)
+(0.001)
 </td>
 </tr>
 <tr>
@@ -556,12 +562,12 @@ I(dvage2)
 <td>
 </td>
 <td>
--0.0002<sup>***</sup>
-</td>
-<td>
-</td>
-<td>
 -0.0001<sup>***</sup>
+</td>
+<td>
+</td>
+<td>
+-0.00004<sup>***</sup>
 </td>
 </tr>
 <tr>
@@ -575,7 +581,7 @@ I(dvage2)
 <td>
 </td>
 <td>
-(0.00002)
+(0.00001)
 </td>
 </tr>
 <tr>
@@ -599,10 +605,10 @@ sexmale:dvage
 <td>
 </td>
 <td>
--0.001<sup>**</sup>
+-0.0002
 </td>
 <td>
-0.010<sup>***</sup>
+0.009<sup>***</sup>
 </td>
 </tr>
 <tr>
@@ -613,7 +619,7 @@ sexmale:dvage
 <td>
 </td>
 <td>
-(0.0005)
+(0.0004)
 </td>
 <td>
 (0.002)
@@ -675,32 +681,32 @@ sexmale:I(dvage2)
 Constant
 </td>
 <td>
-1.769<sup>***</sup>
+2.524<sup>***</sup>
 </td>
 <td>
-1.390<sup>***</sup>
+2.344<sup>***</sup>
 </td>
 <td>
-1.748<sup>***</sup>
+2.520<sup>***</sup>
 </td>
 <td>
-1.463<sup>***</sup>
+2.434<sup>***</sup>
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
 </td>
 <td>
-(0.012)
+(0.011)
 </td>
 <td>
-(0.028)
+(0.025)
 </td>
 <td>
-(0.016)
+(0.014)
 </td>
 <td>
-(0.037)
+(0.034)
 </td>
 </tr>
 <tr>
@@ -724,16 +730,16 @@ Constant
 Observations
 </td>
 <td>
-47,530
+34,761
 </td>
 <td>
-47,530
+34,761
 </td>
 <td>
-47,530
+34,761
 </td>
 <td>
-47,530
+34,761
 </td>
 </tr>
 <tr>
@@ -741,16 +747,16 @@ Observations
 R<sup>2</sup>
 </td>
 <td>
-0.048
+0.027
 </td>
 <td>
-0.053
+0.029
 </td>
 <td>
-0.048
+0.027
 </td>
 <td>
-0.053
+0.029
 </td>
 </tr>
 <tr>
@@ -758,16 +764,16 @@ R<sup>2</sup>
 Adjusted R<sup>2</sup>
 </td>
 <td>
-0.048
+0.027
 </td>
 <td>
-0.053
+0.029
 </td>
 <td>
-0.048
+0.027
 </td>
 <td>
-0.053
+0.029
 </td>
 </tr>
 <tr>
@@ -775,16 +781,16 @@ Adjusted R<sup>2</sup>
 Residual Std. Error
 </td>
 <td>
-0.946 (df = 47527)
+0.680 (df = 34758)
 </td>
 <td>
-0.944 (df = 47526)
+0.679 (df = 34757)
 </td>
 <td>
-0.946 (df = 47526)
+0.680 (df = 34757)
 </td>
 <td>
-0.943 (df = 47524)
+0.679 (df = 34755)
 </td>
 </tr>
 <tr>
@@ -792,16 +798,16 @@ Residual Std. Error
 F Statistic
 </td>
 <td>
-1,199.426<sup>***</sup> (df = 2; 47527)
+482.108<sup>***</sup> (df = 2; 34758)
 </td>
 <td>
-880.675<sup>***</sup> (df = 3; 47526)
+343.604<sup>***</sup> (df = 3; 34757)
 </td>
 <td>
-801.192<sup>***</sup> (df = 3; 47526)
+321.462<sup>***</sup> (df = 3; 34757)
 </td>
 <td>
-533.896<sup>***</sup> (df = 5; 47524)
+210.631<sup>***</sup> (df = 5; 34755)
 </td>
 </tr>
 <tr>
@@ -851,7 +857,7 @@ UndSoc <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> meanPI)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>()</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
 <p>The model that describes this chart will be the following.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m5 &lt;-<span class="st"> </span><span class="kw">lm</span>(polinterest <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(year), UndSoc)
 <span class="kw">summary</span>(m5)</code></pre></div>
@@ -861,24 +867,24 @@ UndSoc <span class="op">%&gt;%</span>
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -1.3387 -1.2137 -0.2253  0.7295  1.7863 
+## -0.7669 -0.7407  0.2440  0.2628  1.2657 
 ## 
 ## Coefficients:
-##                       Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)          2.2705028  0.0044708 507.848  &lt; 2e-16 ***
-## as.factor(year)2010  0.0009813  0.0062259   0.158    0.875    
-## as.factor(year)2011 -0.0451822  0.0063862  -7.075 1.50e-12 ***
-## as.factor(year)2012 -0.0567904  0.0064826  -8.760  &lt; 2e-16 ***
-## as.factor(year)2013 -0.0262915  0.0065703  -4.002 6.29e-05 ***
-## as.factor(year)2014  0.0099673  0.0067440   1.478    0.139    
-## as.factor(year)2015  0.0681780  0.0066526  10.248  &lt; 2e-16 ***
+##                      Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)          2.737205   0.003681 743.678  &lt; 2e-16 ***
+## as.factor(year)2010  0.009002   0.005131   1.754 0.079354 .  
+## as.factor(year)2011 -0.002951   0.005304  -0.556 0.577977    
+## as.factor(year)2012  0.003522   0.005405   0.652 0.514670    
+## as.factor(year)2013  0.009105   0.005447   1.671 0.094648 .  
+## as.factor(year)2014  0.018811   0.005557   3.385 0.000711 ***
+## as.factor(year)2015  0.029738   0.005424   5.482 4.21e-08 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.9747 on 304327 degrees of freedom
-##   (280369 observations deleted due to missingness)
-## Multiple R-squared:  0.001471,   Adjusted R-squared:  0.001451 
-## F-statistic:  74.7 on 6 and 304327 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 0.6862 on 219976 degrees of freedom
+##   (364720 observations deleted due to missingness)
+## Multiple R-squared:  0.0002287,  Adjusted R-squared:  0.0002014 
+## F-statistic: 8.387 on 6 and 219976 DF,  p-value: 4.063e-09</code></pre>
 <p>We can see from this model that in 2011 to 2013 political interest was statistically significantly lower than in 2009, and in 2015 it was statistically significantly higher.</p>
 </div>
 <div id="adding-a-time-constant-variable" class="section level3">
@@ -893,7 +899,7 @@ UndSoc <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> meanPI, <span class="dt">colour =</span> sex)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>()</code></pre></div>
-<p><img src="datan3_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+<p><img src="datan3_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 <p>It does not look like there was an interaction between sex and year, but we can check it formally.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m6 &lt;-<span class="st"> </span><span class="kw">lm</span>(polinterest <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(year)<span class="op">*</span>sex, UndSoc)
 <span class="kw">summary</span>(m6)</code></pre></div>
@@ -902,32 +908,32 @@ UndSoc <span class="op">%&gt;%</span>
 ## lm(formula = polinterest ~ as.factor(year) * sex, data = UndSoc)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.51330 -1.06358 -0.08411  0.80109  1.93642 
+##     Min      1Q  Median      3Q     Max 
+## -0.8686 -0.6524  0.1492  0.3580  1.3670 
 ## 
 ## Coefficients:
 ##                               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                  2.1316987  0.0058923 361.777  &lt; 2e-16 ***
-## as.factor(year)2010          0.0034852  0.0082076   0.425 0.671108    
-## as.factor(year)2011         -0.0542942  0.0084160  -6.451 1.11e-10 ***
-## as.factor(year)2012         -0.0681161  0.0085534  -7.964 1.68e-15 ***
-## as.factor(year)2013         -0.0475894  0.0086757  -5.485 4.13e-08 ***
-## as.factor(year)2014         -0.0020655  0.0089103  -0.232 0.816686    
-## as.factor(year)2015          0.0672156  0.0087858   7.651 2.01e-14 ***
-## sexmale                      0.3150753  0.0088775  35.491  &lt; 2e-16 ***
-## as.factor(year)2010:sexmale -0.0061332  0.0123615  -0.496 0.619786    
-## as.factor(year)2011:sexmale  0.0208112  0.0126810   1.641 0.100772    
-## as.factor(year)2012:sexmale  0.0238450  0.0128683   1.853 0.063883 .  
-## as.factor(year)2013:sexmale  0.0451257  0.0130399   3.461 0.000539 ***
-## as.factor(year)2014:sexmale  0.0235125  0.0133829   1.757 0.078935 .  
-## as.factor(year)2015:sexmale -0.0006904  0.0132029  -0.052 0.958299    
+## (Intercept)                  2.6382492  0.0050051 527.109  &lt; 2e-16 ***
+## as.factor(year)2010          0.0141597  0.0069812   2.028   0.0425 *  
+## as.factor(year)2011         -0.0052163  0.0072341  -0.721   0.4709    
+## as.factor(year)2012          0.0037539  0.0073914   0.508   0.6115    
+## as.factor(year)2013         -0.0009026  0.0074550  -0.121   0.9036    
+## as.factor(year)2014          0.0167203  0.0075943   2.202   0.0277 *  
+## as.factor(year)2015          0.0365789  0.0073908   4.949 7.45e-07 ***
+## sexmale                      0.2098474  0.0072886  28.791  &lt; 2e-16 ***
+## as.factor(year)2010:sexmale -0.0114441  0.0101599  -1.126   0.2600    
+## as.factor(year)2011:sexmale  0.0021654  0.0105007   0.206   0.8366    
+## as.factor(year)2012:sexmale -0.0052459  0.0106972  -0.490   0.6239    
+## as.factor(year)2013:sexmale  0.0153998  0.0107808   1.428   0.1532    
+## as.factor(year)2014:sexmale  0.0002630  0.0109983   0.024   0.9809    
+## as.factor(year)2015:sexmale -0.0160510  0.0107396  -1.495   0.1350    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.9608 on 304318 degrees of freedom
-##   (280371 observations deleted due to missingness)
-## Multiple R-squared:  0.02969,    Adjusted R-squared:  0.02965 
-## F-statistic: 716.2 on 13 and 304318 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 0.6784 on 219968 degrees of freedom
+##   (364721 observations deleted due to missingness)
+## Multiple R-squared:  0.02307,    Adjusted R-squared:  0.02301 
+## F-statistic: 399.5 on 13 and 219968 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>This suggest that the gap in political interest between men and women was slighty hgher in 2013, but the effect size is really small.</p>
 </div>
 <div id="adding-a-time-varying-variable" class="section level3">
@@ -980,7 +986,7 @@ polinterest
 dvage
 </td>
 <td>
-0.019
+0.048
 </td>
 </tr>
 <tr>
@@ -1001,14 +1007,14 @@ dvage
 Constant
 </td>
 <td>
-2.605
+0.867
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
 </td>
 <td>
-(4.254)
+(4.246)
 </td>
 </tr>
 <tr>
@@ -1026,7 +1032,7 @@ Constant
 Observations
 </td>
 <td>
-1,800
+1,338
 </td>
 </tr>
 <tr>
@@ -1034,7 +1040,7 @@ Observations
 R<sup>2</sup>
 </td>
 <td>
-0.760
+0.697
 </td>
 </tr>
 <tr>
@@ -1042,7 +1048,7 @@ R<sup>2</sup>
 Adjusted R<sup>2</sup>
 </td>
 <td>
-0.677
+0.574
 </td>
 </tr>
 <tr>
@@ -1050,7 +1056,7 @@ Adjusted R<sup>2</sup>
 Residual Std. Error
 </td>
 <td>
-0.551 (df = 1333)
+0.452 (df = 950)
 </td>
 </tr>
 <tr>
@@ -1058,7 +1064,7 @@ Residual Std. Error
 F Statistic
 </td>
 <td>
-9.079<sup>***</sup> (df = 466; 1333)
+5.655<sup>***</sup> (df = 387; 950)
 </td>
 </tr>
 <tr>
@@ -1086,21 +1092,21 @@ m8 &lt;-<span class="st"> </span><span class="kw">plm</span>(polinterest <span c
 ## plm(formula = polinterest ~ dvage, data = UndSoc500, effect = &quot;twoways&quot;, 
 ##     model = &quot;within&quot;, index = c(&quot;pidp&quot;, &quot;year&quot;))
 ## 
-## Unbalanced Panel: n = 460, T = 1-7, N = 1800
+## Unbalanced Panel: n = 381, T = 1-7, N = 1338
 ## 
 ## Residuals:
 ##     Min.  1st Qu.   Median  3rd Qu.     Max. 
-## -1.72200 -0.26171  0.00000  0.20677  2.19176 
+## -1.49866 -0.19252  0.00000  0.17069  1.50937 
 ## 
 ## Coefficients:
 ##       Estimate Std. Error t-value Pr(&gt;|t|)
-## dvage 0.019376   0.070879  0.2734   0.7846
+## dvage 0.048088   0.070771  0.6795    0.497
 ## 
-## Total Sum of Squares:    404.82
-## Residual Sum of Squares: 404.79
-## R-Squared:      5.606e-05
-## Adj. R-Squared: -0.34951
-## F-statistic: 0.0747324 on 1 and 1333 DF, p-value: 0.78461</code></pre>
+## Total Sum of Squares:    193.86
+## Residual Sum of Squares: 193.77
+## R-Squared:      0.00048575
+## Adj. R-Squared: -0.40668
+## F-statistic: 0.461689 on 1 and 950 DF, p-value: 0.497</code></pre>
 <p>Asking for the <strong>twoways</strong> effect means that we fit the model with individual and year fixed effects.</p>
 <p>Note that the effect size is exactly the same in models 7 and 8 (becuase this is essentially the same model), but <strong>plm</strong> will work faster. With <strong>plm</strong> you may be able to estimate the fixed effects model with the full data for your reports, although the estimation will take you some time. I will not do this here.</p>
 </div>
@@ -1167,9 +1173,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
