@@ -36,6 +36,8 @@ library(knitr)
 opts_chunk$set(echo=TRUE, warning=FALSE, message=FALSE)
 ```
 
+**This website accompanies the module as offered in 2018. While in 2019 most things remained similar, I have introduced some changes. For the 2019 version of the module, please use the Github repository here -- https://github.com/dataanalysis3/datan3_2019 . It contains the updated module outline and all other teaching materials.**
+
 # Introduction
 
 This is a website for the Data Analysis in Social Science 3 module at the University of Exeter (SOC2094/3094 POL2094/3094) as offered in Term 2 in 2018.
